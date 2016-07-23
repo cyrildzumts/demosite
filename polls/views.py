@@ -2,7 +2,28 @@ from django.shortcuts import render, get_object_or_404
 from .models import Question, Choice
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.views import generic
 # Create your views here.
+
+
+class IndexView(generic.ListView):
+    page_title = "Polls Home Page"
+    template_name = "polls/index.html"
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        # query the last 5 questions
+        return Question.objects.order_by('pub_date')
+
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/detail.html'
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
 
 
 # Polls Home Page
@@ -10,7 +31,7 @@ def index(request):
     page_title = "Polls Home Page"
     template_name = "polls/index.html"
     # query the last 5 questions
-    latest_question_list = Question.objects.order_by('pub_date')[:5]
+    latest_question_list = Question.objects.order_by('pub_date')
     output = ', '.join([q.question_text for q in latest_question_list])
     context = {'page_title': page_title,
                'latest_question_list': latest_question_list,

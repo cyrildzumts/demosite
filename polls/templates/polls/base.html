@@ -1,6 +1,19 @@
-{% block title %}
-<title> {{page_title}} </title>
-{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% block title %}
+      <title> {{page_title}} </title>
+    {% endblock %}
+    <meta name="keywords" content="{{meta_keywords}}" />
+		<meta name="description" content="{{meta_description}}" />
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+  </head>
+  <body>
+  {% block site_wrapper %}
 
-{% endblock %}
+  {% endblock %}
+  <img src="{% static 'polls/images/background.jpg' %}" alt="Polls">
+  </body>
+</html>
