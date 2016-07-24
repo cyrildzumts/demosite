@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>
+          {% block title %}
+              {{page_title}}
+          {% endblock %}
+    </title>
+    <meta name="keywords" content="{{meta_keywords}}" />
+		<meta name="description" content="{{meta_description}}" />
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+  </head>
+  <body>
+  {% block site_wrapper %}
+
+  {% endblock %}
+  </body>
+</html>

@@ -1,6 +1,11 @@
 {% extends "polls/base.html" %}
 
 {% block site_wrapper %}
+{% if user %}
+  {% if user.is_authenticated %}
+    <p> Bienvenue, {{user.username}}. Content de vous revoir. </p>
+  {% endif %}
+{% endif %}
   {% if latest_question_list %}
     <ul>
       {% for question in latest_question_list %}
