@@ -25,9 +25,10 @@ SECRET_KEY = 'cv8bnb0(d8%e6kt!x#qyy7_me#jy=)cv!_u=f9sse^a&r2eebw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
 
-
+handler404 = 'demosite.views.not_found_404'
+handler500 = 'demosite.views.server_error_500'
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'demosite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
