@@ -29,8 +29,6 @@ class ResultsView(generic.DetailView):
 
 # Polls Home Page
 def index(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
     page_title = "Polls Home Page"
     template_name = "polls/index.html"
     # query the last 5 questions
@@ -68,7 +66,6 @@ def vote(request, pk):
                                     args=(question.id,)))
 
 
-@login_required
 def detail(request, pk):
     question = get_object_or_404(Question, pk=pk)
     template_name = 'polls/detail.html'

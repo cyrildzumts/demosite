@@ -24,7 +24,9 @@ SECRET_KEY = 'cv8bnb0(d8%e6kt!x#qyy7_me#jy=)cv!_u=f9sse^a&r2eebw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+LOGIN_REDIRECT_URL = '/polls/'
+AUTH_USER_MODEL = 'accounts.Customer'
+# AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
 
 handler404 = 'demosite.views.not_found_404'
@@ -32,6 +34,9 @@ handler500 = 'demosite.views.server_error_500'
 # Application definition
 
 INSTALLED_APPS = [
+
+    'catalog.apps.CatalogConfig',
+    'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

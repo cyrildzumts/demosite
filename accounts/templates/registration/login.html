@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block site_wrapper %}
+ {% if form.errors %}
+  <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
+  {% endif %}
+  <form action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+
+    {{form}}
+
+    <input type="submit" value="Se connecter" /><br />
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+  </form>
+
+{% endblock %}

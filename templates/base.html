@@ -13,6 +13,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
   </head>
   <body>
+    {% block navigation %}
+      {% include "tags/navigation.html" %}
+    {% endblock %}
+
   {% block site_wrapper %}
 
   {% endblock %}
