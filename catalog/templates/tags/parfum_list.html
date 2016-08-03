@@ -1,0 +1,15 @@
+{% if recent_parfums %}
+  <br /><br />
+  {% for parfum in recent_parfums %}
+      <div class="product_thumbnail">
+          <a href="{{parfum.get_absolute_url}}">
+            {% load static %}
+            {% static "" as baseUrl %}
+            <img src="{{baseUrl}}/images/products/thumbnails/{{parfum.image}}" WIDTH=150 HEIGHT=150 alt="{{parfum.name}}"  class="bn" />
+            <br />
+            {{parfum.name}}
+          </a>
+      </div>
+  {% endfor %}
+
+{% endif %}

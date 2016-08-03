@@ -20,7 +20,7 @@ def login(request):
     Log in view
     """
     page_title = "Connexion d'utilisateur"
-    template_name = 'accounts/login.html'
+    template_name = 'registration/login.html'
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -50,23 +50,26 @@ def register(request):
     template_name = "registration/register.html"
     page_title = 'Creation de compte'
     if request.method == 'POST':
-        # postdata = request.POST.copy()
+        postdata = request.POST.copy()
         # form = UserCreationForm(postdata)
         form = RegistrationForm(data=request.POST.copy())
         if form.is_valid():
             # form.save()
-            user = form.save()
+            form.save()
             print("Register Form is valid...")
-            return redirect(REDIRECT_URL)
-            # username = postdata.get('username', '')
-            # password = postdata.get('password', '')
-            # user = auth.authenticate(username=username, password=password)
-            """
+
+            # return redirect(REDIRECT_URL)
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = auth.authenticate(username=username, password=password)
+
             if user and user.is_active:
                 auth.login(request, user)
-                url = urlresolvers.reverse('user_account')
-                return HttpResponseRedirect(url)
-            """
+                return redirect(REDIRECT_URL)
+
+        else:
+            print("Register Form is invalid...")
+
     else:
         # form = UserCreationForm()
         form = RegistrationForm()

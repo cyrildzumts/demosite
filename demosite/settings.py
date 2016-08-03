@@ -24,9 +24,14 @@ SECRET_KEY = 'cv8bnb0(d8%e6kt!x#qyy7_me#jy=)cv!_u=f9sse^a&r2eebw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOGIN_REDIRECT_URL = '/polls/'
-AUTH_USER_MODEL = 'accounts.Customer'
+LOGIN_REDIRECT_URL = '/'
+# AUTH_USER_MODEL = 'accounts.Customer'
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]
+SITE_NAME = "Demo Site E-Commerce"
+META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
+                Sac, sacs, android, iphone, samsung, accessoires"
+META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
+                    sacs à main pour femmes et plein d'autres accessoires."
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
 
 handler404 = 'demosite.views.not_found_404'
@@ -34,7 +39,7 @@ handler500 = 'demosite.views.server_error_500'
 # Application definition
 
 INSTALLED_APPS = [
-
+    'cart.apps.CartConfig',
     'catalog.apps.CatalogConfig',
     'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
@@ -69,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'utils.context_processors.demosite',
             ],
         },
     },
@@ -124,4 +130,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
+# MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "staticfiles"),
+)
 STATIC_URL = '/static/'

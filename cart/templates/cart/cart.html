@@ -1,0 +1,85 @@
+{% extends "catalog.html" %}
+
+{% block content %}
+
+<h2> Contenu de votre Panier  </h2>
+{% if not cart_item_count %}
+  <p> Votre Panier ne contient aucun article. </p>
+
+  {% else %}
+Article : {{cart_item_count}}
+<table summary=" Votre Panier" id="shopping_cart">
+  <caption>  Votre Panier </caption>
+  <thead>
+    <!-- header info here -->
+    <tr>
+
+    <th scope="col">Article </th>
+    <th scope="col"> Prix </th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th scope="col" class="right"> Total</th>
+
+    <!-- ..etc .. -->
+  </tr>
+  </thead>
+  <tfoot>
+    <!-- footer info here -->
+    <tr>
+      <th class="right" colspan="5">
+        Sous Total:
+      </th>
+      <th class="right"> {{cart_subtotal}}</th>
+    </tr>
+    {% if cart_items %}
+    <tr>
+      <th class="right" colspan="="6"">
+        <!-- here comes the link to the checkout -->
+        [ Aller à la caisse]
+      </th>
+    </tr>
+    {% endif %}
+  </tfoot>
+  <tbody>
+    {% if cart_items %}
+{% for item in cart_items %}
+<tr>
+<td>
+<a href="{{ item.get_absolute_url }}" class="cart">
+{{ item.name }}
+</a>
+</td>
+<td>{{ item.price}}</td>
+<td class="right">
+<form method="post" action="." class="cart">{% csrf_token %}
+<label for="quantity">Quantité:</label>
+<input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" 
+size="2" class="quantity" maxlength="5" />
+<input type="hidden" name="item_id" value="{{ item.id }}" />
+</td>
+<td>
+<input type="submit" name="submit" value="Actualiser" />
+</form>
+</td>
+<td>
+<form method="post" action="." class="cart">
+<input type="hidden" name="item_id" value="{{ item.id }}" />
+<input type="submit" name="submit" value="Supprimer"/>
+</form>
+</td>
+<td class="right">{{ item.total}}</td>
+</tr>
+{% endfor %}
+{% else %}
+<tr>
+<td colspan="6" style="height:30px;">
+Votre panier est vide.
+</td>
+</tr>
+{% endif %}
+    <!-- loop through cart item here -->
+  </tbody>
+</table>
+{% endif %}
+{% endblock content %}

@@ -10,11 +10,16 @@
     <meta name="keywords" content="{{meta_keywords}}" />
 		<meta name="description" content="{{meta_description}}" />
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
   </head>
   <body>
+
     {% block navigation %}
-      {% include "tags/navigation.html" %}
+      <div id="navigation">
+        <div class="navPadder">
+          {% include 'tags/navigation.html' %}
+        </div>
+      </div>
     {% endblock %}
 
   {% block site_wrapper %}

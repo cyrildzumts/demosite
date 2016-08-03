@@ -6,7 +6,7 @@
   {% endif %}
   <form action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
 
-    {{form}}
+    {{form.as_p}}
 
     <input type="submit" value="Se connecter" /><br />
     <input type="hidden" name="next" value="{{ next|escape }}" />

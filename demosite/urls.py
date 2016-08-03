@@ -19,8 +19,11 @@ from django.contrib import admin
 # from demosite import views
 
 urlpatterns = [
+    url(r'^cart/', include('cart.urls')),
+    url(r'^polls/', include('polls.urls')),
+    url(r'', include('catalog.urls')),
+    url(r'^catalog/', include('catalog.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,0 +1,15 @@
+{% if recent_bags %}
+  <br /><br />
+  {% for bag in recent_bags %}
+      <div class="product_thumbnail">
+          <a href="{{bag.get_absolute_url}}">
+            {% load static %}
+            {% static "" as baseUrl %}
+            <img src="{{baseUrl}}/images/products/thumbnails/{{bag.image}}" WIDTH=150 HEIGHT=150 alt="{{bag.name}}"  class="bn" />
+            <br />
+            {{bag.name}}
+          </a>
+      </div>
+  {% endfor %}
+
+{% endif %}

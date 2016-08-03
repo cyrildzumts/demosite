@@ -1,0 +1,24 @@
+{% extends "catalog.html" %}
+
+{%block site_wrapper %}
+{% if c %}
+  <h3> {{c.name}} </h3>
+  <br /><br />
+  {% for p in products %}
+      <div class="product_thumbnail">
+          <a href="{{p.get_absolute_url}}">
+            {% load static %}
+            {% static "" as baseUrl %}
+            <img src="{{baseUrl}}/images/products/thumbnails/{{p.image}}" WIDTH=150 HEIGHT=150 alt="{{p.name}}"  class="bn" />
+            <br />
+            {{p.name}}
+          </a>
+      </div>
+  {% endfor %}
+  {% else %}
+    <p>Il n'y a pas encore de produits disponible
+    dans cette catégorie </p>
+{% endif %}
+
+
+{% endblock %}

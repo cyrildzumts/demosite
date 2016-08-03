@@ -1,0 +1,38 @@
+{% extends "catalog.html" %}
+
+{% block content %}
+  <div class="product_image" >
+    {% load static %}
+    {% static "" as baseUrl %}
+    <img src="{{baseUrl}}/images/products/main/{{p.image}}" WIDTH=300 HEIGHT=300  alt="{{p.name}}" />
+  </div>
+  <h1> {{p.name}} </h1>
+  <br /><br />
+  Marque: <em>{{p.name}}</em>
+  <br /><br />
+  Dans les categories:
+  {% for c in categories %}
+  <a href="{{c.get_absolute_url}}">{{c.name}}</a>
+  {% if not forloop.last %}, {% endif %}
+  {% endfor %}
+  <br /><br />
+  {% if p.sale_price %}
+    Coûtait<del> {{p.old_price}} CFA </del>
+    <br />
+    Prix Actuel: {{p.price}} CFA
+    {% else %}
+    Prix : {{p.price}} CFA
+    {% endif %}
+    <br /><br />
+    <form method="post" action="." class="cart">{% csrf_token %}
+      {{form.as_p}}
+      <!--<label for="quantity"> Quantité: </label> -->
+      <!--<input type="text" id="quantity" value="1" size="2"/> -->
+      <br />
+      <input type="submit" value= "Ajouter dans le panier" name="submit" alt="Ajouter au panier" />
+    </form>
+    <br /><br />
+    <div class="cb"></div>
+    <h3> Description du produit </h3>
+        {{p.description}}
+{% endblock %}

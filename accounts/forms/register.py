@@ -1,6 +1,8 @@
 from django import forms
 from accounts.models import Customer
 from django.contrib.admin.widgets import AdminDateWidget
+from django.contrib.auth.models import User
+
 
 class RegistrationForm(forms.ModelForm):
     """
@@ -8,12 +10,12 @@ class RegistrationForm(forms.ModelForm):
     """
     username = forms.CharField(widget=forms.widgets.TextInput,
                                label="Nom d'utilisateur")
-    firstname = forms.CharField(widget=forms.widgets.TextInput,
-                                label="Prénom")
-    lastname = forms.CharField(widget=forms.widgets.TextInput,
-                               label="Nom de famille")
+    first_name = forms.CharField(widget=forms.widgets.TextInput,
+                                 label="Prénom")
+    last_name = forms.CharField(widget=forms.widgets.TextInput,
+                                label="Nom")
     email = forms.EmailField(widget=forms.widgets.TextInput,
-                             label='Addresse Email')
+                             label='Email')
     country = forms.CharField(max_length=50, widget=forms.widgets.TextInput,
                               label='Pays de résidence')
     city = forms.CharField(max_length=50, widget=forms.widgets.TextInput,
@@ -24,13 +26,15 @@ class RegistrationForm(forms.ModelForm):
                                 label="Mot de passe(Confirmation)")
     date_of_birth = forms.DateField(label="Date de Naissance",
                                     widget=forms.widgets.SelectDateWidget(
-                                        empty_label=("Choose Year", "Choose Month",
+                                        empty_label=("Choose Year",
+                                                     "Choose Month",
                                                      "Choose Day"),
-    ))
+                                                     )
+                                    )
 
     class Meta:
-        model = Customer
-        fields = ['firstname', 'lastname',
+        model = User
+        fields = ['last_name', 'first_name',
                   'username', 'password1',
                   'password2', 'date_of_birth', 'email', 'country', 'city']
 
@@ -52,7 +56,13 @@ class RegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
         user.set_password(self.cleaned_data['password1'])
+        # user.customers.date_of_birth = self.cleaned_data['date_of_birth']
+        # user.customers.country = self.cleaned_data['country']
+        # user.customers.city = self.cleaned_data['city']
         if commit:
             user.save()
         return user

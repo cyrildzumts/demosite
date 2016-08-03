@@ -1,0 +1,10 @@
+{% extends "catalog.html" %}
+
+{% block content %}
+ <h2> Bienvenu au {{site_name}} </h2>
+ {% load catalog_tags %}
+ {% phone_list %}
+ {% parfum_list %}
+ {% bag_list %}
+ {% shoe_list %}
+{% endblock %}
