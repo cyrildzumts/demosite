@@ -1,14 +1,12 @@
-<h3> Categories</h3>
-<ul id="categories">
+
   {% with active_categories as cats %}
     {% for c in cats %}
-    <li>
-      {% ifequal c.get_absolute_url request_path %}
-        {{c.name}}<br />
-        {% else %}
-          <a href="{{c.get_absolute_url}}" class="category">{{c.name}}</a><br />
-      {% endifequal %}
-    </li>
+
+      {% if not c.parent %}
+      <li>
+          <a href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+      </li>
+      {%endif%}
+
     {% endfor %}
   {% endwith %}
-</ul>

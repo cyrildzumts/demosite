@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-
+from catalog import choices
+from django.conf import settings
 
 # Create your models here.
 
@@ -27,8 +28,80 @@ class Category(models.Model):
         ordering = ['name']
         verbose_name_plural = 'Categories'
 
+    @property
+    def categories(self):
+        """
+        Return a list of Categories path from the Root
+        Category to the current Category(self).
+        """
+        cat_list = []
+        current_cat = self
+        while current_cat is not None:
+            cat_list.append(current_cat)
+            current_cat = current_cat.parent
+        cat_list.reverse()
+        return cat_list
+
+    def root_cat(self):
+        """
+        When the current Category is a root Category,
+        that is, self.parent is None , self is returned
+        instead of None.
+        """
+        current = self
+        while current.parent is not None:
+            current = current.parent
+        return current
+
+    def is_root(self):
+        """
+        Return True if this is a root
+        Category.
+        """
+        return self.parent is None
+
+    def is_parent(self):
+        """
+        Return True if this Category is a parent
+        Category.
+        """
+        return Category.objects.filter(parent=self).exists()
+
     def __str__(self):
         return self.name
+
+    def is_root_child(self, product):
+        """
+        Return true if product belongs to the current
+        Category or to a child of the current
+        Category.
+        """
+        flag = False
+        current_cat = product.categories.get()
+        if current_cat == self:
+            flag = True
+        else:
+            while current_cat.parent is not None:
+                current_cat = current_cat.parent
+                if current_cat == self:
+                    flag = True
+        return flag
+
+    def get_products(self):
+        """
+        Return every products which belong
+        to this Category tree.
+        """
+        products = BaseProduct.objects.all()
+        items = [p for p in products if self.is_root_child(p)]
+        return items
+
+    def get_direct_products(self):
+        """
+        Return only products belonging
+        to this Category
+        """
+        return self.baseproduct_set.all()
 
     @models.permalink
     def get_absolute_url(self):
@@ -55,7 +128,7 @@ class BaseProduct(models.Model):
     quantity = models.IntegerField(default=1)
     sell_quantity = models.IntegerField(default=0)
     sell_date = models.DateTimeField(null=True, blank=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to="products")
     is_available = models.BooleanField(default=True)
     categories = models.ManyToManyField(Category)
     is_bestseller = models.BooleanField(default=False)
@@ -69,6 +142,16 @@ class BaseProduct(models.Model):
     def __str__(self):
         return self.name
 
+    def build_slug(self):
+        self.slug = self.name + "-" + self.id
+
+    def build_sku(self):
+        self.sku = self.brand + "-" + self.name
+
+    @property
+    def cats_path(self):
+        return self.categories.get().categories
+
     @models.permalink
     def get_absolute_url(self):
         return ('catalog:product_details', (), {'product_slug': self.slug})
@@ -79,13 +162,22 @@ class BaseProduct(models.Model):
         else:
             return None
 
+    def product_is_available(self):
+        return self.quantity != 0
+
 
 class Phone(BaseProduct):
-    screen = models.CharField(max_length=512)
-    camera = models.CharField(max_length=512)
+    screen = models.FloatField(choices=choices.SCREEN_SIZE_CHOICES,
+                               default=5)
+    camera = models.IntegerField(choices=choices.CAMERA_RESOLUTION_CHOICES,
+                                 default=13)
     system = models.CharField(max_length=512)
-    memory = models.CharField(max_length=512)
-    sim_card = models.CharField(max_length=512)
+    memory = models.IntegerField(choices=choices.MEMORY_SIZE_CHOICES,
+                                 default=16,
+                                 )
+    sim_card = models.IntegerField(choices=choices.SIM_CARD_CONF_CHOICES,
+                                   default=1,
+                                   )
     battery = models.CharField(max_length=128)
     frequency_band = models.CharField(max_length=512)
     color = models.ForeignKey('catalog.Color', unique=False)
@@ -98,7 +190,10 @@ class Phone(BaseProduct):
 class Shoe(BaseProduct):
     material = models.CharField(max_length=30)
     typ = models.CharField(max_length=30)
-    size = models.ForeignKey('catalog.Size', unique=False)
+    # size = models.ForeignKey('catalog.Size', unique=False)
+    size = models.CharField(max_length=5,
+                            choices=choices.GENERIC_SIZE_CHOICES,
+                            default='38')
     color = models.ForeignKey('catalog.Color', unique=False)
 
     class Meta:
@@ -107,9 +202,14 @@ class Shoe(BaseProduct):
 
 
 class Parfum(BaseProduct):
-    capacity = models.IntegerField()
-    typ = models.CharField(max_length=30)
-    gender = models.CharField(max_length=30)
+    capacity = models.IntegerField(choices=choices.PARFUMS_QUANTITY_CHOICES,
+                                   default=100)
+    typ = models.CharField(max_length=10,
+                           choices=choices.PARFUM_TYP_CHOICES,
+                           default='EDP')
+    gender = models.CharField(max_length=10,
+                              choices=choices.GENDER_CHOICES,
+                              default='F')
 
     class Meta:
         db_table = 'parfums'
@@ -118,23 +218,14 @@ class Parfum(BaseProduct):
 
 class Bag(BaseProduct):
     material = models.CharField(max_length=30)
-    size = models.ForeignKey('catalog.Size', unique=False)
+    size = models.CharField(max_length=5,
+                            choices=choices.GENERIC_SIZE_CHOICES,
+                            default='M')
     color = models.ForeignKey('catalog.Color', unique=False)
 
     class Meta:
         db_table = 'bags'
         ordering = ['-created_at']
-
-
-class Size(models.Model):
-    value = models.CharField(blank=True, max_length=3)
-
-    class Meta:
-        db_table = 'sizes'
-        ordering = ['value']
-
-    def __str__(self):
-        return self.value
 
 
 class Color(models.Model):
@@ -147,4 +238,4 @@ class Color(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return "name : %s -- value : %s " % (self.name, self.value)
+        return self.name

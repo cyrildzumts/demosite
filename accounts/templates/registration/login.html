@@ -4,12 +4,12 @@
  {% if form.errors %}
   <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
   {% endif %}
-  <form action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
-
-    {{form.as_p}}
-
-    <input type="submit" value="Se connecter" /><br />
-    <input type="hidden" name="next" value="{{ next|escape }}" />
+  <form class="form-inline" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+    <input type="text" class="input-small" placeholder="Nom d'utilisateur" id="{{form.username.id_for_label}}"\
+      name="{{form.username.name}}">
+    <input type="password" class="input-small" placeholder="Mot de passe" id="{{form.password.id_for_label}}"\
+        name="{{form.password.name}}">
+    <button type="submit" class="btn">Se connecter</button>
   </form>
 
 {% endblock %}

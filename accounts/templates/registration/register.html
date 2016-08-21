@@ -2,13 +2,63 @@
 {% extends "base.html" %}
 {% block title%} {{page_title}} {% endblock %}
 
-{% block navigation %}
- <p> </p>
-{% endblock %}
 {% block site_wrapper %}
 <h1> Creation de Compte utilisateur </h1>
-<form action="{% url 'accounts:register' %}" method="post"> {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Créer le compte">
+<form class="form-horizontal" action="{% url 'accounts:register' %}" method="post"> {% csrf_token %}
+  <div class="control-group">
+    <label class="control-label" for="{{form.last_name.id_for_label}}">Nom</label>
+    <div class="controls">
+      <input type="text" id="{{form.last_name.id_last_name}}" name="{{form.last_name.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.first_name.id_for_label}}">Prénom</label>
+    <div class="controls">
+      <input type="text" id="{{form.first_name.id_first_name}}" name="{{form.first_name.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.username.id_for_label}}">Nom d'utilisateur</label>
+    <div class="controls">
+      <input type="text" id="{{form.username.id_username}}" name="{{form.username.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.password1.id_for_label}}">Mot de passe</label>
+    <div class="controls">
+      <input type="password" id="{{form.password1.id_password1}}" name="{{form.password1.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.password2.id_for_label}}">Mot de passe(Confirmation)</label>
+    <div class="controls">
+      <input type="password" id="{{form.password2.id_password1}}" name="{{form.password2.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.date_of_birth.id_for_label}}">Date de Naissance</label>
+    <div class="controls">
+      {{form.date_of_birth}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.email.id_for_label}}">Email</label>
+    <div class="controls">
+      <input type="text" id="{{form.email.id_email}}" name="{{form.email.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.country.id_for_label}}">Pays de résidence</label>
+    <div class="controls">
+      <input type="text" id="{{form.country.id_country}}" name="{{form.country.name}}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="{{form.city.id_for_label}}">Ville</label>
+    <div class="controls">
+      <input type="text" id="{{form.city.id_city}}" name="{{form.city.name}}">
+    </div>
+  </div>
+  <button class="btn" type="submit">Créer le compte</button>
 </form>
 {% endblock %}

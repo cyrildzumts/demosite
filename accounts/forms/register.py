@@ -2,6 +2,14 @@ from django import forms
 from accounts.models import Customer
 from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.auth.models import User
+import datetime
+
+# for the RegistrationForm , just allows user wo are at least
+# 17 year old.
+START = datetime.date(1960, 1, 1)
+END = datetime.date.today().year - 16
+
+YEARS_CHOICES = [y for y in range(START.year, END)]
 
 
 class RegistrationForm(forms.ModelForm):
@@ -29,6 +37,7 @@ class RegistrationForm(forms.ModelForm):
                                         empty_label=("Choose Year",
                                                      "Choose Month",
                                                      "Choose Day"),
+                                        years=YEARS_CHOICES
                                                      )
                                     )
 
@@ -60,9 +69,9 @@ class RegistrationForm(forms.ModelForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         user.set_password(self.cleaned_data['password1'])
-        # user.customers.date_of_birth = self.cleaned_data['date_of_birth']
-        # user.customers.country = self.cleaned_data['country']
-        # user.customers.city = self.cleaned_data['city']
+        # user.customer.date_of_birth = self.cleaned_data['date_of_birth']
+        # user.customer.country = self.cleaned_data['country']
+        # user.customer.city = self.cleaned_data['city']
         if commit:
             user.save()
         return user

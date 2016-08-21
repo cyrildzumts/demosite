@@ -1,15 +1,9 @@
 {% if recent_shoes %}
-  <br /><br />
-  {% for shoe in recent_shoes %}
-      <div class="product_thumbnail">
-          <a href="{{shoe.get_absolute_url}}">
-            {% load static %}
-            {% static "" as baseUrl %}
-            <img src="{{baseUrl}}/images/products/thumbnails/{{shoe.image}}" WIDTH=150 HEIGHT=150 alt="{{shoe.name}}"  class="bn" />
-            <br />
-            {{shoe.name}}
-          </a>
-      </div>
+<div class="container">
+  <div class="row">
+  {% for p in recent_shoes %}
+      {% include "tags/product_box.html" %}
   {% endfor %}
-
+  </div>
+</div><br>
 {% endif %}

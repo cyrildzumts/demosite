@@ -1,15 +1,8 @@
 from django import template
-from cart import cart
+from cart.models import Cart
 from catalog.models import Category, Phone, Bag, Shoe, Parfum
-
+import datetime
 register = template.Library()
-
-
-@register.inclusion_tag("tags/cart_box.html")
-def cart_box(request):
-    cart_item_count = cart.cart_distinct_item_count(request)
-    print("Calling cart_box ...")
-    return {'cart_item_count': cart_item_count}
 
 
 @register.inclusion_tag("tags/category_list.html")
@@ -40,3 +33,25 @@ def shoe_list():
 @register.inclusion_tag("tags/parfum_list.html")
 def parfum_list():
     return {'recent_parfums': Parfum.objects.order_by('-created_at')[:5]}
+
+
+@register.simple_tag
+def current_time(format_string=''):
+    if format_string:
+        return datetime.datetime.now().strftime(format_string)
+    return datetime.datetime.now().strftime("%d / %m / %Y - %H : %M")
+
+
+@register.simple_tag
+def display_session(request):
+    print("Request Scheme : %s " % (request.scheme))
+    print("Request Method : %s " % (request.method))
+    print("Request Path : %s " % (request.path))
+    session = request.session
+    print("Session Object: ")
+    print("Session Expire Age : %d" % (session.get_expiry_age()))
+
+    print("Session Content :")
+    for k in session.keys():
+        print("Key : %s" % (k))
+    return request.session

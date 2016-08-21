@@ -1,24 +1,27 @@
 {% extends "catalog.html" %}
+{%block content %}
 
-{%block site_wrapper %}
-{% if c %}
+{% if products %}
   <h3> {{c.name}} </h3>
   <br /><br />
-  {% for p in products %}
-      <div class="product_thumbnail">
-          <a href="{{p.get_absolute_url}}">
-            {% load static %}
-            {% static "" as baseUrl %}
-            <img src="{{baseUrl}}/images/products/thumbnails/{{p.image}}" WIDTH=150 HEIGHT=150 alt="{{p.name}}"  class="bn" />
-            <br />
-            {{p.name}}
-          </a>
-      </div>
-  {% endfor %}
+    {% for p in products  %}
+      {% include "tags/product_box.html" %}
+    {% endfor %}
+    <ul class="pager">
+        {% if products.has_previous %}
+          <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
+        {% endif %}
+        <span class="current">
+          Page {{products.number }} de {{products.paginator.num_pages }}.
+        </span>
+        {% if products.has_next %}
+          <li><a href="?page={{ products.next_page_number }}">next</a></li>
+        {% endif %}
+      </span>
+    </ul>
   {% else %}
     <p>Il n'y a pas encore de produits disponible
     dans cette catégorie </p>
 {% endif %}
-
 
 {% endblock %}

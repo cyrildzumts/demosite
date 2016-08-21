@@ -1,21 +1,34 @@
 from django.shortcuts import render
 from cart import cart
+from cart.models import Cart, CartItem
 from demosite import settings
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 
 
+@csrf_protect
 def show_cart(request):
     template_name = "cart/cart.html"
+    user_cart = cart.get_user_cart(request)
     if request.method == "POST":
         postdata = request.POST.copy()
+        item_id = postdata['item_id']
+        quantity = postdata['quantity']
         if postdata['submit'] == 'Supprimer':
-            cart.remove_from_cart(request)
+            user_cart.remove_from_cart(item_id)
         if postdata['submit'] == 'Actualiser':
-            cart.update_quantity(request)
-    cart_items = cart.get_cart_items(request)
+            user_cart.update_quantity(item_id=item_id, quantity=int(quantity))
+    cart_items = user_cart.get_items()
     page_title = 'Panier' + " - " + settings.SITE_NAME
-    cart_subtotal = cart.cart_subtotal(request)
-    cart_item_count = cart.cart_distinct_item_count(request)
-    return render(request, template_name, locals())
+    cart_subtotal = user_cart.subtotal()
+    cart_item_count = user_cart.items_count()
+    context = {'cart_items': cart_items,
+               'page_title': page_title,
+               'cart_item_count': cart_item_count,
+               'cart_subtotal': cart_subtotal,
+               }
+    return render(request=request,
+                  template_name=template_name,
+                  context=context)
 # Create your views here.

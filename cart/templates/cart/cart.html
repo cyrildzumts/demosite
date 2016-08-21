@@ -8,14 +8,14 @@
 
   {% else %}
 Article : {{cart_item_count}}
-<table summary=" Votre Panier" id="shopping_cart">
+<table summary="Votre Panier" id="shopping_cart" class="table table-hover table-condensed table-responsive">
   <caption>  Votre Panier </caption>
   <thead>
     <!-- header info here -->
     <tr>
 
-    <th scope="col">Article </th>
-    <th scope="col"> Prix </th>
+    <th >Article </th>
+    <th > Prix Unitaire </th>
     <th></th>
     <th></th>
     <th></th>
@@ -30,11 +30,11 @@ Article : {{cart_item_count}}
       <th class="right" colspan="5">
         Sous Total:
       </th>
-      <th class="right"> {{cart_subtotal}}</th>
+      <th class="right"> {{cart_subtotal}} CFA</th>
     </tr>
     {% if cart_items %}
     <tr>
-      <th class="right" colspan="="6"">
+      <th class="right" colspan="6">
         <!-- here comes the link to the checkout -->
         [ Aller à la caisse]
       </th>
@@ -47,28 +47,36 @@ Article : {{cart_item_count}}
 <tr>
 <td>
 <a href="{{ item.get_absolute_url }}" class="cart">
-{{ item.name }}
+  {{item.product.brand}} {{ item.name }}
 </a>
 </td>
-<td>{{ item.price}}</td>
+<td>{{ item.price}} CFA</td>
 <td class="right">
-<form method="post" action="." class="cart">{% csrf_token %}
+<form method="post" action="." class="form" role="form">{% csrf_token %}
 <label for="quantity">Quantité:</label>
-<input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" 
-size="2" class="quantity" maxlength="5" />
-<input type="hidden" name="item_id" value="{{ item.id }}" />
+<input  type="text" name="quantity" value="{{ item.quantity }}" id="quantity" 
+size="2" class="quantity" maxlength="3" />
+<input  type="hidden" name="item_id" value="{{ item.id }}" />
 </td>
 <td>
-<input type="submit" name="submit" value="Actualiser" />
+<label for="refresh">
+
+<span class="glyphicon glyphicon-refresh"></span>
+<input type="submit" name="submit" value="Actualiser" id="refresh"/>
+</label>
 </form>
 </td>
 <td>
-<form method="post" action="." class="cart">
+<form method="post" action="." class="form">{% csrf_token %}
 <input type="hidden" name="item_id" value="{{ item.id }}" />
-<input type="submit" name="submit" value="Supprimer"/>
+<input type="hidden" name="quantity" value="{{ item.quantity}}" />
+<label for="delete">
+<span class="glyphicon glyphicon-remove"></span>
+<input  id="delete" type="submit" name="submit" value="Supprimer"/>
+</label>
 </form>
 </td>
-<td class="right">{{ item.total}}</td>
+<td class="right">{{ item.total}} CFA</td>
 </tr>
 {% endfor %}
 {% else %}
