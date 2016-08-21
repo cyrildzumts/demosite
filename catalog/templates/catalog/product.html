@@ -1,38 +1,55 @@
 {% extends "catalog.html" %}
 
 {% block content %}
-  <div class="product_image" >
-    {% load static %}
-    {% static "" as baseUrl %}
-    <img src="{{baseUrl}}/images/products/main/{{p.image}}" WIDTH=300 HEIGHT=300  alt="{{p.name}}" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      Dans les categories:
+      <ol class="breadcrumb">
+        {% for c in p.cats_path %}
+        <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+        {% endfor %}
+      </ol>
+
+    </div>
+    <div class="col-sm-4">
+    </div>
   </div>
-  <h1> {{p.name}} </h1>
-  <br /><br />
-  Marque: <em>{{p.name}}</em>
-  <br /><br />
-  Dans les categories:
-  {% for c in categories %}
-  <a href="{{c.get_absolute_url}}">{{c.name}}</a>
-  {% if not forloop.last %}, {% endif %}
-  {% endfor %}
-  <br /><br />
-  {% if p.sale_price %}
-    Coûtait<del> {{p.old_price}} CFA </del>
-    <br />
-    Prix Actuel: {{p.price}} CFA
-    {% else %}
-    Prix : {{p.price}} CFA
-    {% endif %}
-    <br /><br />
-    <form method="post" action="." class="cart">{% csrf_token %}
-      {{form.as_p}}
-      <!--<label for="quantity"> Quantité: </label> -->
-      <!--<input type="text" id="quantity" value="1" size="2"/> -->
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="product_image" >
+        <img src="{{p.image.url}}" WIDTH=350 HEIGHT=350  alt="{{p.name}}" />
+      </div>
+    </div>
+    <div class="col-sm-6">
+
+      <h1> {{p.name}} </h1>
+      Marque: <em>{{p.brand}}</em>
       <br />
-      <input type="submit" value= "Ajouter dans le panier" name="submit" alt="Ajouter au panier" />
-    </form>
-    <br /><br />
-    <div class="cb"></div>
-    <h3> Description du produit </h3>
-        {{p.description}}
+      {% if p.sale_price %}
+        Coûtait<del> {{p.old_price}} CFA </del>
+        <br />
+        Prix Actuel: {{p.price}} CFA
+        {% else %}
+        Prix : {{p.price}} CFA
+        {% endif %}
+        <br /><br />
+        <form method="post" action="." class="cart">{% csrf_token %}
+          {{form.as_p}}
+          <!--<label for="quantity"> Quantité: </label> -->
+          <!--<input type="text" id="quantity" value="1" size="2"/> -->
+          <br />
+          <input type="submit" value= "Ajouter dans le panier" name="submit" alt="Ajouter au panier" />
+        </form>
+        <br /><br />
+        <div class="cb"></div>
+        <h3> Description du produit </h3>
+            {{p.description}}
+    </div>
+  </div>
+</div>
+
 {% endblock %}

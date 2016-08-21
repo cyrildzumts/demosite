@@ -1,3 +1,13 @@
 *.sqlite3
 *.pyc
+<<<<<<< HEAD
 staticfiles/images/*
+=======
+*/staticfiles/images/*
+*.jpg
+*.png
+*.bmp
+*.pdf
+*.jpeg
+
+>>>>>>> save_user_cart

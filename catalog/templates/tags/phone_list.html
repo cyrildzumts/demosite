@@ -1,17 +1,9 @@
 {% if recent_phones %}
-  <br /><br />
-  {% for phone in recent_phones %}
-      <div class="product_thumbnail">
-          <a href="{{phone.get_absolute_url}}">
-            {% load static %}
-            {% static "" as baseUrl %}
-            <img src="{{baseUrl}}/images/products/thumbnails/{{phone.image}}" WIDTH=150 HEIGHT=150 alt="{{phone.name}}"  class="bn" />
-            <br />
-            {{phone.name}}
-          </a>
-      </div>
+<div class="container">
+  <div class="row">
+  {% for p in recent_phones %}
+      {% include "tags/product_box.html" %}
   {% endfor %}
-
-  {% else %}
-    <p> Il n'a pas de telephones recent. </p>
+  </div>
+</div><br>
 {% endif %}

@@ -15,15 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 # from django.contrib.auth.views import login, logout
 # from demosite import views
 
 urlpatterns = [
+    url(r'^api/', include('api.urls', namespace='api')),
     url(r'^cart/', include('cart.urls')),
     url(r'^polls/', include('polls.urls')),
-    url(r'', include('catalog.urls')),
     url(r'^catalog/', include('catalog.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^', include('catalog.urls')),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

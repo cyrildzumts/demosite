@@ -1,6 +1,6 @@
-from .models import CartItem
+from .models import CartItem, Cart, UserSession
 from catalog.models import BaseProduct
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, Http404
 from django.http import HttpResponseRedirect
 import decimal
 import random
@@ -8,8 +8,34 @@ import random
 CART_ID_SESSION_KEY = 'cart_id'
 
 
+def get_cart(user):
+    try:
+        cart = Cart.objects.get(user=user)
+    except Cart.DoesNotExist:
+        cart = Cart()
+        cart.user = user
+        cart.save()
+    return cart
+
+
+def get_user_cart(request):
+    if request.user.is_authenticated():
+        return get_cart(request.user)
+    else:
+        raise Http404("Vous devez être connecter pour \
+        pouvoir utiliser le Panier.")
+
 # get current user's cart id, set new one if blank
+
+
 def _cart_id(request):
+    """
+    If the user is logged in, retrieve the user
+    associated cart_id from the database.
+    If the user is anonym, then use the session
+    to retrieve the cart_id.
+    """
+
     if request.session.get(CART_ID_SESSION_KEY, '') == '':
         request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
     return request.session[CART_ID_SESSION_KEY]
@@ -27,7 +53,12 @@ def _generate_cart_id():
 
 # return all the items froms the user's cart
 def get_cart_items(request):
-    return CartItem.objects.filter(cart_id=_cart_id(request))
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        items = CartItem.objects.filter(cart=cart)
+    except Cart.DoesNotExist:
+        items = []
+    return items
 
 
 # add an item to the cart
@@ -42,7 +73,7 @@ def add_to_cart(request):
     # get products in cart
     cart_products = get_cart_items(request)
     product_in_cart = False
-    # check to see item iss already in cart
+    # check to see item is already in cart
     for cart_item in cart_products:
         if cart_item.product.id == p.id:
             # update quantity if found
