@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from cart.cart_exceptions import QuantityError
 # Create your models here.
 
-
+"""
 class UserSession(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True, on_delete=models.CASCADE)
@@ -30,6 +30,8 @@ def delete_user_session(user):
     user_sessions = UserSession.objects.filter(user=user)
     for user_session in user_sessions:
         user_session.session.delete()
+
+"""
 
 
 class Cart(models.Model):

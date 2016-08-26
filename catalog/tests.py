@@ -11,7 +11,9 @@ class CategoryParentTest(TestCase):
     def setUp(self):
         self.shoes_cat = Category.objects.get(name="Chaussures")
         self.mode = Category.objects.get(name="Mode")
+        # root cat
         self.phones_cat = Category.objects.get(name="Smartphone")
+        # child cat
         self.smartphones = Category.objects.get(name="Smartphones")
         self.parfums = Category.objects.get(name="Parfumerie")
         self.edp = Category.objects.get(name="Eaux de Parfums")
@@ -30,12 +32,12 @@ class CategoryParentTest(TestCase):
 
         self.assertNotEqual(self.edt.root_cat(), self.smartphones)
         self.assertNotEqual(self.edp.root_cat(), self.smartphones)
-        self.assertEqual(self.phones_cat.root_cat(), self.smartphones)
+        self.assertNotEqual(self.phones_cat.root_cat(), self.smartphones)
 
     def test_is_root(self):
 
         self.assertFalse(self.shoes_cat.is_root())
-        self.assertFalse(self.phones_cat.is_root())
+        self.assertTrue(self.phones_cat.is_root())
 
         self.assertFalse(self.edt.is_root())
         self.assertFalse(self.edp.is_root())
@@ -43,11 +45,11 @@ class CategoryParentTest(TestCase):
         self.assertTrue(self.mode.is_root())
         self.assertTrue(self.parfums.is_root())
 
-        self.assertTrue(self.smartphones.is_root())
+        self.assertFalse(self.smartphones.is_root())
 
     def test_is_parent(self):
         self.assertTrue(self.mode.is_parent())
-        self.assertTrue(self.smartphones.is_parent())
+        self.assertFalse(self.smartphones.is_parent())
         self.assertTrue(self.parfums.is_parent())
         self.assertTrue(self.shoes_cat.is_parent())
         self.assertFalse(self.edt.is_parent())

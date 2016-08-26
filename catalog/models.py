@@ -166,7 +166,117 @@ class BaseProduct(models.Model):
         return self.quantity != 0
 
 
-class Phone(BaseProduct):
+class ProductType(models.Model):
+    id = models.AutoField(primary_key=True)
+    type_name = models.CharField(max_length=30)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        # abstract = True
+        db_table = 'ProductType'
+        ordering = ['-created_at']
+
+
+class ModelNumber(models.Model):
+    id = models.AutoField(primary_key=True)
+    model_number = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'ModelNumber'
+        ordering = ['-created_at']
+
+
+class Product(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30)
+    brand = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=255, unique=True, help_text='Texte unique\
+                            representant la page du produit.')
+    price = models.IntegerField()
+    old_price = models.IntegerField(default=0)
+    sku = models.CharField(max_length=50)
+    model_number = models.ForeignKey(ModelNumber,
+                                     related_name='product_model',
+                                     on_delete=models.CASCADE,
+                                     unique=False)
+    meta_keywords = models.CharField(max_length=255, help_text='Liste de mot clés,\
+                                     séparés par une virgule,\
+                                     utilisés pour la recherche')
+    meta_description = models.CharField(max_length=255, help_text='Description\
+                                        de mot clés')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    description = models.TextField()
+    quantity = models.IntegerField(default=1)
+    sell_quantity = models.IntegerField(default=0)
+    sell_date = models.DateTimeField(null=True, blank=True)
+    image = models.ImageField(upload_to="products")
+    image2 = models.ImageField(upload_to="products", blank=True, null=True)
+    image3 = models.ImageField(upload_to="products", blank=True, null=True)
+    is_available = models.BooleanField(default=True)
+    categories = models.ManyToManyField(Category)
+    is_bestseller = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=True)
+    has_extra_infos = models.BooleanField(default=False)
+    product_type = models.ForeignKey(ProductType,
+                                     related_name='product_type',
+                                     on_delete=models.CASCADE,
+                                     unique=False)
+    view_count = models.IntegerField(default=0)
+
+    template_name = models.CharField(max_length=100, blank=False, null=False)
+
+    class Meta:
+        # abstract = True
+        db_table = 'Product'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
+
+    def build_slug(self):
+        self.slug = self.name + "-" + self.id
+
+    def build_sku(self):
+        self.sku = self.brand + "-" + self.name
+
+    @property
+    def cats_path(self):
+        return self.categories.get().categories
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('catalog:product_details', (), {'product_slug': self.slug})
+
+    def sale_price(self):
+        if self.old_price > self.price:
+            return self.price
+        else:
+            return None
+
+    def product_is_available(self):
+        return self.quantity != 0
+
+
+class RelatedModel(models.Model):
+    related_model = models.OneToOneField(
+        BaseProduct,
+        null=True,
+        blank=True,
+        related_name='product_details'
+    )
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.related_model.name
+
+
+class Phone(RelatedModel):
+
     screen = models.FloatField(choices=choices.SCREEN_SIZE_CHOICES,
                                default=5)
     camera = models.IntegerField(choices=choices.CAMERA_RESOLUTION_CHOICES,
@@ -184,10 +294,9 @@ class Phone(BaseProduct):
 
     class Meta:
         db_table = 'phones'
-        ordering = ['-created_at']
 
 
-class Shoe(BaseProduct):
+class Shoe(RelatedModel):
     material = models.CharField(max_length=30)
     typ = models.CharField(max_length=30)
     # size = models.ForeignKey('catalog.Size', unique=False)
@@ -198,10 +307,10 @@ class Shoe(BaseProduct):
 
     class Meta:
         db_table = 'shoes'
-        ordering = ['-created_at']
 
 
-class Parfum(BaseProduct):
+class Parfum(RelatedModel):
+
     capacity = models.IntegerField(choices=choices.PARFUMS_QUANTITY_CHOICES,
                                    default=100)
     typ = models.CharField(max_length=10,
@@ -213,10 +322,9 @@ class Parfum(BaseProduct):
 
     class Meta:
         db_table = 'parfums'
-        ordering = ['-created_at']
 
 
-class Bag(BaseProduct):
+class Bag(RelatedModel):
     material = models.CharField(max_length=30)
     size = models.CharField(max_length=5,
                             choices=choices.GENERIC_SIZE_CHOICES,
@@ -225,7 +333,6 @@ class Bag(BaseProduct):
 
     class Meta:
         db_table = 'bags'
-        ordering = ['-created_at']
 
 
 class Color(models.Model):

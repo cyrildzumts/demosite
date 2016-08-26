@@ -17,22 +17,22 @@ def category_list(request_path):
 @register.inclusion_tag("tags/phone_list.html")
 def phone_list():
     print("phone_list tags called.")
-    return {'recent_phones': Phone.objects.order_by('-created_at')[:5]}
+    return {'recent_phones': Phone.objects.all()}
 
 
 @register.inclusion_tag("tags/bag_list.html")
 def bag_list():
-    return {'recent_bags': Bag.objects.order_by('-created_at')[:5]}
+    return {'recent_bags': Bag.objects.all()}
 
 
 @register.inclusion_tag("tags/shoe_list.html")
 def shoe_list():
-    return {'recent_shoes': Shoe.objects.order_by('-created_at')[:5]}
+    return {'recent_shoes': Shoe.objects.all()}
 
 
 @register.inclusion_tag("tags/parfum_list.html")
 def parfum_list():
-    return {'recent_parfums': Parfum.objects.order_by('-created_at')[:5]}
+    return {'recent_parfums': Parfum.objects.all()}
 
 
 @register.simple_tag
