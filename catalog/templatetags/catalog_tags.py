@@ -1,6 +1,6 @@
 from django import template
 from cart.models import Cart
-from catalog.models import Category, Phone, Bag, Shoe, Parfum
+from catalog.models import Category, Phablet, Parfum, Product
 import datetime
 register = template.Library()
 
@@ -17,17 +17,7 @@ def category_list(request_path):
 @register.inclusion_tag("tags/phone_list.html")
 def phone_list():
     print("phone_list tags called.")
-    return {'recent_phones': Phone.objects.all()}
-
-
-@register.inclusion_tag("tags/bag_list.html")
-def bag_list():
-    return {'recent_bags': Bag.objects.all()}
-
-
-@register.inclusion_tag("tags/shoe_list.html")
-def shoe_list():
-    return {'recent_shoes': Shoe.objects.all()}
+    return {'recent_phones': Phablet.objects.all()}
 
 
 @register.inclusion_tag("tags/parfum_list.html")

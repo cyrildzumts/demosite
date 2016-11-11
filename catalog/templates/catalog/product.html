@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
     </div>
     <div class="col-sm-4">
-      Dans les categories:
+    Categorie:
       <ol class="breadcrumb">
         {% for c in p.cats_path %}
         <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
@@ -18,31 +18,42 @@
     <div class="col-sm-4">
     </div>
   </div>
+</div>
+<div class="container-fluid">
+
   <div class="row">
     <div class="col-sm-6">
-      <div class="product_image" >
-        <img src="{{p.image.url}}" WIDTH=350 HEIGHT=350  alt="{{p.name}}" />
+      <div class="product_box center-block">
+        <div class="img-wrapper">
+          <img class="img-responsive center-block" src="{{p.image.url}}"  alt="{{p.name}}" />
+        </div>
       </div>
     </div>
     <div class="col-sm-6">
 
       <h1> {{p.name}} </h1>
-      Marque: <em>{{p.brand}}</em>
+        Marque: <em>{{p.brand}}</em>
       <br />
-      {% if p.sale_price %}
-        Coûtait<del> {{p.old_price}} CFA </del>
+      {% if p.size is not None %}
+        Taille: {{p.size}}
+      {%endif%}
+      {% if p.template_name is not None%}
+      {% include p.template_name %}
+      {%endif%}
         <br />
-        Prix Actuel: {{p.price}} CFA
-        {% else %}
-        Prix : {{p.price}} CFA
+        {% if p.old_price is True %}
+        <p class="invalid">Coûtait : {{p.old_price}} CFA </p> <br />
         {% endif %}
+        Prix : {{p.price}} CFA
         <br /><br />
-        <form method="post" action="." class="cart">{% csrf_token %}
-          {{form.as_p}}
-          <!--<label for="quantity"> Quantité: </label> -->
-          <!--<input type="text" id="quantity" value="1" size="2"/> -->
+        <form method="post" action="." class="addToCart">{% csrf_token %}
+
+          <div class="form-group">
+            {{form.as_p}}
+          <!--<label for="{{form.quantity.id_for_quantity}}"> Quantité:</label> -->
           <br />
-          <input type="submit" value= "Ajouter dans le panier" name="submit" alt="Ajouter au panier" />
+          </div>
+          <input type="submit" class="btn"  name="submit" value="Ajouter dans le Panier">
         </form>
         <br /><br />
         <div class="cb"></div>
@@ -50,6 +61,6 @@
             {{p.description}}
     </div>
   </div>
-</div>
 
+</div>
 {% endblock %}

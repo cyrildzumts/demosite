@@ -1,5 +1,5 @@
 from django.test import TestCase
-from catalog.models import Category, BaseProduct, Bag, Phone, Parfum, Shoe
+from catalog.models import Category, Product, Phablet, Parfum
 from django.utils import timezone
 
 # Create your tests here.

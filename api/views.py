@@ -1,6 +1,6 @@
 
 from rest_framework import status, mixins, generics, permissions, viewsets
-from catalog.models import BaseProduct, Phone, Parfum, Shoe, Bag, Category
+from catalog.models import Product, Phablet, Parfum, Category
 from cart.models import Cart, CartItem
 from api.serializers import CategorySerializer, ProductSerializer,\
     CartSerializer, CartItemSerializer
@@ -13,7 +13,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = BaseProduct.objects.all()
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 

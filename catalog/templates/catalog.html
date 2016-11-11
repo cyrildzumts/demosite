@@ -2,21 +2,18 @@
 {% load catalog_tags %}
 {% block site_wrapper %}
 
-<div id="main">
-  <div id="middle">
-    <div id="sidebar">
-      <div class="sidebarPadder">
-        [search box here]
-        <br />
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar col-sm-2 col-md-2">
+      {% block category_block %}
+
+      {% endblock category_block %}
     </div>
-    <div id="content">
-      <a name="content"></a>
-      <div class="contentPadder">
+    <div class="col-sm-10 col-md-10 content">
+
         {% block content %}
-          {% include 'tags/phone_list.html' %}
-        {% endblock %}
-      </div>
+
+        {% endblock content %}
     </div>
   </div>
 

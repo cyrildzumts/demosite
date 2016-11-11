@@ -1,9 +1,15 @@
 {% extends "catalog.html" %}
 
 {% block content %}
- {% load catalog_tags %}
- {% phone_list %}
- {% parfum_list %}
- {% bag_list %}
- {% shoe_list %}
+ {% load category_tags %}
+ {% subcategory as root_cats%}
+ <div class="container-fluid">
+ {%for cat  in root_cats %}
+  <div class="row">
+ {%for p in cat.get_products%}
+  {% include "tags/product_box.html" %}
+ {% endfor %}
+   </div>
+ {%endfor%}
+</div><br>
 {% endblock %}

@@ -1,10 +1,21 @@
-
+  {% load category_tags %}
   {% with active_categories as cats %}
     {% for c in cats %}
 
       {% if not c.parent %}
-      <li>
-          <a href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+      <li class="dropdown">
+          {% if current_category.root_cat == c %}
+            <a class="dropdown-toggle active" href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+            {% else %}
+            <a class="dropdown-toggle" href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+          {% endif %}
+          
+          {%subcategory c as subs_cats%}
+          <ul class="dropdown-menu">
+            {% for cat in subs_cats %}
+              <li><a href="{{cat.get_absolute_url}}">{{cat.name}}</a></li>
+            {% endfor %}
+          </ul>
       </li>
       {%endif%}
 

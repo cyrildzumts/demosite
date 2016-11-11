@@ -1,5 +1,5 @@
 from django.db import models
-from catalog.models import BaseProduct
+from catalog.models import Product
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -143,7 +143,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, unique=False, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=1)
-    product = models.ForeignKey('catalog.BaseProduct', unique=False)
+    product = models.ForeignKey('catalog.Product', unique=False)
 
     class Meta:
         db_table = 'cart_items'

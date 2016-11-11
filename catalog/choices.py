@@ -23,6 +23,7 @@ TSHIRT_SIZE_CHOICES = (
 )
 
 SCREEN_SIZE_CHOICES = (
+    (3.5, '3.5"'),
     (4, '4"'),
     (4.5, '4.5"'),
     (4.7, '4.7"'),
@@ -63,6 +64,7 @@ MEMORY_SIZE_CHOICES = (
 )
 
 RAM_SIZE_CHOICES = (
+    (512, '512MB'),
     (1, '1GB'),
     (2, '2GB'),
     (3, '3GB'),
@@ -83,9 +85,10 @@ CAMERA_RESOLUTION_CHOICES = (
 
 
 SIM_CARD_CONF_CHOICES = (
-    (1, 'STANDARD'),
-    (2, 'DUAL SIM'),
-    (3, 'TRIO SIM'),
+    ('NO SIM', 'NO SIM'),
+    ('STANDARD', 'STANDARD'),
+    ('DUAL SIM', 'DUAL SIM'),
+    ('TRIO SIM', 'TRIO SIM'),
 )
 
 PARFUMS_QUANTITY_CHOICES = (
@@ -107,8 +110,8 @@ PARFUMS_QUANTITY_CHOICES = (
 )
 
 GENDER_CHOICES = (
-    ('H', 'HOMME'),
-    ('F', 'FEMME'),
+    ('HOMME', 'H'),
+    ('FEMME', 'F'),
 )
 
 PARFUM_TYP_CHOICES = (

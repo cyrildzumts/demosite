@@ -1,15 +1,17 @@
 
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">{{p.brand}} : {{p.name}} </div>
-        <div class="panel-body">
-          <a href="{{p.get_absolute_url}}">
-            <img src="{{p.image.url}}" class="img-thumbnail" style="width:100%" alt="{{p.name}}">
-          </a>
-        </div>
-        <div class="panel-footer">
-          Prix : {{p.price}} CFA
-        </div>
+    <div class="col-sm-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">{{p.brand}} {{p.name}} </div>
+          <div class="panel-body">
+            <div class="img-wrapper">
+              <a href="{{p.get_absolute_url}}">
+                <img class="img-responsive center-block" src="{{p.image.url}}"   alt="{{p.name}}">
+              </a>
+            </div>
+          </div>
+          <div class="panel-footer">
+            Prix : {{p.price}} CFA
+          </div>
 
-      </div>
+        </div>
     </div>

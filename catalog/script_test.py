@@ -1,4 +1,4 @@
-from catalog.models import Category, BaseProduct
+from catalog.models import Category, Product
 from catalog.category import CategoryEntry
 
 # Global vairiable
@@ -64,7 +64,7 @@ def get_products_from_cat(category, products):
 def products_cat():
 
     all_cats = list(Category.objects.filter(parent=None))
-    products = list(BaseProduct.objects.all())
+    products = list(Product.objects.all())
     for c in all_cats:
         items = get_products_from_cat(c, products)
         if items is not None:

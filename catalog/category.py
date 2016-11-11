@@ -1,5 +1,5 @@
 from django.db import models
-from catalog.models import Category, BaseProduct
+from catalog.models import Category, Product
 
 
 class CategoryEntry:
@@ -11,7 +11,7 @@ class CategoryEntry:
         return self.children is not None
 
     def products(self):
-        return BaseProduct.objects.filter()
+        return Product.objects.filter()
 
 
 class CategoryTree(object):
@@ -19,9 +19,7 @@ class CategoryTree(object):
 
 
 def has_children(category):
-    if Category.objects.filter(parent=category) is None:
-        return False
-    return True
+    return Category.objects.filter(parent=category) is None
 
 
 def get_children_categories(category, cat_list=[]):

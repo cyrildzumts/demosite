@@ -2,92 +2,111 @@
 
 {% block content %}
 
-<h2> Contenu de votre Panier  </h2>
+
 {% if not cart_item_count %}
   <p> Votre Panier ne contient aucun article. </p>
 
   {% else %}
-Article : {{cart_item_count}}
-<table summary="Votre Panier" id="shopping_cart" class="table table-hover table-condensed table-responsive">
-  <caption>  Votre Panier </caption>
-  <thead>
-    <!-- header info here -->
-    <tr>
 
-    <th >Article </th>
-    <th > Prix Unitaire </th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th scope="col" class="right"> Total</th>
+<div class="container">
+  <div class="row">
 
-    <!-- ..etc .. -->
-  </tr>
-  </thead>
-  <tfoot>
-    <!-- footer info here -->
-    <tr>
-      <th class="right" colspan="5">
-        Sous Total:
-      </th>
-      <th class="right"> {{cart_subtotal}} CFA</th>
-    </tr>
-    {% if cart_items %}
-    <tr>
-      <th class="right" colspan="6">
-        <!-- here comes the link to the checkout -->
-        [ Aller à la caisse]
-      </th>
-    </tr>
-    {% endif %}
-  </tfoot>
-  <tbody>
-    {% if cart_items %}
-{% for item in cart_items %}
-<tr>
-<td>
-<a href="{{ item.get_absolute_url }}" class="cart">
-  {{item.product.brand}} {{ item.name }}
-</a>
-</td>
-<td>{{ item.price}} CFA</td>
-<td class="right">
-<form method="post" action="." class="form" role="form">{% csrf_token %}
-<label for="quantity">Quantité:</label>
-<input  type="text" name="quantity" value="{{ item.quantity }}" id="quantity" 
-size="2" class="quantity" maxlength="3" />
-<input  type="hidden" name="item_id" value="{{ item.id }}" />
-</td>
-<td>
-<label for="refresh">
+    <div class="col-sm-1">
 
-<span class="glyphicon glyphicon-refresh"></span>
-<input type="submit" name="submit" value="Actualiser" id="refresh"/>
-</label>
-</form>
-</td>
-<td>
-<form method="post" action="." class="form">{% csrf_token %}
-<input type="hidden" name="item_id" value="{{ item.id }}" />
-<input type="hidden" name="quantity" value="{{ item.quantity}}" />
-<label for="delete">
-<span class="glyphicon glyphicon-remove"></span>
-<input  id="delete" type="submit" name="submit" value="Supprimer"/>
-</label>
-</form>
-</td>
-<td class="right">{{ item.total}} CFA</td>
-</tr>
-{% endfor %}
-{% else %}
-<tr>
-<td colspan="6" style="height:30px;">
-Votre panier est vide.
-</td>
-</tr>
-{% endif %}
-    <!-- loop through cart item here -->
-  </tbody>
-</table>
+    </div>
+    <div class="col-sm-10">
+
+        Article : {{cart_item_count}} <br />
+      <div class="container-fluid bordered-container">
+        <table summary="Votre Panier" id="shopping_cart" class="table table-hover table-condensed table-responsive">
+          <caption>  Votre Panier </caption>
+          <thead>
+            <!-- header info here -->
+            <tr>
+
+            <th >Article </th>
+            <th > Prix Unitaire </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th scope="col" class="right"> Total</th>
+
+            <!-- ..etc .. -->
+          </tr>
+          </thead>
+          <tfoot>
+            <!-- footer info here -->
+            <tr>
+              <th class="right" colspan="5">
+                Sous Total:
+              </th>
+              <th class="right"> {{cart_subtotal}} CFA</th>
+            </tr>
+            {% if cart_items %}
+            <tr>
+              <th class="right" colspan="6">
+                <!-- here comes the link to the checkout -->
+                [ Aller à la caisse]
+              </th>
+            </tr>
+            {% endif %}
+          </tfoot>
+          <tbody>
+            {% if cart_items %}
+        {% for item in cart_items %}
+        <tr>
+        <td>
+        <a href="{{ item.get_absolute_url }}" class="cart">
+          {{item.product.brand}} {{ item.name }}
+        </a>
+        </td>
+        <td>{{ item.price}} CFA</td>
+        <td class="right">
+        <form method="post" action="." class="form" role="form">{% csrf_token %}
+        <label for="quantity">Quantité:</label>
+        <input  type="text" name="quantity" value="{{ item.quantity }}" id="quantity" 
+        size="2" class="quantity" maxlength="3" />
+        <input  type="hidden" name="item_id" value="{{ item.id }}" />
+        </td>
+        <td>
+        <label for="refresh">
+
+        <span class="glyphicon glyphicon-refresh"></span>
+        <input type="submit" name="submit" value="Actualiser" id="refresh"/>
+        </label>
+        </form>
+        </td>
+        <td>
+        <form method="post" action="." class="form">{% csrf_token %}
+        <input type="hidden" name="item_id" value="{{ item.id }}" />
+        <input type="hidden" name="quantity" value="{{ item.quantity}}" />
+        <label for="delete">
+        <span class="glyphicon glyphicon-remove"></span>
+        <input  id="delete" type="submit" name="submit" value="Supprimer"/>
+        </label>
+        </form>
+        </td>
+        <td class="right">{{ item.total}} CFA</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+        <td colspan="6" style="height:30px;">
+        Votre panier est vide.
+        </td>
+        </tr>
+        {% endif %}
+            <!-- loop through cart item here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-1">
+
+    </div>
+  </div>
+
+</div>
+
 {% endif %}
 {% endblock content %}

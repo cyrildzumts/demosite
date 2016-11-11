@@ -1,15 +1,29 @@
 {% extends "base.html" %}
 
 {% block site_wrapper %}
- {% if form.errors %}
-  <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
-  {% endif %}
-  <form class="form-inline" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
-    <input type="text" class="input-small" placeholder="Nom d'utilisateur" id="{{form.username.id_for_label}}"\
-      name="{{form.username.name}}">
-    <input type="password" class="input-small" placeholder="Mot de passe" id="{{form.password.id_for_label}}"\
-        name="{{form.password.name}}">
-    <button type="submit" class="btn">Se connecter</button>
-  </form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
 
+    </div>
+    <div class="col-md-6">
+      {% if form.errors %}
+       <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
+       {% endif %}
+
+       <form class="form-inline login" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+         <input type="text" class="input-small" placeholder="Nom d'utilisateur" id="username"\
+           name="{{form.username.name}}">
+         <input type="password" class="input-small" placeholder="Mot de passe" id="password"\
+             name="{{form.password.name}}">
+         <button type="submit" class="btn">Se connecter</button>
+       </form>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+
+  </div>
+
+</div>
 {% endblock %}

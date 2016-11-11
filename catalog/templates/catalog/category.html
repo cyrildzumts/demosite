@@ -1,12 +1,24 @@
 {% extends "catalog.html" %}
-{%block content %}
+{% load category_tags %}
+{% block category_block %}
 
+<div class="list-group">
+    {% include "tags/category_box.html" %}
+</div>
+{% endblock category_block %}
+
+{%block content %}
 {% if products %}
-  <h3> {{c.name}} </h3>
-  <br /><br />
-    {% for p in products  %}
-      {% include "tags/product_box.html" %}
-    {% endfor %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        {% for p in products  %}
+          {% include "tags/product_box.html" %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
     <ul class="pager">
         {% if products.has_previous %}
           <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
@@ -23,5 +35,4 @@
     <p>Il n'y a pas encore de produits disponible
     dans cette catégorie </p>
 {% endif %}
-
 {% endblock %}

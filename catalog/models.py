@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from catalog import choices
 from django.conf import settings
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -22,6 +23,7 @@ class Category(models.Model):
                                         de mot clés')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # view_count = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'categories'
@@ -48,10 +50,10 @@ class Category(models.Model):
         that is, self.parent is None , self is returned
         instead of None.
         """
-        current = self
-        while current.parent is not None:
-            current = current.parent
-        return current
+        root = self
+        while root.parent is not None:
+            root = root.parent
+        return root
 
     def is_root(self):
         """
@@ -92,7 +94,7 @@ class Category(models.Model):
         Return every products which belong
         to this Category tree.
         """
-        products = BaseProduct.objects.all()
+        products = Product.objects.all().order_by('-created_at')
         items = [p for p in products if self.is_root_child(p)]
         return items
 
@@ -101,11 +103,15 @@ class Category(models.Model):
         Return only products belonging
         to this Category
         """
-        return self.baseproduct_set.all()
+        return self.product_set.all()
 
     @models.permalink
     def get_absolute_url(self):
         return ('catalog:catalog_category', (), {'category_slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
 
 
 class BaseProduct(models.Model):
@@ -171,11 +177,15 @@ class ProductType(models.Model):
     type_name = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    template_name = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         # abstract = True
         db_table = 'ProductType'
         ordering = ['-created_at']
+
+    def __str__(self):
+        return self.type_name
 
 
 class ModelNumber(models.Model):
@@ -189,18 +199,39 @@ class ModelNumber(models.Model):
 
 
 class Product(models.Model):
+    TEMPLATE_NAME_CHOICES = (
+        ('tags/product_phablet_options.html', 'Phablet'),
+        ('tags/product_parfum_options.html', 'Parfum'),
+    )
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     brand = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=255, unique=True, help_text='Texte unique\
-                            representant la page du produit.')
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        help_text='Texte unique representant la page du produit.',
+        blank=True,
+        null=False)
+    size = models.CharField(max_length=5,
+                            choices=choices.GENERIC_SIZE_CHOICES,
+                            blank=True,
+                            null=True)
+    material = models.CharField(max_length=10, blank=True, null=True)
+    gender = models.CharField(max_length=6,
+                              choices=choices.GENDER_CHOICES,
+                              blank=True,
+                              null=True)
+    categories = models.ManyToManyField(Category)
     price = models.IntegerField()
     old_price = models.IntegerField(default=0)
-    sku = models.CharField(max_length=50)
+    sku = models.CharField(max_length=50,
+                           blank=True,
+                           null=False)
     model_number = models.ForeignKey(ModelNumber,
                                      related_name='product_model',
-                                     on_delete=models.CASCADE,
-                                     unique=False)
+                                     unique=False,
+                                     blank=True,
+                                     null=True)
     meta_keywords = models.CharField(max_length=255, help_text='Liste de mot clés,\
                                      séparés par une virgule,\
                                      utilisés pour la recherche')
@@ -208,6 +239,7 @@ class Product(models.Model):
                                         de mot clés')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    short_description = models.TextField()
     description = models.TextField()
     quantity = models.IntegerField(default=1)
     sell_quantity = models.IntegerField(default=0)
@@ -216,17 +248,19 @@ class Product(models.Model):
     image2 = models.ImageField(upload_to="products", blank=True, null=True)
     image3 = models.ImageField(upload_to="products", blank=True, null=True)
     is_available = models.BooleanField(default=True)
-    categories = models.ManyToManyField(Category)
     is_bestseller = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=True)
-    has_extra_infos = models.BooleanField(default=False)
     product_type = models.ForeignKey(ProductType,
                                      related_name='product_type',
                                      on_delete=models.CASCADE,
                                      unique=False)
     view_count = models.IntegerField(default=0)
-
-    template_name = models.CharField(max_length=100, blank=False, null=False)
+    coupon = models.PositiveIntegerField(blank=True, null=True)
+    template_name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=TEMPLATE_NAME_CHOICES)
 
     class Meta:
         # abstract = True
@@ -237,10 +271,14 @@ class Product(models.Model):
         return self.name
 
     def build_slug(self):
-        self.slug = self.name + "-" + self.id
+        tmp = self.brand + "-" + self.name
+        if self.slug != tmp:
+            self.slug = tmp
 
     def build_sku(self):
-        self.sku = self.brand + "-" + self.name
+        tmp = self.brand + "-" + self.name
+        if self.sku != tmp:
+            self.sku = self.brand + "-" + self.name
 
     @property
     def cats_path(self):
@@ -259,6 +297,11 @@ class Product(models.Model):
     def product_is_available(self):
         return self.quantity != 0
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        self.build_sku()
+        super(Product, self).save(*args, **kwargs)
+
 
 class RelatedModel(models.Model):
     related_model = models.OneToOneField(
@@ -275,64 +318,52 @@ class RelatedModel(models.Model):
         return self.related_model.name
 
 
-class Phone(RelatedModel):
+class Phablet(Product):
 
     screen = models.FloatField(choices=choices.SCREEN_SIZE_CHOICES,
                                default=5)
-    camera = models.IntegerField(choices=choices.CAMERA_RESOLUTION_CHOICES,
-                                 default=13)
+    rear_camera = models.IntegerField(
+        choices=choices.CAMERA_RESOLUTION_CHOICES,
+        default=13,
+        blank=True,
+        null=True)
+    front_camera = models.IntegerField(
+        choices=choices.CAMERA_RESOLUTION_CHOICES,
+        default=5,
+        blank=True,
+        null=True)
     system = models.CharField(max_length=512)
     memory = models.IntegerField(choices=choices.MEMORY_SIZE_CHOICES,
-                                 default=16,
+                                 default=16
                                  )
-    sim_card = models.IntegerField(choices=choices.SIM_CARD_CONF_CHOICES,
-                                   default=1,
-                                   )
+    ram_memory = models.IntegerField(default=1,
+                                     choices=choices.RAM_SIZE_CHOICES)
+
+    extern_sdcard = models.BooleanField(default=False)
+    sim_card = models.CharField(
+        choices=choices.SIM_CARD_CONF_CHOICES,
+        default="STANDARD",
+        max_length=15
+        )
     battery = models.CharField(max_length=128)
-    frequency_band = models.CharField(max_length=512)
-    color = models.ForeignKey('catalog.Color', unique=False)
 
     class Meta:
         db_table = 'phones'
 
 
-class Shoe(RelatedModel):
-    material = models.CharField(max_length=30)
-    typ = models.CharField(max_length=30)
-    # size = models.ForeignKey('catalog.Size', unique=False)
-    size = models.CharField(max_length=5,
-                            choices=choices.GENERIC_SIZE_CHOICES,
-                            default='38')
-    color = models.ForeignKey('catalog.Color', unique=False)
-
-    class Meta:
-        db_table = 'shoes'
-
-
-class Parfum(RelatedModel):
+class Parfum(Product):
 
     capacity = models.IntegerField(choices=choices.PARFUMS_QUANTITY_CHOICES,
                                    default=100)
     typ = models.CharField(max_length=10,
                            choices=choices.PARFUM_TYP_CHOICES,
                            default='EDP')
-    gender = models.CharField(max_length=10,
-                              choices=choices.GENDER_CHOICES,
-                              default='F')
 
     class Meta:
         db_table = 'parfums'
 
-
-class Bag(RelatedModel):
-    material = models.CharField(max_length=30)
-    size = models.CharField(max_length=5,
-                            choices=choices.GENERIC_SIZE_CHOICES,
-                            default='M')
-    color = models.ForeignKey('catalog.Color', unique=False)
-
-    class Meta:
-        db_table = 'bags'
+    def build_sku(self):
+        self.sku = self.brand + "-" + self.name + "-" + str(self.capacity)
 
 
 class Color(models.Model):
