@@ -140,6 +140,12 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
+    """
+    CartItem represents the an Item present in a Cart.
+    CartItem is generic representation of the Product class,
+    so much of all message send to this instance is delegated to
+    the associated product member.
+    """
     cart = models.ForeignKey(Cart, unique=False, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=1)
@@ -170,9 +176,6 @@ class CartItem(models.Model):
 
     def get_cart(self):
         return self.cart
-
-    def get_quantity(self):
-        return self.quantity
 
     def total(self):
         return self.product.price * self.quantity

@@ -9,6 +9,12 @@ CART_ID_SESSION_KEY = 'cart_id'
 
 
 def get_cart(user):
+    """
+        @brief get_cart
+        @param user :  the current user who made the request
+        @ return a Cart which belongs to user.
+        if the user has no Cart, then a new one is created for this user
+    """
     try:
         cart = Cart.objects.get(user=user)
     except Cart.DoesNotExist:
@@ -19,15 +25,21 @@ def get_cart(user):
 
 
 def get_user_cart(request):
+    """
+        @brief get_user_cart : this is an utility function that
+        first checks if the current user is logged in.
+        @return a Cart associated to the user who made
+        this request.
+        An exception is thrown if the user is not logged in.
+    """
     if request.user.is_authenticated():
         return get_cart(request.user)
     else:
         raise Http404("Vous devez être connecter pour \
         pouvoir utiliser le Panier.")
 
+
 # get current user's cart id, set new one if blank
-
-
 def _cart_id(request):
     """
     If the user is logged in, retrieve the user
@@ -41,7 +53,11 @@ def _cart_id(request):
     return request.session[CART_ID_SESSION_KEY]
 
 
+# TODO : implement a better ID generator
 def _generate_cart_id():
+    """
+    generate a new Cart ID.
+    """
     cart_id = ''
     characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\
                   1234567890!@#$%&*()'
@@ -52,7 +68,12 @@ def _generate_cart_id():
 
 
 # return all the items froms the user's cart
+# deprecated : Use Cart class from models
 def get_cart_items(request):
+    """
+        @brief : return all items present in the user's
+        Cart.  The user id is extracted from the request object
+    """
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         items = CartItem.objects.filter(cart=cart)
@@ -89,16 +110,19 @@ def add_to_cart(request):
 
 
 # return the total number of items in the user's cart
+# deprecated. Please use Cart from models instead
 def cart_distinct_item_count(request):
     return get_cart_items(request).count()
 
 
+# deprecated. Please use Cart from models instead
 def get_single_item(request, item_id):
     return get_object_or_404(CartItem,
                              id=item_id,
                              cart_id=_cart_id(request))
 
 
+# deprecated. Please use Cart from models instead
 def update_quantity(request):
     postdata = request.POST.copy()
     item_id = postdata['item_id']
@@ -113,6 +137,7 @@ def update_quantity(request):
 
 
 # remove a single item from cart
+# deprecated. Please use Cart from models instead
 def remove_from_cart(request):
     postdata = request.POST.copy()
     item_id = postdata['item_id']
@@ -122,6 +147,7 @@ def remove_from_cart(request):
 
 
 # get the total cost for the current cart
+# deprecated. Please use Cart from models instead
 def cart_subtotal(request):
     cart_total = decimal.Decimal('0')
     cart_products = get_cart_items(request)
