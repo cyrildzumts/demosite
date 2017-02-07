@@ -27,7 +27,7 @@ DEBUG = True
 LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.Customer'
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]
-SITE_NAME = "Demo Site E-Commerce"
+SITE_NAME = "Grand Village"
 META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
                 Sac, sacs, android, iphone, samsung, accessoires"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\

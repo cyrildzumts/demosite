@@ -1,7 +1,7 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
 from catalog import choices
-from django.conf import settings
+# from django.conf import settings
 from django.template.defaultfilters import slugify
 
 # Create your models here.

@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from catalog.models import Phablet, Parfum, Category, Product
-from django.core import urlresolvers, serializers
+from catalog.models import Category, Product
+from django.core import urlresolvers  # , serializers
 from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404
+# from django.template import RequestContext
 from cart import cart
 from cart.forms import ProductAddToCartForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from demosite import settings
 # Create your views here.
 
 # this function return a list of subcategory
@@ -24,7 +24,7 @@ def get_categories(parent_id):
 
 def index(request):
     template_name = "catalog/index.html"
-    page_title = 'Catalogue' + " - "
+    page_title = 'Acceuille | ' + settings.SITE_NAME
     session = request.session
     # get the number of visits to the site
 
@@ -49,7 +49,7 @@ def show_category(request, category_slug):
     # c.save()
     template_name = "catalog/category.html"
     product_list = c.get_products()
-    page_title = c.name
+    page_title = c.name + ' | ' + settings.SITE_NAME
     # show 9 product per page
     paginator = Paginator(product_list, 9)
     page = request.GET.get('page')
@@ -81,7 +81,7 @@ def show_product(request, product_slug, template_name="catalog/product.html"):
     categories = p.categories.filter(is_active=True)
     p.view_count = p.view_count + 1
     p.save()
-    page_title = p.name + " - "
+    page_title = p.name + ' | ' + settings.SITE_NAME
     meta_keywords = p.meta_keywords
     meta_description = p.meta_description
     # HTTP methods evaluation:
