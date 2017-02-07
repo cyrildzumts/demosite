@@ -35,6 +35,10 @@ def delete_user_session(user):
 
 
 class Cart(models.Model):
+    """
+    Every User has a Cart.
+    When checking out a Cart, an Order can be created from a  Cart.
+    """
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -142,6 +146,7 @@ class Cart(models.Model):
 class CartItem(models.Model):
     """
     CartItem represents the an Item present in a Cart.
+    A CartItem can be parts of many Carts.
     CartItem is generic representation of the Product class,
     so much of all message send to this instance is delegated to
     the associated product member.
