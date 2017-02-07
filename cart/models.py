@@ -1,11 +1,11 @@
 from django.db import models
-from catalog.models import Product
+# from catalog.models import Product
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-from django.conf import settings
-from django.contrib.sessions.models import Session
-from django.contrib.auth.signals import user_logged_in
+# from django.conf import settings
+# from django.contrib.sessions.models import Session
+# from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import get_object_or_404
 from cart.cart_exceptions import QuantityError
 # Create your models here.
