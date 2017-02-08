@@ -19,12 +19,9 @@ function displayLoginError(){
   jQuery("form.login").submit(function(){
     username = jQuery("#username").val();
     password = jQuery("#password").val();
-    if(username != "" && password !=""){
-      alert("entree correcte");
-    }
-    else{
-      alert("Veuillez saisir le nom d'utilsateur et le mot de passe.");
-      return false;
+    if(!(username != "" && password !="")){
+        alert("Veuillez saisir le nom d'utilsateur et le mot de passe.");
+        return false;
     }
   });
 }

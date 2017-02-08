@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.contrib import auth
@@ -7,6 +8,10 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as django_login, logout as django_logout
 from accounts.forms import AuthenticationForm, RegistrationForm
+from .models import UserProfile
+from .forms.forms import UserForm
+from django.forms.models import inlineformset_factory
+from django.core.exceptions import PermissionDenied
 from demosite import settings
 
 
@@ -80,5 +85,55 @@ def register(request):
 def user_account(request):
     template_name = "registration/user_account.html"
     page_title = 'Mon Compte'
+    user = request.user
+    user_form = UserForm(instance=user)
+    ProfileInlineFormSet = inlineformset_factory(User, UserProfile, fields=(
+        'date_of_birth', 'country',
+        'city', 'province', 'address', 'zip_code', 'telefon', 'newsletter',
+        'is_active_account'))
+    formset = ProfileInlineFormSet(instance=user)
+    if request.method == "POST":
+        user_form = UserForm(request.POST, request.FILES, instance=user)
+        formset = ProfileInlineFormSet(request.POST, request.FILES, instance=user)
+
+        if user_form.is_valid():
+            created_user = user_form.save(commit=False)
+            formset = ProfileInlineFormSet(request.POST, request.FILES, instance=created_user)
+
+            if formset.is_valid():
+                created_user.save()
+                formset.save()
+                return HttpResponseRedirect(REDIRECT_URL)
+
     name = request.user.username
+
+    return render(request, template_name, locals())
+
+
+@login_required
+def edit_account(request, pk):
+    template_name = "registration/user_account.html"
+    page_title = 'Mon Compte'
+    user = User.objects.get(pk=pk)
+    user = request.user
+    user_form = UserForm(instance=user)
+    ProfileInlineFormSet = inlineformset_factory(User, UserProfile, fields=('country',
+        'city', 'province', 'address', 'zip_code', 'telefon', 'newsletter',
+        'is_active_account'))
+    formset = ProfileInlineFormSet(instance=user)
+    if request.method == "POST":
+        user_form = UserForm(request.POST, request.FILES, instance=user)
+        formset = ProfileInlineFormSet(request.POST, request.FILES, instance=user)
+
+        if user_form.is_valid():
+            created_user = user_form.save(commit=False)
+            formset = ProfileInlineFormSet(request.POST, request.FILES, instance=created_user)
+
+            if formset.is_valid():
+                created_user.save()
+                formset.save()
+                return HttpResponseRedirect(REDIRECT_URL)
+
+    name = request.user.username
+
     return render(request, template_name, locals())
