@@ -1,8 +1,6 @@
 *.sqlite3
 *.pyc
-<<<<<<< HEAD
-staticfiles/images/*
-=======
+
 */staticfiles/images/*
 *.jpg
 *.png
@@ -10,4 +8,6 @@ staticfiles/images/*
 *.pdf
 *.jpeg
 
->>>>>>> save_user_cart
+*/migrations/*
+*/__pycache__/*
+

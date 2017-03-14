@@ -15,15 +15,16 @@ class Order(models.Model):
     CANCELLED = 4
 
     # Set of possibles order statuses
-    ORDER_STATUSES = ((SUBMITTED, 'Submitted'),
-                                            PROCESSED, 'Processed'),
-                                            (SHIPPED, 'Shipped'),
-                                            (CANCELLED, 'Cancelled'),)
+    ORDER_STATUSES = (
+        (SUBMITTED, 'Submitted'),
+        (PROCESSED, 'Processed'),
+        (SHIPPED, 'Shipped'),
+        (CANCELLED, 'Cancelled'),)
 
     # Order Infos
     date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED)
-    ip_address = models.IPAddressField()
+    ip_address = models.GenericIPAddressField()
     last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
     transaction_id = models.CharField(max_length=20)
