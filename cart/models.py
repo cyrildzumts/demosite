@@ -160,6 +160,12 @@ class CartItem(models.Model):
         db_table = 'cart_items'
         ordering = ['date_added']
 
+    def __str__(self):
+        return self.product.name + ' (' + self.product.sku + ')'
+
+    def __unicode__(self):
+        return self.product.name + ' (' + self.product.sku + ')'
+
     def set_quantity(self, quantity):
         if quantity <= self.product.quantity:
             self.quantity = quantity

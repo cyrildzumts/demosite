@@ -1,7 +1,7 @@
-from .models import CartItem, Cart
+from cart.models import CartItem, Cart
 from catalog.models import BaseProduct
 from django.shortcuts import get_object_or_404, Http404
-from django.http import HttpResponseRedirect
+# from django.http import HttpResponseRedirect
 import decimal
 import random
 
@@ -154,3 +154,13 @@ def cart_subtotal(request):
     for cart_item in cart_products:
         cart_total += cart_item.product.price * cart_item.quantity
     return cart_total
+
+
+def is_empty(request):
+    user_cart = get_user_cart(request)
+    return user_cart.items_count == 0
+
+
+def empty_cart(request):
+    user_cart = get_cart_items(request)
+    user_cart.delete()

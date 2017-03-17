@@ -21,6 +21,14 @@
 
 
 }
+.item{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+}
 .product_image{
   width: auto;
   max-height: 300px;

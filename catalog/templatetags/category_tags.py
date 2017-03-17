@@ -14,3 +14,8 @@ def subcategory(category=None):
 @register.simple_tag
 def products_from_cat(category):
     return Product.objects.filter(parent=category).order_by('-created_at')
+
+
+@register.simple_tag
+def get_default_products():
+    return Product.objects.all()[:9]

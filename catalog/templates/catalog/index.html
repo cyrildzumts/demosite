@@ -2,14 +2,10 @@
 
 {% block content %}
  {% load category_tags %}
- {% subcategory as root_cats%}
- <div class="container-fluid">
- {%for cat  in root_cats %}
-  <div class="row">
- {%for p in cat.get_products%}
-  {% include "tags/product_box.html" %}
+ {% get_default_products as products %}
+ <div class="container-fluid list-group">
+ {% for p  in products %}
+      {% include "tags/product_box.html" %}
  {% endfor %}
-   </div>
- {%endfor%}
 </div><br>
 {% endblock %}

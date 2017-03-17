@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
-
+"""
 class Order (models.Model):
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -60,11 +60,7 @@ class Order (models.Model):
 
     def get_creation_date(self):
         return self.created_at
+"""
 
-    def create_invoice(self):
-        """
-        create an invoice for this order.
-        the invoice be saved as a pdf file
 
-        """
-        pass
+#    def create_invoice(self):

@@ -1,5 +1,4 @@
 from django import template
-from cart.models import Cart
 from catalog.models import Category, Phablet, Parfum, Product
 import datetime
 register = template.Library()

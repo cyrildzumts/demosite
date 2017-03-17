@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from cart import cart
-from cart.models import Cart, CartItem
+# from cart.models import Cart, CartItem
 from demosite import settings
 from django.views.decorators.csrf import csrf_protect
+from order import checkout
 
 # Create your views here.
 
@@ -19,6 +21,10 @@ def show_cart(request):
             user_cart.remove_from_cart(item_id)
         if postdata['submit'] == 'Actualiser':
             user_cart.update_quantity(item_id=item_id, quantity=int(quantity))
+        if postdata['submit'] == 'Checkout':
+            print("Checkout clicked from cart")
+            checkout_url = checkout.get_checkout_url(request)
+            return HttpResponseRedirect(checkout_url)
     cart_items = user_cart.get_items()
     page_title = 'Panier' + " - " + settings.SITE_NAME
     cart_subtotal = user_cart.subtotal()
