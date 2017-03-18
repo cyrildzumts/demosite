@@ -9,7 +9,9 @@
 <form action="." method="post" class="form-inline">
 <fieldset class="checkout">
 <legend>Contact Info</legend>
+
 <table>
+
 {% form_table_row form.email %}
 {% form_table_row form.phone %}
 </table>
@@ -28,25 +30,12 @@
 </fieldset>
 <fieldset class="checkout">
 <legend>Billing Info</legend>
-<table>
-{% form_table_row form.billing_name %}
-{% form_table_row form.billing_address_1 %}
-{% form_table_row form.billing_address_2 %}
-{% form_table_row form.billing_city %}
-{% form_table_row form.billing_state %}
-{% form_table_row form.billing_zip %}
-{% form_table_row form.billing_country %}
-</table>
+<input type="checkbox" name="use_shipping" value="using_shipping" checked> Use shipping address<br>
+
 </fieldset>
 <fieldset class="checkout">
 <legend>Credit Card Info</legend>
-<table>
-{% form_table_row form.credit_card_number %}
-{% form_table_row form.credit_card_type %}
-{% form_table_row form.credit_card_expire_month %}
-{% form_table_row form.credit_card_expire_year %}
-{% form_table_row form.credit_card_cvv %}
-</table>
+
 </fieldset>
 <table>
 <tr>

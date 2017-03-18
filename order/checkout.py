@@ -4,6 +4,7 @@ from cart.models import Cart
 from order.forms import CheckoutForm
 from demosite import settings
 from django.core import urlresolvers
+
 import urllib
 
 

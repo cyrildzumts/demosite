@@ -71,6 +71,10 @@ class Order(models.Model):
         return total
 
     def generate_order_refNum(self):
+        """
+        Generate a reference number in this format :
+        CurrentYear_CurrentMonth_CurrentDay_Incrementing_Number
+        """
         pass
 
     def set_paid(self):

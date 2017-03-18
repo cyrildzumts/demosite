@@ -7,6 +7,20 @@ from order.forms import CheckoutForm
 from order.models import Order, OrderItem
 from order import order
 from cart import cart
+from accounts.models import UserProfile
+
+
+def fill_form(user):
+    form = CheckoutForm()
+    user_p = UserProfile.objects.get(user=user)
+    form.email = user.email
+    form.phone = user_p.telefon
+    form.shipping_name = user_p.user.first_name + ' ' + user_p.user.last_name
+    form.shipping_address_1 = user_p.address
+    form.shipping_city = user_p.city
+    form.shipping_country = user_p.country
+    form.shipping_zip = user_p.zip_code
+    return form
 
 
 # Create your views here.
@@ -29,8 +43,9 @@ def show_checkout(request):
                 return HttpResponseRedirect(receipt_url)
         else:
             error_message = 'Correct the errors below'
-    else:
-        form = CheckoutForm()
+    # else:
+        #form.phone =
+    form = fill_form(user=request.user)
     page_title = 'Checkout'
     return render(request, template_name, locals())
 
