@@ -8,6 +8,10 @@ import decimal
 import datetime
 
 
+# Global Variable counting
+Order_Count = 1
+
+
 # Create your models here.
 class Order(models.Model):
     # Order Status
@@ -41,20 +45,9 @@ class Order(models.Model):
     # Shipping Infos
     shipping_name = models.CharField(max_length=50)
     shipping_address_1 = models.CharField(max_length=50)
-    shipping_address_2 = models.CharField(max_length=50, blank=True)
     shipping_city = models.CharField(max_length=50)
-    shipping_state = models.CharField(max_length=2)
     shipping_country = models.CharField(max_length=50)
     shipping_zip = models.CharField(max_length=10)
-
-    # Billing Infos
-    billing_name = models.CharField(max_length=50)
-    billing_address_1 = models.CharField(max_length=50)
-    billing_address_2 = models.CharField(max_length=50, blank=True)
-    billing_city = models.CharField(max_length=50)
-    billing_state = models.CharField(max_length=2)
-    billing_country = models.CharField(max_length=50)
-    billing_zip = models.CharField(max_length=10)
 
     def __unicode__(self):
         return 'Order #' + str(self.id)
@@ -70,12 +63,22 @@ class Order(models.Model):
             total += item.total
         return total
 
-    def generate_order_refNum(self):
+    def generate_order_refNum(self, counter=Order_Count):
         """
         Generate a reference number in this format :
         CurrentYear_CurrentMonth_CurrentDay_Incrementing_Number
         """
-        pass
+        counter += 1
+        year = datetime.datetime.now.year
+        month = datetime.datetime.now.month
+        day = datetime.datetime.now.day
+        hour = datetime.datetime.now.hour
+        minu = datetime.datetime.now.minute
+
+        ref_str = str(year) + str(month) + str(day) + str(hour) + str(minu)
+        + str(counter)
+        self.ref_num = int(ref_str)
+        return ref_str
 
     def set_paid(self):
         self.paid_status = True

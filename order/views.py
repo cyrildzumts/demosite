@@ -7,26 +7,26 @@ from order.forms import CheckoutForm
 from order.models import Order, OrderItem
 from order import order
 from cart import cart
+from django.contrib.auth.models import User
 from accounts.models import UserProfile
 
 
 def fill_form(user):
-    form = CheckoutForm()
+    form = {}
     user_p = UserProfile.objects.get(user=user)
-    form.email = user.email
-    form.phone = user_p.telefon
-    form.shipping_name = user_p.user.first_name + ' ' + user_p.user.last_name
-    form.shipping_address_1 = user_p.address
-    form.shipping_city = user_p.city
-    form.shipping_country = user_p.country
-    form.shipping_zip = user_p.zip_code
+    form['email'] = user.email
+    form['phone'] = user_p.telefon
+    form['name'] = user_p.user.first_name + ' ' + user_p.user.last_name
+    form['address'] = user_p.address
+    form['city'] = user_p.city
+    form['country'] = user_p.country
+    form['zip'] = user_p.zip_code
     return form
 
 
 # Create your views here.
 def show_checkout(request):
     template_name = 'order/checkout.html'
-    print("show_checkout view called")
     if cart.is_empty(request):
         cart_url = urlresolvers.reverse('show_cart')
         return HttpResponseRedirect(cart_url)
@@ -44,8 +44,10 @@ def show_checkout(request):
         else:
             error_message = 'Correct the errors below'
     # else:
-        #form.phone =
-    form = fill_form(user=request.user)
+    # Method = GET . this an initial request. create a a new form
+    form_context = fill_form(User.objects.get(username=request.user.username))
+    form_context['ip_address'] = request
+    print("Form Filled : Name =  " + form_context['name'])
     page_title = 'Checkout'
     return render(request, template_name, locals())
 

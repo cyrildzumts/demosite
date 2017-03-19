@@ -1,0 +1,15 @@
+<div class="container">
+    <fieldset>
+        <legend>Methode de Payement : </legend>
+    </fieldset>
+    <select name="paid_options">
+        <option value="SMS"> SMS</option>
+        {% if form_context.country|lower == "gabon" %}
+            <option value="AirtelMoney" selected> AirtelMoney</option>
+        {% else %}
+            <option value="OrangeMoney" selected>OrangeMoney</option>
+            <option value="MTNMoney">MTNMoney</option>
+        {% endif %}
+    </select>
+    <br><br>
+</div>
