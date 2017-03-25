@@ -25,14 +25,14 @@ def process(request):
     return 1
 
 
-def create_order(request, transaction_id):
+def create_order(request):
     order = Order()
     checkout_form = CheckoutForm(request.Post, instance=order)
     order = checkout_form.save(commit=False)
-    order.transaction_id = transaction_id
     order.ip_address = request.META.get('REMOTE_ADDR')
     order.user = request.user
     order.status = Order.SUBMITTED
+    order.generate_order_refNum()
     order.save()
     # if order save succeeded
     if order.pk:

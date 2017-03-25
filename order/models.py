@@ -9,11 +9,12 @@ import datetime
 
 
 # Global Variable counting
-Order_Count = 1
 
 
 # Create your models here.
 class Order(models.Model):
+    # class Variable Counter :
+    Order_Count = 0
     # Order Status
     SUBMITTED = 1
     PROCESSED = 2
@@ -63,20 +64,20 @@ class Order(models.Model):
             total += item.total
         return total
 
-    def generate_order_refNum(self, counter=Order_Count):
+    def generate_order_refNum(self):
         """
         Generate a reference number in this format :
         CurrentYear_CurrentMonth_CurrentDay_Incrementing_Number
         """
-        counter += 1
-        year = datetime.datetime.now.year
-        month = datetime.datetime.now.month
-        day = datetime.datetime.now.day
-        hour = datetime.datetime.now.hour
-        minu = datetime.datetime.now.minute
+        Order.Order_Count += 1
+        year = datetime.datetime.now().year
+        month = datetime.datetime.now().month
+        day = datetime.datetime.now().day
+        hour = datetime.datetime.now().hour
+        minu = datetime.datetime.now().minute
 
-        ref_str = str(year) + str(month) + str(day) + str(hour) + str(minu)
-        + str(counter)
+        ref_str = (str(year) + str(month) + str(day) + str(hour) +
+                   str(minu) + str(Order.Order_Count))
         self.ref_num = int(ref_str)
         return ref_str
 

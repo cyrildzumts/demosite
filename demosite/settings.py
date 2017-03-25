@@ -32,16 +32,24 @@ META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
                 Sac, sacs, android, iphone, samsung, accessoires"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.6', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.6','testserver', ]
 
 handler404 = 'demosite.views.not_found_404'
 handler500 = 'demosite.views.server_error_500'
 # Application definition
 
+"""
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+"""
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 
 INSTALLED_APPS = [

@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^order/', include('order.urls')),
     url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^api/api-auth/', include('rest_framework.urls')),
     url(r'^cart/', include('cart.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^catalog/', include('catalog.urls')),

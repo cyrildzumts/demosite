@@ -2,7 +2,7 @@ from cart.models import Cart, CartItem, LineItem, LineItemManager
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-
+from order.models import Order
 """
 class Order (models.Model):
     id = models.AutoField(primary_key=True)
@@ -61,6 +61,13 @@ class Order (models.Model):
     def get_creation_date(self):
         return self.created_at
 """
+
+
+class OrderManager():
+    order_counter = 0
+
+    def validate_form(postdata):
+        pass
 
 
 #    def create_invoice(self):
