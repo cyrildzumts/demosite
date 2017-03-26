@@ -26,6 +26,7 @@ def login(request):
     """
     page_title = "Connexion d'utilisateur"
     template_name = 'registration/login.html'
+    template_name = 'tags/login_form.html'
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():

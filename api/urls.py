@@ -4,7 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.routers import DefaultRouter
 from api.views import CategoryViewSet, ProductViewSet, CartItemViewSet, CartViewSet
 from demosite import settings
-
+from api import views
 app_name = 'api_app'
 
 categories = CategoryViewSet.as_view({
@@ -29,5 +29,5 @@ router.register(r'cartItems', CartItemViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    # url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^ajax/ajax_login/$', views.ajax_login, name='ajax_login'),
 ]
