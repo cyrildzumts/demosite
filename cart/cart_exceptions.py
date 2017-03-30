@@ -7,3 +7,11 @@ class QuantityError(Exception):
 
     def __str__(self):
         return self.message
+
+
+class ProductNotAvailableError(Exception):
+    def __init__(self, product_name):
+        self.message = "The product %s is not available" % (product_name)
+
+    def __str__(self):
+        return self.message

@@ -1,5 +1,5 @@
 from django.db import models
-# from catalog.models import Product
+from catalog.models import Product
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -8,6 +8,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 # from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import get_object_or_404
 from cart.cart_exceptions import QuantityError
+from django.core.exceptions import ObjectDoesNotExist
 # Create your models here.
 
 """
@@ -58,21 +59,42 @@ class Cart(models.Model):
         update the quantity.
         If not then create a new CartItem and set
         appropriate value for its variable and save.
+        This method does nothing when 'quantity' <  1
         """
-        item_in_cart = False
-        items = self.cartitem_set.all()
-        for item in items:
-            if item.product.pk == product.pk:
-                q = item.get_quantity() + quantity
-                self.update_quantity(item.pk, q)
-                item_in_cart = True
-        if not item_in_cart:
-            # create and save a new cart item
-            item = CartItem()
-            item.set_product(product)
-            item.set_quantity(quantity)
-            item.set_cart(self)
-            item.save()
+        added = False
+        if quantity > 0:
+            item_in_cart = False
+            items = self.cartitem_set.all()
+            # check if this product is already in the cart.
+            # if yes, then check if 'quantity' is not greater than
+            # that we have in stock.
+            # if it is lower then update the quantity in stock
+            for item in items:
+                if item.product.pk == product.pk:
+                    q = item.get_quantity() + quantity
+                    added = self.update_quantity(item.pk, q)
+                    item_in_cart = True
+            if not item_in_cart:
+                # create and save a new cart item
+                item = CartItem()
+                item.set_product(product)
+                 # this might throw an exception
+                item.set_quantity(quantity)
+                item.set_cart(self)
+                item.save()
+                added = True
+        return added
+
+    def contain_item(self, item_id):
+        flag = False
+        try:
+            prod = Product.objects.get(pk=int(item_id))
+            item = self.cartitem_set.get(product=prod)
+            if item is not None:
+                flag = True
+        except ObjectDoesNotExist as e:
+            pass  # print(e)
+        return flag
 
     def get_item(self, item_id):
         """
@@ -88,15 +110,24 @@ class Cart(models.Model):
         of quantity.
         If quantity = 0, the corresponding CartItem will
         be deleted.
+        This method return True if the quantity could be updated.
+        return False if not.
         """
+        flag = False
         item = self.get_item(item_id)
         if item:
+            # item_quantity = item.get_quantity()
             if quantity > 0:
+                available_qty = item.get_product().quantity - quantity
+                if (available_qty > 0):
+                    item.set_quantity(quantity)
+                    item.save()
+                    flag = True
+                else:
+                    if quantity == 0:
+                        self.remove_from_cart(item_id)
 
-                item.set_quantity(quantity)
-                item.save()
-            else:
-                self.remove_from_cart(item_id)
+        return flag
 
     def remove_from_cart(self, item_id):
         """

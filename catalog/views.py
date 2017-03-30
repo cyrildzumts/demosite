@@ -9,12 +9,25 @@ from cart.forms import ProductAddToCartForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from demosite import settings
+from django.views.generic.detail import DetailView
 # Create your views here.
 
 # this function return a list of subcategory
 # which are parts of a parent category
 # if parent category is zero, then  we are looking
 # for the root category.
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "catalog/product_details.html"
+    #context_object_name = "product"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        name = super(ProductDetailView, self).get_object().name
+        context['page_title'] = name
+        return context
 
 
 def get_categories(parent_id):

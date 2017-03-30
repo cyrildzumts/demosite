@@ -36,6 +36,9 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.6','testserver', ]
 
 handler404 = 'demosite.views.not_found_404'
 handler500 = 'demosite.views.server_error_500'
+
+# fixtures directories
+FIXTURE_DIRS = ['fixtures']
 # Application definition
 
 """
@@ -111,7 +114,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'TEST': {
+                'NAME': 'test_db.sqlite3',
+        },
+    },
 }
 
 

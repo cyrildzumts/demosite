@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class CategoryParentTest(TestCase):
-    fixtures = ['catalog']
+    # fixtures = ['catalog']
 
     def setUp(self):
         self.shoes_cat = Category.objects.get(name="Chaussures")

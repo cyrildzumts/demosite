@@ -1,0 +1,67 @@
+{% extends "catalog.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+    Categorie:
+      <ol class="breadcrumb">
+        {% for c in product.cats_path %}
+        <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+        {% endfor %}
+      </ol>
+
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="product_box center-block">
+        <div class="img-wrapper">
+          <img class="img-responsive center-block" src="{{product.image.url}}"  alt="{{product.name}}" />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+
+      <h1> {{product.name}} </h1>
+        Marque: <em>{{product.brand}}</em>
+      <br />
+      {% if product.size is not None %}
+        Taille: {{product.size}}
+      {%endif%}
+      {% if product.template_name is not None%}
+      {% include product.template_name %}
+      {%endif%}
+        <br />
+        {% if product.old_price is True %}
+        <p class="invalid">Coûtait : {{product.old_price}} CFA </p> <br />
+        {% endif %}
+        Prix : {{product.price}} CFA
+        <br /><br />
+        <form method="post" action="." class="addToCart">{% csrf_token %}
+
+          <div class="form-group">
+            {{form.as_p}}
+          <!--<label for="{{form.quantity.id_for_quantity}}"> Quantité:</label> -->
+          <br />
+          </div>
+          <input type="submit" class="btn"  name="submit" value="Ajouter dans le Panier">
+        </form>
+        <br /><br />
+        <div class="cb"></div>
+        <h3> Description du produit </h3>
+            {{product.description}}
+    </div>
+  </div>
+
+</div>
+{{product.content}}
+{% endblock %}

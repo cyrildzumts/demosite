@@ -286,7 +286,7 @@ class Product(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('catalog:product_details', (), {'product_slug': self.slug})
+        return ('catalog:product_details', (), {'slug': self.slug})
 
     def sale_price(self):
         if self.old_price > self.price:
