@@ -63,18 +63,16 @@ class Cart(models.Model):
         """
         added = False
         if quantity > 0:
-            item_in_cart = False
-            items = self.cartitem_set.all()
+            if self.contain_item(product.pk):
+                ci = CartItem.objects.get(product=product)
+                added = ci.update_quantity(quantity)
+
             # check if this product is already in the cart.
             # if yes, then check if 'quantity' is not greater than
             # that we have in stock.
             # if it is lower then update the quantity in stock
-            for item in items:
-                if item.product.pk == product.pk:
-                    q = item.get_quantity() + quantity
-                    added = self.update_quantity(item.pk, q)
-                    item_in_cart = True
-            if not item_in_cart:
+
+            else:
                 # create and save a new cart item
                 item = CartItem()
                 item.set_product(product)
@@ -100,9 +98,11 @@ class Cart(models.Model):
         """
         Return a CartItem object when found
         """
-        return get_object_or_404(CartItem,
-                                 pk=item_id,
-                                 cart=self)
+        try:
+            item = CartItem.objects.get(pk=item_id, cart=self)
+        except ObjectDoesNotExist:
+            item = None
+        return item
 
     def update_quantity(self, item_id, quantity):
         """
@@ -198,11 +198,16 @@ class CartItem(models.Model):
         return self.product.name + ' (' + self.product.sku + ')'
 
     def set_quantity(self, quantity):
+        flag = False
         if quantity <= self.product.quantity:
             self.quantity = quantity
+            flag = True
+        """
         else:
             raise QuantityError(available=self.product.quantity,
                                 value=quantity)
+        """
+        return flag
 
     def get_quantity(self):
         return self.quantity
