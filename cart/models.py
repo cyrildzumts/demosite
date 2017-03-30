@@ -76,7 +76,7 @@ class Cart(models.Model):
                 # create and save a new cart item
                 item = CartItem()
                 item.set_product(product)
-                 # this might throw an exception
+                # this might throw an exception
                 item.set_quantity(quantity)
                 item.set_cart(self)
                 item.save()
@@ -164,8 +164,8 @@ class Cart(models.Model):
             count += item.quantity
         return count
 
-    def refresh(self):
-        pass
+    def is_empty(self):
+        return self.items_count == 0
 
     def get_user(self):
         return self.user
