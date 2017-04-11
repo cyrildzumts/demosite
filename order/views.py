@@ -43,8 +43,15 @@ def show_checkout(request):
                 return HttpResponseRedirect(receipt_url)
         else:
             error_message = 'Correct the errors below'
+            print("Error data from form : ", form.errors)
     # else:
     # Method = GET . this an initial request. create a a new form
+    user_cart = None
+    cartitems = None
+    if request.user.is_authenticated():
+        user_cart = cart.get_cart(request.user)
+        cartitems = user_cart.get_items()
+
     form_context = fill_form(User.objects.get(username=request.user.username))
     form_context['ip_address'] = request
     print("Form Filled : Name =  " + form_context['name'])

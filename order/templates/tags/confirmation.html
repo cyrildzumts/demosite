@@ -1,5 +1,27 @@
-<div class="container">
-    <fieldset>
+
         <legend>Contenu de votre Commande:</legend>
-    </fieldset>
-</div>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Nom du produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th> Prix total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item  in cartitems %}
+                <tr>
+                    <th>{{item.product.sku}}</th>
+                    <th>{{item.product.name}}</th>
+                    <th>{{item.quantity}}</th>
+                    <th>{{item.price}}</th>
+                    <th>{{item.total_price}}</th>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <p>Total = {{user_cart.subtotal}}</p>
+                </tr>
+            </tbody>
+        </table>
