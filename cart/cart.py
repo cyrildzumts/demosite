@@ -75,7 +75,7 @@ def get_cart_items(request):
         Cart.  The user id is extracted from the request object
     """
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart = Cart.objects.get(user=request.user)
         items = CartItem.objects.filter(cart=cart)
     except Cart.DoesNotExist:
         items = []

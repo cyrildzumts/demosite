@@ -2,7 +2,7 @@
     <fieldset>
         <legend>Methode de Payement : </legend>
     </fieldset>
-    <select name="paid_options">
+    <select name="payement_type">
         <option value="SMS"> SMS</option>
         {% if form_context.country|lower == "gabon" %}
             <option value="AirtelMoney" selected> AirtelMoney</option>
