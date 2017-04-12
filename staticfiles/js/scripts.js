@@ -1,3 +1,28 @@
+function addToCart2(id){
+    $.ajax({
+        type: 'POST',
+        url : '/cart/add_to_cart/',
+        data: {product_id: id},
+        dataType: 'json',
+        // success Function called in case of an http 200 response
+        success: item_add_confirm,
+        error: function (){
+            alert("Il y a une erreur, Veuillez reessayer.");
+        }
+    });
+
+}
+function item_add_confirm(response){
+    data = JSON.parse(response);
+    alert("Item ajouter dans le Panier . " + data );
+    //update the cart icon counter
+    update_cart_icon(data);
+}
+
+function update_cart_icon(count){
+jQuery(".cart_badge").html(count);
+}
+
 function addToCart(){
   // code add an item into the Cart
   jQuery("form.addToCart").submit(function(){
@@ -25,6 +50,11 @@ function displayLoginError(){
     }
   });
 }
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 $(".dropdown").mouseenter(function(){
     //alert("You entered this cat!");
     $(this).find("ul").fadeIn();
@@ -37,3 +67,5 @@ $(".dropdown").mouseleave(function(){
 });
 //jQuery(document).ready(addToCart);
 jQuery(document).ready(displayLoginError);
+
+// popup notifitaction when we add a new item into the cart.

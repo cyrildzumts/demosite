@@ -46,6 +46,11 @@
         {% endif %}
         Prix : {{p.price}} CFA
         <br /><br />
+
+        <button type="button" class="btn" name="button">
+            <span class="glyphicons glyphicons-cart-in"></span>Add
+        </button>
+
         <form method="post" action="." class="addToCart">{% csrf_token %}
 
           <div class="form-group">

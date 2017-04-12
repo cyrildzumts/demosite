@@ -64,8 +64,9 @@ class Cart(models.Model):
         added = False
         if quantity > 0:
             if self.contain_item(product.pk):
-                ci = CartItem.objects.get(product=product)
-                added = ci.update_quantity(quantity)
+                # ci = CartItem.objects.get(product=product)
+                ci = CartItem.objects.get(cart=self, product=product)
+                added = self.update_quantity(ci.id, quantity)
 
             # check if this product is already in the cart.
             # if yes, then check if 'quantity' is not greater than
@@ -118,9 +119,11 @@ class Cart(models.Model):
         if item:
             # item_quantity = item.get_quantity()
             if quantity > 0:
-                available_qty = item.get_product().quantity - quantity
-                if (available_qty > 0):
-                    item.set_quantity(quantity)
+                in_use = item.get_quantity()
+                desired_qty = in_use + quantity
+                in_stock = item.get_product().quantity
+                if (desired_qty > in_stock) is not True:
+                    item.set_quantity(desired_qty)
                     item.save()
                     flag = True
                 else:

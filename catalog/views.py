@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from catalog.models import Category, Product
 from django.core import urlresolvers  # , serializers
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 # from django.template import RequestContext
 from cart import cart

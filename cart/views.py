@@ -1,12 +1,16 @@
 from django.shortcuts import render
+from catalog.models import Product
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest
+from django.http import HttpResponse
 from django.urls import reverse, resolve
 from cart import cart
 # from cart.models import Cart, CartItem
 from demosite import settings
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from order import checkout
-
+import json
 # Create your views here.
 
 
@@ -43,3 +47,25 @@ def show_cart(request):
                   template_name=template_name,
                   context=context)
 # Create your views here.
+
+
+# ajax-add To cart view
+@csrf_exempt
+def ajax_add_to_cart(request):
+    print("Called ajax add from jQuery")
+    response = "-1"
+    added = False
+    if len(request.POST) > 0:
+        postdata = request.POST.copy()
+        product_id = postdata['product_id']
+        if product_id:
+            print("Ajax Add : product_id : ", product_id)
+            user_cart = cart.get_user_cart(request)
+            p = Product.objects.get(pk=product_id)
+            added = user_cart.add_to_cart(p)
+            if added is True:
+                response = user_cart.items_count()
+            else:
+                return HttpResponseBadRequest()
+    return HttpResponse(json.dumps(response),
+                        content_type="application/json")
