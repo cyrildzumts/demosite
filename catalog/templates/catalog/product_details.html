@@ -46,7 +46,7 @@
         {% endif %}
         Prix : {{product.price}} CFA
         <br /><br />
-        <button onclick="addToCart2({{product.id}});"  class="btn btn-default"  data-toggle="tooltp" title="Ajouter dans le Panier" name="addButton">
+        <button onclick="cart_add_item({{product.id}}, 1);"  class="btn btn-default"  data-toggle="tooltp" title="Ajouter dans le Panier" name="addButton">
             <span class="glyphicon glyphicon-shopping-cart"></span>
         </button>
         <form method="post" action="." class="addToCart">{% csrf_token %}

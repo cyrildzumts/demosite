@@ -62,11 +62,11 @@ class Cart(models.Model):
         This method does nothing when 'quantity' <  1
         """
         added = False
-        if quantity > 0:
+        if quantity >= 0:
             if self.contain_item(product.pk):
                 # ci = CartItem.objects.get(product=product)
-                ci = CartItem.objects.get(cart=self, product=product)
-                added = self.update_quantity(ci.id, quantity)
+                # ci = CartItem.objects.get(cart=self, product=product)
+                added = self.update_cart(product.id, quantity)
 
             # check if this product is already in the cart.
             # if yes, then check if 'quantity' is not greater than
@@ -75,13 +75,14 @@ class Cart(models.Model):
 
             else:
                 # create and save a new cart item
-                item = CartItem()
-                item.set_product(product)
-                # this might throw an exception
-                item.set_quantity(quantity)
-                item.set_cart(self)
-                item.save()
-                added = True
+                if (quantity <= product.quantity):
+                    item = CartItem()
+                    item.set_product(product)
+                    # this might throw an exception
+                    item.set_quantity(quantity)
+                    item.set_cart(self)
+                    item.save()
+                    added = True
         return added
 
     def contain_item(self, item_id):
@@ -105,6 +106,34 @@ class Cart(models.Model):
             item = None
         return item
 
+    def update_cart(self, item_id, quantity):
+        """
+        item_id : ID of the Product to be updated
+        quantity:  quantity of the item .
+        precondition : quantity >= 0;
+        update_cart() updates the quantity value of a CartItem.
+        If quantity == 0 then that item will be removed from the cart.
+        if quantity < 0 this method returns false.
+        On success this method returns True.
+        """
+
+        flag = False
+        if(quantity >= 0):
+            if(self.contain_item(item_id)):
+                prod = Product.objects.get(pk=int(item_id))
+                item = self.cartitem_set.get(product=prod)
+                # item = self.get_item(item_id)
+                # item_quantity = item.get_quantity()
+                if quantity > 0:
+                    in_stock = prod.quantity
+                    if (quantity <= in_stock):
+                        item.set_quantity(quantity)
+                        item.save()
+                        flag = True
+                else:
+                        self.remove_from_cart(item.id)
+        return flag
+
     def update_quantity(self, item_id, quantity):
         """
         Update the CartItem quantity to the value
@@ -126,9 +155,9 @@ class Cart(models.Model):
                     item.set_quantity(desired_qty)
                     item.save()
                     flag = True
-                else:
-                    if quantity == 0:
-                        self.remove_from_cart(item_id)
+            else:
+                if quantity == 0:
+                    self.remove_from_cart(item_id)
 
         return flag
 

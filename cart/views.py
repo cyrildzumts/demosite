@@ -52,19 +52,47 @@ def show_cart(request):
 # ajax-add To cart view
 @csrf_exempt
 def ajax_add_to_cart(request):
-    print("Called ajax add from jQuery")
+
     response = "-1"
     added = False
     if len(request.POST) > 0:
         postdata = request.POST.copy()
         product_id = postdata['product_id']
+        quantity = postdata['quantity']
         if product_id:
             print("Ajax Add : product_id : ", product_id)
             user_cart = cart.get_user_cart(request)
             p = Product.objects.get(pk=product_id)
-            added = user_cart.add_to_cart(p)
+            added = user_cart.add_to_cart(product=p, quantity=int(quantity))
             if added is True:
                 response = user_cart.items_count()
+            else:
+                return HttpResponseBadRequest()
+    return HttpResponse(json.dumps(response),
+                        content_type="application/json")
+
+
+# ajax cart update view.
+@csrf_exempt
+def ajax_cart_update(request):
+    """
+    This method is called from JQuery.  it updates the Cart
+    """
+    response = {}
+    done = False
+    if len(request.POST) > 0:
+        postdata = request.POST.copy()
+        product_id = int(postdata['product_id'])
+        quantity = int(postdata['quantity'])
+        if product_id is not None and quantity is not None:
+            print("Ajax Update : product_id : ", product_id)
+            print("Ajax Update : quantity : ", quantity)
+            user_cart = cart.get_user_cart(request)
+            done = user_cart.update_cart(item_id=product_id, quantity=quantity)
+            if done is True:
+                response['state'] = True
+                response['total_count'] = user_cart.items_count()
+                response['count'] = quantity
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),
