@@ -46,18 +46,7 @@
         {% endif %}
         Prix : {{product.price}} CFA
         <br /><br />
-        <button onclick="cart_add_item({{product.id}}, 1);"  class="btn btn-default"  data-toggle="tooltp" title="Ajouter dans le Panier" name="addButton">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-        </button>
-        <form method="post" action="." class="addToCart">{% csrf_token %}
-
-          <div class="form-group">
-            {{form.as_p}}
-          <!--<label for="{{form.quantity.id_for_quantity}}"> Quantité:</label> -->
-          <br />
-          </div>
-          <input type="submit" class="btn"  name="submit" value="Ajouter dans le Panier">
-        </form>
+        <span class="add-to-cart glyphicon glyphicon-shopping-cart btn btn-default" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
         <br /><br />
         <div class="cb"></div>
         <h3> Description du produit </h3>

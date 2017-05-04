@@ -1,3 +1,8 @@
+jQuery(".add-to-cart").click(function(){
+    var item_id = parseInt(jQuery(this).attr("data-itemid"));
+    cart_add_item(item_id, 1);
+})
+
 function cart_add_item(id, quantity)
 {
     print("Cart Add Item ...clicked");
@@ -8,12 +13,15 @@ function cart_add_item(id, quantity)
         data: {product_id: id, quantity: quantity},
         dataType: 'json',
         // success Function called in case of an http 200 response
-        success: cart_edit_confirm,
+        success: function(response){
+            cart_edit_confirm(response);
+        },
         error: function (){
             alert("Il y a une erreur, Veuillez reessayer.");
         }
     });
 }
+
 function print(str)
 {
     console.log(str);
@@ -56,6 +64,7 @@ function cart_update(inputElement, product_id, quantity)
 function cart_edit_confirm(response)
 {
     //update the cart icon counter
+    print("cart_edit_confirm :  count " + response.total_count);
     update_cart_icon(response.total_count);
 
 }

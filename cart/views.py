@@ -53,7 +53,8 @@ def show_cart(request):
 @csrf_exempt
 def ajax_add_to_cart(request):
 
-    response = "-1"
+    response = {}
+    response['state'] = False
     added = False
     if len(request.POST) > 0:
         postdata = request.POST.copy()
@@ -61,11 +62,13 @@ def ajax_add_to_cart(request):
         quantity = postdata['quantity']
         if product_id:
             print("Ajax Add : product_id : ", product_id)
+            print("Ajax Add : quantity : ", quantity)
             user_cart = cart.get_user_cart(request)
             p = Product.objects.get(pk=product_id)
             added = user_cart.add_to_cart(product=p, quantity=int(quantity))
             if added is True:
-                response = user_cart.items_count()
+                response['state'] = True
+                response['total_count'] = user_cart.items_count()
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),

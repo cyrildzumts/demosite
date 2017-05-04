@@ -66,7 +66,8 @@ class Cart(models.Model):
             if self.contain_item(product.pk):
                 # ci = CartItem.objects.get(product=product)
                 # ci = CartItem.objects.get(cart=self, product=product)
-                added = self.update_cart(product.id, quantity)
+                ci = self.cartitem_set.get(product=product)
+                added = self.update_quantity(ci.id, quantity)
 
             # check if this product is already in the cart.
             # if yes, then check if 'quantity' is not greater than
@@ -138,6 +139,7 @@ class Cart(models.Model):
         """
         Update the CartItem quantity to the value
         of quantity.
+        item_id : CartItem id.
         If quantity = 0, the corresponding CartItem will
         be deleted.
         This method return True if the quantity could be updated.
