@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from order.forms import CheckoutForm
-
+from django_email import mail
 from order.models import Order, OrderItem
 from order import checkout
 from cart import cart
@@ -39,6 +39,10 @@ def show_checkout(request):
             if order:
                 request.session['order_number'] = order.pk
                 receipt_url = urlresolvers.reverse('order:receipt')
+                mail.dispatchEmail(subject="Django Checkout Confirmation",
+                                   content="Your Order have been placed.",
+                                   from_email=None,
+                                   to_email="cyrildz@ymail.com")
                 return HttpResponseRedirect(receipt_url)
         else:
             error_message = 'Correct the errors below'
@@ -68,6 +72,7 @@ def receipt(request):
             user_cart = cart.get_cart(request.user)
             user_cart.delete()
             del request.session['order_number']
+
         else:
             cart_url = urlresolvers.reverse('show_cart')
             return HttpResponseRedirect(cart_url)

@@ -117,7 +117,6 @@ class Cart(models.Model):
         if quantity < 0 this method returns false.
         On success this method returns True.
         """
-
         flag = False
         if(quantity >= 0):
             if(self.contain_item(item_id)):
@@ -136,32 +135,31 @@ class Cart(models.Model):
         return flag
 
     def update_quantity(self, item_id, quantity):
-        """
-        Update the CartItem quantity to the value
-        of quantity.
-        item_id : CartItem id.
-        If quantity = 0, the corresponding CartItem will
-        be deleted.
-        This method return True if the quantity could be updated.
-        return False if not.
-        """
-        flag = False
-        item = self.get_item(item_id)
-        if item:
-            # item_quantity = item.get_quantity()
-            if quantity > 0:
-                in_use = item.get_quantity()
-                desired_qty = in_use + quantity
-                in_stock = item.get_product().quantity
-                if (desired_qty > in_stock) is not True:
-                    item.set_quantity(desired_qty)
-                    item.save()
-                    flag = True
-            else:
-                if quantity == 0:
-                    flag = self.remove_from_cart(item_id)
-
-        return flag
+            """
+            Update the CartItem quantity to the value
+            of quantity.
+            item_id : CartItem id.
+            If quantity = 0, the corresponding CartItem will
+            be deleted.
+            This method return True if the quantity could be updated.
+            return False if not.
+            """
+            flag = False
+            item = self.get_item(item_id)
+            if item:
+                # item_quantity = item.get_quantity()
+                if quantity > 0:
+                    in_use = item.get_quantity()
+                    desired_qty = in_use + quantity
+                    in_stock = item.get_product().quantity
+                    if (desired_qty > in_stock) is not True:
+                        item.set_quantity(desired_qty)
+                        item.save()
+                        flag = True
+                else:
+                    if quantity == 0:
+                        flag = self.remove_from_cart(item_id)
+            return flag
 
     def remove_from_cart(self, item_id):
         """

@@ -1,4 +1,5 @@
 from django.db import models
+from django_email import mail
 # from django import forms
 from django.contrib.auth.models import User
 from catalog.models import Product
@@ -108,13 +109,15 @@ class Order(models.Model):
                 oi.order = self
                 oi.save()
 
+    def sent_confirmation_mail(selft):
+        pass
 
+        
 class OrderItem(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     order = models.ForeignKey(Order)
-
     # class Meta:
     #    db_table = 'order_items'
 

@@ -32,11 +32,18 @@ META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
                 Sac, sacs, android, iphone, samsung, accessoires"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.6','testserver', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.6', 'testserver', ]
 
 handler404 = 'demosite.views.not_found_404'
 handler500 = 'demosite.views.server_error_500'
-
+# EMAIL SETTINGS
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 465  # SSL REQUIRED
+# EMAIL_PORT = 587  # TLS REQUIRED
+EMAIL_HOST_PASSWORD = "Engineering0"
+EMAIL_HOST_USER = "contact.gvshop"
+EMAIL_USE_SSL = True
 # fixtures directories
 FIXTURE_DIRS = ['fixtures']
 # Application definition
