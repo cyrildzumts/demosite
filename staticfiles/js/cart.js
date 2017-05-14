@@ -26,10 +26,7 @@ function print(str)
 {
     console.log(str);
 }
-jQuery(".item_add").click(function (){
-     var element = this.getElementsByTagName('input')[0];
-    print("Source element : "  +  element);
-});
+
 function update_input(element, value)
 {
     var el = element;
@@ -47,14 +44,14 @@ function cart_update(inputElement, product_id, quantity)
                 data:{product_id: product_id, quantity:quantity},
                 dataype: 'json',
                 success: function(response){
-                    update_input(inputElement, response.count);
-                    cart_edit_confirm(response)
+                    //update_input(inputElement, response.count);
+                    //cart_edit_confirm(response);
+                    location.reload();
                     print("Quittin onsuccess func  ...");
                 },
                 error: cart_edit_error
             });
     }
-
     print("Quittin cart_update ...");
 }
 /**
@@ -149,7 +146,7 @@ function displayAttribute(node, added, del){
              if(quantity < 2)
              {
                  print("hiding remove item ");
-                node.hide();
+                //node.hide();
              }
 
          }

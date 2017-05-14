@@ -132,7 +132,7 @@ class Cart(models.Model):
                         item.save()
                         flag = True
                 else:
-                        self.remove_from_cart(item.id)
+                        flag = self.remove_from_cart(item.id)
         return flag
 
     def update_quantity(self, item_id, quantity):
@@ -159,7 +159,7 @@ class Cart(models.Model):
                     flag = True
             else:
                 if quantity == 0:
-                    self.remove_from_cart(item_id)
+                    flag = self.remove_from_cart(item_id)
 
         return flag
 
@@ -167,9 +167,12 @@ class Cart(models.Model):
         """
         Delete the CartItem corresponding to item_id.
         """
+        flag = False
         item = self.get_item(item_id)
         if item:
             item.delete()
+            flag = True
+        return flag
 
     def subtotal(self):
         """
