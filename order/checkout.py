@@ -1,11 +1,7 @@
 from order.models import Order, OrderItem
 from cart import cart
-from cart.models import Cart
 from order.forms import CheckoutForm
-from demosite import settings
 from django.core import urlresolvers
-
-import urllib
 
 
 # return the URL from th Checkout module for cart

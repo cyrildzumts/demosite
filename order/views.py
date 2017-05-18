@@ -39,8 +39,11 @@ def show_checkout(request):
             if order:
                 request.session['order_number'] = order.pk
                 receipt_url = urlresolvers.reverse('order:receipt')
-                mail.dispatchEmail(subject="Django Checkout Confirmation",
-                                   content="Your Order have been placed.",
+                mail.dispatchEmail(subject="Confirmation de votre commande",
+                                   content="Votre commande a bien été recue.  Dès reception "
+                                   " du paiement votre commande sera livrée. Notez bien que votre commade "
+                                   " sera annulée si elle n'est payé dans un delai de 7 jours à compter"
+                                   " de maintenant.",
                                    from_email=None,
                                    to_email="cyrildz@ymail.com")
                 return HttpResponseRedirect(receipt_url)

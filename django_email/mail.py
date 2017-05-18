@@ -1,9 +1,11 @@
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 class Emailsender():
     def __init__(self):
         self.name = "Emailsender"
+        self.backend = EmailMessage()
 
     def sendTo(self, subject, usermaillist, content):
         send_mail(subject=subject,
