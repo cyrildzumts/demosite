@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api.apps.ApiConfig',
     'order.apps.OrderConfig',
+    'contact.apps.ContactConfig',
 ]
 
 MIDDLEWARE = [

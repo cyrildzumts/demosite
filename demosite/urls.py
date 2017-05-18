@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 # from demosite import views
 
 urlpatterns = [
+    url(r'^contact/', include('contact.urls')),
     url(r'^order/', include('order.urls')),
     url(r'^api/', include('api.urls', namespace='api')),
     url(r'^api/api-auth/', include('rest_framework.urls')),
