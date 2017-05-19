@@ -43,6 +43,7 @@ EMAIL_PORT = 465  # SSL REQUIRED
 # EMAIL_PORT = 587  # TLS REQUIRED
 EMAIL_HOST_PASSWORD = "Engineering0"
 EMAIL_HOST_USER = "contact.gvshop"
+CONTACT_MAIL = "contact.gvshop@gmail.com"
 EMAIL_USE_SSL = True
 # fixtures directories
 FIXTURE_DIRS = ['fixtures']

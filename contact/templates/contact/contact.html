@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% block title%} {{page_title}} {% endblock %}
+{% block site_wrapper %}
+<h3 class="contact_title"> Nous contacter</h3> <br>
+<p class="contact_tips"> Important :  utilisez ce formulaire pour nous<br>
+contacter sur les produits en vente sur ce site. Vous pouvez egalement nous<br>
+contacter sur pour certains produits que vous aimerez bien avoir mais que nous <br>
+ne vendons pas.
+</p><br>
+<div class="container">
+    <form class="" action="." method="post">{% csrf_token %}
+        {{ form }}
+        <input type="submit" name="submit" value="Envoyer" />
+    </form>
+    <div class="row">
+
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+
+{% endblock %}

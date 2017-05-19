@@ -11,7 +11,7 @@
 <ul class="nav navbar-nav">
   <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
   {% category_list request.path %}
-  <li><a href="{% url 'polls:index'%}"> Nous contacter </a></li>
+  <li><a href="{% url 'contact:index'%}"> Nous contacter </a></li>
   <li>
 
     {% include "tags/cart_box.html" %}

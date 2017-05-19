@@ -21,6 +21,6 @@ def dispatchEmail(subject, content,   from_email,  to_email):
         subject,
         content,
         None,
-        [to_email],
+        to_email,
         fail_silently=False,
     )
