@@ -111,6 +111,9 @@ class Order(models.Model):
 
     def sent_confirmation_mail(selft):
         pass
+    
+    def getOrderItem(self):
+        return orderitem_set.all()
 
         
 class OrderItem(models.Model):
@@ -123,7 +126,7 @@ class OrderItem(models.Model):
 
     @property
     def total(self):
-        return self.quantity * self.price
+        return int(self.quantity * self.price)
 
     @property
     def name(self):
