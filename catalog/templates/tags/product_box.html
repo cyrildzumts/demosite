@@ -11,7 +11,9 @@
           </div>
           <div class="panel-footer">
             Prix : {{p.price}} CFA
+            <a href="{% url 'wishlist:add_to_wishlist' p.id %}">
+              <span class="glyphicon glyphicon-heart-empty"></span> 
+            </a>
           </div>
-
         </div>
     </div>
