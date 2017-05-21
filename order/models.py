@@ -59,7 +59,7 @@ class Order(models.Model):
 
     @property
     def total(self):
-        total = decimal.Decimal('0.00')
+        total = 0
         order_items = OrderItem.objects.filter(order=self)
         for item in order_items:
             total += item.total
@@ -123,6 +123,10 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order)
     # class Meta:
     #    db_table = 'order_items'
+
+    @property
+    def get_price(self):
+        return int(self.price)
 
     @property
     def total(self):

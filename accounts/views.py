@@ -136,6 +136,8 @@ def show_orders(request):
     }
     return render(request, template_name, context)
 
+# TODO add try  catch block and add a redirect
+# in case of an exception
 @login_required
 def order_details(request, order_id):
     page_title = "Contenu de la commande" + " - " + settings.SITE_NAME

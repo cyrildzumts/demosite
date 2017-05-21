@@ -16,9 +16,14 @@
                 src="{{item.image_url}}" alt="{{item.name}}" width="100" height="100">
                 </a>
             </td>
-            <td> {{item.name}} </td>
+            <td> 
+                <a href="{{item.get_absolute_url}}">
+                    {{item.name}} 
+                </a>
+                
+            </td>
             <td> {{item.quantity}} </td>
-            <td> {{item.price}} </td>
+            <td> {{item.get_price}} </td>
             <td> {{item.total}} </td>
         </tr>
 

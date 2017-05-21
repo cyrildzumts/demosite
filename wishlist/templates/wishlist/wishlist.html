@@ -1,0 +1,52 @@
+{% extends "catalog.html" %}
+
+{% block content %}
+
+
+{% if item_count == 0 %}
+  <p> Votre Liste de souhaits ne contient aucun article. </p>
+
+  {% else %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-1">
+
+    </div>
+    <div class="col-sm-10">
+
+        Article : {{item_count}} <br />
+      <div class="container-fluid bordered-container">
+        <table summary="Votre Liste de souhait" id="shopping_cart" class="table table-hover table-condensed table-responsive">
+          <caption>  Votre Liste de Souhaits </caption>
+          <thead>
+            <!-- header info here -->
+            <tr>
+            <th> Image du Produit </th>
+            <th >Nom du Produit </th>
+
+            <th > Prix Unitaire </th>
+            <!-- ..etc .. -->
+          </tr>
+          </thead>
+          <tbody>
+            {% if wishlistitems %}
+                {% for item in wishlistitems %}
+                {% include "tags/wishlist_entry.html" %}
+                {% endfor %}
+            {% endif %}
+            <!-- loop through cart item here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-1">
+
+    </div>
+  </div>
+
+</div>
+
+{% endif %}
+{% endblock content %}

@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'order.apps.OrderConfig',
     'contact.apps.ContactConfig',
+    'wishlist.apps.WishlistConfig',
 ]
 
 MIDDLEWARE = [

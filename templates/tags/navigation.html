@@ -13,8 +13,10 @@
   {% category_list request.path %}
   <li><a href="{% url 'contact:index'%}"> Nous contacter </a></li>
   <li>
-
     {% include "tags/cart_box.html" %}
+  </li>
+  <li>
+      <a href="{% url 'wishlist:show_wishlist' %}"> Wishlist </a>
   </li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
