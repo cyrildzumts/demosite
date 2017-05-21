@@ -13,6 +13,7 @@ from .forms.forms import UserForm
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
 from demosite import settings
+from order.models import Order, OrderItem
 
 
 # GLOBAL Redirect url variable
@@ -63,7 +64,6 @@ def register(request):
             # form.save()
             form.save()
             print("Register Form is valid...")
-
             # return redirect(REDIRECT_URL)
             username = request.POST['username']
             password = request.POST['password1']
@@ -89,7 +89,6 @@ def user_account(request):
     user = User.objects.get(username=request.user.username)
     user_profile = user.userprofile
     name = request.user.first_name
-
     return render(request, template_name, locals())
 
 
@@ -122,5 +121,34 @@ def edit_account(request, pk):
                 return HttpResponseRedirect(REDIRECT_URL)
 
     name = request.user.username
-
     return render(request, template_name, locals())
+
+@login_required
+def show_orders(request):
+    page_title = "Mes Commandes" + " - " + settings.SITE_NAME
+    template_name = "accounts/user_orders.html"
+    user = request.user
+    orders = user.order_set.order_by('-date')
+    context = {
+        'page_title':page_title,
+        'template_name':template_name,
+        'orders': orders,
+    }
+    return render(request, template_name, context)
+
+@login_required
+def order_details(request, order_id):
+    page_title = "Contenu de la commande" + " - " + settings.SITE_NAME
+    template_name = "order/order_details.html"
+    user = request.user
+    id = int(order_id)
+    order = None
+    
+    if(id):
+        order = Order.objects.get(id=id)
+    context = {
+        'page_title':page_title,
+        'template_name':template_name,
+        'orderitems': order.orderitem_set.all(),
+    }
+    return render(request, template_name, context)

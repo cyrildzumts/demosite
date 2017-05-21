@@ -45,7 +45,7 @@ def show_checkout(request):
                                    " sera annulée si elle n'est payé dans un delai de 7 jours à compter"
                                    " de maintenant.",
                                    from_email=None,
-                                   to_email="cyrildz@ymail.com")
+                                   to_email=["cyrildz@ymail.com"])
                 return HttpResponseRedirect(receipt_url)
         else:
             error_message = 'Correct the errors below'
@@ -80,3 +80,4 @@ def receipt(request):
             cart_url = urlresolvers.reverse('show_cart')
             return HttpResponseRedirect(cart_url)
         return render(request, template_name, locals())
+

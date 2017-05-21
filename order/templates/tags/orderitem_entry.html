@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th> Image du produit </th>
+            <th> Nom du Produit </th>
+            <th> Quantité </th>
+            <th> Prix unitaire </th>
+            <th> Prix Total </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a href="{{item.get_absolute_url}}">
+                <img class="img-thumbnail group list-group-image img-responsive center-block" 
+                src="{{item.image_url}}" alt="{{item.name}}" width="100" height="100">
+                </a>
+            </td>
+            <td> {{item.name}} </td>
+            <td> {{item.quantity}} </td>
+            <td> {{item.price}} </td>
+            <td> {{item.total}} </td>
+        </tr>
+
+    </tbody>
+</table>

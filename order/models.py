@@ -147,3 +147,9 @@ class OrderItem(models.Model):
 
     def set_quantty(self, quantity):
         self.quantity = quantity
+    
+    def image_url(self):
+        return self.product.image.url
+
+    def get_absolute_url(self):
+        return self.product.get_absolute_url()

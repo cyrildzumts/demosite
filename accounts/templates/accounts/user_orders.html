@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+
+{% block site_wrapper %}
+
+<h3> Mes Commandes : </h3>
+<div class="container">
+{% for order in orders %}
+    <div class="row">
+        {% include "tags/order_entry.html" %}
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
