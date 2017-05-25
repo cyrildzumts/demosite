@@ -35,6 +35,7 @@
     color: #fff;
 }
 */
+/*
 .category-container a.active{
   background-color: #bdc3c7;
 }
@@ -43,9 +44,7 @@
   height: auto;
   margin: auto;
 }
-.product_container{
 
-}
 
 
 .product_box{
@@ -54,10 +53,7 @@
     margin-bottom:  10px;
 }
 
-.product_box img{
 
-
-}
 .item{
     position: absolute;
     left: 0px;
@@ -82,3 +78,21 @@
   border-style: solid;
   border-color: lightgrey;
 }
+*/
+.push
+ {
+    height: 8px;
+ }
+
+footer
+ {
+    height: 100px;
+ }
+
+footer {
+      background-color: #f2f2f2;
+      
+      width: 100%;
+      padding: 15px;
+      bottom: 0;
+    }

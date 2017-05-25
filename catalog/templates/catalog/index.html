@@ -4,8 +4,10 @@
  {% load category_tags %}
  {% get_default_products as products %}
  <div class="container-fluid list-group">
- {% for p  in products %}
-      {% include "tags/product_box.html" %}
- {% endfor %}
+    <div class="row">
+        {% for p  in products %}
+        {% include "tags/product_box_flat.html" %}
+        {% endfor %}
+    </div>
 </div><br>
 {% endblock %}
