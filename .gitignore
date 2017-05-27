@@ -7,7 +7,7 @@
 *.bmp
 *.pdf
 *.jpeg
-
+*/.vscode/*
 */migrations/*
 */__pycache__/*
 
