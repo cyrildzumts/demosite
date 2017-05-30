@@ -7,7 +7,6 @@ register = template.Library()
 
 @register.simple_tag
 def subcategory(category=None):
-    # print("subcategory called... category = %s" % (category))
     return Category.objects.filter(parent=category)
 
 
@@ -19,3 +18,7 @@ def products_from_cat(category):
 @register.simple_tag
 def get_default_products():
     return Product.objects.all()[:9]
+
+@register.simple_tag
+def banners():
+    return Product.objects.all()[:5]

@@ -13,7 +13,6 @@ $("#login_form").submit(function(){
                 text = "erreur de connexion - veuillez ressayer";
             }
             document.getElementById("server_response").innerHTML = text;
-            //alert(text);
         }
 
     });

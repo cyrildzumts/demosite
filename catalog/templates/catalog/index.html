@@ -1,13 +1,26 @@
 {% extends "catalog.html" %}
+{% load category_tags %}
+    {% block banner_content %}
+        <div class="container">
+            {% banners as banner %}
+            {% include "tags/banner.html" %}
+            
+        </div>
+    {% endblock banner_content %}
 
-{% block content %}
- {% load category_tags %}
- {% get_default_products as products %}
- <div class="container-fluid list-group">
-    <div class="row">
-        {% for p  in products %}
-        {% include "tags/product_box_flat.html" %}
-        {% endfor %}
-    </div>
-</div><br>
-{% endblock %}
+    {% block content %}
+ 
+        {% get_default_products as products %}
+
+            <div class="container-fluid list-group">
+                <div class="row">
+                    {% for p  in products %}
+                    {% include "tags/product_box_flat.html" %}
+                    {% endfor %}
+                </div>
+            </div><br>
+
+    {% endblock %}
+
+
+

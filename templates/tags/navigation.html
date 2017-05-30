@@ -25,7 +25,7 @@
     <li><a href="{% url 'accounts:user_account'%}"> Mon Compte </a></li>
   {% else %}
     <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Creer un Compte </a></li>
-    <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
+    <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"> Se connecter</span> </a></li>
   {% endif %}
 </ul>
 </div>

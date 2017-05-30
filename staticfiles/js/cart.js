@@ -102,12 +102,10 @@ jQuery("input.quantity").keypress(function(e){
     }
 });
 jQuery(".add_item").click(function(){
-    print("Add Item clicked " + this);
     displayAttribute($(this), true);
 });
 
 jQuery(".remove_item").click(function(){
-    print("Remove Item clicked " + this);
     node = $(this);
     displayAttribute(node, false);
 });

@@ -15,9 +15,6 @@ function displayLoginError(){
   });
 }
 
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
 
 $(".dropdown").mouseenter(function(){
     //alert("You entered this cat!");
@@ -30,6 +27,9 @@ $(".dropdown").mouseleave(function(){
     //$(".dropdown-menu").fadeIn("slow");
 });
 //jQuery(document).ready(addToCart);
-jQuery(document).ready(displayLoginError);
-
 // popup notifitaction when we add a new item into the cart.
+$("#login").click(function(e){
+    e.preventDefault();
+    $('#login form').slideToggle(300);
+    $(this).toggleClass('close');
+});

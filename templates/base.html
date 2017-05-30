@@ -18,14 +18,16 @@
     {% block external %} {% endblock external %}
   </head>
   <body>
-    {% block jumbotron %}
+    {% block banner %}
       <div class="jumbotron">
-        <div class="container text-center">
-          <h1>{{site_name}} </h1>
-          <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
-        </div>
+        {% block banner_content %}
+          <div class="container text-center">
+            <h1>{{site_name}} </h1>
+            <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
+          </div>
+        {% endblock banner_content %}
       </div>
-    {% endblock jumbotron %}
+    {% endblock banner %}
     {% block navigation %}
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
