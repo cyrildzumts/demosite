@@ -7,11 +7,21 @@ register = template.Library()
 
 @register.simple_tag
 def subcategory(category=None):
+    """
+    By default this method returns the direct 
+    root children categories.
+    if category is not None then this method
+    return the subcategory of category
+    """
     return Category.objects.filter(parent=category)
 
 
 @register.simple_tag
 def products_from_cat(category):
+    """
+    This method returns all the product from a 
+    given category.
+    """
     return Product.objects.filter(parent=category).order_by('-created_at')
 
 

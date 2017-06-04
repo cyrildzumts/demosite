@@ -8,9 +8,47 @@ contacter sur pour certains produits que vous aimerez bien avoir mais que nous <
 ne vendons pas.
 </p><br>
 <div class="container">
-    <form class="" action="." method="post">{% csrf_token %}
-        {{ form }}
-        <input type="submit" name="submit" value="Envoyer" />
+    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="{{form.id_for_label}}">Nom :</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="{{form.username.id_username}}" name="{{form.username.name}}">
+            </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-3 text-right" for="{{form.sender.id_for_label}}">Email:</label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" id="{{form.sender.id_sender}}" name="{{form.sender.name}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 text-right" for="{{form.subject.id_for_label}}">Sujet:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="{{form.subject.id_subject}}" name="{{form.subject.name}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 text-right" for="{{form.message.id_for_label}}">Message:</label>
+          <div class="col-sm-6">
+            <textarea class="form-control" id="{{form.message.id_message}}" name="{{form.message.name}}"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 text-right" for="{{form.cc_myself.id_for_label}}">M'envoyer une copie :</label>
+          <div class="col-sm-6">
+            <input type="checkbox" class="form-control" id="{{form.cc_myself.id_cc_myself}}" name="{{form.cc_myself.name}}">
+          </div>
+          
+        </div>
+        <div class="form-group">
+
+            <div class="col-sm-6">
+                <button class="btn btn-default" type="submit" name="submit" value="Envoyer" >
+                    Envoyer
+                </button>
+           </div>
+       </div>
     </form>
     <div class="row">
 

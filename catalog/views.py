@@ -74,7 +74,7 @@ def show_category(request, category_slug):
         # deliver first page
         products = paginator.page(1)
     except EmptyPage:
-        # if page is ou of range (eg. 9999),
+        # if page is out of range (eg. 9999),
         # deliver the last page of results
         products = paginator.page(paginator.num_pages)
     meta_keywords = c.meta_keywords

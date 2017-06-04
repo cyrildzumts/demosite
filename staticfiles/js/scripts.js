@@ -28,8 +28,10 @@ $(".dropdown").mouseleave(function(){
 });
 //jQuery(document).ready(addToCart);
 // popup notifitaction when we add a new item into the cart.
-$("#login").click(function(e){
+
+$(".login_element").click(function(e){
     e.preventDefault();
     $('#login form').slideToggle(300);
     $(this).toggleClass('close');
 });
+

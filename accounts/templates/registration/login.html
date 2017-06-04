@@ -7,18 +7,7 @@
 
     </div>
     <div class="col-md-6">
-      {% if form.errors %}
-       <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
-       {% endif %}
-
-       <form class="form-inline login" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
-         <input type="text" class="input-small" placeholder="Nom d'utilisateur" id="username"\
-           name="{{form.username.name}}">
-         <input type="password" class="input-small" placeholder="Mot de passe" id="password"\
-             name="{{form.password.name}}">
-         <button type="submit" class="btn">Se connecter</button>
-       </form>
-    </div>
+      {%include 'tags/login_form.html'' %}
     <div class="col-md-3">
 
     </div>

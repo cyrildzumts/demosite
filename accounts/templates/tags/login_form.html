@@ -1,34 +1,21 @@
-{% extends "base.html" %}
 
-{% block site_wrapper %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
 
-    </div>
-    <div class="col-md-6">
-      {% if form.errors %}
-       <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
-       {% endif %}
-<div class="login_form" title="Connexion">
-    <form class="form" id="login_form"  method="post">{% csrf_token %}
-        <fieldset>
-            <legend>Connexion</legend>
-            <input type="text" name="username"  id="username" class="input-small" placeholder="Nom d'utilisateur" required>
+  <div class="row login_element">
+        {% if form.errors %}
+            <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
+        {% endif %}
+        <div class="login_form" title="Connexion">
+            <form id="login" class="form-inline" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+                <fieldset>
+                    <legend>Connexion</legend>
+                    <input type="text" name="username"  id="username" class="input-small" placeholder="Nom d'utilisateur" required>
 
-            <input type="password" name="password" id="password" class="input-small" placeholder="Mot de passe">
-            <button  class="btn" id="btn_login">Se connecter</button>
-        </fieldset>
-    </form>
+                    <input type="password" name="password" id="password" class="input-small" placeholder="Mot de passe">
+                    <button  class="btn" id="btn_login">Se connecter</button>
+                </fieldset>
+            </form>
+        </div> <!-- END OF login_form -->
+  </div> <!-- END OF ROW -->
 
-</div>
-</div>
-<div class="col-md-3">
 
-</div>
 
-</div>
-
-<p id="server_response" > </p>
-</div>
-{% endblock %}

@@ -6,6 +6,10 @@ register = template.Library()
 
 @register.inclusion_tag("tags/category_list.html")
 def category_list(request_path):
+    """
+    This method returns a list of all the
+    active categories.
+    """
     active_categories = Category.objects.filter(is_active=True)
     return {
             'active_categories': active_categories,
