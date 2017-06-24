@@ -39,6 +39,7 @@ def ajax_login(request):
     """
     AJAX Log in view
     """
+    print("ajax_login ...")
     data = {}
     if request.method == 'POST':
         user = auth.authenticate(username=request.POST['username'],

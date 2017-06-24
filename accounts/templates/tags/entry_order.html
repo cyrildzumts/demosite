@@ -1,0 +1,49 @@
+
+<div class="container orderEntry card blue-grey "> <!-- Order Entry Container -->
+    <div class="panel2 card-content">
+            <div class="col-xs-12 col-md-12">
+                <div class="row card-title">
+                    <div class="col-xs-12 card-action">
+                        <a href="{% url 'accounts:order_details' order.id %}">
+                            <h5>Numéro de Commande : {{order.ref_num}}</h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5> 
+                            <b>Status de paiement : </b>
+                            <span>
+                                {% if order.paid_status is True %}
+                                    Payé
+                                {% else %} 
+                                    Non Payé
+                                {% endif %}
+                            </span>
+                        </h5> 
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5><b> Date :</b> {{order.date.date}} </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5><b>Montant : </b> {{order.total}} FCFA</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5><b>Status de Livraison : </b> {{order.get_status}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5><b>Quantité : </b> {{order.get_quantity}}</h5>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div><!-- End of Order Entry -->

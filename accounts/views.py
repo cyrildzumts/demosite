@@ -27,7 +27,8 @@ def login(request):
     """
     page_title = "Connexion d'utilisateur"
     template_name = 'registration/login.html'
-    template_name = 'tags/login_form.html'
+    # template_name = 'tags/login_form.html'
+    print("login ...")
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -145,12 +146,13 @@ def order_details(request, order_id):
     user = request.user
     id = int(order_id)
     order = None
-    
+
     if(id):
         order = Order.objects.get(id=id)
     context = {
         'page_title':page_title,
         'template_name':template_name,
+        'order_ref' : order.ref_num,
         'orderitems': order.orderitem_set.all(),
     }
     return render(request, template_name, context)

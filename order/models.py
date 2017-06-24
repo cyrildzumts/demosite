@@ -21,13 +21,15 @@ class Order(models.Model):
     PROCESSED = 2
     SHIPPED = 3
     CANCELLED = 4
+    BEINGPROCESSED = 5
 
     # Set of possibles order statuses
     ORDER_STATUSES = (
         (SUBMITTED, 'Submitted'),
         (PROCESSED, 'Processed'),
         (SHIPPED, 'Shipped'),
-        (CANCELLED, 'Cancelled'),)
+        (CANCELLED, 'Cancelled'),
+        (BEINGPROCESSED, 'Being processed'),)
 
     # Order Infos
     date = models.DateTimeField(auto_now_add=True)
@@ -96,6 +98,17 @@ class Order(models.Model):
         if self.status != status:
             self.status = status
 
+    @property
+    def get_status(self):
+        """
+         Return a string representation of the order
+         status.
+         """
+        return Order.ORDER_STATUSES[self.status-1][1]
+
+    def get_date(self):
+        return date.date()
+
     def populate(self, user_cart):
         self.populate_from_item_list(user_cart.get_items())
 
@@ -113,7 +126,10 @@ class Order(models.Model):
         pass
     
     def getOrderItem(self):
-        return orderitem_set.all()
+        return self.orderitem_set.all()
+    
+    def get_quantity(self):
+        return self.orderitem_set.count()
 
         
 class OrderItem(models.Model):
@@ -154,6 +170,6 @@ class OrderItem(models.Model):
     
     def image_url(self):
         return self.product.image.url
-
-    def get_absolute_url(self):
-        return self.product.get_absolute_url()
+    
+    def order_ref(self):
+        return self.order.ref_num
