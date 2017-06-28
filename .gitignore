@@ -1,6 +1,5 @@
 *.sqlite3
 *.pyc
-settings.py
 */staticfiles/images/*
 *.jpg
 *.png
