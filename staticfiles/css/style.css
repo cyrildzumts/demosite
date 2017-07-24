@@ -144,3 +144,50 @@ footer {
 {
     font-size: 11px;
 }
+
+.product-container{
+    background-color: #669AA5;
+    margin: 0px;
+}
+
+.product-panel{
+    background-color: #F53854;
+}
+.product-detail{
+    background-color: #A88A8C;
+}
+
+.product-title{
+    color: #FEFEFE;
+    background-color: #81D6C8;
+}
+.p-price{
+    color: #FEFEFE;
+    font-weight: bolder;
+}
+.p-title{
+    color: #F53854;
+}
+
+.price-info{
+    color: #FEFEFE;
+    background-color: #0D3955;
+}
+.control-btn{
+    color: #FEFEFE;
+    background-color: #61C9FD;
+}
+
+.add-to-wishlist-btn{
+    color: #FEFEFE;
+    background-color: #6E8A84;
+}
+
+.add-to-cart-btn{
+    color: #FEFEFE;
+    background-color: #E6A550;
+}
+
+body{
+    background-color: #FEFEFE;
+}

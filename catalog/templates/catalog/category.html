@@ -1,18 +1,18 @@
-{% extends "catalog.html" %}
+{% extends "base.html" %}
 {% load category_tags %}
-{% block category_block %}
+{% block Sidebar %}
 
 <div class="list-group">
     {% include "tags/category_box.html" %}
 </div>
-{% endblock category_block %}
+{% endblock Sidebar %}
 
-{%block content %}
+{%block PageContent %}
 {% if products %}
   <div class="container-fluid">
     <div class="row list-group">
         {% for p in products  %}
-          {% include "tags/product_box_flat.html" %}
+          {% include "tags/product_box_min.html" %}
         {% endfor %}
     </div>
   </div>
@@ -33,4 +33,4 @@
     <p>Il n'y a pas encore de produits disponible
     dans cette catégorie </p>
 {% endif %}
-{% endblock %}
+{% endblock PageContent %}

@@ -19,33 +19,64 @@
     {% block external %} {% endblock external %}
   </head>
   <body>
-    {% block banner %}
-      <div class="jumbotron">
-        {% block banner_content %}
-          <div class="container text-center">
-            <h1>{{site_name}} </h1>
-            <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
+    <div class="header-panel row">
+      {%block header_panel%}
+        {% block navigation %}
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                  {% include 'tags/navigation.html' %}
+                </div>
+            </nav>
+        {% endblock navigation %}
+      {%endblock header_panel%}
+    </div> <!-- End Of Header Panel -->
+
+    <div class="banner-panel row">
+        {% block banner %}
+          <div class="jumbotron">
+            {% block banner_content %}
+              <div class="container text-center">
+                <h1>{{site_name}} </h1>
+                <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
+              </div>
+            {% endblock banner_content %}
           </div>
-        {% endblock banner_content %}
-      </div>
-    {% endblock banner %}
-    {% block navigation %}
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-          {% include 'tags/navigation.html' %}
-        </div>
-      </nav>
-    {% endblock %}
+        {% endblock banner %}
+    </div> <!-- End of banner-panel -->
+    <div class="sorting-panel row">
+      {% block sorting_panel%}
+
+      {%endblock sorting_panel%}
+    </div> <!-- End of Sorting-Panel -->
+
+    
+  <div class="main-content container-fluid">
+
+    <div class="row">
+        <div class="col-md-2 side-bar">
+          {% block Sidebar %}
+
+          {% endblock Sidebar %}
+        </div><!-- End Of Sidebar -->
+
+        <div class="col-md-10 content">
+          {% block PageContent %}
+
+          {% endblock PageContent %}
+        </div><!-- End of content -->
+    </div>
+  </div> <!-- End of Main-Content -->
+
 
   {% block site_wrapper %}
 
   {% endblock site_wrapper %}
-
+  <div class="page-footer row">
   {% block footer %}
       <div id="push"></div>
      {% include "tags/footer.html" %}
   {% endblock footer %}
-
+  </div> <!-- End of page-footer -->
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}">
     </script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}">

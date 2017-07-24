@@ -1,0 +1,289 @@
+1499251650254	geckodriver	INFO	Listening on 127.0.0.1:56093
+1499251651447	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+
+(firefox:16281): Gtk-WARNING **: GTK+ module /snap/vscode/12/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libunity-gtk-module.so cannot be loaded.
+GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Gtk-Message: Failed to load module "unity-gtk-module"
+1499251661219	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251661221	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251661277	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251661279	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251661341	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251661342	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251664124	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251664125	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251664127	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251664142	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251664143	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251664146	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251668524	Marionette	INFO	Listening on port 45676
+1499251668654	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499251728229	Marionette	INFO	Ceased listening
+1499251733616	geckodriver	INFO	Listening on 127.0.0.1:48685
+1499251734821	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+
+(firefox:16491): Gtk-WARNING **: GTK+ module /snap/vscode/12/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libunity-gtk-module.so cannot be loaded.
+GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Gtk-Message: Failed to load module "unity-gtk-module"
+1499251735940	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251735941	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251735974	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251735976	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251736014	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251736015	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251736441	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251736443	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251736444	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251736454	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251736456	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251736457	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251738348	Marionette	INFO	Listening on port 45109
+1499251738462	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499251874377	Marionette	INFO	Ceased listening
+1499251879845	geckodriver	INFO	Listening on 127.0.0.1:45564
+1499251881038	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+
+(firefox:16945): Gtk-WARNING **: GTK+ module /snap/vscode/12/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libunity-gtk-module.so cannot be loaded.
+GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Gtk-Message: Failed to load module "unity-gtk-module"
+1499251882575	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251882577	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251882609	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251882610	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251882651	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251882652	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251883210	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251883213	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251883215	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251883228	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251883230	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251883232	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251885273	Marionette	INFO	Listening on port 33305
+1499251885396	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499251923993	geckodriver	INFO	Listening on 127.0.0.1:42771
+1499251925184	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+
+(firefox:17110): Gtk-WARNING **: GTK+ module /snap/vscode/12/usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libunity-gtk-module.so cannot be loaded.
+GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Gtk-Message: Failed to load module "unity-gtk-module"
+1499251926433	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251926436	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251926468	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251926470	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251926510	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251926512	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251926994	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251926995	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251926998	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251927013	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499251927014	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499251927016	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499251929411	Marionette	INFO	Listening on port 34173
+1499251929503	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499251933529	Marionette	INFO	Ceased listening
+1499251934833	Marionette	INFO	Ceased listening
+1499252002874	geckodriver	INFO	Listening on 127.0.0.1:33999
+1499252004084	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252005558	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252005560	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252005592	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252005593	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252005635	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252005636	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252006661	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252006663	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252006665	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252006682	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252006684	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252006685	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252010658	Marionette	INFO	Listening on port 33696
+1499252010894	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252078171	geckodriver	INFO	Listening on 127.0.0.1:33885
+1499252079479	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252080372	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252080373	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252080407	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252080409	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252080447	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252080448	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252081472	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252081475	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252081477	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252081494	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252081496	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252081498	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252085008	Marionette	INFO	Listening on port 38910
+1499252085253	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252096930	Marionette	INFO	Ceased listening
+1499252110992	Marionette	INFO	Ceased listening
+1499252158166	geckodriver	INFO	Listening on 127.0.0.1:55637
+1499252159397	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252160393	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252160394	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252160426	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252160428	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252160468	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252160469	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252161369	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252161372	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252161375	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252161390	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252161393	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252161395	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252164715	Marionette	INFO	Listening on port 44685
+1499252164936	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252176725	Marionette	INFO	Ceased listening
+1499252210164	geckodriver	INFO	Listening on 127.0.0.1:58732
+1499252211349	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252212264	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252212266	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252212299	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252212300	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252212338	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252212339	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252213337	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252213340	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252213342	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252213358	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252213360	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252213362	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252216801	Marionette	INFO	Listening on port 46419
+1499252216980	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252228764	Marionette	INFO	Ceased listening
+1499252446764	geckodriver	INFO	Listening on 127.0.0.1:49292
+1499252447970	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252449200	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252449202	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252449234	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252449235	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252449274	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252449275	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252450494	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252450497	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252450500	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252450515	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252450518	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252450520	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252453899	Marionette	INFO	Listening on port 33391
+1499252454325	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252496230	Marionette	INFO	Ceased listening
+1499252498623	geckodriver	INFO	Listening on 127.0.0.1:58058
+1499252499805	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252500772	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252500773	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252500806	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252500807	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252500846	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252500847	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252501770	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252501772	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252501776	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252501792	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252501795	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252501797	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252505207	Marionette	INFO	Listening on port 35865
+1499252505364	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/components/nsUrlClassifierListManager.js, line 536: TypeError: this.tablesData[table] is undefined
+1499252509259	Marionette	INFO	Ceased listening
+1499252734596	geckodriver	INFO	Listening on 127.0.0.1:43133
+1499252735787	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252736752	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252736754	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252736785	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252736786	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252736826	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252736828	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252737785	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252737788	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252737790	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252737805	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252737807	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252737809	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252741359	Marionette	INFO	Listening on port 42220
+1499252741483	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252742571	Marionette	INFO	New connections will no longer be accepted
+1499252922261	geckodriver	INFO	Listening on 127.0.0.1:32878
+1499252923444	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499252924394	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252924395	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252924427	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252924428	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252924467	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252924468	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252925487	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252925489	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252925491	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252925507	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499252925509	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499252925511	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499252928655	Marionette	INFO	Listening on port 35904
+1499252929153	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499252930436	Marionette	INFO	New connections will no longer be accepted
+1499253561041	geckodriver	INFO	Listening on 127.0.0.1:45941
+1499253562299	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499253563266	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253563268	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253563300	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253563301	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253563339	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253563340	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253564171	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253564172	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253564174	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253564187	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253564188	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253564190	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253567364	Marionette	INFO	Listening on port 33453
+1499253567917	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499253569180	Marionette	INFO	New connections will no longer be accepted
+1499253667160	geckodriver	INFO	Listening on 127.0.0.1:37418
+1499253668361	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499253669323	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253669324	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253669358	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253669360	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253669407	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253669409	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253670351	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253670353	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253670354	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253670369	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253670371	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253670373	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253673758	Marionette	INFO	Listening on port 43726
+1499253673918	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499253675056	Marionette	INFO	New connections will no longer be accepted
+1499253712184	geckodriver	INFO	Listening on 127.0.0.1:41431
+1499253713374	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499253714395	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253714397	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253714430	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253714432	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253714471	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253714472	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253715494	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253715496	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253715497	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253715512	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253715514	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253715515	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253719079	Marionette	INFO	Listening on port 43440
+1499253719283	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499253720371	Marionette	INFO	New connections will no longer be accepted
+1499253738045	geckodriver	INFO	Listening on 127.0.0.1:34519
+1499253739237	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1499253740115	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253740117	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253740148	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253740150	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253740188	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253740189	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253741158	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253741160	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253741163	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253741180	addons.xpi	WARN	Add-on {03cb16aa-4675-11e5-b233-213b1d5d46b0} is not compatible with application version.
+1499253741182	addons.xpi	WARN	Add-on {8a01dfcc-450f-11e5-909b-fb581d5d46b0} is not compatible with application version.
+1499253741184	addons.xpi	WARN	Add-on {52c2877e-44e1-11e5-8874-a62d1d5d46B0} is not compatible with application version.
+1499253744720	Marionette	INFO	Listening on port 40347
+1499253745149	Marionette	WARN	TLS certificate errors will be ignored for this session
+1499253746241	Marionette	INFO	New connections will no longer be accepted

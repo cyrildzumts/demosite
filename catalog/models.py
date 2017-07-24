@@ -202,6 +202,7 @@ class Product(models.Model):
     TEMPLATE_NAME_CHOICES = (
         ('tags/product_phablet_options.html', 'Phablet'),
         ('tags/product_parfum_options.html', 'Parfum'),
+        ('tags/product_chaussure_options.html', 'Chaussure'),
     )
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)

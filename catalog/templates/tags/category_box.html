@@ -1,12 +1,8 @@
 {% load category_tags %}
-  <div class="row">
-    <a href="{{current_category.root_cat.get_absolute_url}}">
-      {{current_category.root_cat.name}}
-    </a>
-  </div>
+
   {% if current_category.parent is not None %}
     {% if current_category.parent is not current_category.root_cat %}
-    <div class="row">
+    <div class=" list-group-item row">
         <a href="{{current_category.parent.get_absolute_url}}">{{current_category.parent.name}}</a>
     </div>
     {% endif %}
@@ -17,14 +13,16 @@
   {% else %}
     {%subcategory current_category as categories%}
   {% endif %}
-  {% for category in categories %}
+  <ul class="list-group category-container">
+    {% for category in categories %}
 
-    <div class="list-group category-container">
-      {% if category == current_category %}
-      <a class="list-group-item active" href="{{category.get_absolute_url}}">{{category.name}}</a>
-      {% else %}
-      <a class="list-group-item" href="{{category.get_absolute_url}}">{{category.name}}</a>
-      {% endif %}
-    </div>
+      
+        {% if category == current_category %}
+        <li><a class="list-group-item active" href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+        {% else %}
+        <li><a class="list-group-item" href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+        {% endif %}
+  
 
-  {% endfor %}
+    {% endfor %}
+  </ul>
