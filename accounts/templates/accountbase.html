@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{%block MainHeader%}
+    <div class="main-header rebeccapurple vt-ht-centered">
+         <p> Mon Compte : Bienvenue, {{name|capfirst}}!</p>
+        
+    </div><!-- End of main-header -->
+{%endblock MainHeader%}
+
+{% block Sidebar %}
+<div class="container-fluid account-entries">
+    <div class="list-group">
+        <a class="list-group-item active" href="#">Mes Données</a>
+        <a class="list-group-item " href="{% url 'accounts:orders' %}">Mes Commandes</a>
+        <a class="list-group-item" href="#">Mode de Paiement Préferé</a>
+        <a class="list-group-item" href="{% url 'wishlist:show_wishlist' %}" >Ma liste de souhaits</a>
+        <a class="list-group-item" href="#">Abonnements à la newsletter</a>
+        <a class="list-group-item" href="#">Ma Carte VIP</a>
+    </div>
+</div>
+
+{% endblock Sidebar %}
+
+{% block PageContent %}
+{% endblock PageContent %}

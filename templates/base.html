@@ -9,75 +9,87 @@
     </title>
     <meta name="keywords" content="{{meta_keywords}}" />
 		<meta name="description" content="{{meta_description}}" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load staticfiles %}
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/material.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/material_colors.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/csscolor.css' %}" />
     {% block external %} {% endblock external %}
   </head>
   <body>
-    <div class="header-panel row">
-      {%block header_panel%}
-        {% block navigation %}
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid">
-                  {% include 'tags/navigation.html' %}
-                </div>
-            </nav>
-        {% endblock navigation %}
-      {%endblock header_panel%}
-    </div> <!-- End Of Header Panel -->
+    <div class="container-fluid">
+        <div class="header-panel row rebeccapurple">
+          {%block header_panel%}
+            {% block navigation %}
+                <nav class="navbar navbar-default navbar-fixed-top rebeccapurple">
+                    <div class="container-fluid ">
+                      {% include 'tags/navigation.html' %}
+                    </div>
+                </nav>
+            {% endblock navigation %}
+          {%endblock header_panel%}
+        </div> <!-- End Of Header Panel -->
 
-    <div class="banner-panel row">
-        {% block banner %}
-          <div class="jumbotron">
-            {% block banner_content %}
-              <div class="container text-center">
-                <h1>{{site_name}} </h1>
-                <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
+        <div class="banner-panel row">
+            {% block banner %}
+              <div class="jumbotron">
+                {% block banner_content %}
+                  <div class="container text-center">
+                    <h1>{{site_name}} </h1>
+                    <p class="lead muted"> Produits de qualité à des prix imbatables.</p>
+                  </div>
+                {% endblock banner_content %}
               </div>
-            {% endblock banner_content %}
-          </div>
-        {% endblock banner %}
-    </div> <!-- End of banner-panel -->
-    <div class="sorting-panel row">
-      {% block sorting_panel%}
+            {% endblock banner %}
+        </div> <!-- End of banner-panel -->
+        <div class="sorting-panel row">
+          {% block sorting_panel%}
 
-      {%endblock sorting_panel%}
-    </div> <!-- End of Sorting-Panel -->
+          {%endblock sorting_panel%}
+        </div> <!-- End of Sorting-Panel -->
 
+        
+      <div class="main-content container-fluid">
+        {%block MainHeader%}
+          
+        {%endblock MainHeader%}
+        
+        <div class="row">
+            <div class="col-md-2 side-bar">
+              {% block Sidebar %}
+
+              {% endblock Sidebar %}
+            </div><!-- End Of Sidebar -->
+
+            <div class="col-md-10 content">
+              {% block PageContent %}
+
+              {% endblock PageContent %}
+            </div><!-- End of content -->
+        </div>
+      </div> <!-- End of Main-Content -->
+
+
+      {% block site_wrapper %}
+
+      {% endblock site_wrapper %}
+  </div>
     
-  <div class="main-content container-fluid">
-
-    <div class="row">
-        <div class="col-md-2 side-bar">
-          {% block Sidebar %}
-
-          {% endblock Sidebar %}
-        </div><!-- End Of Sidebar -->
-
-        <div class="col-md-10 content">
-          {% block PageContent %}
-
-          {% endblock PageContent %}
-        </div><!-- End of content -->
-    </div>
-  </div> <!-- End of Main-Content -->
-
-
-  {% block site_wrapper %}
-
-  {% endblock site_wrapper %}
-  <div class="page-footer row">
+  <footer class="footer text-center rebeccapurple">
   {% block footer %}
-      <div id="push"></div>
+      
      {% include "tags/footer.html" %}
   {% endblock footer %}
-  </div> <!-- End of page-footer -->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}">
+  </footer> <!-- End of page-footer -->
+<!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous">
+</script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
+</script> -->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
+</script> -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> 
     </script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}">
     </script>

@@ -1,31 +1,31 @@
 {% load catalog_tags %}
-<div class="navbar-header">
+<div class="navbar-header rebeccapurple ">
   <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#myNavbar">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'catalog:index'%}"> Demosite </a></li>
+  <a class="navbar-brand" href="{% url 'catalog:index'%}"> GrandVillage </a></li>
 </div>
-<div class="collapse navbar-collapse" id="myNavbar">
-<ul class="nav navbar-nav">
-  <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
-  {% category_list request.path %}
-  <li><a href="{% url 'contact:index'%}"> Nous contacter </a></li>
-  <li>
-    {% include "tags/cart_box.html" %}
-  </li>
-  <li>
-      <a href="{% url 'wishlist:show_wishlist' %}"> Wishlist </a>
-  </li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-  {% if user.is_authenticated %}
-    <li><a href="{% url 'accounts:logout' %}"> Se déconnecter </a></li>
-    <li><a href="{% url 'accounts:user_account'%}"> Mon Compte </a></li>
-  {% else %}
-    <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Creer un Compte </a></li>
-    <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"> Se connecter</span> </a></li>
-  {% endif %}
-</ul>
+<div class="collapse navbar-collapse rebeccapurple" id="myNavbar">
+  <ul class="nav navbar-nav ">
+    <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
+    {% category_list request.path %}
+    <li><a href="{% url 'contact:index'%}"> Nous contacter </a></li>
+    <li>
+      {% include "tags/cart_box.html" %}
+    </li>
+    <li>
+        <a href="{% url 'wishlist:show_wishlist' %}"> Wishlist </a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'accounts:logout' %}"> Se déconnecter </a></li>
+      <li><a href="{% url 'accounts:user_account'%}"> Mon Compte </a></li>
+    {% else %}
+      <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Creer un Compte </a></li>
+      <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"> Se connecter</span> </a></li>
+    {% endif %}
+  </ul>
 </div>

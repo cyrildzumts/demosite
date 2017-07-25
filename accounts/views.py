@@ -85,7 +85,7 @@ def register(request):
 
 @login_required
 def user_account(request):
-    template_name = "registration/user_account.html"
+    template_name = "accounts/my-account.html"
     page_title = 'Mon Compte | ' + settings.SITE_NAME
     user = User.objects.get(username=request.user.username)
     user_profile = user.userprofile
@@ -95,7 +95,7 @@ def user_account(request):
 
 @login_required
 def edit_account(request, pk):
-    template_name = "registration/user_account.html"
+    template_name = "accounts/my-account.html"
     page_title = 'Modification du profile | ' + settings.SITE_NAME
     user = User.objects.get(pk=pk)
     user = request.user

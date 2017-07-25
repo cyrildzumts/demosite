@@ -79,23 +79,12 @@
   border-color: lightgrey;
 }
 */
+
 .push
  {
     height: 8px;
  }
 
-footer
- {
-    height: 100px;
- }
-
-footer {
-      background-color: #f2f2f2;
-      
-      width: 100%;
-      padding: 15px;
-      bottom: 0;
-    }
 
 .orderEntry{
 
@@ -145,49 +134,227 @@ footer {
     font-size: 11px;
 }
 
-.product-container{
-    background-color: #669AA5;
+.product-inner-container{
+    width: 100%;
+    height: 100%;
     margin: 0px;
+    padding: 5px;
+}
+.product-image{
+    width: 100%;
+    height: 100%;
 }
 
 .product-panel{
-    background-color: #F53854;
+    width: 100%;
+    height: 25%;
+    margin: 0px;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+.product-title{
+    width: 100%;
+    height: 32px;
+    margin: 0px;
+    padding: 2px;
+
 }
 .product-detail{
-    background-color: #A88A8C;
+    width: 100%;
+    height: 50%;
+    margin: 0px;
+    padding: 2px;
+}
+.price-info{
+    
+    height: 32px;
 }
 
-.product-title{
-    color: #FEFEFE;
-    background-color: #81D6C8;
+.control-btn{
+    
+    width: 50%;
+    height: 100%;
+    margin: 0px;
+    /*padding: 1px;*/
 }
-.p-price{
-    color: #FEFEFE;
-    font-weight: bolder;
+.controls-inner{
+    width: 100%;
+    height: 32px;
+    margin: 0px;
 }
 .p-title{
-    color: #F53854;
+    font-size: small;
+}
+.p-price{
+    font-size: small;
+    font-weight: bolder;
+}
+.add-to-wishlist{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px;
 }
 
-.price-info{
-    color: #FEFEFE;
-    background-color: #0D3955;
-}
-.control-btn{
-    color: #FEFEFE;
-    background-color: #61C9FD;
-}
-
-.add-to-wishlist-btn{
-    color: #FEFEFE;
-    background-color: #6E8A84;
+.add-to-cart{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px;
 }
 
-.add-to-cart-btn{
-    color: #FEFEFE;
-    background-color: #E6A550;
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
 
 body{
+    margin-bottom: 150px;
     background-color: #FEFEFE;
+}
+footer {
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+  color: #FEFEFE;
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+
+.main-header{
+    width: 100%;
+    height: 32px;
+    margin: 10px;
+    
+}
+body > .container-fluid{
+    padding: 60px 15px 0;
+}
+.container-fluid .text-muted{
+    margin: 20px 0;
+}
+
+footer > .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.side-bar .active{
+    color:#F2F1FE;
+    background-color:#663399;
+}
+
+.side-bar  a{
+    color:#663399;
+}
+.side-bar  a:hover{
+    color:#F2F1FE;
+    background-color:#663399;
+}
+.side-bar a:link{
+    text-decoration: none;
+}
+.side-bar  li{
+    color:#663399;
+    background-color:#DCC6E0;
+}
+.sidebar-link{
+    color: #663399;
+}
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.masqued{
+    visibility: hidden;
+}
+
+.text-left{
+    text-align: left;
+}
+.bg-transparent{
+    background-color: transparent;
+}
+.blocktext{
+    margin-left: auto;
+    margin-right: auto;
+    width: 5em
+}
+.img-centered{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.vt-centered{
+    /*height: 10em;*/
+    display: flex;
+    align-items: center
+}
+.vt-ht-centered{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+*,
+*:before,
+*::after{
+    box-sizing: border-box;
+}
+
+.jumbotron{
+    background-color: #DCC6E0;
+    color: #FEFEFE;
+}
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-size: 14px !important;
+    font-family: Ubuntu;
+    letter-spacing: 1px;
+    border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #FEFEFE !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #f4511e !important;
+    background-color: #FEFEFE !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #FEFEFE !important;
+}
+
+.text-purple
+{
+    color: #663399;
+}
+.text-orange{
+    color: #f4511e;
 }

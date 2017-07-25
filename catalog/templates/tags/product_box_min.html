@@ -1,40 +1,48 @@
-<div class="product-container col-xs-6 col-sm-6 col-md-4"><!-- Product Container -->
-    <div class="product-image row"><!-- Product Image Element -->
-        <div class="col-xs-12 col-md-12">
-            <div class="img-responsive">
+<div class="product-container col-xs-12 col-sm-6 col-md-4 bg-transparent"><!-- Product Container -->
+    
+    <div class="product-inner-container">
+        <div class="product-image row"><!-- Product Image Element -->
+            <div class="img-centered">
                 <a href="{{p.get_absolute_url}}">
-                  <img src="{{p.image.url}}" class="img-responsive" style="width:100%">
+                    <img src="{{p.image.url}}" class="img-responsive" style="width:100%">
                 </a>
             </div><!-- End of Responsive Image -->
-        </div> <!-- End of Col -->
-        <div class="push">
-        </div> 
-    </div><!-- End Of Product Image element -->
-    <div class="product-panel row"> <!-- Product Panel Element-->
-        <div class="product-title row">
-            <div class="col-xs-12 col-md-12">
-                <p class="p-title text-center"> <strong> {{p.name}} </strong></p>
-            </div>
-        </div> <!-- End of Product Title -->
-        <div class="product-detail row">
-            <div class="col-xs-6 col-md-6 price-info">
-                <span class="p-price">Prix : {{p.price}} FCFA  </span>
-            </div><!-- End of Price Info -->
-            <div class="col-xs-6 col-md-6 control-btn">
-                <div class="row">
-                     <div class="col-xs-6 col-md-6 add-to-wishlist-btn">
-                            <a href="{% url 'wishlist:add_to_wishlist' p.id  %}">
-                                <span class="glyphicon glyphicon-heart-empty"></span>
-                            </a>
-                     </div><!-- End of Add-To-Wishlist-Btn -->
-                    <div class="col-xs-6 col-md-6 add-to-cart-btn">
-                        <span class="add-to-cart glyphicon glyphicon-shopping-cart btn-default" data-itemid="{{p.id}}" title="Ajouter dans le Panier"></span>
+            <div class="push">
+            </div> 
+        </div><!-- End Of Product Image element -->
+        <div class="product-panel row bg-transparent text-purple"> <!-- Product Panel Element-->
+            <div class="product-title row">
+                <div class="text-left ">
+                    <span class="p-title "> <strong> {{p.name}} </strong></span>
+                </div>
+            </div> <!-- End of Product Title -->
+            <div class="product-detail row">
+                <div class="col-xs-6 col-md-6 ">
+                    <div class="price-info text-left">
+                        <span class="p-price">{{p.price}} FCFA  </span>
                     </div>
-                </div><!-- End of Row -->
+                    
+                </div><!-- End of Price Info -->
+                <div class="col-xs-6 col-md-6">
+                    <div class="controls-inner row text-purple masqued">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="add-to-wishlist vt-ht-centered">
+                                <a  href="{% url 'wishlist:add_to_wishlist' p.id  %}">
+                                    <span class="glyphicon glyphicon-heart-empty gi-2x"></span>
+                                </a>
+                            </div>       
+                        </div><!-- End of col-xs-6 -->
+                        <div class="col-xs-6 col-md-6">
+                            <div class="add-to-cart vt-ht-centered">
+                                <span class="glyphicon glyphicon-shopping-cart gi-2x" data-itemid="{{p.id}}" title="Ajouter dans le Panier"></span>
+                            </div>  
+                        </div>
+                    </div><!-- End of Row -->
 
-            </div><!-- End of control-btn -->
-        </div><!-- End of product Detail -->
-        <div class="push">
-        </div> 
-    </div><!-- End of Product Panel Element -->
+                </div><!-- End of col -->
+            </div><!-- End of product Detail -->
+            <div class="push">
+            </div> 
+        </div><!-- End of Product Panel Element -->
+    </div><!-- End of product-innner-Container -->
 </div> <!-- End of Product Container -->
