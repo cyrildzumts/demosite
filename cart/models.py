@@ -264,6 +264,9 @@ class CartItem(models.Model):
 
     def name(self):
         return self.product.name
+    
+    def image(self):
+        return self.product.image
 
     def price(self):
         return self.product.price

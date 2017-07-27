@@ -6,30 +6,26 @@
 <li>{{ error_message }}</li>
 </ul>
 {% endif %}
-<div class="container container-fluid">
-    <h3>Checkout</h3>
+<div class="container-fluid text-purple">
     <ul class="nav nav-tabs">
-        <li class="active" ><a data-toggle="tab" href="#shipping-info">Information generales :</a></li>
+        <li class="active" ><a data-toggle="tab" href="#shipping-info">Vos informations générales :</a></li>
         <li ><a data-toggle="tab" href="#payoptions">Options de payement :</a></li>
         <li ><a data-toggle="tab" href="#cartcontent">Contenu du panier :</a></li>
     </ul>
     <form action="." method="post" class="form-inline">{% csrf_token %}
         <div class="tab-content">
             <div id="shipping-info" class="tab-pane fade in active">
-                <h3>Information generales</h3>
                 {% include "tags/shipping_info.html" %}
             </div>
 
             <div id="payoptions" class="tab-pane fade">
-                <h3>Options de Payement</h3>
                 {% include "tags/payement_choices.html" %}
             </div>
 
             <div id="cartcontent" class="tab-pane fade">
-                <h3>Contenu du Panier</h3>
                 {% include "tags/confirmation.html" %}
             </div>
-            <span colspan="2"><input type="submit" value="Place Order" class="submit" /></span>
+            <span colspan="2"><input type="submit" value="Valider votre commande" class="submit rebeccapurple" /></span>
         </div>
         </form>
 

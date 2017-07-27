@@ -16,7 +16,7 @@ import json
 
 @csrf_protect
 def show_cart(request):
-    template_name = "cart/cart.html"
+    template_name = "cart/cart_flat.html"
     user_cart = cart.get_user_cart(request)
     # checkout_url = checkout.get_checkout_url(request)
     match = resolve('/order/checkout/')

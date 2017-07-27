@@ -2,29 +2,21 @@
     
     <div class="product-inner-container">
         <div class="product-image row"><!-- Product Image Element -->
-            <div class="img-centered">
+            <div class="img-centered text-purple">
                 <a href="{{p.get_absolute_url}}">
                     <img src="{{p.image.url}}" class="img-responsive" style="width:100%">
                 </a>
+                </br>
+                <p class="p-brand">{{p.brand}} </p>
+                <p class="p-title "> <strong> {{p.name}} </strong></p>
+                <p class="p-price">{{p.price}} FCFA  </p>
             </div><!-- End of Responsive Image -->
             <div class="push">
             </div> 
         </div><!-- End Of Product Image element -->
         <div class="product-panel row bg-transparent text-purple"> <!-- Product Panel Element-->
-            <div class="product-title row">
-                <div class="text-left ">
-                    <span class="p-title "> <strong> {{p.name}} </strong></span>
-                </div>
-            </div> <!-- End of Product Title -->
-            <div class="product-detail row">
-                <div class="col-xs-6 col-md-6 ">
-                    <div class="price-info text-left">
-                        <span class="p-price">{{p.price}} FCFA  </span>
-                    </div>
-                    
-                </div><!-- End of Price Info -->
-                <div class="col-xs-6 col-md-6">
-                    <div class="controls-inner row text-purple masqued">
+            
+            <div class="controls-inner row text-purple masqued">
                         <div class="col-xs-6 col-md-6">
                             <div class="add-to-wishlist vt-ht-centered">
                                 <a  href="{% url 'wishlist:add_to_wishlist' p.id  %}">
@@ -37,12 +29,8 @@
                                 <span class="glyphicon glyphicon-shopping-cart gi-2x" data-itemid="{{p.id}}" title="Ajouter dans le Panier"></span>
                             </div>  
                         </div>
-                    </div><!-- End of Row -->
-
-                </div><!-- End of col -->
-            </div><!-- End of product Detail -->
-            <div class="push">
-            </div> 
+            </div><!-- End of Row -->
+                
         </div><!-- End of Product Panel Element -->
     </div><!-- End of product-innner-Container -->
 </div> <!-- End of Product Container -->

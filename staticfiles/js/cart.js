@@ -106,7 +106,9 @@ jQuery(".add_item").click(function(){
 });
 
 jQuery(".remove_item").click(function(){
+
     node = $(this);
+    console.log("remove item clicked");
     displayAttribute(node, false);
 });
 

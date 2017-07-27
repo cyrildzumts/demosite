@@ -1,28 +1,22 @@
 {% load category_tags %}
 
   {% if current_category.parent is not None %}
-    {% if current_category.parent is not current_category.root_cat %}
-    <div class=" list-group-item row">
-        <a href="{{current_category.parent.get_absolute_url}}">{{current_category.parent.name}}</a>
-    </div>
-    {% endif %}
-
-  {% endif %}
-  {% if current_category.parent is not None %}
+      {% if current_category.parent is not current_category.root_cat %}
+      <div class=" list-group-item row">
+          <a href="{{current_category.parent.get_absolute_url}}">{{current_category.parent.name}}</a>
+      </div>
+      {% endif %}
     {%subcategory current_category.parent as categories%}
-  {% else %}
+    {% else %}
     {%subcategory current_category as categories%}
   {% endif %}
-  <ul class="list-group category-container">
+
+  <div class="container-fluid category-container">
     {% for category in categories %}
-
-      
         {% if category == current_category %}
-        <li><a class="list-group-item active" href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+        <a class="list-group-item active" href="{{category.get_absolute_url}}">{{category.name}}</a>
         {% else %}
-        <li><a class="list-group-item" href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+        <a class="list-group-item" href="{{category.get_absolute_url}}">{{category.name}}</a>
         {% endif %}
-  
-
     {% endfor %}
-  </ul>
+  </div>

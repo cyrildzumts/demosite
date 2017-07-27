@@ -1,27 +1,38 @@
 
-        <legend>Contenu de votre Commande:</legend>
-        <table class="table table-responsive">
-            <thead>
-                <tr>
-                    <th>Reference</th>
-                    <th>Nom du produit</th>
-                    <th>Quantité</th>
-                    <th>Prix Unitaire</th>
-                    <th> Prix total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item  in cartitems %}
-                <tr>
-                    <td>{{item.product.sku}}</td>
-                    <td>{{item.product.name}}</td>
-                    <td>{{item.quantity}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.total_price}}</td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <p>Total = {{user_cart.subtotal}}</p>
-                </tr>
-            </tbody>
-        </table>
+        <legend>Articles</legend>
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Nom du produit</th>
+                        <th>Quantité</th>
+                        <th>Prix Unitaire</th>
+                        <th> Prix total</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class=" fluid rebeccapurple">
+                        <td></td>
+                        <td> </td>
+                        <td> </td>
+                        <td><p>Total = {{user_cart.subtotal}} FCFA</p></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for item  in cartitems %}
+                    <tr>
+                        <td>{{item.product.sku}}</td>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.price}} FCFA</td>
+                        <td>{{item.total_price}} FCFA</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+                
+            </table>
+        </div>
+        
