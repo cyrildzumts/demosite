@@ -1,6 +1,7 @@
 *.sqlite3
 *.pyc
 */staticfiles/images/*
+*/static/*
 *.jpg
 *.png
 *.bmp
