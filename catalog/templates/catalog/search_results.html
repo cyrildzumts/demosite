@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+    
+    {% block PageContent %}
+
+            <div class="container-fluid list-group">
+                <div class="row">
+                    <p> Resultat de la recherche : </p>
+                        {%if results%}
+                            {% for p  in results %}
+                            {% include "tags/product_box_min.html" %}
+                            {% endfor %}
+                        {%else%}
+                            <p class="no-result"> Aucun article trouvé. </p>
+
+                        {%endif%}
+                </div>
+            </div><br>
+
+    {% endblock PageContent %}

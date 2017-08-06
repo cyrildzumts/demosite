@@ -31,7 +31,11 @@
     </div>
     <div class="col-sm-6">
 
-      <h1> {{product.name}} </h1>
+      <h1> {{product.name}} 
+        {%if product.is_available is False%}
+          <span class="not-in-stock"> Epuisé ! </span>
+        {%endif%}
+      </h1>
         Marque: <em>{{product.brand}}</em>
       <br />
       {% if product.size is not None %}
@@ -46,7 +50,7 @@
         {% endif %}
         Prix : {{product.price}} CFA
         <br /><br />
-        <span class="add-to-cart glyphicon glyphicon-shopping-cart btn btn-default" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
+        <span class="add-to-cart glyphicon glyphicon-shopping-cart btn btn-default" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
         <br /><br />
         <div class="cb"></div>
         <h3> Description du produit </h3>

@@ -1,7 +1,7 @@
 
 <div id="mlogin_modal" class="mmodal mfade " role="dialog">
     <div class="mmodal-dialog">
-        <div class="modal-content bg-snuff">
+        <div class="modal-content gradient-blue">
             <div class="modal-header">
                 <h4 class="modal-title"> Connexion </h4>
             </div> <!-- End of Modal header -->
@@ -11,7 +11,7 @@
                         <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
                     {% endif %}
                     <div class="login_form_div" title="Connexion">
-                        <form id="login_form" class="form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+                        <form id="login_form" name="login_form" class="form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
                             
 
                             <div class="row">

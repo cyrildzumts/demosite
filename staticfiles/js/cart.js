@@ -1,6 +1,12 @@
 jQuery(".add-to-cart").click(function(){
     var item_id = parseInt(jQuery(this).attr("data-itemid"));
-    cart_add_item(item_id, 1);
+    var is_available = jQuery(this).attr("data-available");
+    console.log("Item availability : " + is_available);
+    if(is_available != "False")
+        {
+            cart_add_item(item_id, 1);
+        }
+
 })
 
 function cart_add_item(id, quantity)

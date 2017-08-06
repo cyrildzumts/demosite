@@ -407,3 +407,9 @@ html {
 .item-price, .item-name, .item-sumary{
     font-size: 0.875em;
 }
+
+.not-in-stock{
+    font-size: 0.75em;
+    background-color: #F62459;
+    color: #F2F1FE;
+}

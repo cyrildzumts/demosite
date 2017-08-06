@@ -146,5 +146,8 @@
 .bg-emerald{
     background-color: #3FC380;
 }
+.gradient-blue{
+    background: linear-gradient(#3498db, #4ECDC4);
+}
 
 

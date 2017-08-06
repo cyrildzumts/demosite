@@ -14,7 +14,12 @@ function displayLoginError(){
     }
   });
 }
-
+$(".search-form").submit(function(){
+    var q = document.forms["search-form"]["q"].value;
+    if(q == "")
+        return false;
+    return true;
+});
 
 $(".dropdown").mouseenter(function(){
     //alert("You entered this cat!");

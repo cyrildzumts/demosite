@@ -13,6 +13,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from demosite import settings
 from django.views.generic.detail import DetailView
 import calendar
+from django.db.models import Q
+import operator
+from functools import reduce
 # Create your views here.
 
 # this function return a list of subcategory
@@ -158,3 +161,24 @@ def flyer(request):
         session['last_visit'] = str(datetime.now())
         session['visits'] = 1
     return render(request, template_name, locals())
+
+
+def search_view(request):
+    template_name = "catalog/search_results.html"
+    page_title = 'Resultats de la Recherche | ' + settings.SITE_NAME
+    results = Product.objects.all()
+    query = request.GET.get('q')
+    query_list = query.split()
+    if(len(query_list) > 0 ):
+        results = results.filter(reduce(operator.or_, (Q(name__icontains=q) for q in query_list))|
+                                 reduce(operator.or_, (Q(brand__icontains=q) for q in query_list))|
+                                 reduce(operator.or_, (Q(categories__meta_keywords__icontains=q) for q in query_list))|
+                                 reduce(operator.or_, (Q(meta_keywords__icontains=q) for q in query_list))
+        )
+    else:
+        results = None
+    context = {
+        'page_title': page_title,
+        'results' : results,
+    }
+    return render(request, template_name,context)
