@@ -158,7 +158,7 @@ def cart_subtotal(request):
 
 def is_empty(request):
     user_cart = get_user_cart(request)
-    return user_cart.items_count == 0
+    return user_cart.is_empty()
 
 
 def empty_cart(request):

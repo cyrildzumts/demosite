@@ -8,7 +8,6 @@ import decimal
 # from enum import Enum
 import datetime
 
-
 # Global Variable counting
 
 
@@ -131,6 +130,21 @@ class Order(models.Model):
     def get_quantity(self):
         return self.orderitem_set.count()
 
+    def validate(self):
+        """
+        This Method is called when an order has been
+        sent by an user. The stock inventory will be updated.
+        The content ordered will update the stock quantity of
+        the order item so that when there is no more item left
+        no user will be able place a new order containing that item. 
+        if the remaining quantity of the item is 0 then that item 
+        will be marked as inactive. 
+        """
+        orderitems = self.getOrderItem()
+        for item in orderitems:
+            item.product.set_sell_quantity(item.quantity)
+            item.product.sell_date = datetime.datetime.now()
+            item.product.save()
         
 class OrderItem(models.Model):
     product = models.ForeignKey(Product)

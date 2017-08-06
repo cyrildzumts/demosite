@@ -1,0 +1,50 @@
+.card {
+
+    margin: 24px;
+    min-width: 320px;
+    max-width: 640px;
+    /*display: flex;*/
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    border-radius: 2px;
+    overflow: hidden;
+}
+.card-fluid {
+
+    margin: 24px;
+    min-width: 320px;
+    max-width: 100%;
+    /*display: flex;*/
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    border-radius: 2px;
+    overflow: hidden;
+}
+.card-main, .card-content-text{
+    width: 100%;
+    margin: 1px;
+    padding: 1px;
+}
+.card-horizontal-block{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0;
+}
+.card-content-text{
+    font-size: 16px;
+}
+.card-actions{
+    margin: 5px;
+}
+
+.card, .card-fluid{
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 5px 5px 5px #888888;
+}

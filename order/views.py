@@ -29,7 +29,8 @@ def show_checkout(request):
     template_name = 'order/checkout.html'
     r = request
     if cart.is_empty(request):
-        cart_url = urlresolvers.reverse('show_cart')
+        print("show_checkout : Cart is empty")
+        cart_url = urlresolvers.reverse('cart:show_cart')
         return HttpResponseRedirect(cart_url)
     if request.method == 'POST':
         postdata = request.POST.copy()
@@ -46,6 +47,10 @@ def show_checkout(request):
                                    " de maintenant.",
                                    from_email=None,
                                    to_email=["cyrildz@ymail.com"])
+                order_items = order.getOrderItem()
+                user_cart = cart.get_cart(request.user)
+                user_cart.delete()
+                order.validate()
                 return HttpResponseRedirect(receipt_url)
         else:
             error_message = 'Correct the errors below'
@@ -66,18 +71,6 @@ def show_checkout(request):
 
 
 def receipt(request):
-        template_name = 'order/receipt.html'
-        order_number = request.session.get('order_number')
-        if order_number:
-            print("Order Numer : ", order_number)
-            order = Order.objects.filter(id=order_number)[0]
-            order_items = OrderItem.objects.filter(order=order)
-            user_cart = cart.get_cart(request.user)
-            user_cart.delete()
-            del request.session['order_number']
-
-        else:
-            cart_url = urlresolvers.reverse('show_cart')
-            return HttpResponseRedirect(cart_url)
+        template_name = 'order/thank_you.html'
         return render(request, template_name, locals())
 

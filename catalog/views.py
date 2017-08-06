@@ -4,6 +4,7 @@ from django.core import urlresolvers  # , serializers
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils.safestring import mark_safe
 # from django.template import RequestContext
 from cart import cart
 from cart.forms import ProductAddToCartForm
@@ -11,6 +12,7 @@ from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from demosite import settings
 from django.views.generic.detail import DetailView
+import calendar
 # Create your views here.
 
 # this function return a list of subcategory
@@ -133,4 +135,26 @@ def show_product(request, product_slug, template_name="catalog/product.html"):
     form.fields['product_slug'].widget.attrs['value'] = product_slug
     # set the test cookie on our first GET
     request.session.set_test_cookie()
+    return render(request, template_name, locals())
+
+
+
+def flyer(request):
+    template_name = "catalog/flyer.html"
+    page_title = 'Flyer Demo | ' + settings.SITE_NAME
+    session = request.session
+    # get the number of visits to the site
+
+    if request.session.get('last_visit'):
+        last_visit_time = session.get('last_visit')
+        visits = session.get('visits', 0)
+        delta = (datetime.now()-datetime.strptime(last_visit_time[:-7],
+                 "%Y-%m-%d %H:%M:%S")
+                 ).seconds
+        if delta > 10:
+            session['visits'] = visits + 1
+            session['last_visit'] = str(datetime.now())
+    else:
+        session['last_visit'] = str(datetime.now())
+        session['visits'] = 1
     return render(request, template_name, locals())

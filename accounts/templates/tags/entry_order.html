@@ -1,49 +1,23 @@
 
-<div class="container orderEntry rebeccapurple "> <!-- Order Entry Container -->
-    <div class="panel2">
-            <div class="col-xs-12 col-md-12">
-                <div class="row">
-                    <div class="col-xs-12 text-orange">
-                        <a class="text-orange" href="{% url 'accounts:order_details' order.id %}">
-                            <h5>Numéro de Commande : {{order.ref_num}}</h5>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5> 
-                            <b>Status de paiement : </b>
-                            <span>
+    <div class="rounded-10 card bg-iron text-left">
+        <div class="card-horizontal-block">
+            <section class="card-main">
+                <h3 class="card-title card-title-large"> Numéro de Commande : {{order.ref_num}}</h3>
+                <h4 class="card-subtitle"><b> Date :</b> {{order.date.date}}</h4>
+                <h4>Montant : </b>{{order.total}} FCFA</h4>
+                <h4>Status de paiement :
                                 {% if order.paid_status is True %}
                                     Payé
                                 {% else %} 
                                     Non Payé
                                 {% endif %}
-                            </span>
-                        </h5> 
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5><b> Date :</b> {{order.date.date}} </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5><b>Montant : </b> {{order.total}} FCFA</h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5><b>Status de Livraison : </b> {{order.get_status}}</h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5><b>Quantité : </b> {{order.get_quantity}}</h5>
-                    </div>
-                </div>
-            </div>
+                </h4>
+                <h4><b>Status de Livraison : </b>{{order.get_status}}</h4>
+            </section>
+        </div>
+        <section class="card-actions">
+            <a class="text-orange" href="{% url 'accounts:order_details' order.id %}">
+                   <button class="btn btn-sm card-action bg-rebeccapurple"> Details </button>
+            </a>
+        </section>
     </div>
-</div><!-- End of Order Entry -->

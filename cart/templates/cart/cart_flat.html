@@ -1,9 +1,8 @@
-{% extends "base.html" %}
- {% block PageContent %} 
+{% extends "base.html" %} {% block PageContent %}
 
-    
-    <div class="container">
-      {% if cart_items %}
+
+<div class="container-fluid">
+    {% if cart_items %}
     <div class="row">
         <div class="col-xs-12 col-md-8 cart-panel">
             <div class="panel panel-info">
@@ -11,46 +10,79 @@
                     <div class="panel-title">
                         <div class="row">
                             <div class="col-xs-6">
-                                <h5><span class="glyphicon glyphicon-shopping-cart"> Votre Panier </span></h5> 
+                                <h5><span class="glyphicon glyphicon-shopping-cart"> Mon Panier </span></h5>
                             </div>
                             <div class="col-xs-6">
-                              <a href="{% url 'catalog:index'%}">
+                                <a href="{% url 'catalog:index'%}">
                                 <button type="button" class="btn btn-primary btn-sm btn-block">
-                                    <span class="glyphicon glyphicon-share-alt"> Continue vos achats ...</span>
+                                    <span class="glyphicon glyphicon-share-alt hidden-xs hidden-sm"> Continue mes achats ...</span>
                                 </button>
                               </a>
-                                
+
                             </div>
                         </div>
-                    </div><!-- End Of Panel-Title-->
-                </div><!-- End Of Panel-Heading -->
+                    </div>
+                    <!-- End Of Panel-Title-->
+                </div>
+                <!-- End Of Panel-Heading -->
                 <div class="panel-body">
-                  {% for item in cart_items %} 
-                    {%include "tags/card_entry_flat.html"%} 
-                  {% endfor %}
-                    
-                </div><!-- End Of Panel-Body-->
+                    {% for item in cart_items %} {%include "tags/card_entry_flat.html"%} {% endfor %}
+
+                </div>
+                <!-- End Of Panel-Body-->
                 <div class="panel-footer">
                     <div class="row text-center">
                         <div class="col-xs-9">
                             <h4 class="text-right">Total : <strong>{{cart_subtotal}} CFA</strong></h4>
                         </div>
                         <div class="col-xs-3">
-                          <a class="no-decoration" href="/order/{{checkout_url}}">
+                            <a class="no-decoration" href="/order/{{checkout_url}}">
                             <button type="button" class="btn btn-block rebeccapurple">
-                             Checkout
+                             Aller à la caisse
                             </button>
                           </a>
-            
+
                         </div>
                     </div>
-                </div><!-- End Of Panel-Footer -->
-            </div><!-- End Of Panel -->
+                </div>
+                <!-- End Of Panel-Footer -->
+            </div>
+            <!-- End Of Panel -->
         </div>
     </div>
-      {%else%}
-    <p> Votre Panier ne contient aucun article. </p>
-{% endif %} 
-</div><!-- End Of Container --> 
-  
+    {%else%}
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10">
+            <div class="card-fluid bg-rebeccapurple">
+                <section class="card-main text-center">
+                    <h4 class="card-title"> Panier Vide</h4>
+                    <h6 class="card-subtitle">Veuillez ajouter des article dans le panier</h6>
+                </section>
+                <!-- End Of Main Section -->
+                <section class="card-content-text text-center">
+                    <p>
+                        Votre Panier ne contient aucun article.</br>
+                        Parcourrez la liste d'articles en vente sur le site</br>
+                        et ajouter les produits que vous desirez acheter dans le Panier. </br>
+                    </p>
+                </section>
+                <!-- End Of Main Section -->
+                <section class="card-actions text-center">
+                    <h4 class="card-next">Acceuille du site</h4>
+                </section>
+                <!-- End Of Main Section -->
+            </div>
+            <!-- End Of Card -->
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+<!-- End Of Container -->
+
 {% endblock PageContent %}

@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-      <title>
-              Page non trouvée
-      </title>
-    <meta name="keywords" content="{{meta_keywords}}" />
-		<meta name="description" content="{{meta_description}}" />  
-  </head>
-  <body>
-  <h1> Page non trouvée</h1>
-  <p> Veuillez verifier l'adresse et reessayer à nouveau.</p>
 
-  </body>
-</html>
+{% extends "base.html" %}
+
+<div class="container-fluid">
+  {% block PageContent %}
+      <h1> 404 ! Oups !</h1>
+      <p> La page que vous cherchez n'existe pas.</p>
+      <p><a  href="{% url 'catalog:index'%}"> Retour à l'Acceuille </a> </p>
+  {% endblock PageContent %}
+</div>

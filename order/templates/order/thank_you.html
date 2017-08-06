@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block PageContent %}
+<div class="row">
+    <span class="span4">
+
+    </span>
+    <span class="span4">
+        <section >
+            <h4 class="order-confirmation">
+                Confirmation de reception de votre commande
+            </h4>
+        </section>
+        <section>
+            <p>
+                Un mail de Confirmation vous a été envoyée.
+                Merci de votre confiance. 
+                Pour voir le statut de vos commades 
+                veuillez vous diriger vers <p class="link-hint"> <a href="{% url 'accounts:user_account'%}">Mon Compte</a> </p>
+                <p class="home-link"><a href="{% url 'catalog:index'%}"> Retour à l'acceuille du Site </a></p>
+                
+            </p>
+        </section>
+
+    </span>
+    <span class="span4">
+
+    </span>
+</div>
+{% endblock %}

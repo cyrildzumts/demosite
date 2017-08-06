@@ -5,9 +5,9 @@
       {% if not c.parent %}
       <li class="dropdown">
           {% if current_category.root_cat == c %}
-            <a class="dropdown-toggle active" href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+            <a class="dropdown-toggle active" href="{{c.get_absolute_url}}">{{c.name}} </a>
             {% else %}
-            <a class="dropdown-toggle" href="{{c.get_absolute_url}}" class="category">{{c.name}} </a>
+            <a class="dropdown-toggle" href="{{c.get_absolute_url}}">{{c.name}} </a>
           {% endif %}
           
           {%subcategory c as subs_cats%}

@@ -1,11 +1,11 @@
-<div class="col-xs-10 orderItem flex">
+<div class="col-xs-10 card">
     <div class="itemImage">
        <a href="{{item.get_absolute_url}}">
             <img class="img-thumbnail  img-responsive center-block" 
                 src="{{item.image_url}}" alt="{{item.name}}">
         </a>
     </div> <!-- End of itemImage -->
-    <div class="orderItemDetail">
+    <section class="card-main">
         <p class="refNumber">
             Reference : {{item.sku}}
         </p>
@@ -13,5 +13,5 @@
         <p class="itemQuantity"> Quantité : {{item.quantity}}</p>
         <p class="itemPrice"> Prix Unitaire : {{item.get_price}} FCFA</p>
         <p class="itemTotalPrice"> Prix Total : {{item.total}} FCFA</p>
-    </div> <!-- End of orderItemDetail -->
+    </section> <!-- End of orderItemDetail -->
 </div><!-- End of orderItem -->

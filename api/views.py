@@ -44,7 +44,7 @@ def ajax_login(request):
     if request.method == 'POST':
         user = auth.authenticate(username=request.POST['username'],
                                  password=request.POST['password'])
-        if user is not None:
+        if user :
             if user.is_active:
                 auth.login(request, user)
                 data['status'] = 200

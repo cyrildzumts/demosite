@@ -388,3 +388,22 @@ html {
 .p-title, .p-title, .p-brand{
     font-family: "Montserrat", sans-serif;
 }
+
+.bordered{
+    margin: 5px;
+    /*border: 1px solid #888888;*/
+}
+.rounded-2{
+    border-radius: 2px;
+}
+
+.rounded-4{
+    border-radius: 8px;
+}
+
+.rounded-10{
+    border-radius: 20px;
+}
+.item-price, .item-name, .item-sumary{
+    font-size: 0.875em;
+}

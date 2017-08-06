@@ -1,0 +1,27 @@
+
+    <input class="form-control" type="hidden" name="shipping_name" value="{{form_context.name}}">
+    <input class="form-control" type="hidden" name="email" value="{{form_context.email}}" >
+    <input class="form-control" type="hidden" name="phone" value="{{form_context.phone}}">
+    <input  class="form-control" type="hidden" name="shipping_address_1" value="{{form_context.address}}">
+    <input  class="form-control" type="hidden" name="shipping_city" value="{{form_context.city}}">
+    <input class="form-control" type="hidden" name="shipping_zip" value="{{form_context.zip}}">
+    <input class="form-control" type="hidden" name="shipping_country" value="{{form_context.country}}">
+    <div class="container-fluid">
+        <div class="card ">
+            <section class="card-main">
+                <h5 class="card-title"> Nom Complet : {{form_context.name}}</h5>
+                <h5 class="card-subtitle"> Email : {{form_context.email}}</h5>
+
+            </section><!-- End Of Main Section -->
+            <section class="card-content-text">
+                <h5 class="card-tel"> Telephone : {{form_context.phone}}</h5>
+                <h5 class="card-tel"> Adresse : {{form_context.address}}</h5>
+                <h5 class="card-tel"> Ville: {{form_context.city}}</h5>
+                <h5 class="card-tel"> Boîte Postale : {{form_context.zip}}</h5>
+                <h5 class="card-tel"> Pays : {{form_context.country}}</h5>
+            </section><!-- End Of Main Section -->
+            <section class="card-actions text-center">
+                <h4 class="card-next">Suivant</h4>
+            </section><!-- End Of Main Section -->
+        </div><!-- End Of Card -->
+    </div>

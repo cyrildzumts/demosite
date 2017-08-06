@@ -1,13 +1,13 @@
 {% load catalog_tags %}
-<div class="navbar-header rebeccapurple ">
+<div class="navbar-header bg-rebeccapurple ">
   <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target="#myNavbar">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'catalog:index'%}"> GrandVillage </a></li>
+  <a class="navbar-brand" href="{% url 'catalog:index'%}"> GrandVillage </a>
 </div>
-<div class="collapse navbar-collapse rebeccapurple" id="myNavbar">
+<div class="collapse navbar-collapse bg-rebeccapurple" id="myNavbar">
   <ul class="nav navbar-nav ">
     <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
     {% category_list request.path %}
@@ -16,7 +16,7 @@
       {% include "tags/cart_box.html" %}
     </li>
     <li>
-        <a href="{% url 'wishlist:show_wishlist' %}"> Wishlist </a>
+        <a href="{% url 'wishlist:show_wishlist' %}"> Ma Wishlist </a>
     </li>
   </ul>
   <ul class="nav navbar-nav navbar-right">

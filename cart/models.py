@@ -76,7 +76,7 @@ class Cart(models.Model):
 
             else:
                 # create and save a new cart item
-                if (quantity <= product.quantity):
+                if (quantity <= (product.quantity - product.sell_quantity)):
                     item = CartItem()
                     item.set_product(product)
                     # this might throw an exception
@@ -125,7 +125,7 @@ class Cart(models.Model):
                 # item = self.get_item(item_id)
                 # item_quantity = item.get_quantity()
                 if quantity > 0:
-                    in_stock = prod.quantity
+                    in_stock = prod.quantity - prod.sell_quantity
                     if (quantity <= in_stock):
                         item.set_quantity(quantity)
                         item.save()
@@ -151,8 +151,8 @@ class Cart(models.Model):
                 if quantity > 0:
                     in_use = item.get_quantity()
                     desired_qty = in_use + quantity
-                    in_stock = item.get_product().quantity
-                    if (desired_qty > in_stock) is not True:
+                    in_stock = item.get_product().quantity - item.get_product().sell_quantity 
+                    if (in_stock >= desired_qty):
                         item.set_quantity(desired_qty)
                         item.save()
                         flag = True
@@ -200,7 +200,7 @@ class Cart(models.Model):
         return count
 
     def is_empty(self):
-        return self.items_count == 0
+        return self.items_count() == 0
 
     def get_user(self):
         return self.user

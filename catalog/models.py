@@ -296,11 +296,22 @@ class Product(models.Model):
             return None
 
     def product_is_available(self):
-        return self.quantity != 0
+        return (self.quantity > self.sell_quantity)
 
+    def set_sell_quantity(self, quantity):
+        if type(quantity) == int:
+
+            if(quantity > 0 and quantity <= (self.quantity - self.sell_quantity)):
+                self.sell_quantity = self.sell_quantity + quantity
+                self.save()
+
+        
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        self.build_sku()
+        if(self.id is None):
+            self.slug = slugify(self.name)
+            self.build_sku()
+        if(self.product_is_available() == False):
+            self.is_available = False
         super(Product, self).save(*args, **kwargs)
 
 
