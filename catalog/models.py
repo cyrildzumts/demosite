@@ -44,6 +44,14 @@ class Category(models.Model):
         cat_list.reverse()
         return cat_list
 
+    def subcategories(self):
+        """
+        This method returns the direct 
+        children categories.
+        """
+        return Category.objects.filter(parent=self)
+
+
     def root_cat(self):
         """
         When the current Category is a root Category,

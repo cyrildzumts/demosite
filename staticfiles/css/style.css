@@ -413,3 +413,12 @@ html {
     background-color: #F62459;
     color: #F2F1FE;
 }
+
+.navbar-nav-cat a{
+    box-sizing: border-box;
+    display: block;
+}
+
+.navbar-cat a{
+    display: flex;
+}

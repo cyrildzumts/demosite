@@ -8,6 +8,7 @@ register = template.Library()
 @register.simple_tag
 def subcategory(category=None):
     """
+    Category Model Class now implement this method. 
     By default this method returns the direct 
     root children categories.
     if category is not None then this method
