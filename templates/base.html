@@ -21,116 +21,108 @@
 </head>
 
 <body>
-  <div class="container-fluid ">
-    {%block header_panel%} 
-        {% block navigation %}
-          <nav class="navbar navbar-default navbar-fixed-top card-flat">
-            {% include 'tags/navigation.html' %}
-          </nav>
-        {% endblock navigation %} 
-      {%endblock header_panel%}
-    <!-- End Of Header Panel -->
-    {%block banner-panel%}
-    <div class=" bg-oceangreen body-panel">
-      {% block banner_content %}
+  <div class="body-wrapper">
+
+    <header>
+      {%block header_panel%} {% block navigation %}
+      <nav class="navbar navbar-default navbar-fixed-top card-flat">
+        {% include 'tags/navigation.html' %}
+      </nav>
+      {% endblock navigation %} {%endblock header_panel%}
+      <!-- End Of Header Panel -->
+      {%block banner-panel%}
+      <div class=" bg-oceangreen body-panel">
+        {% block banner_content %}
         <div class="container text-center">
           <h1>{{site_name}} </h1>
           <p class="lead"> Produits de qualité à des prix imbatables.</p>
+          {%block banner_extra%}
+          {%endblock banner_extra%}
         </div>
-      {% endblock banner_content %}
+        {% endblock banner_content %}
+      </div>
+      {%endblock banner-panel%}
+      <!-- End of banner-panel -->
+
+    </header>
+
+    <div class="card-flat-container body-content bg-whiteblack">
+
+      <header class="content-header">
+        {%block content_header%}
+          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-ebony">
+            <p> Nouveaux Articles </p>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-rebeccapurple">
+            <p> Articles Populaires </p>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-crimson">
+            <p> Reductions </p>
+            <!--
+              </div>
+                <div class="col-md-3 header-entry bg-thunderbird">
+                  <p> Col 4 </p>
+              </div>
+                -->
+        {%endblock content_header%}
+      </header>
+
+      <div class="main-content container-fluid">
+        {%block MainHeader%}
+          <header class="main-header">
+          
+          </header>
+        {%endblock MainHeader%}
+        
+        {% block Sidebar %} 
+          <nav class="navbar">
+            
+          </nav>
+        {% endblock Sidebar %}
+        
+          <!-- End Of Sidebar -->
+
+        {% block PageContent %} 
+          <article>
+
+          </article>
+        {% endblock PageContent %}
+        
+      </div>
+      <!-- End of Main-Content -->
+
     </div>
-    {%endblock banner-panel%}
-    <!-- End of banner-panel -->
-    <div class="card-flat-container body-content-container padding-top bg-whiteblack">
-          <div class="content-header">
-            <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-ebony">
-                <p> Nouveaux Articles </p>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-rebeccapurple">
-                <p> Articles Populaires </p>
-            </div>
-              <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-crimson">
-                <p> Reductions </p>
-              <!--
-            </div>
-              <div class="col-md-3 header-entry bg-thunderbird">
-                <p> Col 4 </p>
-            </div>
-              -->
-          </div>
-          <div class="sorting-panel row">
-            {% block sorting_panel%}
-              <span class="col-md-1">
-
-              </span>
-              <span class="col-md-11">
-                <form class="navbar-form navbar-right search-form" name="search-form" role="search" action="{% url 'catalog:search' %}" method="get">{% csrf_token %}
-                  <div class="input-group card-flat">
-                    <input type="text" class="form-control" placeholder="Search..." name="q">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </span>
-            {%endblock sorting_panel%}
-          </div>
-        <!-- End of Sorting-Panel -->
-
-
-          <div class="main-content container-fluid">
-            {%block MainHeader%} {%endblock MainHeader%}
-
-            <div class="row">
-              <div class="col-md-2">
-                {% block Sidebar %} {% endblock Sidebar %}
-              </div>
-              <!-- End Of Sidebar -->
-
-              <div class="col-md-10 content">
-                {% block PageContent %} {% endblock PageContent %}
-              </div>
-              <!-- End of content -->
-            </div>
-          </div>
-          <!-- End of Main-Content -->
-
-
-    {% block site_wrapper %} {% endblock site_wrapper %}
+    <footer class="footer text-center card-flat">
+        {% block footer %} {% include "tags/footer.html" %} {% endblock footer %}
+    </footer>
   </div>
 
-    </div>
 
 
 
-  <footer class="footer text-center card-flat">
-    {% block footer %} {% include "tags/footer.html" %} {% endblock footer %}
-  </footer>
-  <!-- End of page-footer -->
-  <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous">
+    <!-- End of page-footer -->
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous">
 </script>-->
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
 </script> -->
-  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
 </script> -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> -->
-  </script>
-  <!--<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}">-->
-  </script>
-  <script type="text/javascript" src="{% static 'js/scripts.js' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> -->
+    </script>
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}">-->
+    </script>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}">
 
-  </script>
-  <script type="text/javascript" src="{% static 'js/cart.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}">
 
-  </script>
-  <script type="text/javascript" src="{% static 'js/ajax_login.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'js/ajax_login.js' %}">
 
-  </script>
+    </script>
 </body>
 
 </html>
