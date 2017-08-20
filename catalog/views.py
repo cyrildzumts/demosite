@@ -38,7 +38,7 @@ class ProductDetailView(DetailView):
 
 def get_categories(parent_id):
     id = int(parent_id)
-    return {'categories': Category.objects.get(parent_category=id)}
+    return {'categories': Category.objects.filter(parent=id)}
 
 
 def index(request):

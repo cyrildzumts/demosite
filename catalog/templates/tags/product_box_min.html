@@ -1,8 +1,8 @@
-<div class="product-container col-xs-12 col-sm-6 col-md-4 bg-transparent"><!-- Product Container -->
+<div class="product-container col-xs-12 col-sm-6 col-md-4 card-flat"><!-- Product Container -->
     
-    <div class="product-inner-container">
-        <div class="product-image row"><!-- Product Image Element -->
-            <div class="img-centered text-purple">
+    <div class="product-inner-container card-flat-header">
+        <div class="product-image card-flat-header row"><!-- Product Image Element -->
+            <div class="img-centered">
                 <a href="{{p.get_absolute_url}}">
                     <img src="{{p.image.url}}" class="img-responsive" style="width:100%">
                 </a>
@@ -14,9 +14,9 @@
             <div class="push">
             </div> 
         </div><!-- End Of Product Image element -->
-        <div class="product-panel row bg-transparent text-purple"> <!-- Product Panel Element-->
+        <div class="product-panel row bg-transparent"> <!-- Product Panel Element-->
             
-            <div class="controls-inner row text-purple masqued">
+            <div class="controls-inner row masqued">
                         <div class="col-xs-6 col-md-6">
                             <div class="add-to-wishlist vt-ht-centered">
                                 <a  href="{% url 'wishlist:add_to_wishlist' p.id  %}">

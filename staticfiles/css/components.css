@@ -48,3 +48,108 @@
     font-family: "Montserrat", sans-serif;
     box-shadow: 5px 5px 5px #888888;
 }
+.card-container{
+
+    width: 100%;
+    float: left;
+    margin: auto;
+}
+.card-product{
+    border-radius: 2px;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 2px 3px 3px #888888, -1px 0 2px #888888;
+    text-align: center;
+}
+.card-flat{
+    /*width: 400px;*/
+    border-radius: 2px;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 1px 1px 1px #888888, -1px 0 1px #888888;
+    text-align: center;
+    margin: auto;
+}
+
+.card-flat-container{
+    /*width: 400px;*/
+    width: 90%;
+    z-index: 10;
+    border-radius: 2px;
+    /*border: 1px solid #F2F1FE;*/
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 2px 5px 5px #2F2D2C, -2px 5px 5px #2F2D2C;
+    text-align: center;
+    margin: auto;
+}
+
+.card-flat:hover{
+    box-shadow: 3px 5px 5px #888888, -2px 0 5px #888888;
+}
+.card-flat-body{
+    width: 100%;
+    padding: 10px;
+}
+
+.card-flat-header{
+    width: 100%;
+    padding: 10px;
+    color: #888888;
+    padding: 10px;
+}
+.card-flat-header:hover{
+    background-color: #F9F8F4;
+}
+.card-flat-footer{
+    width: 100%;
+    padding: 10px;
+    color: #888888;
+}
+.site-brand{
+    width: 100px;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: #888888;
+}
+
+
+nav a:hover, nav a:link{
+    
+    text-decoration: none;
+}
+
+.body-panel{
+    width: 100%;
+    height: 300px;
+    max-height: 500px;
+
+}
+.padding-top{
+    position: absolute;
+    right: 5%;
+    left: 5%;
+    top: 300px;
+}
+
+.header-entry{
+
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.content-header{
+    
+    border: 1px solid #DADFE1;
+    width: 100%;
+    height: 50px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -6,21 +6,21 @@
     <input  class="form-control" type="hidden" name="shipping_city" value="{{form_context.city}}">
     <input class="form-control" type="hidden" name="shipping_zip" value="{{form_context.zip}}">
     <input class="form-control" type="hidden" name="shipping_country" value="{{form_context.country}}">
-    <div class="container-fluid">
-        <div class="card ">
-            <section class="card-main">
+    <div class="container">
+        <div class="card-flat">
+            <section class="card-flat-header">
                 <h5 class="card-title"> Nom Complet : {{form_context.name}}</h5>
                 <h5 class="card-subtitle"> Email : {{form_context.email}}</h5>
 
             </section><!-- End Of Main Section -->
-            <section class="card-content-text">
+            <section class="card-flat-body">
                 <h5 class="card-tel"> Telephone : {{form_context.phone}}</h5>
                 <h5 class="card-tel"> Adresse : {{form_context.address}}</h5>
                 <h5 class="card-tel"> Ville: {{form_context.city}}</h5>
                 <h5 class="card-tel"> Boîte Postale : {{form_context.zip}}</h5>
                 <h5 class="card-tel"> Pays : {{form_context.country}}</h5>
             </section><!-- End Of Main Section -->
-            <section class="card-actions text-center">
+            <section class="card-flat-footer text-center">
                 <h4 class="card-next">Suivant</h4>
             </section><!-- End Of Main Section -->
         </div><!-- End Of Card -->

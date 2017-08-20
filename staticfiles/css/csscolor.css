@@ -26,6 +26,16 @@
 }
 .bg-radicalred{
     background-color: #F62459;
+    color: #F2F1FE;
+}
+.bg-crimson{
+    background-color: #FF3951;
+    color: #F2F1FE;
+}
+
+.bg-tolopea{
+    background-color: #2A2742;
+    color: #F2F1FE;
 }
 .bg-snuff{
     color: #F2F1FE;
@@ -149,5 +159,16 @@
 .gradient-blue{
     background: linear-gradient(#3498db, #4ECDC4);
 }
+.bg-whiteblack{
+    background-color: #ECF0F1;
+    color: #2C2C2C;
+}
 
-
+.bg-ebony{
+    background-color: #2C2C2C;
+    color: #ECF0F1;
+}
+.bg-newspaper{
+    background-color: #F9F8F4;
+    color:#2C2C2C;
+}

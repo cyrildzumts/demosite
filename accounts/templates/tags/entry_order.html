@@ -1,12 +1,11 @@
 
-    <div class="rounded-10 row card bg-iron text-left" data-toggle="collapse" data-target="#order{{order.id}}">
+    <div class="rounded-10 row card-flat text-left" data-toggle="collapse" data-target="#order{{order.id}}">
         <div class="card-horizontal-block">
             <section class="card-main">
-                <p class="card-title card-title-large" > Numéro de Commande : {{order.ref_num}}
-                    
-                </p>
+                <p class="card-title card-title-large" > Numéro de Commande : {{order.ref_num}}</p>
+                <p class="card-subtitle"><b> Date :</b> {{order.date.date}}</p>
                 <div id="order{{order.id}}" class="collapse">
-                    <p class="card-subtitle"><b> Date :</b> {{order.date.date}}</p>
+                    
                     <p>Montant : </b>{{order.total}} FCFA</p>
                     <p>Status de paiement :
                                     {% if order.paid_status is True %}
