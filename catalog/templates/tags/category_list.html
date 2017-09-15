@@ -11,7 +11,7 @@
           {% endif %}
           
           {%subcategory c as subs_cats%}
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" role="menu">
             {% for cat in subs_cats %}
               <li><a href="{{cat.get_absolute_url}}">{{cat.name}}</a></li>
             {% endfor %}

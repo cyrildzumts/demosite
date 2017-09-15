@@ -1,8 +1,13 @@
 {% extends "accountbase.html"%}
+{%block content_header%}
+    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
+         <h3> Mes Commandes</h3>
+    </div><!-- End of main-header -->
+{%endblock content_header%}
+
 
 {% block PageContent %}
 
-<h3> Mes Commandes : </h3>
 <div class="container">
 {% for order in orders %}
         {% include "tags/entry_order.html" %}

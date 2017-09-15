@@ -1,14 +1,20 @@
 {% extends "base.html"%}
 
-{% block site_wrapper %}
+{%block content_header%}
+    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
+         <h4>Contenu de la Commande {{order_ref}}</h4>
+    </div><!-- End of main-header -->
+{%endblock content_header%}
 
-<h4>Commande : {{order_ref}}</h4>
-<div class="container">
 
-{% for item in orderitems %}
-    <div class="row">
-        {% include "tags/item_entry.html" %}
-    </div>
-{% endfor %}
+{% block PageContent %}
+
+
+<div class="card-flat">
+    {% for item in orderitems %}
+        <div class="card-flat item-entry">
+            {% include "tags/item_entry.html" %}
+        </div>
+    {% endfor %}
 </div>
-{% endblock %}
+{% endblock PageContent %}

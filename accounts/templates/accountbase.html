@@ -1,21 +1,22 @@
 {% extends "base.html"%}
-
-{%block MainHeader%}
-    <div class="main-header vt-ht-centered">
-         <p> Mon Compte : Bienvenue {{request.user.first_name}}!</p>
-        
+{%comment "not neaded now" %}
+{%block content_header%}
+    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
+         <p> Mon Compte : Bienvenue {{request.user.first_name}}!</p>  
     </div><!-- End of main-header -->
-{%endblock MainHeader%}
+{%endblock content_header%}
+
+{%endcomment%}
 
 {% block Sidebar %}
 <div class="container-fluid account-entries">
     <div class="list-group">
-        <a class="list-group-item active" href="#">Mes Données</a>
+        <a class="list-group-item active" href="{% url 'accounts:user_account' %}">Mes Données</a>
         <a class="list-group-item " href="{% url 'accounts:orders' %}">Mes Commandes</a>
         <a class="list-group-item" href="#">Mode de Paiement Préferé</a>
         <a class="list-group-item" href="{% url 'wishlist:show_wishlist' %}" >Ma liste de souhaits</a>
-        <a class="list-group-item" href="#">Abonnements à la newsletter</a>
-        <a class="list-group-item" href="#">Ma Carte VIP</a>
+        {%comment%}<a class="list-group-item" href="#">Abonnements à la newsletter</a>{%endcomment%}
+        {%comment%}<a class="list-group-item" href="#">Ma Carte VIP</a>{%endcomment%}
     </div>
 </div>
 

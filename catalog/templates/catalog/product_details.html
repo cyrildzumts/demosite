@@ -22,32 +22,37 @@
 
 
 {% block PageContent %}
-<div class="card-flat-product bg-newspaper row">
-  <nav class=" navbar-text card-thumbnails hidden-xs col-md-1">
-    <p> Thumbnails </p>
-  </nav>
-  <div class="card-product-image col-md-6">
-    <img class="img-responsive center-block" src="{{product.image.url}}"  alt="{{product.name}}" />
+<div class="card-flat-product bg-newspaper">
+  
+  <div class="card-product-image col-md-6 bg-turquoise">
+    <div class="image-container row">
+       <img class="img-responsive" src="{{product.image.url}}" alt="{{product.name}}" />
+    </div>
   </div>
-  <div class="col-md-5 card-product-details">
-       <p>Marque: <strong><em>{{product.brand}}</em> </strong></p>
+  <div class="col-md-6 card-product-details bg-niagara">
+
+    <div class="detail-content">
+         <p>Marque: <strong><em>{{product.brand}}</em> </strong></p>
       
-      {% if product.size is not None %}
-        <p>Taille: {{product.size}}</p>
-      {%endif%}
-      {% if product.template_name is not None%}
-      {% include product.template_name %}
-      {%endif%}
-        {% if product.old_price is True %}
-        <p class="invalid">Coûtait : {{product.old_price}} CFA </p> <br />
+        {% if product.size is not None %}
+          <p>Taille: {{product.size}}</p>
+        {%endif%}
+        {% if product.template_name is not None%}
+        {% include product.template_name %}
+        {%endif%}
+          {% if product.old_price is True %}
+        <p class="invalid">Coûtait : {{product.old_price}} CFA </p>
         {% endif %}
         <p>Prix : <strong>{{product.price}} CFA </strong></p>
         <p>
-          <span class="add-to-cart btn glyphicon glyphicon-shopping-cart bg-niagara" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
+          <span class="add-to-cart btn glyphicon glyphicon-shopping-cart gi-2x bg-niagara" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
         </p>
 
         <h3> Description du produit </h3>
         <p>{{product.description}}</p>
+
+    </div>
+      
   </div>
 
 </div>

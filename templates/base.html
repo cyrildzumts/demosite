@@ -21,11 +21,11 @@
 </head>
 
 <body>
-  <div class="body-wrapper">
+  <div class="body-wrapper">                                                                                                                                                                            
 
-    <header>
+    <header role="banner">
       {%block header_panel%} {% block navigation %}
-      <nav class="navbar navbar-default navbar-fixed-top card-flat">
+      <nav role="navigation" class="navbar-default navbar-fixed-top">
         {% include 'tags/navigation.html' %}
       </nav>
       {% endblock navigation %} {%endblock header_panel%}
@@ -92,7 +92,7 @@
       <!-- End of Main-Content -->
 
     </div>
-    <footer class="footer text-center card-flat">
+    <footer class="footer text-center card-flat" role="contentinfo">
         {% block footer %} {% include "tags/footer.html" %} {% endblock footer %}
     </footer>
   </div>

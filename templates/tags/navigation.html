@@ -1,45 +1,40 @@
 {% load catalog_tags %}
-<div class="navbar-header">
-  <div class="bg-niagara site-brand ">
-    <a href="{% url 'catalog:index'%}"> GrandVillage </a>
+<div class="container-fluid bg-ebonyclay">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+      <a class="navbar-brand" href="{% url 'catalog:index'%}">Grand Village</a>
   </div>
-</div>
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-</button>
-<div class="collapse navbar-collapse" id="myNavbar">
-  <ul class="nav navbar-nav ">
-    <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
-    {% category_list request.path %}
-    <li><a href="{% url 'contact:index'%}"> Nous contacter </a></li>
+  
+  <div class="collapse navbar-collapse pull-left" id="site-nav">
+      <ul class="nav navbar-nav">
+          <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
+          {% category_list request.path %}
+          <li><a href="{% url 'contact:index'%}">Contact</a></li>
+      </ul>
+  </div>
+  <ul class="nav navbar-nav pull-left">
     <li>
       {% include "tags/cart_box.html" %}
     </li>
     <li>
-      <a href="{% url 'wishlist:show_wishlist' %}"> Ma Wishlist </a>
+      <a href="{% url 'wishlist:show_wishlist' %}">
+        <span class="glyphicon glyphicon-heart"></span>
+      </a>
     </li>
   </ul>
-  {% block sorting_panel%}
-  <div class="sorting-panel">
-    <form class="navbar-form navbar-right search-form" name="search-form" role="search" action="{% url 'catalog:search' %}" method="get">{% csrf_token %}
-      <div class="input-group card-flat">
-        <input type="text" class="form-control" placeholder="Search..." name="q">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-  {%endblock sorting_panel%}
-  <!-- End of Sorting-Panel -->
   <ul class="nav navbar-nav navbar-right">
     {% if user.is_authenticated %}
     <li><a href="{% url 'accounts:logout' %}"> Se déconnecter </a></li>
     <li><a href="{% url 'accounts:user_account'%}"> Mon Compte </a></li>
     {% else %}
-    <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Creer un Compte </a></li>
-    <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"> Se connecter</span> </a></li>
+    <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> S'enregistrer </a></li>
+    <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
     {% endif %}
-  </ul>
+</ul>
+    
 </div>
+
