@@ -379,6 +379,7 @@ html {
 input[type=text]:focus {
     border: 3px solid #E9E8E3;
 }
+/*
 nav li{
     text-align: center;
 
@@ -388,6 +389,7 @@ nav ul{
     padding: 0;
     margin: 2px;
 }
+*/
 /*
 nav ul{
     list-style-type: none;
@@ -407,14 +409,41 @@ nav li a{
 }
 */
 /*
-@media only screen and (min-width: 30em){
-    nav li{
+
+@media only screen and (max-width: 50em){
+    nav li, .nav li{
         display:inline-block;
         
-        width: 180px;
+        
+        
     }
-    nav {
-        padding-bottom: 3em;
+    nav , .nav{
+        padding-bottom: 2em;
+    }
+
+    nav li, .nav li{
+        border: 1px solid #666;
+        
+        padding: 1px 1em;
+        text-align: center;
+        justify-content: center;
+        margin: 2px 1px 0 ;
     }
 }
 */
+
+.nav-mobile-div{
+    
+    width: 100%;
+    float: left;
+    
+}
+.nav-mobile li{
+    display: inline-block;
+    border: 1px solid #666;
+
+}
+.nav-mobile{
+    width: 100%;
+}
+

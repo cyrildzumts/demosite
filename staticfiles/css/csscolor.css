@@ -178,3 +178,10 @@
     color:#2C2C2C;
 }
 
+.bg-transparent{
+    background-color: transparent;
+}
+
+.text-color-crimson{
+    color: #FF3951;
+}

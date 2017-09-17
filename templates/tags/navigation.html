@@ -1,40 +1,66 @@
 {% load catalog_tags %}
-<div class="container-fluid bg-ebonyclay">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-      <a class="navbar-brand" href="{% url 'catalog:index'%}">Grand Village</a>
-  </div>
-  
-  <div class="collapse navbar-collapse pull-left" id="site-nav">
-      <ul class="nav navbar-nav">
-          <li><a href="{% url 'catalog:index'%}"> Acceuille </a></li>
-          {% category_list request.path %}
-          <li><a href="{% url 'contact:index'%}">Contact</a></li>
-      </ul>
-  </div>
-  <ul class="nav navbar-nav pull-left">
-    <li>
-      {% include "tags/cart_box.html" %}
-    </li>
-    <li>
-      <a href="{% url 'wishlist:show_wishlist' %}">
-        <span class="glyphicon glyphicon-heart"></span>
-      </a>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-    {% if user.is_authenticated %}
-    <li><a href="{% url 'accounts:logout' %}"> Se déconnecter </a></li>
-    <li><a href="{% url 'accounts:user_account'%}"> Mon Compte </a></li>
-    {% else %}
-    <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> S'enregistrer </a></li>
-    <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
-    {% endif %}
-</ul>
-    
-</div>
+<div class="container-fluid">
+    <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="{% url 'catalog:index'%}">GV</a>
+    </div>
+    <div class="hidden-md hidden-lg nav-mobile-div ">
+            
+            <ul class="pull-left nav navbar-nav nav-mobile">
+                <li>
+                    {% include "tags/cart_box.html" %}
+                </li>
+                <li >
+                    <a href="{% url 'wishlist:show_wishlist' %}">
+                       <span class="glyphicon glyphicon-heart"></span>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li ><a href="{% url 'accounts:user_account'%}"><span class="glyphicon glyphicon-user"></span> </a></li>
+                <li ><a href="{% url 'accounts:logout' %}"><span class="glyphicon glyphicon-log-out"></span></a></li>
 
+                {% else %}
+                <li class="text-color-crimson"><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> <span class="hidden-xs">S'enregistrer</span></a></li>
+                <li ><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"></span> <span class="hidden-xs">Se connecter</span></a></li>
+                {% endif %}
+            </ul>
+            <div class="collapse navbar-collapse" id="site-nav-menu">
+                    <ul class="nav navbar-nav">
+                        {% category_list request.path %}
+                        <li><a href="{% url 'contact:index'%}">Contact</a></li>
+                    </ul>
+            </div>
+                
+     </div>
+    <div class="navbar-div">
+        
+        <div class="visible-md visible-lg ">
+            <ul class="nav navbar-nav">
+                {% category_list request.path %}
+                <li><a href="{% url 'contact:index'%}">Contact</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    {% include "tags/cart_box.html" %}
+                </li>
+                <li>
+                    <a href="{% url 'wishlist:show_wishlist' %}">
+                                           <span class="glyphicon glyphicon-heart"></span>
+                                        </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'accounts:logout' %}"> <span  class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a href="{% url 'accounts:user_account'%}"><span class="glyphicon glyphicon-user"></span></a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> <span>S'enregistrer</span></a></li>
+                <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"></span> <span>Se connecter</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
