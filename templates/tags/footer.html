@@ -1,23 +1,8 @@
 
 {% load catalog_tags %}
-    <div class="container-fluid vt-centered">
-        
-                <div class="col-sm-10 col-md-8">
-                    <ul class="nav navbar navbar-nav footer-links">
-                                <li>  <a href="{% url 'catalog:index'%}"> Acceuille</a></li>
-                                <li>  <a href="{% url 'contact:index'%}"> Nous contacter</a> </li>
-                                <li>  <a href="#"> Livraison </a> </li>
-                                <li>  <a href="#"> Service Client</a> </li>
-                                <li>  <a href="#"> Abonnement à notre newsletter </a> </li>
-                    </ul>
-                    <p>
-                        Grand Village Shop 2016
-                    </p>
-                </div> <!-- End col-sm* -->
-                <div class="col-sm-2 col-md-4">
-                    <div class="footer-right">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                    </div>
-                </div> <!-- End col-sm* -->
-        
+    <div class="container-fluid vt-centered flex-container">
+        <a class="flex-item width_25" href="{% url 'contact:index'%}">Contact</a>
+        <a class="width_25 flex-item" href="#">Livraison</a>  
+        <a class="flex-item" href="#">Newsletter </a>
+        <a class="flex-item" href="#">A propos de GV</a>          
     </div>

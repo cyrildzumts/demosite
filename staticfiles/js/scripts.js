@@ -41,3 +41,27 @@ $(".login_element").click(function(e){
     $(this).toggleClass('close');
 });
 */
+
+/**
+ * Open The menu by setting the menu's width.
+ */
+
+ /*
+function openMenu(){
+    document.getElementById("site-menu").style.width = "250px";
+}
+
+function closeMenu(){
+    document.getElementById("site-menu").style.width = "0";
+}
+
+*/
+$("#openMenu").click(function(){
+    document.getElementById("site-menu").style.width = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0.4,0.4)";
+});
+$(".close").click(function(){
+    document.getElementById("site-menu").style.width = "0";
+    document.body.style.backgroundColor = "white";
+    
+});

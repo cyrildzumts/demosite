@@ -38,7 +38,6 @@
     justify-content: flex-end;
     box-sizing: border-box;
     border-radius: 2px;
-    z-index: 10;
     overflow: hidden;
 }
 .card-main, .card-content-text{
@@ -82,7 +81,6 @@
     font-family: "Montserrat", sans-serif;
     box-shadow: 1px 1px 1px #888888, -1px 0 1px #888888;
     text-align: center;
-    z-index: 10;
     margin: auto;
 }
 
@@ -328,4 +326,54 @@ nav a:hover, nav a:link{
 
 .padding-extra{
     padding: 10px;
+}
+
+.menu-vt{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F9F8F4;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+.menu-vt ul{
+    list-style: none;
+}
+.menu-vt a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2F2D2C;
+    display: block;
+    transition: 0.3s;
+}
+
+.menu-vt a:hover, .offcanvas a:focus{
+    color: #888888;
+}
+
+.menu-vt .close{
+    position: absolute;
+    top:0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+@media screen and (max-width: 40em){
+    .menu-vt{
+        padding-top: 15px;
+    }
+    .menu-vt a{
+        font-size: 18px;
+    }
 }
