@@ -65,3 +65,6 @@ $(".close").click(function(){
     document.body.style.backgroundColor = "white";
     
 });
+$("#loginBtn").click(function(){
+    $("#loginModal").modal();
+});

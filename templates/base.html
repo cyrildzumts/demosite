@@ -23,31 +23,68 @@
 </head>
 
 <body>
-  <div class="body-wrapper">                                                                                                                                                                            
-
-    <header role="banner">
+                                                                                                                                                                            
+    <header class="site-header" role="banner">
       {%block header_panel%} {% block navigation %}
       <nav role="navigation" id="site-navbar" class="navbar-default navbar-fixed-top">
         {% include 'tags/navigation.html' %}
       </nav>
+      
+      
       {% endblock navigation %} {%endblock header_panel%}
       <!-- End Of Header Panel -->
-      {%block banner-panel%}
-      <div class=" bg-oceangreen body-panel">
-        {% block banner_content %}
-        <div class="container text-center">
-          <h1>{{site_name}} </h1>
-          <p class="lead"> Produits de qualité à des prix imbatables.</p>
-          {%block banner_extra%}
-          {%endblock banner_extra%}
-        </div>
-        {% endblock banner_content %}
-      </div>
-      {%endblock banner-panel%}
-      <!-- End of banner-panel -->
-
+      
     </header>
-
+    {%block banner-panel%}
+    <div class="bg-oceangreen visible-md visible-lg">
+      {% block banner_content %}
+      <div class="container text-center">
+        <h1>{{site_name}} </h1>
+        <p class="lead"> Produits de qualité à des prix imbatables.</p>
+        {%block banner_extra%}
+        {%endblock banner_extra%}
+      </div>
+      {% endblock banner_content %}
+    </div>
+    {%endblock banner-panel%}
+    <!-- End of banner-panel -->
+    <div class="container">
+      <div class="modal fade login-container" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">&times; </button>
+                    <h4><span class="glyphicon glyphicon-lock"></span>
+                      Connexion
+                    </h4>
+                </div><!-- End of Modal Header -->
+                <div class="modal-body">
+                    {% if form.errors %}
+                    <p class="error"> Désolé, le nom ou le mot de passe est incorrect.</p>
+                    {% endif %}
+                    <form id="login_form" class="form" name="login_form" action="{% url 'accounts:login' %}" method="post" role="form">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="username"><span class="glyphicon glyphicon-user"></span> Username </label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                                <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Mot de passe </label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block btn-sm"><span class="glyphicon glyphicon-off"></span> Se connecter </button>
+                    </form>
+                </div><!-- End of Modal Body -->
+                <div class="modal-footer">
+                    
+                    <button type="submit" class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"> Annuler </span></button>
+ 
+                    <p> Pas de Compte ? <a href="{% url 'accounts:register' %}"> Creer un compte </a></p>
+                    <p> Vous avez oublié votre <a href="">mot de passe ? </a></p>
+                </div><!-- End of Modal-footer -->
+            </div><!-- End Of Modal-Content -->
+        </div><!-- End Of Modal-Dialog -->
+    </div><!-- End OfModal -->
+    </div>
     <div class="card-flat-container body-content bg-whiteblack">
 
       <header class="content-header">
@@ -97,18 +134,7 @@
     <footer class="footer" role="contentinfo">
         {% block footer %} {% include "tags/footer.html" %} {% endblock footer %}
     </footer>
-  </div>
 
-
-
-
-    <!-- End of page-footer -->
-    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous">
-</script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
-</script> -->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous">
-</script> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

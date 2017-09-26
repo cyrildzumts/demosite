@@ -30,8 +30,10 @@ def login(request):
     # template_name = 'tags/login_form.html'
     print("login ...")
     if request.method == 'POST':
+        print("We got a post request ...")
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
+            print("We got a valid form ...")
             user = auth.authenticate(username=request.POST['username'],
                                      password=request.POST['password'])
             if user is not None:
