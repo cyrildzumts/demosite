@@ -29,8 +29,10 @@
 }
 .card-fluid {
 
-    margin: 2px;
-    min-width: 320px;
+    padding: 5px;
+    margin: 5px;
+    
+    width: 100%;
     max-width: 100%;
     /*display: flex;*/
     -webkit-box-direction: normal;
@@ -42,7 +44,7 @@
 }
 .card-main, .card-content-text{
     width: 100%;
-    margin: auto;
+    margin: 5px;
 }
 .card-horizontal-block{
     display: flex;
@@ -99,27 +101,37 @@
 .card-flat:hover{
     box-shadow: 3px 5px 5px #888888, -2px 0 5px #888888;
 }
-.card-flat-body{
+.card-body{
+    display: block;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
+    margin: 2px;
 }
 
-.card-flat-header{
+.card-header{
+    
     width: 100%;
-    padding: 10px;
-    color: #888888;
-    padding: 10px;
+    padding: 1px;
+    margin: 2px;
+
 }
-.card-flat-header:hover{
+.card-header:hover{
     background-color: #F9F8F4;
+    color: #2F2D2C;
 }
-.card-flat-footer{
+.card-footer{
     width: 100%;
-    padding: 10px;
-    color: #888888;
+    text-align: center;
+    padding: auto;
+    margin: auto;
+}
+.card-item{
+    width: 100%;
+    padding: 1px;
+    margin: 1px;
 }
 
-.card-flat-product{
+.card-product{
     /*display: block;*/
     border-radius: 2px;
     font-family: "Montserrat", sans-serif;
@@ -215,7 +227,7 @@ nav a:hover, nav a:link{
 }
 .card-image{
     display: block;
-    width: 90%;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -282,6 +294,12 @@ nav a:hover, nav a:link{
     height: 98px;
     margin :auto;
 
+}
+
+.item-name, .item-price{
+    font-size: 11px;
+    justify-content: center;
+    text-align: center;
 }
 .item-detail{
     width: 70%;
@@ -377,3 +395,53 @@ nav a:hover, nav a:link{
         font-size: 18px;
     }
 }
+/**************************************
+**** Cart UI Settings *****************
+**************************************/
+.flex-container{
+    display: flex;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    padding:1px;
+}
+
+.flex-item{
+    max-height: 50%;
+    margin: 1px;
+    
+}
+
+
+.floating-box{
+    display: inline-flex;
+    margin: auto;
+    border: 3px solid #2F2D2C;  
+}
+.card-item-image{
+    width: 20%;
+    border: 1px solid #888888; 
+    justify-content: center;
+}
+.card-item-image img{
+    max-width: 100%;
+}
+.card-item-detail, .card-item-price{
+    width: 100px;
+    margin: 2px;
+    border: 1px solid #888888; 
+    align-content: center;
+    justify-content: center;
+
+}
+.card-item-quantity{
+    width: 20px;
+    border: 1px solid #888888; 
+}
+.card-item-remove{
+    width: 30px;
+    border: 1px solid #888888; 
+}
+/**************************************/

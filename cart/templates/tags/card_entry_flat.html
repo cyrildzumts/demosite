@@ -1,24 +1,20 @@
-<div class="card-flat row">
-    <div class="cart-item">
-        <div class="col-xs-2">
-            <img src="{{item.image.url}}" class="img-responsive" style="width : 80px; height: 80px;">
-        </div>
-        <div class="col-xs-4">
-            <p class="item-name"><strong>{{item.name}}</strong></p>
-            <p class="item-sumary"><small>{{item.product.description}}</small></p>
-        </div>
-        <div class="col-xs-6">
-            <div class="col-xs-6 text-right vt-centered">
-                <p  class="item-price"><strong>{{item.price}}</strong></p>
-            </div>
-            <div class="col-xs-4">
-                <h5 class="vt-centered hidden-sm hidden-xs">{{item.quantity}}</h5>
-            </div>
-            <div class="col-xs-2 entry" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}">
-                <span class="remove_item glyphicon glyphicon-trash" title="Supprimer cet element" >
 
-                </span>
-            </div>
-        </div>
+<div class="card-item flex-container bordered">
+    <div class="card-item-image flex-item">
+        <img src="{{item.image.url}}" class="img-responsive">
+    </div>
+    <div class="card-item-detail flex-item">
+        <p class="item-name"><strong>{{item.name}}</strong></p>
+    </div>
+    <div class="card-item-price flex-item">
+        <p class="item-price"><strong>{{item.price}} FCFA</strong></p>
+    </div>
+    <div class="card-item-quantity flex-item">
+        <h5 class="vt-centered hidden-sm hidden-xs">{{item.quantity}}</h5>
+    </div>
+    <div class="entry card-item-remove fflex-item" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}">
+        <span class="remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
+            
+        </span>
     </div>
 </div>

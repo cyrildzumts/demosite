@@ -103,7 +103,9 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    overflow: auto;
 }
+
 html, body {
     margin: 0;
     padding: 0;
@@ -270,7 +272,9 @@ html {
     height: 100px;
     margin: 10px;
 }
-
+.cart_badge{
+    font-size: 8px;
+}
 .fluid{
     width: 100%;
     margin: auto;
@@ -288,8 +292,7 @@ html {
 }
 
 .bordered{
-    margin: 5px;
-    /*border: 1px solid #888888;*/
+    border: 1px solid #280ABF;
 }
 .rounded-2{
     border-radius: 2px;
@@ -334,7 +337,7 @@ html {
 .cart-item{
     height: 100px;
     width: 100%;
-    margin: 2px;
+    margin: auto;
     box-sizing: content-box;
     padding: auto;
     border-bottom-width: thin;
@@ -343,7 +346,9 @@ html {
     /*border-bottom : 2px solid #22313F;*/
 
 }
-
+.bold {
+    font-size: 10px;
+}
 .float-left{
     display: inline-block;
 }
@@ -495,12 +500,11 @@ nav li a{
     align-content: center;
     justify-content: center;
     width: 25%;
-    padding: 12px 0;
-
+    padding: 5px;
+    margin: 1px;
     transition: all 0.3s ease;
-    color: white;
     font-size: 20px;
-    border: 1px solid #669AA5;
+    border: 1px solid #F2F1FE;
 }
 .icon-bar li:a{
     width: 100%;
@@ -509,31 +513,20 @@ nav li a{
 }
 
 .icon-bar li:hover{
-    background-color: #000;
+    background-color: #22313F;
+    color: #F2F1FE;
 }
 .icon-bar li a:link{
     
     text-decoration: none;
-    color: white;
+    color: #F9F8F4;
 }
 .icon-bar a:hover{
     
     text-decoration: none;
 }
 
-.flex-container{
-    display: flex;
-    background-color: #F9F8F4;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
 
-.flex-item{
-    max-height: 100%;
-    margin: auto;
-    background-color: #E9E8E3;
-}
 
 .remove-z{
     z-index: 1000;
