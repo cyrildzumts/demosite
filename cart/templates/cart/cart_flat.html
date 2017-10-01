@@ -1,22 +1,22 @@
 {% extends "base.html" %} {% block PageContent %}
 
+<div class="container-fluid card-fluid">
 
-<div class="container-fluid card-fluid bg-niagara">
     {% if cart_items %}
-    <div class="card-header bordered">
+    <div class="card-header">
         <div class="header-title flex-container">
                 <h5 class="flex-item"><span class="glyphicon glyphicon-shopping-cart"> Mon Panier </span></h5>
                 <a class="flex-item" href="{% url 'catalog:index'%}">
-                        <button type="button" class="btn btn-default bg-whiteblack">
-                            <span class="glyphicon glyphicon-share-alt hidden-xs hidden-sm"> Continue mes achats ...</span>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-share-alt"> Shopping...</span>
                         </button>
                 </a>
         </div>
     </div>
-    <div class="card-body bordered">
+    <div class="card-body">
             {% for item in cart_items %} {%include "tags/card_entry_flat.html"%} {% endfor %}
     </div>
-    <div class="card-footer flex-container bordered">
+    <div class="flex-container card-footer">
             <h6 class="flex-item">Total : <strong>{{cart_subtotal}} CFA</strong></h6>
             <a class="no-decoration flex-item" href="/order/{{checkout_url}}">
                 <button type="button" class="btn btn-block">

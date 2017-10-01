@@ -12,13 +12,13 @@
  
         {% get_default_products as products %}
 
-            <div class="container-fluid list-group">
-                <div class="row">
+            <div class="card-fluid bordered" >
+                <div class="row centered bordered">
                     {% for p  in products %}
                     {% include "tags/product_box_min.html" %}
                     {% endfor %}
                 </div>
-            </div><br>
+            </div>
 
     {% endblock PageContent %}
 

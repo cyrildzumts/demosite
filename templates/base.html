@@ -26,7 +26,7 @@
                                                                                                                                                                             
     <header class="site-header" role="banner">
       {%block header_panel%} {% block navigation %}
-      <nav role="navigation" id="site-navbar" class="navbar-default navbar-fixed-top">
+      <nav role="navigation" id="site-navbar" class="navbar-default navbar-fixed-top flex-container">
         {% include 'tags/navigation.html' %}
       </nav>
       
@@ -85,43 +85,33 @@
         </div><!-- End Of Modal-Dialog -->
     </div><!-- End OfModal -->
     </div>
-    <div class="card-flat-container body-content bg-whiteblack">
-
-      <header class="content-header">
+    <div class="card-fluid body-content">
+      <header class="content-header flex-container">
         {%block content_header%}
-          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-ebony">
+          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
             <p> Nouveaux Articles </p>
           </div>
-          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-rebeccapurple">
+          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
             <p> Articles Populaires </p>
           </div>
-          <div class="col-md-4 col-sm-4 col-xs-4 header-entry bg-crimson">
+          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
             <p> Reductions </p>
-            <!--
-              </div>
-                <div class="col-md-3 header-entry bg-thunderbird">
-                  <p> Col 4 </p>
-              </div>
-                -->
         {%endblock content_header%}
       </header>
 
-      <div class="main-content container-fluid">
+      <div class="card-fluid">
         {%block MainHeader%}
-          <header class="main-header">
           
-          </header>
         {%endblock MainHeader%}
         
         {% block Sidebar %} 
-          <nav class="navbar">
-            
-          </nav>
+
         {% endblock Sidebar %}
         
           <!-- End Of Sidebar -->
 
         {% block PageContent %} 
+        
           <article>
 
           </article>

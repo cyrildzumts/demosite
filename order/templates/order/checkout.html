@@ -1,34 +1,45 @@
-{% extends "catalog.html" %}
-{% load checkout_tags %}
-{% block content %}
-<h1>Checkout</h1>{% if error_message %}
+{% extends "catalog.html" %} {% load checkout_tags %} {% block content_header %}
+<h1>Checkout</h1>
+{% endblock content_header %} {% block PageContent %} {% if error_message %}
 <ul class="errorlist">
-<li>{{ error_message }}</li>
+    <li>{{ error_message }}</li>
 </ul>
 {% endif %}
-<div class="container-fluid text-purple">
-    <ul class="nav nav-tabs">
-        <li class="active" ><a data-toggle="tab" href="#shipping-info">Vos informations générales :</a></li>
-        <li ><a data-toggle="tab" href="#payoptions">Options de payement :</a></li>
-        <li ><a data-toggle="tab" href="#cartcontent">Contenu du panier :</a></li>
+<div class="card-fluid">
+    <ul class="nav nav-pills card-fuild bordered">
+        <li class="active">
+            <a data-toggle="pill" href="#tab1">
+                <span class="glyphicon glyphicon-info-sign"> Infos </span>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#tab2">
+                    <span class="glyphicon glyphicon-tags"> Payement </span>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#tab3">
+                <span class="glyphicon glyphicon-shopping-cart"> Panier </span>
+            </a>
+        </li>
     </ul>
-    <form action="." method="post" class="form-inline">{% csrf_token %}
-        <div class="tab-content">
-            <div id="shipping-info" class="tab-pane fade in active">
-                {% include "tags/infos_material.html" %}
-            </div>
-
-            <div id="payoptions" class="tab-pane fade">
-                {% include "tags/payement_choices.html" %}
-            </div>
-
-            <div id="cartcontent" class="tab-pane fade">
-                {% include "tags/confirmation.html" %}
-            </div>
-            <span colspan="2"><input type="submit" value="Valider votre commande" class="submit rebeccapurple" /></span>
+    <form action="." method="post" class="tab-content form-inline">{% csrf_token %}
+        <div id="tab1" class="tab-pane fade in active">
+            {% include "tags/infos_material.html" %}
         </div>
-        </form>
+
+        <div id="tab2" class="tab-pane fade">
+            {% include "tags/payement_choices.html" %}
+        </div>
+
+        <div id="tab3" class="tab-pane fade">
+            {% include "tags/confirmation.html" %}
+        </div>
+        <span colspan="2"><input type="submit" value="Valider votre commande" class="submit" /></span>
+    </form>
+
+
 
 </div>
 
-{% endblock %}
+{% endblock PageContent %}

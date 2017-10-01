@@ -1,164 +1,186 @@
 /* -----------------------------------------------
-***  LAYOUTS COMPONENTS IN HEADER, FOOTER*********
+***  Generics COMPONENTS    **********************
+ These are component which can be used everywhere
+ in the site
+ the Headers and Footer. They are site wide.
 -------------------------------------------------*/
+.centered{
+    padding: 5px;
+    margin: auto;
+}
 
-/* -----------------------------------------------
-***  LAYOUTS COMPONENTS IN MAIN CONTENT **********
--------------------------------------------------*/
-
-/* -----------------------------------------------
-***  TYPOGRAPHY IN HEADER, FOOTER ****************
--------------------------------------------------*/
-
-/* -----------------------------------------------
-***  TYPOGRAPHY IN MAIN CONTENT** ****************
--------------------------------------------------*/
 
 .card {
-
-    margin: 24px;
-    min-width: 320px;
-    max-width: 640px;
-    /*display: flex;*/
-    -webkit-box-direction: normal;
-    -webkit-box-orient: vertical;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    border-radius: 2px;
-    overflow: hidden;
-}
-.card-fluid {
-
-    padding: 5px;
-    margin: 5px;
     
-    width: 100%;
-    max-width: 100%;
-    /*display: flex;*/
-    -webkit-box-direction: normal;
-    -webkit-box-orient: vertical;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    border-radius: 2px;
-    overflow: hidden;
-}
-.card-main, .card-content-text{
-    width: 100%;
-    margin: 5px;
-}
-.card-horizontal-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 0;
-}
-.card-content-text{
-    font-size: 16px;
-}
-.card-actions{
-    margin: 5px;
-}
-
-.card, .card-fluid{
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 2px 1px 1px #888888;
-}
-.card-container{
-
-    width: 100%;
-    float: left;
-    margin: auto;
-}
-.card-product{
-    border-radius: 2px;
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 2px 3px 3px #888888, -1px 0 2px #888888;
-    text-align: center;
-}
-.card-flat{
-    /*width: 400px;*/
-    border-radius: 2px;
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 1px 1px 1px #888888, -1px 0 1px #888888;
-    text-align: center;
-    margin: auto;
-}
-
-.card-flat-container{
-    /*width: 400px;*/
-    /*width: 90%;*/
-    border-radius: 2px;
-    /*border: 1px solid #F2F1FE;*/
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 1px 1px 1px #2F2D2C, -1px 0 1px #2F2D2C;
-    /*box-shadow: 2px 5px 5px #2F2D2C, -2px 5px 5px #2F2D2C;*/
-    text-align: center;
-    margin: auto;
-}
-
-.card-flat:hover{
-    box-shadow: 3px 5px 5px #888888, -2px 0 5px #888888;
-}
-.card-body{
-    display: block;
-    width: 100%;
-    padding: 5px;
-    margin: 2px;
-}
-
-.card-header{
+        margin: 24px;
+        min-width: 320px;
+        max-width: 640px;
+        /*display: flex;*/
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    .card-fluid {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        padding: 5px;
+        margin: auto;
+        
+        /*display: flex;*/
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+        justify-content: center;
+        
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    .card-main, .card-content-text{
+        width: 100%;
+        margin: auto;
+    }
+    .card-horizontal-block{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 0;
+    }
+    .card-content-text{
+        font-size: 16px;
+    }
+    .card-actions{
+        margin: 5px;
+    }
     
-    width: 100%;
-    padding: 1px;
-    margin: 2px;
+    .card, .card-fluid{
+        font-family: "Montserrat", sans-serif;
+        box-shadow: 2px 1px 1px #888888;
+    }
+    .card-container{
+    
+        width: 100%;
+        float: left;
+        margin: auto;
+    }
+    .card-product{
+        
+        width: 100%;
+        height: 350px;
+    }
+    .card-flat{
+        /*width: 400px;*/
+        border-radius: 2px;
+        font-family: "Montserrat", sans-serif;
+        box-shadow: 1px 1px 1px #888888, -1px 0 1px #888888;
+        text-align: center;
+        margin: auto;
+    }
+    
+    .card-flat-container{
+        /*width: 400px;*/
+        /*width: 90%;*/
+        border-radius: 2px;
+        /*border: 1px solid #F2F1FE;*/
+        font-family: "Montserrat", sans-serif;
+        box-shadow: 1px 1px 1px #2F2D2C, -1px 0 1px #2F2D2C;
+        /*box-shadow: 2px 5px 5px #2F2D2C, -2px 5px 5px #2F2D2C;*/
+        text-align: center;
+        padding: 1px;
+        margin: 1px;
+    }
+    
+    .card-flat:hover{
+        box-shadow: 3px 5px 5px #888888, -2px 0 5px #888888;
+    }
+    .card-body{
+        display: block;
+        width: 100%;
+        padding: 5px;
+        margin: auto;
+    }
+    
+    .card-header{
+        width: 100%;
+        max-width: 250px;
+        padding: 1px;
+        margin: auto;
+    }
+    .card-header:hover{
+        background-color:#BFBFBF;
+        color: #2F2D2C;
+    }
+    .card-footer{
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        margin: auto;
+    }
+    .card-item{
+        width: 100%;
+        padding: 2px;
+        margin: 2px;
+    }
+    
+    .card-product{
+        border-radius: 2px;
+        font-family: "Montserrat", sans-serif;
+        box-shadow: 1px 1px 1px #DED8D3, -1px 0 1px #DED8D3;
+        text-align: center;
+    }
+    
+    .card-product-details{
+        text-align: left;
+    }
+    .card-flat-category{
+        width: 250px;
+        display: inline-block;
+        text-align: center;
+        justify-content: center;
+        background-color: transparent;
+    }
+    .card-flat-category ul , .card-flat-category ul a{
+    
+        text-decoration: none;
+        color: #F9F8F4;
+        background-color: transparent;
+    }
+    .card-flat-category ul a:hover{
+        text-decoration: none;
+    }
 
-}
-.card-header:hover{
-    background-color: #F9F8F4;
-    color: #2F2D2C;
-}
-.card-footer{
-    width: 100%;
-    text-align: center;
-    padding: auto;
-    margin: auto;
-}
-.card-item{
-    width: 100%;
-    padding: 1px;
-    margin: 1px;
-}
 
-.card-product{
-    /*display: block;*/
-    border-radius: 2px;
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 1px 1px 1px #DED8D3, -1px 0 1px #DED8D3;
-    text-align: center;
-    margin: auto;
-}
+    .flex-container{
+        display: flex;
+        width: 100%;
+    
+        align-items: center;
+        justify-content: center;
+        padding:1px;
+        margin: 1px;
+    }
+    
+    .flex-item{
+        max-height: 50%;
+        padding: 1px;
+        margin: auto;
+        
+    }
+/* ----------------------------------------------
+***  End of LAYOUTS COMPONENTS IN HEADER ********
+-----------------------------------------------*/
 
-.card-product-details{
-    text-align: left;
-}
-.card-flat-category{
-    width: 250px;
-    display: inline-block;
-    text-align: center;
-    justify-content: center;
-    background-color: transparent;
-}
-.card-flat-category ul , .card-flat-category ul a{
 
-    text-decoration: none;
-    color: #F9F8F4;
-    background-color: transparent;
-}
-.card-flat-category ul a:hover{
-    text-decoration: none;
-}
+/* -----------------------------------------------
+***  LAYOUTS COMPONENTS IN HEADER, FOOTER*********
+ These Layouts are used to theme and design
+ the Headers and Footer. They are site wide.
+-------------------------------------------------*/
+
 .site-brand{
     width: 100px;
     height: 50px;
@@ -166,14 +188,234 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    color: #888888;
 }
 
+/* ----------------------------------------------
+***  End of LAYOUTS COMPONENTS IN HEADER ********
+-----------------------------------------------*/
 
+
+/* -----------------------------------------------
+***  LAYOUTS COMPONENTS IN MAIN CONTENT **********
+These Layouts are used to theme and design
+ the main content of an Element. 
+ They are site wide.
+-------------------------------------------------*/
+
+.main-content{
+    width: 100%;
+    padding: 1px;
+    margin: 1px;
+}
 nav a:hover, nav a:link{
     
     text-decoration: none;
 }
+.navbar-nav-cat a{
+    box-sizing: border-box;
+    display: block;
+}
+
+.navbar-cat a{
+    display: flex;
+}
+
+.nav-mobile-div{
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    
+}
+.nav-header-menu{
+    width: 100px;
+}
+.nav-header-menu button{
+    width: 50px;
+    height: 50px;
+}
+.nav-header-menu a{
+
+    width: 50px;
+}
+.nav-header{
+    float: left;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+}
+.nav-btn-menu{
+    float: left;
+    justify-content: center;
+    text-align: center;
+}
+.nav-brand{
+    float: left;
+    justify-content: center;
+    text-align: center;
+}
+.nav-mobile li{
+    float: left;
+    border: 1px solid #666;
+    
+    justify-content: center;
+
+}
+.nav-mobile li a{
+    
+    display: block;
+    justify-content: center;
+    
+    
+
+}
+.nav-mobile{
+  width: 80%;
+  overflow: hidden;
+}
+
+#site-nav-menu{
+    width: 100%;
+}
+
+.icon-bar{
+    width: 100%;  
+}
+.icon-bar{
+    list-style: none;
+    margin: 0;
+}
+
+.icon-bar li{
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    width: 25%;
+    padding: 5px;
+    margin: 1px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    border: 1px solid #BFBFBF;
+}
+.icon-bar li a{
+    width: 100%;
+    max-height: 60px;
+    color: #2F2D2C;
+    margin: auto;
+}
+
+.icon-bar li:hover{
+    background-color: #888888;
+    color: #F2F1FE;
+}
+.icon-bar li a:link{
+    
+    text-decoration: none;
+    color: #F9F8F4;
+}
+.icon-bar a:hover{
+    
+    text-decoration: none;
+}
+
+.modal-header{
+    padding: 35px 50px;
+    text-align: center;
+}
+
+.site-header{
+    width: 100%;
+    height: 80px;
+    padding: 1px;
+    margin: 1px;
+    
+}
+
+.body-content{
+    width: 100%;
+    padding: 2px;
+    margin: auto;
+}
+/* ----------------------------------------------
+***  End of LAYOUTS COMPONENTS IN MAIN CONTENT **
+-----------------------------------------------*/
+
+/* -----------------------------------------------
+***  Vanilla HTML Element settings ***************
+------------------------------------------------*/
+html {
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+    height: 100%;
+}
+
+body{
+    display: flex;
+    box-sizing: border-box;
+    background-color: #FEFEFE;
+    min-height: 100%;
+    min-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+
+html, body {
+    padding:5px;
+    margin: auto;
+    
+}
+body > .container-fluid{
+    
+    padding: 10px;
+}
+footer {
+    
+    width: 100%;
+    height: 100px;
+    position: relative;
+    text-align: center;
+    color: #FEFEFE;
+    padding: 10px;
+    margin: auto;
+  }
+  
+
+/* ----------------------------------------------
+***  End of Vanilla HTML Element Settings *******
+-----------------------------------------------*/
+
+/* -----------------------------------------------
+***  TYPOGRAPHY IN HEADER, FOOTER ****************
+These settings controlle the font used in 
+headers and footers.
+-------------------------------------------------*/
+
+.card-footer a{
+    text-decoration: none;
+    color: #2F2D2C;
+}
+
+#openMenu {
+    color: #2F2D2C;
+}
+
+#openMenu a {
+    text-decoration: none;
+    color: #2F2D2C;
+}
+
+/* -----------------------------------------------
+***  TYPOGRAPHY IN MAIN CONTENT** ****************
+-------------------------------------------------*/
+
+
+
+
+
+
+
+
 
 .body-panel{
     width: 100%;
@@ -181,27 +423,17 @@ nav a:hover, nav a:link{
     max-height: 500px;
 
 }
-.padding-top{
-    position: absolute;
-    right: 5%;
-    left: 5%;
-    top: 300px;
-}
 
 .header-entry{
-
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+    height: 40px;
 }
 
 .content-header{
-    
+    box-sizing: border-box;
     border: 1px solid #DADFE1;
     width: 100%;
-    height: 50px;
+    padding: 2px;
+    margin: auto;
 }
 
 .content{
@@ -398,21 +630,7 @@ nav a:hover, nav a:link{
 /**************************************
 **** Cart UI Settings *****************
 **************************************/
-.flex-container{
-    display: flex;
-    width: 100%;
 
-    align-items: center;
-    justify-content: center;
-    margin: 2px;
-    padding:1px;
-}
-
-.flex-item{
-    max-height: 50%;
-    margin: 1px;
-    
-}
 
 
 .floating-box{
@@ -422,6 +640,8 @@ nav a:hover, nav a:link{
 }
 .card-item-image{
     width: 20%;
+    padding: 1px;
+    margin: auto;
     border: 1px solid #888888; 
     justify-content: center;
 }
@@ -430,18 +650,49 @@ nav a:hover, nav a:link{
 }
 .card-item-detail, .card-item-price{
     width: 100px;
-    margin: 2px;
-    border: 1px solid #888888; 
+    padding: 1px;
+    margin: auto; 
     align-content: center;
     justify-content: center;
 
 }
 .card-item-quantity{
     width: 20px;
-    border: 1px solid #888888; 
+    padding: 1px;
+    margin: auto;
 }
 .card-item-remove{
     width: 30px;
-    border: 1px solid #888888; 
+    padding: 1px;
+    margin: auto; 
 }
+.item-price, .item-name, .item-sumary{
+    font-size: 0.875em;
+}
+
+.cart-item{
+    height: 100px;
+    width: 100%;
+    padding: 1px;
+    margin: auto;
+    box-sizing: border-box;
+    /*border-bottom : 2px solid #22313F;*/
+
+}
+.input-block{
+    display: block;
+    border: 1px solid #2F2D2C;
+    padding: 10px;
+    margin: 5px;
+}
+
+.input-field, .value-field{
+    box-sizing: content-box;
+    width: 200px;
+    min-width: 100px;
+    border: 1px solid #2F2D2C;
+    padding: 2px;
+    margin: 5px;
+}
+
 /**************************************/

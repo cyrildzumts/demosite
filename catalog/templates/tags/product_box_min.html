@@ -1,21 +1,17 @@
-<div class="col-xs-6 col-sm-6 col-md-3"><!-- Product Container -->
+<div class="col-xs-6 col-sm-6 col-md-3  centered"><!-- Product Container -->
     
-    <div class="product-inner-container card-flat-header">
-        <div class="product-image card-flat-header row"><!-- Product Image Element -->
-            <div class="img-centered">
-                <a href="{{p.get_absolute_url}}">
-                    <img src="{{p.image.url}}">
-                </a>
-                
+    <div class="card-fluid card-product bordered">
+        <div class="card-header"><!-- Product Image Element -->
+            <a href="{{p.get_absolute_url}}">
+                    <img class="img-responsive" src="{{p.image.url}}">
+            </a>
+        </div><!-- End Of Product Image element -->
+        <div class="card-body">
                 <p class="p-brand">{{p.brand}} </p>
                 <p class="p-title "> <strong> {{p.name}} </strong></p>
                 <p class="p-price">{{p.price}} FCFA  </p>
-            </div><!-- End of Responsive Image -->
-            <div class="push">
-            </div> 
-        </div><!-- End Of Product Image element -->
+        </div>
         <div class="product-panel row bg-transparent"> <!-- Product Panel Element-->
-            
             <div class="controls-inner row masqued">
                         <div class="col-xs-6 col-md-6">
                             <div class="add-to-wishlist vt-ht-centered">
