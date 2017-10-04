@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block PageContent %}
 
-<div class="container-fluid card-fluid">
+<div class="container-fluid card-fluid cart">
 
     {% if cart_items %}
     <div class="card-header">
@@ -13,7 +13,7 @@
                 </a>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body cart-body">
             {% for item in cart_items %} {%include "tags/card_entry_flat.html"%} {% endfor %}
     </div>
     <div class="flex-container card-footer">

@@ -12,8 +12,8 @@
  
         {% get_default_products as products %}
 
-            <div class="card-fluid bordered" >
-                <div class="row centered bordered">
+            <div class="card-fluid" >
+                <div class="row centered">
                     {% for p  in products %}
                     {% include "tags/product_box_min.html" %}
                     {% endfor %}
