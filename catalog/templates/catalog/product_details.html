@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {%block banner_extra%}
+
 <div class="card-flat-category">
   <ul class="breadcrumb">
         {% for c in product.cats_path %}
@@ -11,25 +12,25 @@
 {%endblock banner_extra%}
 
 {%block content_header%}
-    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony">
-        <p> <h1> {{product.name}} 
-        {%if product.is_available is False%}
-          <span class="not-in-stock"> Epuisé ! </span>
-        {%endif%}
-      </h1> </p>
+    <div class="col-md-12 col-sm-12 col-xs-12 flex-container bg-ebony">
+        <div class="p-product-name">{{product.name}} 
+          {%if product.is_available is False%}
+            <span class="not-in-stock"> Epuisé !!! </span>
+          {%endif%}
+        </div>
     </div>
 {%endblock content_header%}
 
 
 {% block PageContent %}
-<div class="card-flat-product bg-newspaper">
+<div class="card-flat-product">
   
-  <div class="card-product-image col-md-6 bg-turquoise">
+  <div class="card-product-image col-md-6">
     <div class="image-container row">
        <img class="img-responsive" src="{{product.image.url}}" alt="{{product.name}}" />
     </div>
   </div>
-  <div class="col-md-6 card-product-details bg-niagara">
+  <div class="col-md-6 product-details">
 
     <div class="detail-content">
          <p>Marque: <strong><em>{{product.brand}}</em> </strong></p>
@@ -44,8 +45,8 @@
         <p class="invalid">Coûtait : {{product.old_price}} CFA </p>
         {% endif %}
         <p>Prix : <strong>{{product.price}} CFA </strong></p>
-        <p>
-          <span class="add-to-cart btn glyphicon glyphicon-shopping-cart gi-2x bg-niagara" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
+        <p class="">
+          <span class="add-to-cart glyphicon glyphicon-shopping-cart gi-2x bordered" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
         </p>
 
         <h3> Description du produit </h3>
