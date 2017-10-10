@@ -1,18 +1,27 @@
-{% extends "base.html" %} {% block PageContent %}
+{% extends "base.html" %}
 
-<div class="container-fluid card-fluid cart">
+
+{%block content_header%}
+
+    <div class="flex-container">
+            <h5 class="flex-item">Mon Panier</h5>
+            <a class="flex-item" href="{% url 'catalog:index'%}">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-share-alt"> Continuer mon shopping</span>
+                    </button>
+            </a>
+    </div>
+
+{%endblock content_header%}
+
+
+
+{% block PageContent %}
+
+<div class="card-fluid cart">
 
     {% if cart_items %}
-    <div class="card-header">
-        <div class="header-title flex-container">
-                <h5 class="flex-item"><span class="glyphicon glyphicon-shopping-cart"> Mon Panier </span></h5>
-                <a class="flex-item" href="{% url 'catalog:index'%}">
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-share-alt"> Shopping...</span>
-                        </button>
-                </a>
-        </div>
-    </div>
+    
     <div class="card-body cart-body">
             {% for item in cart_items %} {%include "tags/card_entry_flat.html"%} {% endfor %}
     </div>

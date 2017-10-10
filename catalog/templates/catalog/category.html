@@ -9,10 +9,11 @@
 
 {%block PageContent %}
 {% if products %}
-  <div class="container-fluid">
-    <div class="row list-group">
-        {% for p in products  %}
-          {% include "tags/product_box_min.html" %}
+  
+  <div class="card-fluid" >
+    <div class="row centered">
+        {% for p  in products %}
+        {% include "tags/product_box_min.html" %}
         {% endfor %}
     </div>
   </div>
