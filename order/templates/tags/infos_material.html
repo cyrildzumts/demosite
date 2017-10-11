@@ -7,43 +7,48 @@
     <input class="form-control" type="hidden" name="shipping_zip" value="{{form_context.zip}}">
     <input class="form-control" type="hidden" name="shipping_country" value="{{form_context.country}}">
 
-        <div class="card-fluid">
+        <div class="container">
             <section class="card-flat-header">
                 <h5 class="card-title">Vos Informations</h5>
 
             </section><!-- End Of Main Section -->
             <section class="card-body">
-                <div class="input-block">
-                    <span class="input-field"> Nom : </span>
-                    <span class="value-field"> {{form_context.name}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field flex-item"> Email : </span>
-                    <span class="value-field text-right"> {{form_context.email}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field"> Telephone : </span>
-                    <span class="value-field"> {{form_context.phone}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field"> Adresse :</span>
-                    <span class="value-field"> {{form_context.address}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field"> Ville :</span>
-                    <span class="value-field"> {{form_context.city}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field"> Boîte Postale :</span>
-                    <span class="value-field"> {{form_context.zip}} </span>
-                </div>
-                <div class="input-block">
-                    <span class="input-field"> Pays :</span>
-                    <span class="value-field"> {{form_context.country}} </span>
-                </div>
+
+                    <table class="table table-responsive">
+                            
+                            <tbody>
+                                <tr>
+                                    <td>Nom d'utilisateur : </td>
+                                    <td> {{request.user.username}} </td>
+                                </tr>
+                                <tr>
+                                        <td>Email :</td>
+                                        <td> {{form_context.email}} </td>
+                                </tr>
+                                <tr>
+                                        <td>Nom : </td>
+                                        <td> {{form_context.name}} </td>
+                                </tr>
+                                
+                                <tr>
+                                        <td> Pays de résidence :</td>
+                                        <td> {{form_context.country}} </td>
+                                </tr>
+                                <tr>
+                                        <td> Ville :</td>
+                                        <td> {{form_context.city}} </td>
+                                </tr>
+                                <tr>
+                                        <td> Telephone :</td>
+                                        <td> {{form_context.phone}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                
                 
             </section><!-- End Of Main Section -->
             <section class="card-flat-footer text-center">
-                <h4 class="card-next">Suivant</h4>
+                <span class="card-next btn btn-default">Suivant</span>
             </section><!-- End Of Main Section -->
         </div><!-- End Of Card -->

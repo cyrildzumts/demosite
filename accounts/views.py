@@ -156,5 +156,6 @@ def order_details(request, order_id):
         'template_name':template_name,
         'order_ref' : order.ref_num,
         'orderitems': order.orderitem_set.all(),
+        'order':order,
     }
     return render(request, template_name, context)

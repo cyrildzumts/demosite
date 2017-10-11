@@ -75,7 +75,7 @@
             <li><a href="{% url 'accounts:user_account'%}"><span class="glyphicon glyphicon-user"></span></a></li>
             {% else %}
             <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> <span>S'enregistrer</span></a></li>
-            <li><a href="{% url 'accounts:login' %}"><span id="login" class="glyphicon glyphicon-log-in"></span> <span>Se connecter</span></a></li>
+            <li id="loginBtn2"><a href="{% url 'accounts:login' %}"><span id="login2" class="glyphicon glyphicon-log-in"></span> <span>Se connecter</span></a></li>
             {% endif %}
         </ul>
     </div>

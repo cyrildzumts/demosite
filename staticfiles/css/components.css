@@ -131,23 +131,22 @@
     .card-product{
         
         width: 100%;
-        min-width: 210px;
-        max-width: 310px;
-        height: 400px;
-        min-height: 400px;
+        max-width: 300px;
+        height: 410px;
         padding: 1px;
-        margin: 2px;
+        margin: auto;
     }
     .card-product-header{
-        width: 100%;
+        
+        
         height: 300px;
-        padding: 10px;
+        padding: 1px;
         margin: auto;
     }
 
 .card-product-header img{
-    width: 100%;
-    padding: 10px;
+    width: 90%;
+    padding: 1px;
     margin: auto;
 }
 .product-link{
@@ -169,7 +168,7 @@
 }
     .card-product-details{
         width: 100%;
-        height: 95px;
+        height: 100px;
         padding: 1px;
         margin: auto;
         font-size: 10px;
@@ -432,7 +431,6 @@ footer {
     margin: auto;
   }
   
-
 /* ----------------------------------------------
 ***  End of Vanilla HTML Element Settings *******
 -----------------------------------------------*/
@@ -477,7 +475,7 @@ headers and footers.
 }
 
 .header-entry{
-    height: 40px;
+    width: 60%;
 }
 
 .content-header{
@@ -555,6 +553,50 @@ headers and footers.
     
     
 
+}
+.table>tbody>tr>td, 
+.table>tbody>tr>th,  
+.table>thead>tr>td, 
+.table>thead>tr>th{
+ vertical-align: middle;
+ text-align: left;
+}
+
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th{
+    vertical-align: middle;
+    text-align: right;
+}
+
+.cart-content-table tbody th,
+.cart-content-table tbody td{
+    text-align: left;
+    white-space: nowrap;
+    padding: 5px;
+    margin: auto;
+}
+.cart-content-table td img {
+    width: 80%;
+    padding: 5px;
+    margin: auto;
+}
+.order-content-table th,
+.order-content-table td{
+    text-align: right;
+    white-space: nowrap;
+}
+.order-content-table tfoot{
+    padding: 0px;
+    margin: auto;
+}
+.order-content-table tfoot td,
+.order-content-table tfoot th,
+.order-content-table tfoot tr{
+    border: 1px dotted #2F2D2C;
+}
+
+.order-total{
+    padding: 25px 20px 3px 0;
 }
 .item-entry{
     height: 100px;
@@ -750,6 +792,42 @@ headers and footers.
     box-sizing: border-box;
     /*border-bottom : 2px solid #22313F;*/
 
+}
+.cart-item-image{
+    max-width: 15%;
+    padding: 10px;
+    margin: auto;
+}
+.cart-item-image img{
+    width: 65px;
+    padding: 5px;
+    margin: auto;
+}
+
+.cart-item-name{
+    width: 30%;
+    padding: 5px;
+    margin: auto;
+}
+.cart-item-qty{
+    width: 5%;
+    padding: 5px;
+    margin: auto;
+}
+.cart-item-price{
+    width: 15%;
+    padding: 5px;
+    margin: auto;
+}
+.cart-item-total-price{
+    width: 30%;
+    padding: 5px;
+    margin: auto;
+}
+.card-item-remove{
+    width: 2%;
+    padding: 5px;
+    margin: auto;
 }
 .input-block{
     display: block;

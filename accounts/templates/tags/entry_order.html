@@ -1,27 +1,12 @@
 
-    <div class="rounded-10 row card-flat text-left" data-toggle="collapse" data-target="#order{{order.id}}">
-        <div class="card-horizontal-block">
-            <section class="card-main text-left">
-                <p class="card-title card-title-large" > Numéro de Commande : {{order.ref_num}}</p>
-                <p class="card-subtitle"><b> Date :</b> {{order.date.date}}</p>
-                <div id="order{{order.id}}" class="collapse">
-                    
-                    <p>Montant : </b>{{order.total}} FCFA</p>
-                    <p>Status de paiement :
-                                    {% if order.paid_status is True %}
-                                        Payé
-                                    {% else %} 
-                                        Non Payé
-                                    {% endif %}
-                    </p>
-                    <h5><b>Status de Livraison : </b>{{order.get_status}}</h5>
-                </div>
-                
-            </section>
-        </div>
-        <section class="card-actions">
-            <a class="text-orange" href="{% url 'accounts:order_details' order.id %}">
-                   <button class="btn btn-sm card-action bg-rebeccapurple"> Details </button>
+    <tr> 
+        <td> {{order.date.date}} </td>
+        <td> {{order.ref_num}} </td>
+        <td> {{order.get_status}} </td>
+        <td>  {{order.total}} FCFA </td>
+        <td> 
+            <a class="" href="{% url 'accounts:order_details' order.id %}">
+                <button class="btn btn-sm card-action"> Details </button>
             </a>
-        </section>
-    </div>
+        </td>
+    </tr>

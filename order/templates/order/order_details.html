@@ -1,8 +1,10 @@
 {% extends "base.html"%}
 
 {%block content_header%}
-    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
-         <h4>Contenu de la Commande {{order_ref}}</h4>
+    <div class="header-entry">
+         <p>Contenu de la Commande : <strong>{{order_ref}}</strong></p>
+         <p> Date de commande : <strong>{{order.date.date}}</strong></p>
+         <p> Status de la commande : <strong>{{order.get_status}}</strong></p>
     </div><!-- End of main-header -->
 {%endblock content_header%}
 
@@ -10,11 +12,43 @@
 {% block PageContent %}
 
 
-<div class="card-flat">
-    {% for item in orderitems %}
-        <div class="card-flat item-entry">
-            {% include "tags/item_entry.html" %}
-        </div>
-    {% endfor %}
-</div>
+<article class="container">
+
+    <table class="table order-content-table">
+        <thead>
+            <tr>
+                <th> Nom de l'article </th>
+                <th> Quantité </th>
+                <th> Prix Unitaire </th>
+                <th> Prix Total </th>
+            </tr>
+        </thead>
+        <tfoot>
+                <tr>
+                    <th colspan="3" scope="row" class="order-total"> Montant Total:</th>
+                    <td headers="price"> {{order.total}} FCFA</td>
+                </tr>
+                <tr>
+                    <th colspan="3" scope="row"> Frais d'envoi :</th>
+                    <td headers="price"> 0.00 FCFA</td>
+                </tr>
+                <tr>
+                    <th colspan="3" scope="row"> Reduction :</th>
+                    <td headers="price"> -0.00 FCFA</td>
+                </tr>
+                <tr>
+                    <th colspan="3" scope="row"> <strong> Somme Total :</strong></th>
+                    <td headers="price"> <strong> {{order.total}} FCFA </strong></td>
+                </tr>
+        </tfoot>
+        <tbody>
+            {% for item in orderitems %}
+                {% include "tags/item_entry.html" %}
+            {% endfor %}
+        </tbody>
+
+        
+    </table>
+    
+</article>
 {% endblock PageContent %}

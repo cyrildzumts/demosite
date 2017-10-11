@@ -1,29 +1,56 @@
 {% extends "accountbase.html"%}
 
 {%block content_header%}
-    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
-         <p> Mon Compte : Bienvenue {{request.user.first_name}}!</p>  
+    <div class=" header-entry flex-container">
+         <h3> Mon Compte : Bienvenue {{request.user.first_name}}!</h3>  
     </div><!-- End of main-header -->
 {%endblock content_header%}
 
 {% block PageContent %}
 
-<div class="card-flat container">
+<div class="container">
     <section class="card-flat-header">
             <h2 class="panel-title">Informations personelles : </h2>
     </section>
 
     <section class="card-flat-body content-center">
-        <div class="text-left">
-            <p><span class="entry-key">Nom d'utilisateur :</span> <span class="entry-value"> {{user_profile.user.username}}</span></p>
-            <p><span class="entry-key">Email :</span> <span class="entry-value"> {{user_profile.user.email}}</span></p>
-            <p><span class="entry-key">Nom :</span> <span class="entry-value"> {{user_profile.user.last_name}}</span></p>
-            <p><span class="entry-key">Prenom :</span> <span class="entry-value"> {{user_profile.user.first_name}}</span></p>
-            <p><span class="entry-key">Date de naissance :</span> <span class="entry-value"> {{user_profile.date_of_birth}}</span></p>
-            <p><span class="entry-key">Pays de résidence:</span> <span class="entry-value"> {{user_profile.country}}</span></p>
-            <p><span class="entry-key">Ville :</span> <span class="entry-value"> {{user_profile.city}}</span></p>
-            <p><span class="entry-key">Telephone :</span> <span class="entry-value"> {{user_profile.telefon}}</span></p>
-        </div>
+        <table class="table table-responsive">
+            
+            <tbody>
+                <tr>
+                    <td>Nom d'utilisateur : </td>
+                    <td> {{user_profile.user.username}} </td>
+                </tr>
+                <tr>
+                        <td>Email :</td>
+                        <td> {{user_profile.user.email}} </td>
+                </tr>
+                <tr>
+                        <td>Nom : </td>
+                        <td> {{user_profile.user.last_name}} </td>
+                </tr>
+                <tr>
+                        <td>Prenom :</td>
+                        <td> {{user_profile.user.first_name}} </td>
+                </tr>
+                <tr>
+                        <td> Date de naissance :</td>
+                        <td> {{user_profile.date_of_birth}} </td>
+                </tr>
+                <tr>
+                        <td> Pays de résidence :</td>
+                        <td> {{user_profile.country}} </td>
+                </tr>
+                <tr>
+                        <td> Ville :</td>
+                        <td> {{user_profile.city}} </td>
+                </tr>
+                <tr>
+                        <td> Telephone :</td>
+                        <td> {{user_profile.telefon}} </td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     <section class="card-flat-footer">
         <a href="{% url 'accounts:orders' %}" class="btn btn-default text-center">Modifier <span class="glyphicon glyphicon-pencil"></span></a>

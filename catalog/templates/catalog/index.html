@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load category_tags %}
     {% block banner_content %}
-        <div class="container card-flat">
+        <div class="container">
             {% banners as banner %}
             {% include "tags/banner.html" %}
             
@@ -12,7 +12,7 @@
  
         {% get_default_products as products %}
 
-            <div class="card-fluid" >
+            <div class="container" >
                 <div class="row centered">
                     {% for p  in products %}
                     {% include "tags/product_box_min.html" %}

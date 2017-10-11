@@ -18,23 +18,68 @@
 
 {% block PageContent %}
 
-<div class="card-fluid cart">
+<div class="container table-responsive">
 
     {% if cart_items %}
     
-    <div class="card-body cart-body">
-            {% for item in cart_items %} {%include "tags/card_entry_flat.html"%} {% endfor %}
-    </div>
-    <div class="flex-container card-footer">
-            <h6 class="flex-item">Total : <strong>{{cart_subtotal}} CFA</strong></h6>
-            <a class="no-decoration flex-item" href="/order/{{checkout_url}}">
-                <button type="button" class="btn btn-block">
-                 Aller à la caisse
-                </button>
-            </a>
-    </div>
+
+
+    <table class="table  cart-content-table">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>Nom du produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th> Prix total</th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tfoot>
+                    <tr>
+                        <th colspan="3" scope="row" class="order-total"> Montant Total:</th>
+                        <td headers="price"> {{user_cart.subtotal}} FCFA</td>
+                    </tr>
+                    <tr>
+                        <th colspan="3" scope="row"> Frais d'envoi :</th>
+                        <td headers="price"> 0.00 FCFA</td>
+                    </tr>
+                    <tr>
+                        <th colspan="3" scope="row"> Reduction :</th>
+                        <td headers="price"> -0.00 FCFA</td>
+                    </tr>
+                    <tr>
+                        <th colspan="3" scope="row"> <strong> Somme Total :</strong></th>
+                        <td headers="price"> <strong> {{cart_subtotal}} FCFA </strong></td>
+                    </tr>
+                    <tr> 
+                            <th colspan="3" scope="row"></th>
+                            <td> 
+                                <a class="no-decoration btn btn-default" href="/order/{{checkout_url}}">
+                                    Aller à la caisse
+                                </a>
+                            </td>
+                    </tr>
+            </tfoot>
+            <tbody>
+                {% for item  in cart_items %}
+                <tr>
+                    <td class="cart-item-image"> <img class="img-responsive" src="{{item.image.url}}" alt=""> </td>
+                    <td class="cart-item-name">{{item.product.name}}</td>
+                    <td class="cart-item-qty">{{item.quantity}}</td>
+                    <td class="cart-item-price">{{item.price}} FCFA</td>
+                    <td class="cart-item-total-price">{{item.total_price}} FCFA</td>
+                    <td class="entry card-item-remove fflex-item" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}">
+                            <span class="remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
+                                
+                            </span>
+                        </td>
+                </tr>
+                {% endfor %}
+            </tbody>
             
-           
+    </table>
+                       
 
     {%else%}
     <div class="row">

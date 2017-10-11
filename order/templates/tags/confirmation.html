@@ -1,8 +1,8 @@
 
    
-    <div class="card-fluid">
+    <div class="">
         <section class="card-main table-responsive">
-            <table class="table">
+            <table class="table cart-content-table">
                 <thead>
                     <tr>
                         <th>Reference</th>
@@ -13,13 +13,22 @@
                     </tr>
                 </thead>
                 <tfoot>
-                    <tr class=" fluid bg-rebeccapurple">
-                        <td></td>
-                        <td> </td>
-                        <td> </td>
-                        <td><p>Total = {{user_cart.subtotal}} FCFA</p></td>
-                        <td></td>
-                    </tr>
+                        <tr>
+                            <th colspan="3" scope="row" class="order-total"> Montant Total:</th>
+                            <td headers="price"> {{user_cart.subtotal}} FCFA</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" scope="row"> Frais d'envoi :</th>
+                            <td headers="price"> 0.00 FCFA</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" scope="row"> Reduction :</th>
+                            <td headers="price"> -0.00 FCFA</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3" scope="row"> <strong> Somme Total :</strong></th>
+                            <td headers="price"> <strong> {{user_cart.subtotal}} FCFA </strong></td>
+                        </tr>
                 </tfoot>
                 <tbody>
                     {% for item  in cartitems %}
@@ -31,7 +40,7 @@
                         <td>{{item.total_price}} FCFA</td>
                     </tr>
                     {% endfor %}
-                    
+                    <tr> <td> </td> </tr>
                 </tbody>
                 
             </table>
@@ -39,7 +48,10 @@
         <!-- End Of Main Section -->
 
         <section class="card-actions text-center">
-            <h4 class="card-next">Prev</h4>
+            <h4 class="card-next">
+                    <span class="card-prev btn btn-default"> Précedent </span>
+                    <input type="submit" value="Envoyer" class="submit btn btn-default" />
+            </h4>
         </section>
         <!-- End Of Main Section -->
     </div>

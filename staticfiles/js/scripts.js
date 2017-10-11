@@ -68,3 +68,6 @@ $(".close").click(function(){
 $("#loginBtn").click(function(){
     $("#loginModal").modal();
 });
+$("#loginBtn2").click(function(){
+    $("#loginModal").modal();
+});

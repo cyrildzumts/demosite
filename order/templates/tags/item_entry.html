@@ -1,18 +1,8 @@
-<div class="order-entry center">
-        <div class="content-left item-image">
-            <a href="{{item.get_absolute_url}}">
-                <img src="{{item.image_url}}" class="contain" alt="{{item.name}}">
-            </a>
-        </div>
-        <!-- End of itemImage -->
-        <section class="card-main item-detail content-left">
-            <ul class="text-left">
-                <li>{{item.name}} </li>
-                <li> Quantité : {{item.quantity}}</li>
-                <li> Prix Unitaire : {{item.get_price}} FCFA</li>
-                <pli> Prix Total : {{item.total}} FCFA</li>
-            </ul>
-        </section>
-        <!-- End of orderItemDetail -->
-    <!-- End of orderItem -->
-</div>
+
+
+<tr>
+        <td> {{item.name}} </td>
+        <td> {{item.quantity}} </td>
+        <td> {{item.get_price}} FCFA </td>
+        <td> {{item.total}} FCFA </td>
+</tr>
