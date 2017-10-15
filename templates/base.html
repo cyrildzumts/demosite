@@ -36,9 +36,9 @@
       
     </header>
     {%block banner-panel%}
-    <div class="visible-md visible-lg bg-newspaper">
+    <div class="visible-md visible-lg bg-newspaper site-banner">
       {% block banner_content %}
-      <div class="container text-center">
+      <div class="container-fluid text-center">
         <h1>{{site_name}} </h1>
         <p class="lead"> Produits de qualité à des prix imbatables.</p>
         {%block banner_extra%}
@@ -118,7 +118,7 @@
       <!-- End of Main-Content -->
 
     </div>
-    <footer class="footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo">
         {% block footer %} {% include "tags/footer.html" %} {% endblock footer %}
     </footer>
 

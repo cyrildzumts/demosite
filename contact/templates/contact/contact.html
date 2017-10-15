@@ -1,17 +1,27 @@
 {% extends "base.html"%}
 {% block title%} {{page_title}} {% endblock %}
-{% block PageContent %}
-<div class="contact">
-  <h3 class="contact_title"> Nous contacter</h3> <br>
-<p class="contact_tips"> Important :  utilisez ce formulaire pour nous<br>
-contacter sur les produits en vente sur ce site. Vous pouvez egalement nous<br>
-contacter sur pour certains produits que vous aimerez bien avoir mais que nous <br>
-ne vendons pas.
-</p><br>
 
+{% block content_header %}
+<h3 class="contact_title"> Nous contacter</h3>
+{% endblock content_header %} 
+{% block PageContent %}
+
+
+<div class="flex-container">
+    <div class="flex-item contact-notice">
+        
+       <p class="contact_tips context"> <span class="danger"> <strong>Important :</strong></span>
+          utilisez ce formulaire pour nous contacter sur les produits en vente sur ce site. Vous pouvez egalement nous
+          contacter sur pour certains produits que vous aimerez bien avoir mais que nous
+          ne vendons pas.
+      </p>
+      
+    </div>
 </div>
 
-<div class="container">
+
+
+<div class="flex-item">
     <form class="form-horizontal" action="." method="post">{% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-3" for="{{form.id_for_label}}">Nom :</label>
@@ -41,7 +51,7 @@ ne vendons pas.
         <div class="form-group">
           <label class="control-label col-sm-3 text-right" for="{{form.cc_myself.id_for_label}}">M'envoyer une copie :</label>
           <div class="col-sm-6">
-            <input type="checkbox" class="form-control" id="{{form.cc_myself.id_cc_myself}}" name="{{form.cc_myself.name}}">
+            <input type="checkbox" id="{{form.cc_myself.id_cc_myself}}" name="{{form.cc_myself.name}}">
           </div>
           
         </div>

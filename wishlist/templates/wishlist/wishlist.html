@@ -1,5 +1,9 @@
 {% extends "accountbase.html" %}
 
+{% block content_header %}
+<h3 class="contact_title"> Liste De Souhaits </h3>
+{% endblock content_header %}
+
 {% block PageContent %}
 
 
@@ -8,15 +12,9 @@
 
   {% else %}
 
-<div class="container">
-  <div class="row">
 
-    <div class="col-sm-1">
-
-    </div>
-    <div class="col-sm-10">
-      <div class="container-fluid bordered-container">
-        <table summary="Votre Liste de souhait" id="shopping_cart" class="table table-hover table-condensed table-responsive">
+    <div class="container table-responsive">
+        <table summary="Votre Liste de souhait" id="wishlist-table" class="table table-condensed">
           <caption>  Votre Liste de Souhaits </caption>
           <thead>
             <!-- header info here -->
@@ -31,20 +29,26 @@
           <tbody>
             {% if wishlistitems %}
                 {% for item in wishlistitems %}
-                {% include "tags/wishlist_entry.html" %}
+                <tr>
+                    <td class="cart-item-image">
+                        <a href="{{item.get_absolute_url}}">
+                            <img class="img-responsive" src="{{item.image_url}}" alt="{{item.name}}">
+                        </a>
+                    </td>
+                    <td class="cart-item-name"> 
+                        <a href="{{item.get_absolute_url}}">
+                            {{item.name}} 
+                        </a>
+                    </td>
+                    <td class="cart-item-price"> {{item.price}} FCFA</td>
+                </tr>
                 {% endfor %}
             {% endif %}
             <!-- loop through cart item here -->
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="col-sm-1">
 
-    </div>
-  </div>
-
-</div>
 
 {% endif %}
 {% endblock PageContent %}

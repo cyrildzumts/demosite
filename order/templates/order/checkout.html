@@ -1,12 +1,25 @@
-{% extends "catalog.html" %} {% load checkout_tags %} {% block content_header %}
-<h1>Checkout</h1>
-{% endblock content_header %} {% block PageContent %} {% if error_message %}
-<ul class="errorlist">
-    <li>{{ error_message }}</li>
-</ul>
+{% extends "base.html" %} {% load checkout_tags %} 
+{% block content_header %}
+    <h1>Checkout</h1>
+{% endblock content_header %} 
+{% block PageContent %} 
+{% if error_message %}
+    <ul class="errorlist">
+        <li>{{ error_message }}</li>
+    </ul>
 {% endif %}
-<div class="container">
-    <ul class="nav nav-pills card-fuild bordered">
+<form action="." method="post" class="hidden form-inline">{% csrf_token %}
+        
+            <input class="form-control" type="hidden" name="shipping_name" value="{{form_context.name}}">
+            <input class="form-control" type="hidden" name="email" value="{{form_context.email}}" >
+            <input class="form-control" type="hidden" name="phone" value="{{form_context.phone}}">
+            <input  class="form-control" type="hidden" name="shipping_address_1" value="{{form_context.address}}">
+            <input  class="form-control" type="hidden" name="shipping_city" value="{{form_context.city}}">
+            <input class="form-control" type="hidden" name="shipping_zip" value="{{form_context.zip}}">
+            <input class="form-control" type="hidden" name="shipping_country" value="{{form_context.country}}">
+</form>
+<div class="container-fluid">
+    <ul class="nav nav-pills bordered">
         <li class="active">
             <a data-toggle="pill" href="#tab1">
                 <span class="glyphicon glyphicon-info-sign"> Infos </span>
@@ -23,19 +36,20 @@
             </a>
         </li>
     </ul>
-    <form action="." method="post" class="tab-content form-inline">{% csrf_token %}
-        <div id="tab1" class="tab-pane fade in active">
-            {% include "tags/infos_material.html" %}
-        </div>
-
-        <div id="tab2" class="tab-pane fade">
-            {% include "tags/payement_choices.html" %}
-        </div>
-
-        <div id="tab3" class="tab-pane fade">
-            {% include "tags/confirmation.html" %}
-        </div>
-    </form>
+    <div class="tab-content">
+            <div id="tab1" class="tab-pane fade in active">
+                {% include "tags/infos_material.html" %}
+            </div>
+        
+            <div id="tab2" class="tab-pane fade">
+                {% include "tags/payement_choices.html" %}
+            </div>
+        
+            <div id="tab3" class="tab-pane fade">
+                {% include "tags/confirmation.html" %}
+            </div>
+    </div>
+    
 
 
 

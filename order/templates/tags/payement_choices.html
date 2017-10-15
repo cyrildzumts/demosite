@@ -1,29 +1,25 @@
-<div class="container-fluid">
 
-        <section class="card-main">
-            <fieldset>
-                <legend>Méthode de Paiement : </legend>
-                <select name="payement_type">
-                    <option value="SMS"> SMS</option>
-                        {% if form_context.country|lower == "gabon" %}
-                    <option value="AirtelMoney" selected> AirtelMoney</option>
-                        {% else %}
-                    <option value="OrangeMoney" selected>OrangeMoney</option>
-                    <option value="MTNMoney">MTNMoney</option>
-                        {% endif %}
-                    <option value="Bank"> Depôt Bancaire </option>
-                </select>
-            </fieldset>
+        <section class="card-flat-header">
+                <h4 class="card-title">Méthode de Paiement :</h4>
+        </section><!-- End Of Main Section -->
+        <section class="card-body">
+                <fieldset>
+                        <select name="payement_type">
+                            <option value="SMS"> SMS</option>
+                                {% if form_context.country|lower == "gabon" %}
+                            <option value="AirtelMoney" selected> AirtelMoney</option>
+                                {% else %}
+                            <option value="OrangeMoney" selected>OrangeMoney</option>
+                            <option value="MTNMoney">MTNMoney</option>
+                                {% endif %}
+                            <option value="Bank"> Depôt Bancaire </option>
+                        </select>
+                </fieldset>
+        </section><!-- End Of Body Section -->
+        <section class="card-flat-footer text-center">
+                <h4>
+                        <span class="card-prev btn btn-default" data-toggle="pill" href="#tab1"> Précedent </span> 
+                        <span class="card-next btn btn-default" data-toggle="pill" href="#tab3"> Suivant </span>
+                </h4>  
+        </section><!-- End Of Footer Section -->
 
-        </section>
-        <!-- End Of Main Section -->
-
-        <section class="card-actions text-center">
-            <h4>
-                <span class="card-prev btn btn-default"> Précedent </span> - 
-                <span class="card-next btn btn-default"> Suivant </span>
-            </h4>
-            
-        </section>
-        <!-- End Of Main Section -->
-</div>
