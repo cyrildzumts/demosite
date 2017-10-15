@@ -9,7 +9,27 @@
     margin: auto;
 }
 
+.fluid-container{
+    box-sizing: border-box;
+    width: 50%;
+    padding: 2px;
+    margin: auto;
+}
 
+
+@media screen and (max-width: 40em){
+    .fluid-container{
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1px;
+        margin: 1px;
+    }
+    .table>tfoot>tr>td, 
+    .table>tfoot>tr>th{
+        
+        text-align: right;
+    }
+}
 .card {
     
         margin: 24px;
@@ -368,15 +388,14 @@ nav a:hover, nav a:link{
 
 .site-header{
     width: 100%;
-    height: 80px;
-    padding: 1px;
-    margin: 1px;
+    padding: 0;
+    margin: auto;
     
 }
 
 .body-content{
     width: 100%;
-    padding: 2px;
+    padding: 0;
     margin: auto;
 }
 

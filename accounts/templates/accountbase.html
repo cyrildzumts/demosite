@@ -1,7 +1,7 @@
 {% extends "base.html"%}
 {%comment "not neaded now" %}
 {%block content_header%}
-    <div class="col-md-12 col-sm-12 col-xs-12 header-entry bg-ebony vt-ht-centered">
+    <div class="header-entry bg-ebony vt-ht-centered">
          <p> Mon Compte : Bienvenue {{request.user.first_name}}!</p>  
     </div><!-- End of main-header -->
 {%endblock content_header%}
@@ -9,8 +9,8 @@
 {%endcomment%}
 
 {% block Sidebar %}
-<div class="container-fluid account-entries">
-    <div class="list-group">
+<div class="flex-container">
+    <div class="flex-item">
         <a class="list-group-item active" href="{% url 'accounts:user_account' %}">Mes Données</a>
         <a class="list-group-item " href="{% url 'accounts:orders' %}">Mes Commandes</a>
         <a class="list-group-item" href="#">Mode de Paiement Préferé</a>
