@@ -515,7 +515,19 @@ footer {
 These settings controlle the font used in 
 headers and footers.
 -------------------------------------------------*/
+.card-info{
+    font-size: 14px;
+    width: 100%;
+    padding: 50px;
+    margin: auto;
+}
 
+.card-info .list-group{
+    width: 100%;
+    padding: 50px;
+    margin: auto;
+    text-align: justify
+}
 .card-footer a{
     text-decoration: none;
     color: #2F2D2C;

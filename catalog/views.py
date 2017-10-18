@@ -42,6 +42,13 @@ def get_categories(parent_id):
 
 
 def index(request):
+    """
+        This method serves the home page of the site.
+        They are template tags already defined to provide
+        by default context data containing the list of products
+        to be displayed. See category_tags.py
+
+    """
     template_name = "catalog/index.html"
     page_title = 'Acceuille | ' + settings.SITE_NAME
     session = request.session
@@ -63,6 +70,14 @@ def index(request):
 
 
 def show_category(request, category_slug):
+    """
+        This method serves the Category page. 
+        It renders the  page with products fromthe desired 
+        category.
+        @category_slug  is used the detect the desired the category.
+        @request contains the page number used by a paginator
+
+    """
     c = get_object_or_404(Category, slug=category_slug)
     # c.view_count = c.view_count + 1
     # c.save()
@@ -96,6 +111,24 @@ def show_category(request, category_slug):
 
 # product with POST and GET detection
 def show_product(request, product_slug, template_name="catalog/product.html"):
+    """
+        This method displays the Product's information.
+        The product is found using the slug attribut.
+        This function will be update to query the product based on the 
+        product ID.
+        It possible for the user to add the displayed product into the cart,
+        because of that we have to check whether the user used the GET or POST 
+        HTTP method.
+        If the user used GET then we just display the product details.
+        If the user used POST then if want to add that product into the cart,
+        we have to retrieve the product attribut that has been sent through
+        a form, get the product and add it into the cart and return a json response.
+
+        For static raison , we are counting the number of time this product
+        has been displayed.
+
+        As of now,the product page is served by the Class Based View ProductDetailView(defined above)
+    """
     p = get_object_or_404(Product, slug=product_slug)
     categories = p.categories.filter(is_active=True)
     p.view_count = p.view_count + 1
@@ -130,7 +163,7 @@ def show_product(request, product_slug, template_name="catalog/product.html"):
             return HttpResponseRedirect(url)
 
         else:
-            print("Add to Cart form is inValid")
+            #print("Add to Cart form is inValid")
             return JsonResponse({'status': 'error'})
     else:
         form = ProductAddToCartForm(request=request, label_suffix=':')
@@ -164,12 +197,22 @@ def flyer(request):
 
 
 def search_view(request):
+    """
+        This function process the query emited by the user.
+        It processes it by looking for Product with attributes 
+        that match a defined filter : 
+        *name
+        *brand
+        *Categories meta keyword
+        *Meta keyword
+    """
     template_name = "catalog/search_results.html"
     page_title = 'Resultats de la Recherche | ' + settings.SITE_NAME
     results = Product.objects.all()
     query = request.GET.get('q')
     query_list = query.split()
-    if(len(query_list) > 0 ):
+    count = len(query_list)
+    if(count  > 0):
         results = results.filter(reduce(operator.or_, (Q(name__icontains=q) for q in query_list))|
                                  reduce(operator.or_, (Q(brand__icontains=q) for q in query_list))|
                                  reduce(operator.or_, (Q(categories__meta_keywords__icontains=q) for q in query_list))|
@@ -180,5 +223,19 @@ def search_view(request):
     context = {
         'page_title': page_title,
         'results' : results,
+    }
+    return render(request, template_name,context)
+
+
+def livraison(request):
+    """
+    This function serves the livraison Page.
+    By default the livraison html page is saved
+    on the root template folder.
+    """
+    template_name = "livraison.html"
+    page_title = 'Livraison | ' + settings.SITE_NAME
+    context = {
+        'page_title': page_title,
     }
     return render(request, template_name,context)

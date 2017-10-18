@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 # from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from demosite import settings
 
 
 def not_found_404(request):
@@ -45,3 +46,16 @@ def register(request):
         form = UserCreationForm()
     return render(request, template_name="registration/register.html",
                   context=locals())
+
+def livraison(request):
+    """
+    This function serves the livraison Page.
+    By default the livraison html page is saved
+    on the root template folder.
+    """
+    template_name = "livraison.html"
+    page_title = 'Livraison | ' + settings.SITE_NAME
+    context = {
+        'page_title': page_title,
+    }
+    return render(request, template_name,context)

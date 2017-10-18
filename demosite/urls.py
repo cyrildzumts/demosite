@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 # from django.contrib.auth.views import login, logout
-# from demosite import views
+from demosite import views
 
 urlpatterns = [
+    url(r'^livraison/$', views.livraison , name='livraison'),
     url(r'^wishlist/', include('wishlist.urls')),
     url(r'^contact/', include('contact.urls')),
     url(r'^order/', include('order.urls')),
