@@ -2,86 +2,65 @@
 {% extends "base.html" %}
 {% block title%} {{page_title}} {% endblock %}
 
+{% block content_header %}
+<div class="flex-container">
+    <h2 class="flex-item">
+        <strong>Creation de Compte utilisateur</strong>
+    </h2>
+</div>
+{% endblock content_header %}
 {% block PageContent %}
-<div class="container card-flat">
-  <div class="row">
-    <div class="col-md-1 col-sm-2">
-
-    </div>
-    <div class="col-md-10 col-sm-6">
-      <h1> Creation de Compte utilisateur </h1>
-      <form class="form-horizontal" action="{% url 'accounts:register' %}" method="post"> {% csrf_token %}
+<div class="flex-container">
+    <div class="">
+      <form class="form" action="{% url 'accounts:register' %}" method="post"> {% csrf_token %}
 
         <div class="form-group">
-          <label class="control-label col-sm-3" for="{{form.last_name.id_for_label}}">Nom:</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" id="{{form.last_name.id_last_name}}" name="{{form.last_name.name}}">
-          </div>
+          <label class="control-label" for="{{form.last_name.id_for_label}}">Nom:</label>
+          <input type="text" class="form-control" id="{{form.last_name.id_last_name}}" name="{{form.last_name.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.first_name.id_for_label}}">Prénom:</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" id="{{form.first_name.id_first_name}}" name="{{form.first_name.name}}">
-          </div>
+          <label class="control-label  text-right" for="{{form.first_name.id_for_label}}">Prénom:</label>
+          <input type="text" class="form-control" id="{{form.first_name.id_first_name}}" name="{{form.first_name.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.username.id_for_label}}">Nom d'utilisateur:</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" id="{{form.username.id_username}}" name="{{form.username.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.username.id_for_label}}">Nom d'utilisateur:</label>
+          <input type="text" class="form-control" id="{{form.username.id_username}}" name="{{form.username.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.password1.id_for_label}}">Mot de passe:</label>
-          <div class="col-sm-6">
-            <input type="password" class="form-control" id="{{form.password1.id_password1}}" name="{{form.password1.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.password1.id_for_label}}">Mot de passe:</label>
+          <input type="password" class="form-control" id="{{form.password1.id_password1}}" name="{{form.password1.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.password2.id_for_label}}">Mot de passe(Confirmation):</label>
-          <div class="col-sm-6">
-            <input type="password" class="form-control" id="{{form.password2.id_password1}}" name="{{form.password2.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.password2.id_for_label}}">Mot de passe(Confirmation):</label>
+          <input type="password" class="form-control" id="{{form.password2.id_password1}}" name="{{form.password2.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.date_of_birth.id_for_label}}">Date de Naissance:</label>
-          <div class="col-sm-6">
+          <label class="control-label text-right" for="{{form.date_of_birth.id_for_label}}">Date de Naissance:</label>
             {{form.date_of_birth}}
-          </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.email.id_for_label}}">Email:</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" id="{{form.email.id_email}}" name="{{form.email.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.email.id_for_label}}">Email:</label>
+          <input type="text" class="form-control" id="{{form.email.id_email}}" name="{{form.email.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.country.id_for_label}}">Pays de résidence:</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" id="{{form.country.id_country}}" name="{{form.country.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.country.id_for_label}}">Pays de résidence:</label>
+          <input type="text" class="form-control" id="{{form.country.id_country}}" name="{{form.country.name}}">
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-3 text-right" for="{{form.city.id_for_label}}">Ville:</label>
-          <div class="col-sm-6">
-            <input type="text"  class="form-control" id="{{form.city.id_city}}" name="{{form.city.name}}">
-          </div>
+          <label class="control-label text-right" for="{{form.city.id_for_label}}">Ville:</label>
+          <input type="text"  class="form-control" id="{{form.city.id_city}}" name="{{form.city.name}}">
         </div>
 
         <button class="btn" type="submit">Créer le compte</button>
       </form>
     </div>
-    <div class="col-md-1 col-sm-10">
-
-    </div>
-
-  </div>
 
 </div>
 

@@ -541,7 +541,9 @@ headers and footers.
     text-decoration: none;
     color: #2F2D2C;
 }
-
+#loginBtn, #loginBtn2{
+    cursor: pointer;
+}
 /* -----------------------------------------------
 ***  TYPOGRAPHY IN MAIN CONTENT** ****************
 -------------------------------------------------*/
