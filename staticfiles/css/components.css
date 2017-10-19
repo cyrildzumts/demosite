@@ -327,8 +327,44 @@ nav a:hover, nav a:link{
 
 .navbar-cat a{
     display: flex;
+    
+
 }
 
+.nav-cat{
+    max-width: 300px;
+    list-style-type: none;
+    /*border: 2px solid #888888;*/
+    padding: 5px;
+    margin: 5px;
+    color: #2F2D2C;
+    background-color:#FEFEFE;
+}
+
+.nav-cat li a:hover{
+    background-color: #DADFE1;
+
+}
+
+.nav-cat-child{
+    margin-left: 30px;
+}
+.nav-cat li a{
+    display: block;
+    width: 150px;
+    padding: 5px;
+    margin: 1px;
+    /*border: 2px solid #888888;*/
+    text-align: center;
+    color: #2F2D2C;
+    background-color: #BFBFBF;
+    text-decoration: none;
+
+}
+.nav-cat li a:link{
+    color: #2F2D2C;
+    text-decoration: none;
+}
 .nav-mobile-div{
     width: 100%;
     height: 60px;
