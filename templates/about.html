@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block banner-panel %}
+
+{% endblock banner-panel %}
+
+{% block content_header %}
+    <div class="flex-container">
+        <h4 class="flex-item">
+            <strong> À propos de {{site_name}}</strong>
+        </h4>
+    </div>
+{% endblock content_header %}
+
+
+{% block PageContent %}
+    <div class="fluid-container">
+        <div class="flex-item card card-info">
+             <a href="{% url 'catalog:index'%}"><strong>{{site_name}}</strong></a> a pour objectif de vendre des produits de qualité
+             à des prix abordable pour tous.
+             Sur <strong>{{site_name}}</strong> vous ne trouverez que des <strong>produits originaux</strong>,
+             pas de contre-facon ou imitations.
+             Nous achetons nos produits au près de sources fiables afin de pouvoir offrir
+             à nos clients des produits de qualités.
+             Nous sommes basés au Gabon et actuellement ne livrons que sur Port-gentil et 
+             Libreville. 
+             Si vous souhaitez avoir un produits particulier que nous ne vendons pas sur 
+             notre site, alors vous pouvez <a href="{% url 'contact:index' %}"><strong>nous contacter</strong></a> 
+             et nous faire part de votre souhait. S'il nous est possible de le realiser
+             alors nous serons heureux de vous aider.
+             Vous pouvez egalement nous contacter pour nous donner vos impressions sur nos 
+             services, ca nous ferait plaisir de les recevoir.
+
+        </div>
+
+    </div>
+{% endblock PageContent %}

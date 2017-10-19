@@ -59,3 +59,17 @@ def livraison(request):
         'page_title': page_title,
     }
     return render(request, template_name,context)
+
+
+def about(request):
+    """
+    This function serves the About Page.
+    By default the About html page is saved
+    on the root template folder.
+    """
+    template_name = "about.html"
+    page_title = 'A Propose | ' + settings.SITE_NAME
+    context = {
+        'page_title': page_title,
+    }
+    return render(request, template_name,context)
