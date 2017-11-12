@@ -51,21 +51,24 @@ def index(request):
     """
     template_name = "catalog/index.html"
     page_title = 'Acceuille | ' + settings.SITE_NAME
-    session = request.session
+    try:
+        session = request.session
     # get the number of visits to the site
-
-    if request.session.get('last_visit'):
-        last_visit_time = session.get('last_visit')
-        visits = session.get('visits', 0)
-        delta = (datetime.now()-datetime.strptime(last_visit_time[:-7],
+        if request.session.get('last_visit'):
+            last_visit_time = session.get('last_visit')
+            visits = session.get('visits', 0)
+            delta = (datetime.now()-datetime.strptime(last_visit_time[:-7],
                  "%Y-%m-%d %H:%M:%S")
                  ).seconds
-        if delta > 10:
-            session['visits'] = visits + 1
-            session['last_visit'] = str(datetime.now())
-    else:
-        session['last_visit'] = str(datetime.now())
-        session['visits'] = 1
+            if delta > 10:
+                session['visits'] = visits + 1
+                session['last_visit'] = str(datetime.now())
+            else:
+                session['last_visit'] = str(datetime.now())
+                session['visits'] = 1
+    except AttributeError:
+        pass
+    context = {'page_title': page_title,}
     return render(request, template_name, locals())
 
 

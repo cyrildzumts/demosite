@@ -1,56 +1,33 @@
 from django.test import TestCase
-from catalog.models import Category, Product, Phablet, Parfum
+from django.urls import resolve
+from django.http import HttpRequest
+#from catalog.models import Category, Product, Phablet, Parfum
 from django.utils import timezone
-
+from selenium import webdriver
+from catalog.views import index
 # Create your tests here.
 
 
-class CategoryParentTest(TestCase):
-    # fixtures = ['catalog']
+class HomePageTest(TestCase):
+    """
+    """
 
-    def setUp(self):
-        self.shoes_cat = Category.objects.get(name="Chaussures")
-        self.mode = Category.objects.get(name="Mode")
-        # root cat
-        self.phones_cat = Category.objects.get(name="Smartphone")
-        # child cat
-        self.smartphones = Category.objects.get(name="Smartphones")
-        self.parfums = Category.objects.get(name="Parfumerie")
-        self.edp = Category.objects.get(name="Eaux de Parfums")
-        self.edt = Category.objects.get(name="Eaux de Toilettes")
+    def test_root_url(self):
+        """
+        This Testcase uses resolve to test if the user
+        can get to the home page.
+        resolve return a ResolverMatch object.
+        """
+        root_url = resolve('/')
+        self.assertEqual(root_url.func, index)
+        
 
-    def test_root_cat(self):
+    def test_home_is_html(self):
+        request = HttpRequest()
+        response = index(request)
+        html = response.content.decode('utf8')
+        self.assertTrue(html.startswith('<!DOCTYPE html>'))
+        self.assertIn('<title>',html)
+        self.assertTrue(html.endswith('</html>'))
 
-        self.assertEqual(self.shoes_cat.root_cat(), self.mode)
-        self.assertNotEqual(self.phones_cat.root_cat(), self.mode)
-
-        self.assertNotEqual(self.edt.root_cat(), self.mode)
-        self.assertNotEqual(self.edp.root_cat(), self.mode)
-
-        self.assertEqual(self.edt.root_cat(), self.parfums)
-        self.assertEqual(self.edp.root_cat(), self.parfums)
-
-        self.assertNotEqual(self.edt.root_cat(), self.smartphones)
-        self.assertNotEqual(self.edp.root_cat(), self.smartphones)
-        self.assertNotEqual(self.phones_cat.root_cat(), self.smartphones)
-
-    def test_is_root(self):
-
-        self.assertFalse(self.shoes_cat.is_root())
-        self.assertTrue(self.phones_cat.is_root())
-
-        self.assertFalse(self.edt.is_root())
-        self.assertFalse(self.edp.is_root())
-
-        self.assertTrue(self.mode.is_root())
-        self.assertTrue(self.parfums.is_root())
-
-        self.assertFalse(self.smartphones.is_root())
-
-    def test_is_parent(self):
-        self.assertTrue(self.mode.is_parent())
-        self.assertFalse(self.smartphones.is_parent())
-        self.assertTrue(self.parfums.is_parent())
-        self.assertTrue(self.shoes_cat.is_parent())
-        self.assertFalse(self.edt.is_parent())
-        self.assertFalse(self.edp.is_parent())
+        

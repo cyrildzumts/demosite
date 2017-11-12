@@ -11,4 +11,5 @@
 */.vscode
 */migrations/*
 */__pycache__/*
+*.log
 
