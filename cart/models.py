@@ -64,6 +64,7 @@ class Cart(models.Model):
         added = False
         if quantity >= 0:
             if self.contain_item(product.pk):
+                print ("Product Already in Cart")
                 # ci = CartItem.objects.get(product=product)
                 # ci = CartItem.objects.get(cart=self, product=product)
                 ci = self.cartitem_set.get(product=product)
@@ -155,7 +156,10 @@ class Cart(models.Model):
                     if (in_stock >= desired_qty):
                         item.set_quantity(desired_qty)
                         item.save()
+                        print("Cart item qty augmented")
                         flag = True
+                    else:
+                        print("Cart item qty not available")
                 else:
                     if quantity == 0:
                         flag = self.remove_from_cart(item_id)

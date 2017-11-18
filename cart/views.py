@@ -68,7 +68,8 @@ def ajax_add_to_cart(request):
             added = user_cart.add_to_cart(product=p, quantity=int(quantity))
             if added is True:
                 response['state'] = True
-                response['total_count'] = user_cart.items_count()
+                response['count'] = user_cart.items_count()
+                response['total'] = user_cart.subtotal()
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),
@@ -94,8 +95,8 @@ def ajax_cart_update(request):
             done = user_cart.update_cart(item_id=product_id, quantity=quantity)
             if done is True:
                 response['state'] = True
-                response['total_count'] = user_cart.items_count()
-                response['count'] = quantity
+                response['count'] = user_cart.items_count()
+                response['total'] = user_cart.subtotal()
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),

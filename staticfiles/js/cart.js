@@ -1,4 +1,4 @@
-jQuery(".add-to-cart").click(function(){
+jQuery(".add-to-cartt").click(function(){
     var item_id = parseInt(jQuery(this).attr("data-itemid"));
     var is_available = jQuery(this).attr("data-available");
     console.log("Item availability : " + is_available);
@@ -6,6 +6,9 @@ jQuery(".add-to-cart").click(function(){
         {
             cart_add_item(item_id, 1);
         }
+    else{
+
+    }
 
 })
 
@@ -67,8 +70,8 @@ function cart_update(inputElement, product_id, quantity)
 function cart_edit_confirm(response)
 {
     //update the cart icon counter
-    print("cart_edit_confirm :  count " + response.total_count);
-    update_cart_icon(response.total_count);
+    print("cart_edit_confirm :  count " + response.count);
+    update_cart_icon(response.count);
 
 }
 
@@ -168,13 +171,13 @@ function displayAttribute(node, added, del){
     temp.quantity = quantity;
     temp.input = node.siblings("input");
     //temp.input.val(quantity);
-    print("Item Parent : " + temp.parent);
-    print("Parent Attributes : ");
-    print("Item ID : " +  temp.item_id );
-    print("Item Old Quantity : " + temp.old_quantity);
-    print("Item Quantity : " + quantity);
-    print("Input : " + temp.input );
-    print("Input Value : " + temp.input.val() );
+    //print("Item Parent : " + temp.parent);
+    //print("Parent Attributes : ");
+    //print("Item ID : " +  temp.item_id );
+    //print("Item Old Quantity : " + temp.old_quantity);
+    //print("Item Quantity : " + quantity);
+    //print("Input : " + temp.input );
+    //print("Input Value : " + temp.input.val() );
     cart_update(temp.input, temp.item_id, temp.quantity);
     return temp;
 }

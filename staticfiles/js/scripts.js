@@ -1,3 +1,5 @@
+
+
 jQuery('[data-toggle="popover"]').popover();
 function hideItemAdded(){
     jQuery(".item_added").trigger("click");
@@ -75,64 +77,156 @@ $("#loginBtn2").click(function(){
 
 
 
-function Cart (){
-    this.username = "";
-    this.cartID = 0;
-    this.count = 0;
-    this.total = 0;
-    this.items = [];
-    this.observers = [];
-    this.setUsername = function(username){
-        this.username = username;
-    }
-    this.setCartID = function(id){
-        this.cartID = id;
-    }
-    this.setCount = function(count){
-        this.count = count;
-    }
-    this.getTotal = function(){
-        return this.total;
-    }
-    this.notify = function(){
-        for(observer in this.observers){
-            observer.update();
-        }
-    }
-    this.attach = function(observer){
-        this.observers.add(observer);
-    }
-    this.addItem = function(item){
-        this.count = this.count + item.quantity;
-        this.total = this.total + item.total;
-        this.items.push(item);
-        this.notify();
-    }
-
-    this.removeItem = function(id){
-        var old_count = this.count;
-        this.items = this.items.filter(function(item){
-            var flag = false;
-            if(item.id === id){
-                flag = true;
-                this.total = this.total - item.total;
-                this.count = this.count - item.quantity;
-            }
-            return flag;
-        });
-        if(this.count != count){
-            this.notify();
-        }
-        
-    }
-    this.removeAll = function(){
+var Cart = (function(){
+    function Cart(){
+        this.events = [];
+        this.items = [];
+        this.eventListeners = [];
         this.total = 0;
         this.count = 0;
-        while(this.items.lenght){
+        this.userID = -1;
+        this.observers = [];
+        this.serverUrl = "";
+    }
+    Cart.prototype.init = function(listener){
+        this.addEventListener(listener);
+    };
+    Cart.prototype.onAddButtonClicked = function(){
+        var item = {};
+        var element = jQuery(".add-to-cart");
+        item.id = parseInt(element.attr("data-itemid"));
+        item.is_available = element.attr("data-available");
+        item.price = 15000;
+        item.quantity = 1;
+        Shopping.myCart.addItem(item);
+    };
+    Cart.prototype.onRemoveButtonClicked = function(){
+        console.log("RemovedButton Clicked ...");
+    };
+    Cart.prototype.onPlusButtonClicked = function(){
+        console.log("PlusButton Clicked ...");
+    };
+    Cart.prototype.onMinusButtonClicked = function(){
+        console.log("MinusButton Clicked ...");
+    };
+    Cart.prototype.addObserver = function(observer){
+        console.log("Adding Observer ...");
+        this.observers.push(observer);
+    };
+    Cart.prototype.removeObserver = function(observer){
+        console.log("Removing Observer ...");
+        for(var i = 0; i < this.observers.length; i++){
+            if(this.observers[i] === observer){
+                this.observers.slice(i, i+1);
+                break;
+            }
+        }
+    };
+    Cart.prototype.notify = function(item){
+        console.log("Notifying Observers ...");
+        for (observer in this.observers){
+            observer(item);
+        }
+        this.badgeUpdate();
+    };
+    Cart.prototype.addItem = function(item){
+       
+        var that = this;
+        // Send request to the Server 
+        if(item.is_available != "False"){
+            $.ajax({
+                type: 'POST',
+                url : '/cart/add_to_cart/',
+                data: {product_id: item.id, quantity: item.quantity},
+                dataType: 'json',
+                // success Function called in case of an http 200 response
+                success: function(response){
+                    that.total = response.total;
+                    that.count = response.count;
+                    that.notify(item);
+                },
+                error: function (){
+                    alert("Il y a une erreur, Veuillez reessayer.");
+                }
+            });
+        }
+       
+        else{
+            console.log("This article is not available ...");
+        }
+        
+    };
+    Cart.prototype.removeItem = function(itemID){
+        // Send request to the Server here 
+        var index = this.items.findIndex(function(item){
+            return item.id === itemID;
+        });
+        if(index >= 0){
+            this.items.slice(index, index);
+            this.total -= item.price * item.quantity;
+            this.count -= item.quantity;
+            this.notify(item);
+        }
+        
+    };
+    Cart.prototype.addEventListener = function(event){
+        console.log("Adding Event  ... : " +  event.html() );
+        this.eventListeners.push(event);
+    };
+    Cart.prototype.getCount = function(){
+        return this.count;
+    };
+    Cart.prototype.getTotal = function(){
+        
+        return this.total;
+    };
+
+    Cart.prototype.getItem = function(index){
+        if(index >= 0 && index < this.count)
+            return this.items[index];
+        else 
+        return {id : -1};
+    };
+
+    Cart.prototype.clear = function(){
+        while(this.items.length){
             this.items.pop();
         }
-    }
-};
+        while(this.eventss.length){
+            this.events.pop();
+        }
+        while(this.observers.length){
+            this.observers.pop();
+        }
+        while(this.eventListeners.length){
+            this.eventListeners.pop();
+        }
+        this.total = 0.0;
+        this.count = 0;
+    };
+
+    Cart.prototype.update = function(req){
+        console.log("Update called with itemID : " + req.id + " Qty : " + req.quantity + "\nAction : " +req.action);
+    };
+    Cart.prototype.badgeUpdate = function(){
+        this.eventListeners[0].html("(" + this.count + ")");
+    };
+    Cart.prototype.getCart = function(){
+        var cart = myCart || new Cart();
+    };
+    return Cart;
+})();
+
+//var myCart = new Cart();
+
+Shopping = {};
+Shopping.Cart = Cart;
+Shopping.myCart = new Shopping.Cart();
+Shopping.myCart.init(jQuery(".cart-badge"));
+jQuery(".add-to-cart").click(Shopping.myCart.onAddButtonClicked.bind(Shopping.myCart));
+jQuery(".plusButton").click(Shopping.myCart.onPlusButtonClicked.bind(Shopping.myCart));
+jQuery(".minusButton").click(Shopping.myCart.onMinusButtonClicked.bind(Shopping.myCart));
+jQuery(".removeFromCartButton").click(Shopping.myCart.onRemoveButtonClicked.bind(Shopping.myCart));
 
 function  ShoppingApp (){
     // Private attibutes :
@@ -160,4 +254,10 @@ function  ShoppingApp (){
 
     // Cart 
     //this.Cart 
+};
+
+function Observer(observable){
+    this.update = function(arg){
+        console.log("target has changed ...");
+    };
 };

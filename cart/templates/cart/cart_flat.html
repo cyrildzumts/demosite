@@ -66,11 +66,14 @@
                 <tr>
                     <td class="cart-item-image"> <img class="img-responsive" src="{{item.image.url}}" alt=""> </td>
                     <td class="cart-item-name">{{item.product.name}}</td>
-                    <td class="cart-item-qty">{{item.quantity}}</td>
+                    <td class="cart-item-qty">{{item.quantity}} 
+                        <span class="plusButton glyphicon glyphicon-plus"></span>
+                        <span class="minusButton glyphicon glyphicon-minus"></span>
+                    </td>
                     <td class="cart-item-price">{{item.price}} FCFA</td>
                     <td class="cart-item-total-price">{{item.total_price}} FCFA</td>
                     <td class="entry card-item-remove fflex-item" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}">
-                            <span class="remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
+                            <span class="removeFromCartButton remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
                                 
                             </span>
                         </td>

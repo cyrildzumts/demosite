@@ -46,7 +46,9 @@
         {% endif %}
         <p>Prix : <strong>{{product.price}} CFA </strong></p>
         <p class="">
-          <span class="add-to-cart glyphicon glyphicon-shopping-cart gi-2x bordered" data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier"></span>
+          <span class="add-to-cart glyphicon glyphicon-shopping-cart gi-2x bordered" 
+            data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier">
+          </span>
         </p>
 
         <h3> Description du produit </h3>
