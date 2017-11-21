@@ -51,7 +51,7 @@ function cart_update(inputElement, product_id, quantity)
                 type : 'POST',
                 url: '/cart/cart_update/',
                 data:{product_id: product_id, quantity:quantity},
-                dataype: 'json',
+                dataType: 'json',
                 success: function(response){
                     //update_input(inputElement, response.count);
                     //cart_edit_confirm(response);
@@ -113,19 +113,21 @@ jQuery("input.quantity").keypress(function(e){
 jQuery(".add_item").click(function(){
     displayAttribute($(this), true);
 });
-
+/*
 jQuery(".remove_item").click(function(){
 
     node = $(this);
     console.log("remove item clicked");
     displayAttribute(node, false);
 });
-
+*/
+/*
 jQuery(".delete").click(function(){
     print("Delete Item clicked " + this);
     node = $(this);
     displayAttribute(node, false, true);
 });
+*/
 function displayAttribute(node, added, del){
     /**
     * node : a JSON representing an HTML element

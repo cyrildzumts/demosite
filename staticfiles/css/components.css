@@ -16,6 +16,35 @@
     text-align: justify;
 
 }
+/*
+#cart-modal{
+    
+    width: 300px;
+    height: 500px;
+    padding: 10px;
+    margin: auto;
+    overflow: auto;
+}
+*/
+/*
+.modal-dialog{
+    width: 350px;
+    height: 550px;
+
+}
+*/
+
+.cart-modal-container{
+    box-sizing: border-box;
+    width: 100px;
+    display: inline-block;
+    
+}
+.cart-modal-container.cart-modal-img{
+    width: 50%;
+    padding: 4px;
+    margin: auto;
+}
 
 .context .danger{
     border-radius: 5px;
@@ -93,7 +122,7 @@
         justify-content: center;
         
         border-radius: 2px;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
     .card-main, .card-content-text{
         width: 100%;
@@ -385,7 +414,7 @@ nav a:hover, nav a:link{
 .nav-header{
     float: left;
     width: 50px;
-    height: 50px;
+    /*height: 50px;*/
     justify-content: center;
     text-align: center;
 }
@@ -417,6 +446,11 @@ nav a:hover, nav a:link{
 .nav-mobile{
   width: 80%;
   overflow: hidden;
+}
+.account-menu{
+    width: 250px;
+    padding: 10px;
+    margin: auto;
 }
 
 #site-nav-menu{

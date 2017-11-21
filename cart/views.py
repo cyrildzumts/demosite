@@ -97,6 +97,7 @@ def ajax_cart_update(request):
                 response['state'] = True
                 response['count'] = user_cart.items_count()
                 response['total'] = user_cart.subtotal()
+                response['quantity'] = quantity
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),

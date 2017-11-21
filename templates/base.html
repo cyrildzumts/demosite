@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    {% load cart_tags %}
+    
+    {% cart_box request as cart_box %}
 <head>
   <meta charset="utf-8">
   <title>
@@ -113,8 +115,11 @@
 
         {% endblock PageContent %}
         
-
+      {% block CartModal %}
+      
+      {% endblock CartModal %}
       <!-- End of Main-Content -->
+      
 
     </div>
     <footer class="site-footer" role="contentinfo">

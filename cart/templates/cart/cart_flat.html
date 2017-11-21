@@ -38,7 +38,7 @@
             <tfoot>
                     <tr>
                         <th colspan="4" scope="row" class="order-total"> Montant Total:</th>
-                        <td headers="price"> {{user_cart.subtotal}} FCFA</td>
+                        <td headers="price" > <span class="cart-subtotal"> {{cart_subtotal}} FCFA </span></td>
                     </tr>
                     <tr>
                         <th colspan="4" scope="row"> Frais d'envoi :</th>
@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <th colspan="4" scope="row"> <strong> Somme Total :</strong></th>
-                        <td headers="price"> <strong> {{cart_subtotal}} FCFA </strong></td>
+                        <td headers="price"> <strong><span class="cart-subtotal"> {{cart_subtotal}} FCFA  </span></strong></td>
                     </tr>
                     <tr> 
                             <th colspan="4" scope="row"></th>
@@ -66,9 +66,10 @@
                 <tr>
                     <td class="cart-item-image"> <img class="img-responsive" src="{{item.image.url}}" alt=""> </td>
                     <td class="cart-item-name">{{item.product.name}}</td>
-                    <td class="cart-item-qty">{{item.quantity}} 
-                        <span class="plusButton glyphicon glyphicon-plus"></span>
-                        <span class="minusButton glyphicon glyphicon-minus"></span>
+                    <td class="cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                        <span class="minusButton glyphicon glyphicon-minus"> </span>
+                        <span class="cartItem-qty"> {{item.quantity}} </span>
+                        <span class="plusButton glyphicon glyphicon-plus"> </span>   
                     </td>
                     <td class="cart-item-price">{{item.price}} FCFA</td>
                     <td class="cart-item-total-price">{{item.total_price}} FCFA</td>
@@ -76,7 +77,7 @@
                             <span class="removeFromCartButton remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
                                 
                             </span>
-                        </td>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -120,3 +121,6 @@
 <!-- End Of Container -->
 
 {% endblock PageContent %}
+
+{% block CartModal %}
+{% endblock CartModal %}

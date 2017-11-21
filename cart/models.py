@@ -111,7 +111,7 @@ class Cart(models.Model):
     def update_cart(self, item_id, quantity):
         """
         item_id : ID of the Product to be updated
-        quantity:  quantity of the item .
+        quantity:  new quantity of the item .
         precondition : quantity >= 0;
         update_cart() updates the quantity value of a CartItem.
         If quantity == 0 then that item will be removed from the cart.
@@ -134,6 +134,7 @@ class Cart(models.Model):
                 else:
                         flag = self.remove_from_cart(item.id)
         return flag
+
 
     def update_quantity(self, item_id, quantity):
             """
