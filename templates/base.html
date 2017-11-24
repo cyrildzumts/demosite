@@ -30,8 +30,6 @@
       <nav role="navigation" id="site-navbar" class="navbar-default navbar-fixed-top flex-container">
         {% include 'tags/navigation.html' %}
       </nav>
-      
-      
       {% endblock navigation %} {%endblock header_panel%}
       <!-- End Of Header Panel -->
       
@@ -89,14 +87,28 @@
     <div class="body-content">
       <header class="content-header flex-container">
         {%block content_header%}
-          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
-            <p> Nouveaux Articles </p>
+          <div id="filter-box" class="filter panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h4 class="panel-title"> <a data-toggle="collapse" href="#select-filter"> Filtrer la liste <span class="glyphicon glyphicon-plus-sign"></span></a></h4>
+              </div>
+              <div id="select-filter" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <select name="brands" id="select-brands">
+                          <option value="1">Motorla</option>
+                          <option value="2">LG</option>
+                          <option value="3">HM</option>
+                          <option value="4">ZARA</option>
+                      </select> 
+                  </div>
+                  <div class="panel-footer">
+                    <button id="btn-filter" class="btn btn-default"> Appliquer </button>
+                  </div>
+              </div>
+            </div>
+
           </div>
-          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
-            <p> Articles Populaires </p>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-4 flex-item header-entry">
-            <p> Reductions </p>
+          
         {%endblock content_header%}
       </header>
 

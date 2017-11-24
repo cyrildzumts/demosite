@@ -13,11 +13,13 @@
         {% get_default_products as products %}
 
             <div class="container" >
-                <div class="row centered">
+                <ul id="product-list" class="row centered sortable">
                     {% for p  in products %}
-                    {% include "tags/product_box_min.html" %}
+                    <li class="list-entry" data-brand="{{p.brand}}" data-price="{{p.price}}">
+                        {% include "tags/product_box_min.html" %}
+                    </li>
                     {% endfor %}
-                </div>
+                </ul>
             </div>
 
     {% endblock PageContent %}

@@ -2,7 +2,7 @@
 
 {% cart_box request as cart_count %}
 
-<a class="link-icon dropdown-toggle" href="{% url 'cart:show_cart' %}">
+<a class="link-icon" href="{% url 'cart:show_cart' %}">
     <span class="cart-button dropdown-toggle glyphicon glyphicon-shopping-cart" data-toggle="dropdown">
     </span>
     {% if cart_count.count > 0 %}
@@ -11,22 +11,29 @@
     </span>
     {%endif%}
 </a>
-<div id="cart-menu" class="dropdown-menu" role="menu" >
-        <div class="card">
-                <ul class="cart-menu-items">
-                    {% for cartItem in cart_box.cartItems %}
-                      <li class="cart-menu-entry" data-itemid={{cartItem.product.id}}>
-                          <img class="img-responsive" src="{{cartItem.image.url}}" alt="">
-                          <p>{{cartItem.name}}</p>
-                          <p>{{cartItem.price}} FCFA</p>
-                      </li>
-          
-                    {% endfor %}
-                </ul>
-
-            <div class="modal-footer">
-                <a class="btn btn-default" href="{% url 'cart:show_cart' %}"> Aller dans le panier </a>
-                <button type="button" class=" btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
+<ul class="dropdown-menu cart-dropdown bg-ebony" >
+    {% for cartItem in cart_box.cartItems %}
+    <li class="cart-menu-entry flex-container" data-itemid={{cartItem.product.id}}>
+        <div class="menu-img">
+            <img class="img-responsive" src="{{cartItem.image.url}}" alt="">
         </div>
-</div>
+        <div class="menu-entry-infos">
+                <p>{{cartItem.name}}</p>
+                <p>{{cartItem.price}} FCFA</p>
+                <p>{{cartItem.quantity}}</p>
+        </div>
+        
+        
+    </li>
+
+  {% endfor %}
+  <li class="divider">
+
+  </li>
+
+  <li class="cart-menu-entry cart-menu-footer flex-container bg-ebonyclay">
+    <a class="btn btn-default cart-link" href="{% url 'cart:show_cart' %}">Voir</a>
+    <span class="space"></span>
+    <button type="button" class=" btn btn-default close-btn" data-dismiss="cart-dropdown">Fermer</button>
+  </li>
+</ul>

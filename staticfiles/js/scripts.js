@@ -97,13 +97,18 @@ var Cart = (function(){
         //jQuery("#cart-modal").modal({backdrop: false});
        // });
        jQuery(".cart-button").hover(this.onCartButtonHover.bind(this));
+       jQuery(".close-btn").click(this.onCloseBtnClicked.bind(this));
     };
     Cart.prototype.init = function(listener){
         this.addEventListener(listener);
     };
+    Cart.prototype.onCloseBtnClicked = function(even){
+        console.log("Close Menu btn clicked ...");
+        jQuery(".cart-dropdown").toggle();
+    };
     Cart.prototype.onCartButtonHover = function(event){
         console.log("Cart hovered ..");
-        $(".cart-button").dropdown();
+        //$(".cart-button").dropdown();
     };
     Cart.prototype.onAddButtonClicked = function(event){
         var item = {};
@@ -339,6 +344,85 @@ var Account = (function(){
     return Account ;
 })();
 
+
+
+var Catalog = (function(){
+    function Catalog(){
+        this.sortOrder         = 1;
+        this.CURRENT_SORTING    = 0;
+        this.SORTING_PRICE_ASC  = 1;
+        this.SORTING_PRICE_DSC  = 2;
+        this.SORTING_POPULARITY = 3;
+        this.SORTING_RANDOM     = 4;
+        this.ordering           = [];
+        this.viewedItems       = [];
+        this.$items             = {};
+        this.$select_filter    = {};
+        this.$select_brands    = {};
+        this.brands            = [];
+    }
+    Catalog.prototype.init = function(sorting){
+        this.ordering[0]                         = "NO ACTIV SORTING ";
+        this.ordering[this.SORTING_PRICE_ASC]     = "ASCENDING SORTING";
+        this.ordering[this.SORTING_PRICE_DSC]     = "DESCENDING SORTING";
+        this.ordering[this.SORTING_POPULARITY]    = "POPULARITY SORTING";
+        this.ordering[this.SORTING_RANDOM]        = "RANDOM SORTING";
+        if((sorting >= 0) && (sorting <= this.SORTING_RANDOM)){
+            this.CURRENT_SORTING = sorting;
+            this.filter();
+        }
+        this.getItems();
+        $("#btn-filter").click(this.onFilterChanged.bind(this));
+        this.$select_filter = $("#select-filter");
+        this.$select_brands = $("#select-brands");
+    };
+    Catalog.prototype.onFilterChanged = function(event){
+        this.$select_filter.collapse("toggle");
+        var sel = this.$select_brands.val();
+        console.log("Filter Selected : " + sel);
+        this.filter();
+    };
+
+    Catalog.prototype.onSortingChanged = function(event){
+        console.log("Sorting changed to " + this.ordering[this.CURRENT_SORTING]);
+    };
+
+    Catalog.prototype.filter = function(){
+        console.log(" filter () : This method is not implemented yet ...");
+    };
+
+    Catalog.prototype.sort = function(){
+        console.log(" sort () : This method is not implemented yet ...");
+    };
+    Catalog.prototype.search = function(){
+        console.log(" search () : This method is not implemented yet ...");
+    };
+    Catalog.prototype.onSearchInputChanged = function(query){
+        console.log(" Searched Query : " + query);
+    };
+    Catalog.prototype.renderViewedItems = function(){
+        console.log(" render () : This method is not implemented yet ...");
+    };
+
+    Catalog.prototype.getItems = function(){
+        console.log(" getItems () : This method is not implemented yet ...");
+        this.$items = $("#product-list .list-entry");
+        console.log("We found " + this.$items.length + " in this page");
+        this.getBrands();
+
+    };
+    Catalog.prototype.getBrands = function (){
+        console.log(" getBrands () : This method is not implemented yet ...");
+        var elem ;
+        for (var i = 0; i < this.$items.length; i++){
+            elem = $(this.$items[i]).attr("data-brand");
+            if (!this.brands.includes(elem)){
+                this.brands.push(elem);
+            }
+        }
+    };
+    return Catalog;
+})();
 //var myCart = new Cart();
 
 Shopping = {};
@@ -362,8 +446,10 @@ if(typeof (Storage)!== "undefined"){
 else{
     console.log("This Browser doesn't support webstorage");
 }
-Shopping.myCart = new Shopping.Cart();
+Shopping.myCart  = new Shopping.Cart();
 Shopping.account = new Account();
+Shopping.catalog = new Catalog();
+Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.myCart.initDefault();
 Shopping.myCart.init(jQuery(".cart-badge"));

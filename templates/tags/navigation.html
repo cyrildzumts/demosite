@@ -62,7 +62,7 @@
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="flex-item dropdown cart-dropdown">
+            <li class="flex-item dropdown cart-btn">
                 {% include "tags/cart_box.html" %}
             </li>
             <li class="flex-item">
@@ -72,30 +72,27 @@
             </li>
             {% if user.is_authenticated %}
             <li class="flex-item"><a href="{% url 'accounts:logout' %}"> <span  class="glyphicon glyphicon-log-out"></span></a></li>
-            <li class="account-Button dropdown">
+            <li class="account-Button dropdown flex-item">
                 <a href="{% url 'accounts:user_account'%}"><span data-toggle="dropdown" class="dropdown-toggle glyphicon glyphicon-user"></span>
                 </a>
-                <ul class="dropdown-menu account-menu">
+                <ul class="dropdown-menu account-menu bg-aliceblue">
                     <li>
                         <a href="{% url 'accounts:user_account'%}">Appercu</a>
                     </li>
                     <li>
-                        <a href="">Mes Commandes</a>
+                        <a href="{% url 'accounts:orders' %}">Mes Commandes</a>
                     </li>
                     <li>
-                        <a href="">Wishlist</a>
+                        <a href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
                     </li>
                     <li>
-                        <a href="">Contact</a>
-                    </li>
-                    <li>
-                        <a href="">Mes Données</a>
+                        <a href="{% url 'contact:index'%}">Contact</a>
                     </li>
                     <li class="divider">
                         
                     </li>
                     <li>
-                        <a href="">Se déconnecter</a>
+                        <a href="{% url 'accounts:logout' %}">Se déconnecter</a>
                     </li>
                 </ul>
             </li>
