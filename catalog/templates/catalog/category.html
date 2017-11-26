@@ -10,11 +10,15 @@
     </div>
     {% if products %}
   
-      <div class="fluid-container">
+    <div class="container" >
+      <ul id="product-list" class="row centered sortable">
           {% for p  in products %}
-          {% include "tags/product_box_min.html" %}
+          <li class="list-entry" data-brand="{{p.brand}}" data-price="{{p.price}}">
+              {% include "tags/product_box_min.html" %}
+          </li>
           {% endfor %}
-      </div>
+      </ul>
+  </div>
 
       <div class="flex-container">
           <ul class="pager flex-item">
@@ -32,7 +36,7 @@
       </div>
       
     {% else %}
-      <p>Il n'y a pas encore de produits disponible
+      <p class="text-center">Il n'y a pas encore de produits disponible
       dans cette catégorie </p>
   {% endif %}
 </div>

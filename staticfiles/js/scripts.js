@@ -360,6 +360,7 @@ var Catalog = (function(){
         this.$select_filter    = {};
         this.$select_brands    = {};
         this.brands            = [];
+        this.brand_filter      = [];
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -373,24 +374,55 @@ var Catalog = (function(){
         }
         this.getItems();
         $("#btn-filter").click(this.onFilterChanged.bind(this));
+        $("#btn-filter-reset").click(this.onFilterReset.bind(this));
         this.$select_filter = $("#select-filter");
         this.$select_brands = $("#select-brands");
+        for(var i = 0; i < this.brands.length; i++){
+            this.$select_brands.append(`<input class="flex-item" type="checkbox" value=${i}>${this.brands[i]}`);
+        }
     };
     Catalog.prototype.onFilterChanged = function(event){
         this.$select_filter.collapse("toggle");
-        var sel = this.$select_brands.val();
-        console.log("Filter Selected : " + sel);
+        var $input = $("#select-brands input:checked");
+        console.log("Filter Selected : " );
+        for(var i = 0; i < $input.length; i++){
+            console.log(this.brands[$input[i].value]);
+            console.log("--------------");
+            this.brand_filter.push(this.brands[$input[i].value]);
+        }
+        
         this.filter();
     };
 
     Catalog.prototype.onSortingChanged = function(event){
         console.log("Sorting changed to " + this.ordering[this.CURRENT_SORTING]);
     };
+    Catalog.prototype.onFilterReset = function(event){
+        event.preventDefault();
+        console.log("Reset pressed...");
+        
+        $('#select-brands input:checkbox').prop('checked', false);
+        this.$items.show();
 
+    };
     Catalog.prototype.filter = function(){
         console.log(" filter () : This method is not implemented yet ...");
+        for(var i = 0; i < this.$items.length; i++){
+            if(this.brand_filter.includes($(this.$items[i]).attr("data-brand"))){
+                $(this.$items[i]).hide();
+            }
+            else{
+                $(this.$items[i]).show();
+            }
+        }
+        this.brand_filter_clear();
+        
     };
-
+    Catalog.prototype.brand_filter_clear = function(){
+        while(this.brand_filter.length){
+            this.brand_filter.pop();
+        }
+    };
     Catalog.prototype.sort = function(){
         console.log(" sort () : This method is not implemented yet ...");
     };
@@ -412,12 +444,11 @@ var Catalog = (function(){
 
     };
     Catalog.prototype.getBrands = function (){
-        console.log(" getBrands () : This method is not implemented yet ...");
-        var elem ;
+        var brand ;
         for (var i = 0; i < this.$items.length; i++){
-            elem = $(this.$items[i]).attr("data-brand");
-            if (!this.brands.includes(elem)){
-                this.brands.push(elem);
+            brand = $(this.$items[i]).attr("data-brand");
+            if (!this.brands.includes(brand)){
+                this.brands.push(brand);
             }
         }
     };
@@ -453,16 +484,7 @@ Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.myCart.initDefault();
 Shopping.myCart.init(jQuery(".cart-badge"));
-/*
-jQuery(".add-to-cart").click(Shopping.myCart.onAddButtonClicked.bind(Shopping.myCart));
-jQuery(".plusButton").click(Shopping.myCart.onPlusButtonClicked.bind(Shopping.myCart));
-jQuery(".minusButton").click(Shopping.myCart.onMinusButtonClicked.bind(Shopping.myCart));
-jQuery(".removeFromCartButton").click(Shopping.myCart.onRemoveButtonClicked.bind(Shopping.myCart));
-jQuery(".cart-popover-button").hover(function(){
-    jQuery("#cart-modal").modal({backdrop: false});
-});
 
-*/
 function  ShoppingApp (){
     // Private attibutes :
     this.username = "";
