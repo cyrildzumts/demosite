@@ -87,12 +87,24 @@ def register(request):
 
 @login_required
 def user_account(request):
+    """
+     This method serves the default user account page.
+     This page display an overview of the user's orders,
+     user's infos ...  So this method have to provide these
+     informations to the template.
+    """
     template_name = "accounts/my-account.html"
     page_title = 'Mon Compte | ' + settings.SITE_NAME
     user = User.objects.get(username=request.user.username)
-    user_profile = user.userprofile
-    name = request.user.first_name
-    return render(request, template_name, locals())
+    name = user.first_name
+    orders = user.order_set.order_by('-date').exclude(status=Order.FINISHED)[:2]
+    context = {
+        'name'      : name,
+        'page_title':page_title,
+        'template_name':template_name,
+        'orders': orders,
+    }
+    return render(request, template_name, context)
 
 
 @login_required

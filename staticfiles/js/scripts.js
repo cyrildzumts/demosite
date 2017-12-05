@@ -378,7 +378,7 @@ var Catalog = (function(){
         this.$select_filter = $("#select-filter");
         this.$select_brands = $("#select-brands");
         for(var i = 0; i < this.brands.length; i++){
-            this.$select_brands.append(`<input class="flex-item" type="checkbox" value=${i}>${this.brands[i]}`);
+            this.$select_brands.append(`<input  type="checkbox" value=${i}> <span class="brand-entry"> ${this.brands[i]} </span>`); 
         }
     };
     Catalog.prototype.onFilterChanged = function(event){

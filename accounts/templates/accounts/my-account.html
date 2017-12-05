@@ -1,59 +1,83 @@
 {% extends "accountbase.html"%}
 
-{%block content_header%}
-    <div class=" header-entry flex-container">
-         <h3> Mon Compte : Bienvenue {{request.user.first_name}}!</h3>  
-    </div><!-- End of main-header -->
-{%endblock content_header%}
 
-{% block PageContent %}
 
-<div class="container">
-    <section class="card-flat-header">
-            <h2 class="panel-title">Informations personelles : </h2>
-    </section>
+{%block account_content %}
 
-    <section class="card-flat-body content-center">
-        <table class="table table-responsive">
-            
-            <tbody>
-                <tr>
-                    <td>Nom d'utilisateur : </td>
-                    <td> {{user_profile.user.username}} </td>
-                </tr>
-                <tr>
-                        <td>Email :</td>
-                        <td> {{user_profile.user.email}} </td>
-                </tr>
-                <tr>
-                        <td>Nom : </td>
-                        <td> {{user_profile.user.last_name}} </td>
-                </tr>
-                <tr>
-                        <td>Prenom :</td>
-                        <td> {{user_profile.user.first_name}} </td>
-                </tr>
-                <tr>
-                        <td> Date de naissance :</td>
-                        <td> {{user_profile.date_of_birth}} </td>
-                </tr>
-                <tr>
-                        <td> Pays de résidence :</td>
-                        <td> {{user_profile.country}} </td>
-                </tr>
-                <tr>
-                        <td> Ville :</td>
-                        <td> {{user_profile.city}} </td>
-                </tr>
-                <tr>
-                        <td> Telephone :</td>
-                        <td> {{user_profile.telefon}} </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <section class="card-flat-footer">
-        <a href="{% url 'accounts:orders' %}" class="btn btn-default text-center">Modifier <span class="glyphicon glyphicon-pencil"></span></a>
-    </section>
+<div class="card-flat">
+        <div class="container-fluid">
+                <p> Appercu de mon compte</p>
+                {% for order in orders %}
+                <div class="order-card card-flat">
+                        <div class="order-card-header">
+                                <span class="card-key text-left"> <strong> Reference  </strong><span class="right separator"> : </span> </span>
+                                <span class="card-value text-right"> {{order.ref_num}} </span>
+                        </div>
+                        <div class="list-divider"></div>
+                        <div class="order-card-body">
+                                <div class="order-card-entry">
+                                        <span class="card-key text-left"> <strong> Date </strong> <span class="right separator"> : </span> </span>
+                                        <span class="card-value text-right"> {{order.date.date}} </span>
+                                </div>
+                                <div class="list-divider"></div>
+                                <div class="order-card-entry">
+                                        <span class="card-key text-left"> <strong> Montant </strong><span class="right separator"> : </span></span>
+                                        <span class="card-value text-right"> {{order.total}} FCFA </span>
+                                </div>
+                                <div class="list-divider"></div>
+                                <div class="order-card-entry">
+                                        <span class="card-key text-left"> <strong> Status </strong><span class="right separator"> : </span></span>
+                                        <span class="card-value text-right"> {{order.get_status}} </span>
+                                </div>
+                        </div>
+                        <div class="list-divider"></div>
+                        <div class="order-card-footer">
+                                <span class="card-key"></span>
+                                <span class="card-value">
+                                        <a class="btn" href="{% url 'accounts:order_details' order.id %}">
+                                                       <span class=""><strong> Voir la Commande </strong></span> <span class="glyphicon glyphicon-menu-right"></span>
+                                        </a>
+                                </span>
+                        </div>
+
+                </div>
+                {% endfor %}
+                {% comment "to be removed" %}
+                <div class="orders-overview">
+                                <table class="order-table">
+                                        <caption> Commandes recentes </caption>
+                                        <tr>
+                                                <th> Reference </th>
+                                                <th> Date </th>
+                                                <th> Montant </th>
+                                                <th> Status </th>
+                                                <th>  </th>
+                                        </tr>
+                                        {% for order in orders %}
+                                        <tr> 
+                                                <td> {{order.ref_num}} </td>
+                                                <td> {{order.date.date}} </td>
+                                                <td>  {{order.total}} FCFA </td>
+                                                <td> {{order.get_status}} </td>
+                                                <td> 
+                                                    <a class="btn" href="{% url 'accounts:order_details' order.id %}">
+                                                                Voir la Commande <span class="glyphicon glyphicon-menu-right"></span>
+                                                    </a>
+                                                </td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+        
+                                        
+                                </table>
+                                <div class="container-fluid orders-link"> <a  href=""> <span class="text-right btn btn-default"> Voir toutes les commandes </span> </a></div>
+                        </div>
+                {% endcomment %}
+                
+
+        </div>
+        
 </div>
-{% endblock %}
+{%endblock account_content%}
+
+

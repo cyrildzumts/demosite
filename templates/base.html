@@ -85,8 +85,9 @@
     </div><!-- End OfModal -->
     </div>
     <div class="body-content">
-      <header class="content-header flex-container">
-        {%block content_header%}
+        {% block content_header %}
+      <header class="content-header flex-container container-fluid">
+        
           <div id="filter-box" class="filter panel-group">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -107,9 +108,9 @@
 
           </div>
           
-        {%endblock content_header%}
+        
       </header>
-
+      {% endblock content_header %}
         {%block MainHeader%}
           
         {%endblock MainHeader%}

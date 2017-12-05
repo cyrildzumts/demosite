@@ -21,6 +21,7 @@ class Order(models.Model):
     SHIPPED = 3
     CANCELLED = 4
     BEINGPROCESSED = 5
+    FINISHED = 6
 
     # Set of possibles order statuses
     ORDER_STATUSES = (
@@ -28,7 +29,8 @@ class Order(models.Model):
         (PROCESSED, 'Processed'),
         (SHIPPED, 'Shipped'),
         (CANCELLED, 'Cancelled'),
-        (BEINGPROCESSED, 'Being processed'),)
+        (BEINGPROCESSED, 'Being processed'),
+        (FINISHED, 'FINISHED'),)
 
     # Order Infos
     date = models.DateTimeField(auto_now_add=True)
