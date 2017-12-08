@@ -2,14 +2,44 @@
 
 {%block content_header%}
     <div class="header-entry">
-         <p>Contenu de la Commande : <strong>{{order_ref}}</strong></p>
-         <p> Date de commande : <strong>{{order.date.date}}</strong></p>
-         <p> Status de la commande : <strong>{{order.get_status}}</strong></p>
+         <p> Information de votre Commande </p>
     </div><!-- End of main-header -->
+    
 {%endblock content_header%}
 
 
 {% block PageContent %}
+<div class="order-list list-flex list-vertical">
+        <div class="card-mat vertical">
+                <div class="mat-entry"> {{order.get_status}} </div>
+                <div class="mat-entry">Date : {{order.get_date}}</div>
+                <div class="mat-entry"> <span class="order-ref">Ref : {{order.ref_num}} </span></div>
+        </div>
+        {% for item in orderitems %}
+        <div class="card-mat horizontal">
+                <div class="mat-entry mat-entry-img bordered"> 
+                        <img class="img-responsive" src="{{item.image_url}}">
+                </div>
+                <div class="card-mat vertical">
+                        <div class="mat-entry">{{item.name}}</div>
+                        <div class="mat-entry">Quantité : {{item.quantity}}</div>
+                        <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.get_price}} FCFA  </span></div>
+                        <div class="mat-entry"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span></div>
+                </div>
+                
+        </div>
+        <div class="list-divider"></div>
+        {% endfor %}
+        <div class="card-mat vertical bg-newspaper">
+                <div class="mat-entry"><span class="pull-right">Montant Total : <strong> {{order.total}} FCFA </strong> </span></div>
+                <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
+                <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>
+                <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : {{order.total}} FCFA </strong></span></div>
+        </div>
+        <div class="list-divider"></div>
+</div>  
+
+{% comment "" %}
 
 <div class="fluid-container">
         <div class="table-responsive">
@@ -50,6 +80,7 @@
                 </table>
         </div>
 </div>
+{% endcomment %}
     
     
 

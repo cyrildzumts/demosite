@@ -4,9 +4,29 @@
 
 {%block account_content %}
 
-<div class="card-flat">
-        <div class="container-fluid">
+<div class="">
+        <div class="order-list list-flex list-vertical">
                 <p> Appercu de mon compte</p>
+                {% for order in orders %}
+                <a class="card-mat bordered" href="{% url 'accounts:order_details' order.id %}">
+                                <div >
+                                                <div class="mat-entry">{{order.get_status}}</div>
+                                                <div class="mat-entry"><strong>{{order.get_date}}</strong></div>
+                                                <div class="mat-entry clearfix"> <span class="order-ref">Ref : {{order.ref_num}} </span> <span class="order-sum pull-right"><strong>{{order.total}} FCFA</strong></span></div>
+                                </div>
+                </a>
+                <div class="list-divider"></div>
+                <div class="order-card-footer">
+                        <span class="card-key"></span>
+                        <span class="card-value">
+                                <a class="btn" href="{% url 'accounts:order_details' order.id %}">
+                                               <span class=""><strong> Voir la Commande </strong></span> <span class="glyphicon glyphicon-menu-right"></span>
+                                </a>
+                        </span>
+                </div>
+                
+                {% endfor %}
+                {% comment "to be removed" %}
                 {% for order in orders %}
                 <div class="order-card card-flat">
                         <div class="order-card-header">
@@ -42,7 +62,7 @@
 
                 </div>
                 {% endfor %}
-                {% comment "to be removed" %}
+                
                 <div class="orders-overview">
                                 <table class="order-table">
                                         <caption> Commandes recentes </caption>

@@ -273,6 +273,9 @@ class CartItem(models.Model):
     def image(self):
         return self.product.image
 
+    def image_url(self):
+        return self.product.image.url
+    
     def price(self):
         return self.product.price
 

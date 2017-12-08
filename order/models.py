@@ -108,7 +108,13 @@ class Order(models.Model):
         return Order.ORDER_STATUSES[self.status-1][1]
 
     def get_date(self):
-        return date.date()
+        """
+        As from the current Django 1.11 Doc :
+         'A date and time, represented in Python by a datetime.datetime instance'.
+        This method returns a python datetime.datetime.date 
+        """
+        return self.date.strftime("%d.%m.%Y %H:%M")
+
 
     def populate(self, user_cart):
         self.populate_from_item_list(user_cart.get_items())

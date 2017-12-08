@@ -1,34 +1,76 @@
 {% extends "accountbase.html"%}
 
 {%block content_header%}
-<div class="content-header container-fluid">
+<div class="content-header">
      <h3> Mes Commandes !</h3>  
 </div><!-- End of main-header -->
 {%endblock content_header%}
 
+{% block account_sidemenu %}
+
+{% endblock account_sidemenu %}
+
+
 {% block account_content %}
-<div class="container-fluid">
-        
-            <div class="table table-responsive">
-                    <table class="table table-condensed table-striped">
-                            <thead>
-                                <tr>
-                                    <th> Date </th>
-                                    <th> Numero de commande </th>
-                                    <th> Statut </th>
-                                    <th> Montant </th>
-                                    <th> Action </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {% for order in orders %}
-                                    {% include "tags/entry_order.html" %}
-                                    {% endfor %}
-                            </tbody>
-                    </table>
-            </div>
+
+<div class="order-list list-flex list-vertical">
+
+        {% for order in orders %}
+                <a class="card-mat bordered" href="{% url 'accounts:order_details' order.id %}">
+                                <div >
+                                                <div class="mat-entry">{{order.get_status}}</div>
+                                                <div class="mat-entry"><strong>{{order.get_date}}</strong></div>
+                                                <div class="mat-entry clearfix"> <span class="order-ref">Ref : {{order.ref_num}} </span> <span class="order-sum pull-right"><strong>{{order.total}} FCFA</strong></span></div>
+                                </div>
+                </a>
                 
-        </div>
+        {% endfor %}
+        
+        <nav class="nav-option bordered">
+                <ul id="account-menu" class="">
+                        <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Appercu </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'accounts:orders' %}"> Mes Commandes </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'wishlist:show_wishlist' %}" > Ma liste de souhaits </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Mes Données </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'contact:index' %}"> Contact </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Centre d'aide </a></li>
+                        <li class="list-divider"></li>
+                        <li class="menu-entry"><a  href="{% url 'accounts:logout' %}"> Deconnexion </a></li>
+                        {%comment%}<li class="menu-entry"><a  href="#">Abonnements à la newsletter</a></li>{%endcomment%}
+                        {%comment%}<li class="menu-entry"><a  href="#">Ma Carte VIP</a></li>{%endcomment%}
+                </ul>
+        </nav>
+</div>
+{% comment "" %}
+<div class="container-fluid">
+                
+                <div class="table table-responsive">
+                        <table class="table table-condensed table-striped">
+                                <thead>
+                                        <tr>
+                                            <th> Date </th>
+                                            <th> Numero de commande </th>
+                                            <th> Statut </th>
+                                            <th> Montant </th>
+                                            <th> Action </th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        {% for order in orders %}
+                                        {% include "tags/entry_order.html" %}
+                                        {% endfor %}
+                                </tbody>
+                        </table>
+                </div>
+                        
+ </div>
+{% endcomment %}
+
         
 {% endblock account_content%}
 

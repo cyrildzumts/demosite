@@ -4,6 +4,33 @@
  in the site
  the Headers and Footer. They are site wide.
 -------------------------------------------------*/
+.list-flex{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    margin: auto;
+}
+.list-vertical, .vertical{
+    flex-direction: column;
+}
+.horizontal {
+    flex-direction: row;
+}
+.grid-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.list-icon{
+    padding-left: 16px;
+    
+}
+.list-item{
+    padding-right: 72px;
+}
 .centered{
     padding: 5px;
     margin: auto;
@@ -15,6 +42,53 @@
     margin: auto;
     text-align: justify;
 
+}
+
+.card-mat{
+    display: flex;
+    
+    width: 100%;
+    max-height: 150px;
+    padding: 16px;
+    margin : 5px;
+}
+
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-entry {
+    padding: 1px;
+    margin: 1px;
+}
+
+.mat-entry-img{
+    width: 30%;
+    max-width: 115px;
+    max-height: 115px;
+    padding: 5px;
+    margin: auto;
+}
+/*
+.mat-entry-img img{
+    max-height: 110px;
+    max-width: 110px;
+    padding: 2px;
+    margin: 5px;
+}
+*/
+.order-list{
+    width: 100%;
+}
+.order-list a:link, .order-list a:hover, .order-list a{
+    width: 100%;
+    color: #2F2D2C;
+    text-decoration: none;
+}
+.nav-option{
+    width: 100%;
+    
 }
 /*
 #cart-modal{
@@ -124,8 +198,8 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
 .account-container{
     display: flex;
     flex-direction: column;
-    padding: 5px;
-    margin: 3px;
+    padding: 2px;
+    margin: 5px;
 }
 .list-divider{
     width: 100%;
@@ -159,7 +233,7 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     display: inline-block;
     text-decoration: none;
 }    
-.menu-entry a:hover,
+.menu-entry a:hover, .order-list a:hover,
 .menu-entry a:active{
     background-color: #DED8D3;
     border-radius: 5px;
@@ -701,8 +775,8 @@ nav a:hover, nav a:link{
 
 .body-content{
     width: 100%;
-    padding: 0;
-    margin: auto;
+    padding: 2px;
+    margin: 5px;
 }
 
 .p-product-name{
@@ -710,7 +784,7 @@ nav a:hover, nav a:link{
     font-size: 20px;
     text-align: center;
     padding: 10px;
-    margin: auto;
+    margin: 5px;
 }
 /* ----------------------------------------------
 ***  End of LAYOUTS COMPONENTS IN MAIN CONTENT **
@@ -827,11 +901,9 @@ headers and footers.
 }
 
 .content-header{
-    box-sizing: border-box;
     border: 1px solid #DADFE1;
-    width: 100%;
-    padding: 2px;
-    margin: auto;
+    padding:10px;
+    margin: 5px;
 }
 
 .content{
