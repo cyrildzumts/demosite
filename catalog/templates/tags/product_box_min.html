@@ -1,17 +1,13 @@
-<div class="col-xs-6 col-sm-6 col-md-3 centered"><!-- Product Container -->
-    <div class="card-product">
-        <div class="card-product-header"><!-- Product Image Element -->
-            <a class="product-link" href="{{p.get_absolute_url}}">
-                <img class="img-responsive" src="{{p.image.url}}">
-            </a>
-        </div><!-- End Of Product Image element -->
-        <div class="card-product-details text-center">
-            <div class="text-center">
-                <p class="p-brand">{{p.brand}} </p>
-                <p class="p-title "> <strong> {{p.name}} </strong></p>
-                <p class="p-price">{{p.price}} FCFA  </p>
-            </div>
-        </div> <!-- End of Product Details -->
-        
-    </div><!-- End of product-innner-Container -->
-</div> <!-- End of Product Container -->
+<div class="card-product" data-brand="{{p.brand}}" data-price="{{p.price}}">
+        <div class="card-product-image"> 
+                <a href="{{p.get_absolute_url}}">
+                        <img class="img-responsive" src="{{p.image.url}}">
+                </a>
+        </div>
+        <div class="list-flex vertical">
+                <div class="mat-entry">{{p.name}}</div>
+                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
+                
+        </div>
+</div>

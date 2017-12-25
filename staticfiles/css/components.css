@@ -7,8 +7,6 @@
 .list-flex{
     display: flex;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     padding: 2px;
     margin: auto;
 }
@@ -20,9 +18,12 @@
 }
 .grid-flex{
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    padding: 2px;
+    margin: auto;
 }
 .list-icon{
     padding-left: 16px;
@@ -42,6 +43,9 @@
     margin: auto;
     text-align: justify;
 
+}
+.flex-child{
+    flex-basis: 400px;
 }
 
 .card-mat{
@@ -70,6 +74,7 @@
     padding: 5px;
     margin: auto;
 }
+
 /*
 .mat-entry-img img{
     max-height: 110px;
@@ -89,6 +94,12 @@
 .nav-option{
     width: 100%;
     
+}
+
+#filter-box{
+    width: 100%;
+    padding: 5px;
+    margin: 2px;
 }
 /*
 #cart-modal{
@@ -469,7 +480,48 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
         padding: 2px;
         margin: 2px;
     }
-    
+    .product-card{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-flow: row wrap;
+        padding: 1px;
+        margin: 1px;
+    }
+    .product-card .card-product-image{
+        max-width: 350px;
+        padding: 2px;
+        margin: 2px;
+        
+    }
+    .product-card .product-details{
+        max-width: 400px;
+        width: 350px;
+        padding: 2px;
+        margin: 2px;
+    }
+    .product-details .add-btn{
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+        padding: 2px;
+        margin: 10px;
+    }
+
+    .btn-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .text-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .card-product{
         border-radius: 2px;
         font-family: "Montserrat", sans-serif;
@@ -478,11 +530,11 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     }
     .card-product{
         
-        width: 100%;
-        max-width: 300px;
-        height: 410px;
-        padding: 1px;
-        margin: auto;
+        width: 300px;
+        max-width: 400px;
+        height: 350px;
+        padding: 2px;
+        margin: 5px;
     }
     .card-product-header{
         
@@ -492,8 +544,27 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
         margin: auto;
     }
 
+#banner{
+    width: 100%;
+    height: 300px;
+    padding: 2px;
+    margin: 5px;
+}
 
-    .site-banner{
+.banner-inner{
+    width: 50%;
+    height: 300px;
+
+    padding: 2px;
+    margin: 5px;
+}
+.banner-item{
+    width: 300px;
+    max-width: 350px;
+    padding: 5px;
+    margin: 2px;
+}
+.site-banner{
 
         width: 100%;
         padding: 5px;
@@ -519,7 +590,7 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     margin: auto;
 }
 .card-product-image{
-    width: 50%;
+    width: 100%;
     padding: 5px;
     margin: auto;
 }
@@ -553,14 +624,14 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
 
     .flex-container{
         display: flex;
-        width: 100%;
-    
         align-items: center;
         justify-content: center;
         padding:1px;
         margin: 2px;
     }
-    
+    .flex-wrap{
+        flex-wrap: wrap;
+    }
     .flex-item{
         max-height: 50%;
         padding: 1px;
@@ -1172,6 +1243,7 @@ headers and footers.
     margin: auto;
     border: 3px solid #2F2D2C;  
 }
+/*
 .card-item-image{
     width: 20%;
     padding: 1px;
@@ -1190,9 +1262,11 @@ headers and footers.
 
 }
 .card-item-quantity{
+    
     width: 20px;
     padding: 1px;
     font-size: 10px;
+    
     margin: auto;
 }
 .card-item-remove{
@@ -1204,6 +1278,7 @@ headers and footers.
     font-size: 0.875em;
 }
 
+*/
 .cart-item{
     max-height: 120px;
     width: 100%;
@@ -1213,6 +1288,7 @@ headers and footers.
     /*border-bottom : 2px solid #22313F;*/
 
 }
+/*
 .cart-item-image{
     max-width: 15%;
     padding: 10px;
@@ -1249,6 +1325,7 @@ headers and footers.
     padding: 5px;
     margin: auto;
 }
+*/
 .input-block{
     display: block;
     border: 1px solid #2F2D2C;

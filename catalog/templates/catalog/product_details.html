@@ -23,14 +23,14 @@
 
 
 {% block PageContent %}
-<div class="fluid-container">
+<div class="product-card bordered">
   
-  <div class="card-product-image col-md-6">
-    <div class="image-container row">
+  <div class="card-product-image bordered">
+    <div class="image-container">
        <img class="img-responsive" src="{{product.image.url}}" alt="{{product.name}}" />
     </div>
   </div>
-  <div class="col-md-6 product-details">
+  <div class="product-details bordered">
 
     <div class="detail-content">
          <p>Marque: <strong><em>{{product.brand}}</em> </strong></p>
@@ -45,14 +45,22 @@
         <p class="invalid">Coûtait : {{product.old_price}} CFA </p>
         {% endif %}
         <p>Prix : <strong>{{product.price}} CFA </strong></p>
-        <p class="">
-          <span class="add-to-cart glyphicon glyphicon-shopping-cart gi-2x bordered" 
+        <div class="btn-box">
+          <span class="add-to-cart add-btn text-box glyphicon glyphicon-shopping-cart bordered bg-niagara1" 
             data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier">
+            Ajouter dans le panier
           </span>
-        </p>
+          <span class="add-to-wishlist add-btn text-box glyphicon glyphicon-heart bordered" 
+            data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier">
+            Ajouter dans la wishlist
+        </span>
+        </div>
 
-        <h3> Description du produit </h3>
-        <p>{{product.description}}</p>
+        <div class="description">
+          <h3> Description du produit </h3>
+          <p>{{product.description}}</p>
+        </div>
+        
 
     </div>
       

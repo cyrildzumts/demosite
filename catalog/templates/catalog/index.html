@@ -11,7 +11,9 @@
     {% block PageContent %}
  
         {% get_default_products as products %}
-
+            {% comment "" %}
+            
+            
             <div class="container" >
                 <ul id="product-list" class="row centered sortable">
                     {% for p  in products %}
@@ -20,6 +22,12 @@
                     </li>
                     {% endfor %}
                 </ul>
+            </div>
+            {% endcomment %}
+            <div class="grid-flex">
+                    {% for p  in products %}
+                        {% include "tags/product_box_min.html" %}
+                    {% endfor %}
             </div>
 
     {% endblock PageContent %}

@@ -144,65 +144,11 @@ var Cart = (function(){
     };
     Cart.prototype.onPlusButtonClicked = function(event){
         console.log("PlusButton Clicked ...  : ");
-        var itemID = parseInt($(event.target).parent().attr("data-itemid"));
-        var price = parseFloat($(event.target).parent().attr("data-price"));
-        var quantity = parseInt($(event.target).prev().html());
-        var total_price_element = $(event.target).parent().siblings(".cart-item-total-price");
-
-        var target = $(event.target).prev();
-        var that = this;
-        $.ajax({
-            type: 'POST',
-            url: '/cart/cart_update/',
-            data: {product_id: itemID, quantity : quantity + 1},
-            dataType:'json',
-            success: function(response){
-                that.total = response.total;
-                that.count = response.count;
-                $(target).html(quantity + 1);
-                $(total_price_element).html((price * (quantity + 1)) + " FCFA");
-                that.notify({});
-            },
-            error: function(response){
-                console.log("Error : couldn't add up article");
-            }
-        });
-        
+        this.update(event, true);
     };
     Cart.prototype.onMinusButtonClicked = function(event){
         console.log("MinusButton Clicked ...");
-        var $event_target = $(event.target);
-        var $target_parent = $event_target.parent();
-        var itemID = parseInt($target_parent.attr("data-itemid"));
-        var price = parseFloat($target_parent.attr("data-price"));
-        var quantity = parseInt($(event.target).next().html());
-        var $total_price_element = $target_parent.siblings(".cart-item-total-price");
-        var $target = $event_target.next();
-        var that = this;
-
-        $.ajax({
-            type: 'POST',
-            url: '/cart/cart_update/',
-            data: {product_id: itemID, quantity : quantity - 1},
-            dataType:'json',
-            success: function(response){
-                that.total = response.total;
-                that.count = response.count;
-                quantity = response.quantity;
-                if(quantity == 0){
-                   $target_parent.parent().remove();
-                }
-                else {
-                    $target.html(quantity);
-                    $total_price_element.html((price * (quantity)) + " FCFA");
-                    
-                }
-                that.notify({});
-            },
-            error: function(response){
-                console.log("Error : couldn't substract the  article");
-            }
-        });
+        this.update(event, false);
     };
     Cart.prototype.addObserver = function(observer){
         console.log("Adding Observer ...");
@@ -219,7 +165,7 @@ var Cart = (function(){
     };
     Cart.prototype.notify = function(item){
         console.log("Notifying Observers ...");
-        $(".cart-subtotal").html(this.total + " FCFA");
+        $(".cart-subtotal").html("<strong>" + this.total + " FCFA" +  "</strong>");
         
         for (observer in this.observers){
             observer(item);
@@ -302,8 +248,38 @@ var Cart = (function(){
         this.count = 0;
     };
 
-    Cart.prototype.update = function(req){
-        console.log("Update called with itemID : " + req.id + " Qty : " + req.quantity + "\nAction : " +req.action);
+    Cart.prototype.update = function(event, action){
+        var $target = $(event.target);
+        var $quantity_target = $target.siblings(".cartItem-qty");
+        var itemID = parseInt($target.parent().attr("data-itemid"));
+        var price = parseFloat($target.parent().attr("data-price"));
+        var quantity = parseInt($quantity_target.html());
+        var $span = $target.parent().siblings(".cart-item-total-price").find("span");
+        var that = this;
+        var requested_qty = action ? quantity + 1 : quantity - 1;
+        $.ajax({
+            type: 'POST',
+            url: '/cart/cart_update/',
+            data: {product_id: itemID, quantity : requested_qty},
+            dataType:'json',
+            success: function(response){
+                that.total = response.total;
+                that.count = response.count;
+                if(requested_qty == 0){
+                    $target.parent().parent().parent().remove();
+                 }
+                 else {
+                    $quantity_target.html(requested_qty);
+                    $span.html("<strong> Total : " + (price * (requested_qty)) + " FCFA" + "</strong>");
+                     
+                 }
+                
+                that.notify({});
+            },
+            error: function(response){
+                console.log("Error : couldn't update article");
+            }
+        });
     };
     Cart.prototype.badgeUpdate = function(){
         this.eventListeners[0].html("(" + this.count + ")");
@@ -456,6 +432,110 @@ var Catalog = (function(){
 })();
 //var myCart = new Cart();
 
+var Wishlist = (function(){
+    function Wishlist(){
+        this.items = [];
+        this.$bagde = {};
+
+    }
+    Wishlist.prototype.init = function(){
+        this.$bagde = $(".wishlist-badge");
+        $(".wishlist-add-btn").click(this.onAddButtonClicked.bind(this));
+        $(".wishlist-remove-btn").click(this.onRemoveButtonClicked.bind(this));
+        $(".wishlist-clear-btn").click(this.onClearButtonClicked.bind(this));
+    }
+    Wishlist.prototype.onAddButtonClicked = function(event){
+        var item = {};
+        var $target = $(event.target);
+        var $element_to_remove = $target.parent();
+        item.id = parseInt($element_to_remove.attr("data-itemID"));
+        item.name = $element_to_remove.attr("data-name");
+        item.image = $element_to_remove.attr("data-image");
+        console.log("Item to Remove : \nName : " + item.name + "\nImage : " + item.image);
+        this.addItem(item);
+        
+    };
+    Wishlist.prototype.onRemoveButtonClicked = function(event){
+        var item = {};
+        var $target = $(event.target);
+        var $element_to_remove = $target.parent();
+        item.id = parseInt($element_to_remove.attr("data-itemID"));
+        item.name = $element_to_remove.attr("data-name");
+        item.image = $element_to_remove.attr("data-image");
+        console.log("Item to Remove : \nName : " + item.name + "\nImage : " + item.image);
+        this.removeItem(item.id);
+        
+    };
+    Wishlist.prototype.onClearButtonClicked = function(event){
+        var item = {};
+        var $target = $(event.target);
+        var $element_to_remove = $target.parent();
+        this.clear();
+    };
+    Wishlist.prototype.addItem = function(item){
+        var $target = $(event.target);
+        var that = this;
+        $.ajax({
+            type: 'POST',
+            url: '/wishlist/ajax_add_to_wishlist/',
+            data: {product_id: itemID},
+            dataType:'json',
+            success: function(response){
+                console.log("Add request sent successfully");
+                console.log("Item added : " +  response.state);
+                console.log("Item Count   : " +  response.item_count);
+                //$(`#${itemID}`).remove();
+                that.notify({});
+            },
+            error: function(response){
+                console.log("Error : couldn't add item into the wishlist");
+            }
+        });
+        
+        this.notify();
+        
+    };
+    Wishlist.prototype.removeItem = function(itemID){
+        var $target = $(event.target);
+        var that = this;
+        $.ajax({
+            type: 'POST',
+            url: '/wishlist/ajax_remove_from_wishlist/',
+            data: {product_id: itemID},
+            dataType:'json',
+            success: function(response){
+                console.log("Remove request sent successfully");
+                console.log("Item removed : " +  response.state);
+                console.log("Item Count   : " +  response.item_count);
+                $(`#${itemID}`).remove();
+                that.notify({});
+            },
+            error: function(response){
+                console.log("Error : couldn't remove item from the wishlist");
+            }
+        });
+        
+        this.notify();
+    };
+    Wishlist.prototype.clear = function(){
+
+        this.notify();
+    };
+
+    Wishlist.prototype.get = function(itemID){
+        return this.items.find(function(item){
+            return item.id === itemID;
+        });
+    };
+
+    Wishlist.prototype.notify = function(){
+        console.log("Wishlist changed ...");
+    };
+
+    return Wishlist;
+})();
+
+
 Shopping = {};
 Shopping.Cart = Cart;
 if(typeof (Storage)!== "undefined"){
@@ -480,10 +560,12 @@ else{
 Shopping.myCart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
+Shopping.wishlist =  new Wishlist();
 Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.myCart.initDefault();
 Shopping.myCart.init(jQuery(".cart-badge"));
+Shopping.wishlist.init();
 
 function  ShoppingApp (){
     // Private attibutes :

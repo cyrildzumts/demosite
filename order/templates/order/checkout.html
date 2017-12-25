@@ -19,33 +19,33 @@
             <input class="form-control" type="hidden" name="shipping_country" value="{{form_context.country}}">
 </form>
 <div class="container-fluid">
-    <ul class="nav nav-pills bordered">
+    <ul class="nav nav-tabs bordered">
         <li class="active">
-            <a data-toggle="pill" href="#tab1">
+            <a data-toggle="tab" href="#tab1">
                 <span class="glyphicon glyphicon-info-sign"> Infos </span>
             </a>
         </li>
         <li>
-            <a data-toggle="pill" href="#tab2">
+            <a data-toggle="tab" href="#tab2">
                     <span class="glyphicon glyphicon-tags"> Payement </span>
             </a>
         </li>
         <li>
-            <a data-toggle="pill" href="#tab3">
+            <a data-toggle="tab" href="#tab3">
                 <span class="glyphicon glyphicon-shopping-cart"> Panier </span>
             </a>
         </li>
     </ul>
-    <div class="tab-content">
-            <div id="tab1" class="tab-pane fade in active">
+    <div class="tab-content container-fluid">
+            <div id="tab1" class="tab-pane fade in active tab-child order-card card-flat">
                 {% include "tags/infos_material.html" %}
             </div>
         
-            <div id="tab2" class="tab-pane fade">
+            <div id="tab2" class="tab-pane fade tab-child">
                 {% include "tags/payement_choices.html" %}
             </div>
         
-            <div id="tab3" class="tab-pane fade">
+            <div id="tab3" class="tab-pane fade tab-child">
                 {% include "tags/confirmation.html" %}
             </div>
     </div>

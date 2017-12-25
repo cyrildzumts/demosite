@@ -17,7 +17,7 @@
 
         {% for order in orders %}
                 <a class="card-mat bordered" href="{% url 'accounts:order_details' order.id %}">
-                                <div >
+                                <div class="list-flex vertical" >
                                                 <div class="mat-entry">{{order.get_status}}</div>
                                                 <div class="mat-entry"><strong>{{order.get_date}}</strong></div>
                                                 <div class="mat-entry clearfix"> <span class="order-ref">Ref : {{order.ref_num}} </span> <span class="order-sum pull-right"><strong>{{order.total}} FCFA</strong></span></div>

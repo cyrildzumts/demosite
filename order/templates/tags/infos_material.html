@@ -1,43 +1,87 @@
+<div class="order-card-body">
+        <div class="order-card-entry">
+                <span class="card-key text-left">
+                        <strong> Nom </strong>
+                        <span class="right separator"> : </span>
+                </span>
+                <span class="card-value text-right"> {{form_context.name}} </span>
+        </div>
+        <div class="order-card-entry">
+                <span class="card-key text-left">
+                        <strong> Email </strong>
+                        <span class="right separator"> : </span>
+                </span>
+                <span class="card-value text-right"> {{form_context.email}} </span>
+        </div>
+        <div class="order-card-entry">
+                <span class="card-key text-left">
+                        <strong> Pays de résidence </strong>
+                        <span class="right separator"> : </span>
+                </span>
+                <span class="card-value text-right"> {{form_context.country}} </span>
+        </div>
+        <div class="order-card-entry">
+                <span class="card-key text-left">
+                        <strong> Ville </strong>
+                        <span class="right separator"> : </span>
+                </span>
+                <span class="card-value text-right"> {{form_context.city}} </span>
+        </div>
+        <div class="order-card-entry">
+                <span class="card-key text-left">
+                        <strong> Téléphone </strong>
+                        <span class="right separator"> : </span>
+                </span>
+                <span class="card-value text-right"> {{form_context.phone}} </span>
+        </div>
 
-    
-            
-            <section class="card-body">
+</div>
 
-                    <table class="table table-responsive">
-                            
-                            <tbody>
-                                <tr>
-                                    <td>Nom d'utilisateur : </td>
-                                    <td> {{request.user.username}} </td>
-                                </tr>
-                                <tr>
-                                        <td>Email :</td>
-                                        <td> {{form_context.email}} </td>
-                                </tr>
-                                <tr>
-                                        <td>Nom : </td>
-                                        <td> {{form_context.name}} </td>
-                                </tr>
-                                
-                                <tr>
-                                        <td> Pays de résidence :</td>
-                                        <td> {{form_context.country}} </td>
-                                </tr>
-                                <tr>
-                                        <td> Ville :</td>
-                                        <td> {{form_context.city}} </td>
-                                </tr>
-                                <tr>
-                                        <td> Telephone :</td>
-                                        <td> {{form_context.phone}} </td>
-                                </tr>
-                            </tbody>
-                        </table>
 
-                
-                
-            </section><!-- End Of Body Section -->
-            <section class="card-flat-footer text-center">
-                <span class="card-next btn btn-default" data-toggle="pill" href="#tab2">Suivant</span>
-                
-            </section><!-- End Of Main Section -->
+
+{% comment "" %}
+
+
+<section class="card-body">
+
+        <table class="table table-responsive">
+
+                <tbody>
+                        <tr>
+                                <td>Nom d'utilisateur : </td>
+                                <td> {{request.user.username}} </td>
+                        </tr>
+                        <tr>
+                                <td>Email :</td>
+                                <td> {{form_context.email}} </td>
+                        </tr>
+                        <tr>
+                                <td>Nom : </td>
+                                <td> {{form_context.name}} </td>
+                        </tr>
+
+                        <tr>
+                                <td> Pays de résidence :</td>
+                                <td> {{form_context.country}} </td>
+                        </tr>
+                        <tr>
+                                <td> Ville :</td>
+                                <td> {{form_context.city}} </td>
+                        </tr>
+                        <tr>
+                                <td> Telephone :</td>
+                                <td> {{form_context.phone}} </td>
+                        </tr>
+                </tbody>
+        </table>
+
+
+
+</section>
+<!-- End Of Body Section -->
+<section class="card-flat-footer text-center">
+        <span class="card-next btn btn-default" data-toggle="tab" href="#tab2">Suivant</span>
+
+</section>
+<!-- End Of Main Section -->
+{% endcomment %}

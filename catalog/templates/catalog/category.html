@@ -10,15 +10,11 @@
     </div>
     {% if products %}
   
-    <div class="container" >
-      <ul id="product-list" class="row centered sortable">
-          {% for p  in products %}
-          <li class="list-entry" data-brand="{{p.brand}}" data-price="{{p.price}}">
-              {% include "tags/product_box_min.html" %}
-          </li>
-          {% endfor %}
-      </ul>
-  </div>
+    <div class="grid-flex">
+            {% for p  in products %}
+                {% include "tags/product_box_min.html" %}
+            {% endfor %}
+    </div>
 
       <div class="flex-container">
           <ul class="pager flex-item">

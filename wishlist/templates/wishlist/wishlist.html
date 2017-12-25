@@ -12,6 +12,40 @@
 
   {% else %}
 
+<div class="fluid-container">
+    
+        {% if wishlistitems %}
+        <div class="order-list wishlist-list list-flex list-vertical">
+                <div class="card-mat vertical">
+                        <div class="mat-entry"> Appercu de vos articles sauvegardés </div>
+                        <div class="mat-entry"> {{item_count}} article(s)</div>
+                        
+                </div>
+                {% for item  in wishlistitems %}
+                <div class="card-mat horizontal wishlist-entry bordered" id="{{item.id}}">
+                        <div class="mat-entry mat-entry-img bordered"> 
+                                <img class="img-responsive" src="{{item.image_url}}">
+                        </div>
+                        <div class="card-mat vertical">
+                                <div class="mat-entry">{{item.name}}</div>
+                                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                                <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
+                                    <span class="wishlist-remove-btn glyphicon glyphicon-remove"> </span>   
+                                </div>
+                                <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
+                                
+                        </div>
+                        
+                </div>
+                {% endfor %}
+                <div class="list-divider"></div>
+                <div class="list-divider"></div>
+                <div class="wishlist-clear-btn btn btn-default"> Vider </div>
+                <div class="wishlist-add-to-cart btn btn-default"> Ajouter au panier </div>
+        </div>
+        {% endif %}
+</div> 
+{% comment "" %}
 
     <div class="container table-responsive">
         <table summary="Votre Liste de souhait" id="wishlist-table" class="table table-condensed">
@@ -49,6 +83,7 @@
         </table>
       </div>
 
+      {% endcomment %}
 
 {% endif %}
 {% endblock account_content %}

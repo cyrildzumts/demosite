@@ -1,4 +1,4 @@
-<div id="banner" class="carousel slide" data-ride="carousel">
+<div id="banner" class="carousel slide container-fluid bordered" data-ride="carousel">
     <!-- indicators -->
     <ol class="carousel-indicators">
         <li data-target="#banner" data-slide-to="0" class="active"></li>
@@ -8,14 +8,14 @@
         <li data-target="#banner" data-slide-to="4" ></li>
     </ol>
     <!-- wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner border-inner fluid-container bordered bg-crimson" role="listbox">
         {% for p in banner %}
             {% if forloop.first%}
-                <div class="item active">
+                <div class="item active banner-item bordered bg-niagara">
             {% else %}
-                <div class="item">
+                <div class="item banner-item bordered bg-niagara">
             {%endif%}
-                <img src="{{p.image.url}}" alt="{{p.name}}" style="width:40%;margin:auto;">
+                <img class="img-responsive" src="{{p.image.url}}" alt="{{p.name}}"  >
                 </div>
         {% endfor %}
     </div> <!-- End of Wrapper -->

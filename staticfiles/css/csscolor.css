@@ -195,3 +195,9 @@
 .text-orange{
     color: #f4511e;
 }
+.wishlist-remove-btn{
+    color: #FF3951;
+}
+.wishlist-clear-btn{
+ background-color: #FF3951;
+}

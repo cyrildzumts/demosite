@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from catalog.models import Product
 from django.http import HttpResponseRedirect
@@ -9,8 +10,8 @@ from cart import cart
 from demosite import settings
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
-from order import checkout
-import json
+#from order import checkout
+
 # Create your views here.
 
 
@@ -30,7 +31,6 @@ def show_cart(request):
         if postdata['submit'] == 'Actualiser':
             user_cart.update_quantity(item_id=item_id, quantity=int(quantity))
         if postdata['submit'] == 'Checkout':
-            print("Checkout clicked from cart")
             return HttpResponseRedirect(match.url_name)
     cart_items = user_cart.get_items()
     page_title = 'Panier' + " - " + settings.SITE_NAME
@@ -42,7 +42,8 @@ def show_cart(request):
                'cart_item_count': cart_item_count,
                'cart_subtotal': cart_subtotal,
                'checkout_url': match.url_name,
-               }
+            }
+
     return render(request=request,
                   template_name=template_name,
                   context=context)
@@ -56,7 +57,8 @@ def ajax_add_to_cart(request):
     response = {}
     response['state'] = False
     added = False
-    if len(request.POST) > 0:
+    request_is_valid = len(request.POST) > 0
+    if request_is_valid:
         postdata = request.POST.copy()
         product_id = postdata['product_id']
         quantity = postdata['quantity']
@@ -84,7 +86,8 @@ def ajax_cart_update(request):
     """
     response = {}
     done = False
-    if len(request.POST) > 0:
+    request_is_valid = len(request.POST) > 0
+    if request_is_valid:
         postdata = request.POST.copy()
         product_id = int(postdata['product_id'])
         quantity = int(postdata['quantity'])

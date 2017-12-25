@@ -1,5 +1,51 @@
 
    
+
+
+
+<div class="order-list list-flex list-vertical">
+        <div class="card-mat vertical">
+                <div class="mat-entry"> Appercu de votre commande </div>
+                <div class="mat-entry"> {{cart_item_count}} article(s)</div>
+                
+        </div>
+        {% for item  in cartitems %}
+        <div class="card-mat horizontal bordered">
+                <div class="mat-entry mat-entry-img bordered"> 
+                        <img class="img-responsive" src="{{item.image_url}}">
+                </div>
+                <div class="card-mat vertical">
+                        <div class="mat-entry">{{item.product.name}}</div>
+                        <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                        <div class="mat-entry cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                            <span> Quantité : </span> 
+                            <span class="cartItem-qty"> {{item.quantity}} </span>  
+                        </div>
+                        <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
+                        <div class="mat-entry cart-item-total-price"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span ></div>
+                </div>
+                
+        </div>
+        {% endfor %}
+        <div class="list-divider"></div>
+        <div class="card-mat vertical bg-newspaper">
+                <div class="mat-entry"><span class="pull-right">Montant Total : <strong> {{user_cart.subtotal}} FCFA </strong> </span></div>
+                <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
+                <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>
+                <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : {{user_cart.subtotal}} FCFA </strong></span></div>
+        </div>
+        <div class="list-divider"></div>
+        <input type="submit" value="Envoyer" class="submit btn btn-default success" />
+       
+</div> 
+
+
+
+
+{% comment "" %}
+
+
+
     <div class="container-fluid">
         <section class="card-main table-responsive">
             <table class="table cart-content-table">
@@ -56,3 +102,4 @@
         <!-- End Of Main Section -->
     </div>
     <!-- End Of Card -->
+    {% endcomment %}
