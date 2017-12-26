@@ -56,6 +56,7 @@ class Wishlist(models.Model):
             # item.set_product(product)
             self.wishlistitem_set.add(item)
 
+
     def get_item(self, item_id):
         """
         Return a WishlistItem object when found
@@ -105,7 +106,7 @@ class Wishlist(models.Model):
         This method clear the Wishlist content. This action
         is not reversible.
         """
-        pass
+        self.get_items().delete()
 
 
 class WishlistItem(models.Model):

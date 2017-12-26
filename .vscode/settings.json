@@ -3,5 +3,6 @@
     "workbench.colorCustomizations": 
     {
         "statusBar.background" : "#663399"
-    }
+    },
+    "python.pythonPath": "/usr/bin/python3"
 }

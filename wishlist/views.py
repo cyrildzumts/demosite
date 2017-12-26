@@ -133,3 +133,22 @@ def ajax_add_to_wishlist(request):
                    }
         jsonresponse = HttpResponse(json.dumps(response), content_type="application/json")
     return jsonresponse
+
+
+@csrf_exempt
+def ajax_wishlist_clear(request):
+    """
+    This view allows the user to all items from
+    the wishlist.
+    """
+    user_wishlist = wishlist.get_wishlist(request.user)
+    user_wishlist.clear()
+    print("User %s Wishlist cleared" % request.user.username)
+    item_count = user_wishlist.items_count()
+    response = {}
+    item_count = user_wishlist.items_count()
+    response = {'state': True,
+                'item_count': item_count,
+            }
+    jsonresponse = HttpResponse(json.dumps(response), content_type="application/json")
+    return jsonresponse

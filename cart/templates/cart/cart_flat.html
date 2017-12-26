@@ -24,7 +24,7 @@
     <div class="order-list list-flex list-vertical">
             <div class="card-mat vertical">
                     <div class="mat-entry"> Appercu de votre Panier </div>
-                    <div class="mat-entry"> {{cart_item_count}} article(s)</div>
+                    <div class="mat-entry"> <span class="cart-counter">{{cart_item_count}}</span> article(s)</div>
                     
             </div>
             {% for item  in cart_items %}
@@ -49,10 +49,10 @@
             {% endfor %}
             <div class="list-divider"></div>
             <div class="card-mat vertical bg-newspaper">
-                    <div class="mat-entry"><span class="pull-right">Montant Total : <strong> {{cart_subtotal}} FCFA </strong> </span></div>
+                    <div class="mat-entry"><span class="pull-right">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}} FCFA</span>  </strong> </span></div>
                     <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
                     <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>
-                    <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : {{cart_subtotal}} FCFA </strong></span></div>
+                    <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}} FCFA </span>  </strong></span></div>
             </div>
             <div class="list-divider"></div>
             <div><a class="no-decoration btn btn-default" href="/order/{{checkout_url}}">

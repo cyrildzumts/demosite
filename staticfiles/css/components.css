@@ -4,6 +4,11 @@
  in the site
  the Headers and Footer. They are site wide.
 -------------------------------------------------*/
+.wishlist-counter{
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .list-flex{
     display: flex;
     width: 100%;

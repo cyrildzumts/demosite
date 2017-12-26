@@ -1,15 +1,15 @@
 
 
-jQuery('[data-toggle="popover"]').popover();
+$('[data-toggle="popover"]').popover();
 function hideItemAdded(){
-    jQuery(".item_added").trigger("click");
+    $(".item_added").trigger("click");
 }
 
 // display an error message when the
 function displayLoginError(){
-  jQuery("form.login").submit(function(){
-    username = jQuery("#username").val();
-    password = jQuery("#password").val();
+  $("form.login").submit(function(){
+    username = $("#username").val();
+    password = $("#password").val();
     if(!(username != "" && password !="")){
         alert("Veuillez saisir le nom d'utilsateur et le mot de passe.");
         return false;
@@ -24,40 +24,14 @@ $(".search-form").submit(function(){
 });
 
 $(".dropdown").mouseenter(function(){
-    //alert("You entered this cat!");
     $(this).find("ul").fadeIn();
     //$(".dropdown-menu").fadeIn("slow");
 });
 $(".dropdown").mouseleave(function(){
-    //alert("You entered this cat!");
     $(this).find("ul").fadeOut();
     //$(".dropdown-menu").fadeIn("slow");
 });
-//jQuery(document).ready(addToCart);
-// popup notifitaction when we add a new item into the cart.
 
-/*
-$(".login_element").click(function(e){
-    e.preventDefault();
-    $('#login form').slideToggle(300);
-    $(this).toggleClass('close');
-});
-*/
-
-/**
- * Open The menu by setting the menu's width.
- */
-
- /*
-function openMenu(){
-    document.getElementById("site-menu").style.width = "250px";
-}
-
-function closeMenu(){
-    document.getElementById("site-menu").style.width = "0";
-}
-
-*/
 $("#openMenu").click(function(){
     document.getElementById("site-menu").style.width = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0.4,0.4)";
@@ -82,29 +56,33 @@ var Cart = (function(){
         this.events = [];
         this.items = [];
         this.eventListeners = [];
+        this.$notify_popover = {}
         this.total = 0;
         this.count = 0;
         this.userID = -1;
         this.observers = [];
         this.serverUrl = "";
+        this.$counter = {};
     }
     Cart.prototype.initDefault = function(){
-        jQuery(".add-to-cart").click(this.onAddButtonClicked.bind(this));
-        jQuery(".plusButton").click(this.onPlusButtonClicked.bind(this));
-        jQuery(".minusButton").click(this.onMinusButtonClicked.bind(this));
-        jQuery(".removeFromCartButton").click(this.onRemoveButtonClicked.bind(this));
-        //jQuery(".cart-popover-button").hover(function(){
-        //jQuery("#cart-modal").modal({backdrop: false});
+        this.$counter = $(".cart-counter");
+        $(".add-to-cart").click(this.onAddButtonClicked.bind(this));
+        $(".plusButton").click(this.onPlusButtonClicked.bind(this));
+        $(".minusButton").click(this.onMinusButtonClicked.bind(this));
+        $(".removeFromCartButton").click(this.onRemoveButtonClicked.bind(this));
+        //$(".cart-popover-button").hover(function(){
+        //$("#cart-modal").modal({backdrop: false});
        // });
-       jQuery(".cart-button").hover(this.onCartButtonHover.bind(this));
-       jQuery(".close-btn").click(this.onCloseBtnClicked.bind(this));
+       $(".cart-button").hover(this.onCartButtonHover.bind(this));
+       $(".close-btn").click(this.onCloseBtnClicked.bind(this));
+       this.$notify_popover = $("#cart-popover");
     };
     Cart.prototype.init = function(listener){
         this.addEventListener(listener);
     };
     Cart.prototype.onCloseBtnClicked = function(even){
         console.log("Close Menu btn clicked ...");
-        jQuery(".cart-dropdown").toggle();
+        $(".cart-dropdown").toggle();
     };
     Cart.prototype.onCartButtonHover = function(event){
         console.log("Cart hovered ..");
@@ -112,7 +90,7 @@ var Cart = (function(){
     };
     Cart.prototype.onAddButtonClicked = function(event){
         var item = {};
-        var element = jQuery(".add-to-cart");
+        var element = $(".add-to-cart");
         item.id = parseInt(element.attr("data-itemid"));
         item.is_available = element.attr("data-available");
         item.price = 15000;
@@ -166,6 +144,7 @@ var Cart = (function(){
     Cart.prototype.notify = function(item){
         console.log("Notifying Observers ...");
         $(".cart-subtotal").html("<strong>" + this.total + " FCFA" +  "</strong>");
+        this.$counter.html("<strong>" + this.count + "</string>");
         
         for (observer in this.observers){
             observer(item);
@@ -186,6 +165,8 @@ var Cart = (function(){
                 success: function(response){
                     that.total = response.total;
                     that.count = response.count;
+                    that.$notify_popover.html("Article ajouté");
+                    //that.$notify_popover.show();
                     that.notify(item);
                 },
                 error: function (){
@@ -251,8 +232,8 @@ var Cart = (function(){
     Cart.prototype.update = function(event, action){
         var $target = $(event.target);
         var $quantity_target = $target.siblings(".cartItem-qty");
-        var itemID = parseInt($target.parent().attr("data-itemid"));
-        var price = parseFloat($target.parent().attr("data-price"));
+        var itemID = parseInt($target.parent().data("itemid"));
+        var price = parseFloat($target.parent().data("price"));
         var quantity = parseInt($quantity_target.html());
         var $span = $target.parent().siblings(".cart-item-total-price").find("span");
         var that = this;
@@ -304,17 +285,17 @@ var Account = (function(){
     }
 
     Account.prototype.init = function(){
-        jQuery(".account-Button").click(this.onAccountClicked.bind(this));
-        jQuery(".account-Button").hover(this.onAccountHover.bind(this));
+        $(".account-Button").click(this.onAccountClicked.bind(this));
+        $(".account-Button").hover(this.onAccountHover.bind(this));
         console.log("Account initialized ...");
     };
     Account.prototype.onAccountHover = function(event){
         console.log("AccountButton hovered ...");
-        //jQuery(".dropdown-toggle").dropdown();
+        //$(".dropdown-toggle").dropdown();
     };
     Account.prototype.onAccountClicked = function(event){
         console.log("AccountButton clicked ...");
-        jQuery(".dropdown-toggle").dropdown();
+        $(".dropdown-toggle").dropdown();
     };
 
     return Account ;
@@ -435,23 +416,27 @@ var Catalog = (function(){
 var Wishlist = (function(){
     function Wishlist(){
         this.items = [];
+        this.count = 0;
         this.$bagde = {};
+        this.$counter = {};
 
     }
     Wishlist.prototype.init = function(){
         this.$bagde = $(".wishlist-badge");
-        $(".wishlist-add-btn").click(this.onAddButtonClicked.bind(this));
-        $(".wishlist-remove-btn").click(this.onRemoveButtonClicked.bind(this));
-        $(".wishlist-clear-btn").click(this.onClearButtonClicked.bind(this));
+        this.$counter = $(".wishlist-counter");
+        $(".add-to-wishlist").click(this.onAddButtonClicked.bind(this));
+        $(".wishlist-remove").click(this.onRemoveButtonClicked.bind(this));
+        $(".wishlist-clear").click(this.onClearButtonClicked.bind(this));
     }
     Wishlist.prototype.onAddButtonClicked = function(event){
         var item = {};
         var $target = $(event.target);
-        var $element_to_remove = $target.parent();
-        item.id = parseInt($element_to_remove.attr("data-itemID"));
-        item.name = $element_to_remove.attr("data-name");
-        item.image = $element_to_remove.attr("data-image");
-        console.log("Item to Remove : \nName : " + item.name + "\nImage : " + item.image);
+        var $elelemt_to_add = $target.parent();
+        item.id = parseInt($elelemt_to_add.data("itemid"));
+        item.name = $elelemt_to_add.attr("data-name");
+        //item.image = $elelemt_to_add.attr("data-image");
+        console.log("attr itemid : " + item.id);
+        console.log("Item to add into wishlist : \nName : " + item.name);
         this.addItem(item);
         
     };
@@ -459,10 +444,10 @@ var Wishlist = (function(){
         var item = {};
         var $target = $(event.target);
         var $element_to_remove = $target.parent();
-        item.id = parseInt($element_to_remove.attr("data-itemID"));
+        item.id = parseInt($element_to_remove.attr("data-itemid"));
         item.name = $element_to_remove.attr("data-name");
         item.image = $element_to_remove.attr("data-image");
-        console.log("Item to Remove : \nName : " + item.name + "\nImage : " + item.image);
+        console.log("Item to Remove : \nName : " + item.name);
         this.removeItem(item.id);
         
     };
@@ -478,13 +463,11 @@ var Wishlist = (function(){
         $.ajax({
             type: 'POST',
             url: '/wishlist/ajax_add_to_wishlist/',
-            data: {product_id: itemID},
+            data: {product_id: item.id},
             dataType:'json',
             success: function(response){
-                console.log("Add request sent successfully");
-                console.log("Item added : " +  response.state);
-                console.log("Item Count   : " +  response.item_count);
-                //$(`#${itemID}`).remove();
+                console.log("Wishlist : Add request sent successfully");
+                that.count =  response.item_count;
                 that.notify({});
             },
             error: function(response){
@@ -492,7 +475,6 @@ var Wishlist = (function(){
             }
         });
         
-        this.notify();
         
     };
     Wishlist.prototype.removeItem = function(itemID){
@@ -504,9 +486,8 @@ var Wishlist = (function(){
             data: {product_id: itemID},
             dataType:'json',
             success: function(response){
-                console.log("Remove request sent successfully");
-                console.log("Item removed : " +  response.state);
-                console.log("Item Count   : " +  response.item_count);
+                console.log("Wishlist : Remove request sent successfully");
+                that.count =  response.item_count;
                 $(`#${itemID}`).remove();
                 that.notify({});
             },
@@ -514,12 +495,26 @@ var Wishlist = (function(){
                 console.log("Error : couldn't remove item from the wishlist");
             }
         });
-        
-        this.notify();
     };
     Wishlist.prototype.clear = function(){
-
-        this.notify();
+        var $target = $(event.target);
+        var that = this;
+        $.ajax({
+            type: 'POST',
+            url: '/wishlist/ajax_wishlist_clear/',
+            data: {},
+            dataType:'json',
+            success: function(response){
+                console.log("Clear request sent successfully");
+                console.log("Wishlist cleared : " +  response.state);
+                that.count =  response.item_count;
+                that.notify({});
+            },
+            error: function(response){
+                console.log("Error : couldn't remove item from the wishlist");
+            }
+        });
+        
     };
 
     Wishlist.prototype.get = function(itemID){
@@ -530,6 +525,8 @@ var Wishlist = (function(){
 
     Wishlist.prototype.notify = function(){
         console.log("Wishlist changed ...");
+        this.$counter.html("<strong>" + this.count + " </strong>");
+        //location.reload(true);
     };
 
     return Wishlist;
@@ -564,7 +561,7 @@ Shopping.wishlist =  new Wishlist();
 Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.myCart.initDefault();
-Shopping.myCart.init(jQuery(".cart-badge"));
+Shopping.myCart.init($(".cart-badge"));
 Shopping.wishlist.init();
 
 function  ShoppingApp (){

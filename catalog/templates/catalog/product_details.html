@@ -45,13 +45,17 @@
         <p class="invalid">Coûtait : {{product.old_price}} CFA </p>
         {% endif %}
         <p>Prix : <strong>{{product.price}} CFA </strong></p>
-        <div class="btn-box">
-          <span class="add-to-cart add-btn text-box glyphicon glyphicon-shopping-cart bordered bg-niagara1" 
+
+        <div class="popover" id="cart-popover" data-toggle="popover" title="Message" data-content="">
+
+        </div>
+        <div class="btn-box" data-itemid="{{product.id}}" data-name="{{product.name}}">
+          <span class="add-to-cart add-btn text-box glyphicon glyphicon-shopping-cart bordered bg-success" 
             data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier">
             Ajouter dans le panier
           </span>
           <span class="add-to-wishlist add-btn text-box glyphicon glyphicon-heart bordered" 
-            data-available="{{product.is_available}}" data-itemid="{{product.id}}" title="Ajouter dans le Panier">
+             data-itemid="{{product.id}}" data-name="{{product.name}}" title="Ajouter dans la wishlist">
             Ajouter dans la wishlist
         </span>
         </div>
