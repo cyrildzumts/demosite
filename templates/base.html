@@ -86,31 +86,72 @@
     </div>
     <div class="body-content">
         {% block content_header %}
-      <header class="content-header list-flex flex-center">
+      <header class="content-header">
         
-          <div id="filter-box" class="filter panel-group">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                  <h4 class="panel-title"> <a data-toggle="collapse" href="#select-filter"> Filtrer la liste <span class="glyphicon glyphicon-plus-sign"></span></a></h4>
+          <div id="filter-box" class="filter-sorting flex-column">
+            <div class="flat-card flex-column  flat-dropdown bordered">
+              <div class="header flat-header bordered flat-dropdown-toggle">
+                  <h4 class="panel-title"> Filtres </h4>
+                  <button  class="btn"><span class="glyphicon glyphicon-plus-sign"></span></button>
               </div>
-              <div id="select-filter" class="panel-collapse collapse">
-                  <div class="panel-body list-flex vertical">
-                      <div name="brands" id="select-brands" class="grid-flex">
+              <div id="select-filter" class="flat-dropdown-content main-content" role="menu">
+                <div name="brands" id="select-brands" class="grid-flex" role="menuitem">
                           
-                      </div> 
-                  </div>
-                  <div class="panel-footer">
-                    <button id="btn-filter" class="btn btn-default"> Appliquer </button>
-                    <button id="btn-filter-reset" class="btn btn-default"> Reset </button>
-                  </div>
+                </div> 
+                <div class="size-filter bordered">
+
+                </div>
+                <div class="list-divider">
+
+                </div>
+                <div class="footer">
+                    <button id="btn-filter" class="btn btn-default apply"> Appliquer </button>
+                    <button id="btn-filter-reset" class="btn btn-default apply"> Reset </button>
+                </div> <!-- Footer -->
+              </div> <!-- Main-Content -->
+              
+            </div> <!-- flat-card End -->
+            <div class="flat-card flex-column flat-dropdown bordered">
+              <section class="header bordered flat-dropdown-toggle">
+                <h4> Ordre d'affichage </h4>
+                <button class="btn"><span class="glyphicon glyphicon-plus-sign"></span></button>
+              </section>
+              <div class="main-content flat-dropdown-content" id="sorting-options" role="menu">
+                <div class="sorting-box">
+                    <p class="bordered"> Prix croissant </p>
+                    <p class="bordered"> Prix decroissant </p>
+                    <p class="bordered"> Popularité </p>
+                </div>
+                <div class="list-divider">
+
+                </div>
+                <section class="footer">
+                    <button id="btn-sort" class="btn btn-default apply"> Appliquer </button>
+                    <button id="btn-sort-reset" class="btn btn-default apply"> Reset </button>
+                </section>
               </div>
+              
+              
+
             </div>
 
-          </div>
+          </div> <!-- Filter End -->
           
         
       </header>
+      
       {% endblock content_header %}
+      <div class="cart-popup bordered bg-galery">
+        <div class="popup-header bg-ebony">
+            <h5>
+              Notification
+            </h5>
+        </div>
+        <div class="list-divider bg-ebony"></div>
+        <div class="popup-content">
+
+        </div>
+      </div>
         {%block MainHeader%}
           
         {%endblock MainHeader%}

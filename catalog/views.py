@@ -49,8 +49,10 @@ def index(request):
         to be displayed. See category_tags.py
 
     """
-    template_name = "catalog/index.html"
+    # template_name = "catalog/index.html"
+    template_name = "base_flat.html"
     page_title = 'Acceuille | ' + settings.SITE_NAME
+    current_cat = Category.objects.filter(parent=None)
     try:
         session = request.session
     # get the number of visits to the site
@@ -68,8 +70,10 @@ def index(request):
                 session['visits'] = 1
     except AttributeError:
         pass
-    context = {'page_title': page_title,}
-    return render(request, template_name, locals())
+    context = {'page_title': page_title,
+               'current_category': current_cat,
+            }
+    return render(request, template_name, context)
 
 
 def show_category(request, category_slug):

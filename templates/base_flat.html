@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load cart_tags %}
+    {% cart_box request as cart_box %}
+<head>
+  <meta charset="utf-8">
+  <title>
+    {% block title %} {{page_title}} {% endblock %}
+  </title>
+  <meta name="keywords" content="{{meta_keywords}}" />
+  <meta name="description" content="{{meta_description}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% load staticfiles %} {% load static %}
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Add icon library -->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/csscolor.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" /> {% block external %} {% endblock external %}
+</head>
+
+<body>
+    <header class="flat-header bg-ebonyclay">
+        <h4>Ly Shop</h4>
+        {% comment "nav" %}
+        This nav element is the same accross
+        the whole site. For this container to
+        work without issue, every page needs to
+        provide the category list, cart counter,
+        wishlist counter, 
+        {% endcomment %}
+        <nav class="flat-nav flat-nav-bar bordered">
+            <h4>Navigation</h4>
+
+        </nav>
+    </header>
+    <main class="flat-main bg-tolopea">
+            <aside class="flat-nav-menu bg-ebony bordered">
+                    <h5>Side bar</h5>
+                    <div class="fluid-container bordered">
+                        <h6>Mon Compte</h6>
+                    </div>
+                    <div class="fluid-container bordered">
+                        <h6>Categories</h6>
+                    </div>
+                    <div class="fluid-container bordered">
+                        <h6>Aide</h6>
+                    </div>
+                    <div class="fluid-container bordered">
+                        <h6>Déconnexion</h6>
+                    </div>
+
+            </aside>
+            <div class="flat-search-bar dropdown bordered">
+                    <h4>Search bar</h4>
+            </div>
+            <h4>Main content</h4>
+            {% block MainContent %}
+            
+            {% endblock MainContent %}
+    </main>
+    <footer class="flat-footer bg-ebonyclay">
+        <h4>Footer</h4>
+        <section class="flat-newsletter bordered">
+                <h4>Newsletter</h4>
+        </section>
+        <section class="flat-footer-help bordered">
+                <h4>Help</h4>
+        </section>
+        <section class="flat-payment-options bordered">
+                <h4>Payment options</h4>
+        </section>
+        <section class="flat-social-links bordered">
+                <h4>Social Links</h4>
+        </section>
+        <section class="flat-site-infos bordered">
+                <h4>Site infos ...</h4>
+        </section>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_login.js' %}"></script>
+</body>
+
+</html>

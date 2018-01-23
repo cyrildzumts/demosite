@@ -53,6 +53,8 @@ $("#loginBtn2").click(function(){
 
 var Cart = (function(){
     function Cart(){
+        this.$cart_popup = {};
+        this.$cartpopup_content = {};
         this.events = [];
         this.items = [];
         this.eventListeners = [];
@@ -73,9 +75,13 @@ var Cart = (function(){
         //$(".cart-popover-button").hover(function(){
         //$("#cart-modal").modal({backdrop: false});
        // });
-       $(".cart-button").hover(this.onCartButtonHover.bind(this));
+       $(".cart-button").hover(this.onCartButtonHover.bind(this), this.onCartButtonHoverLeave.bind(this));
        $(".close-btn").click(this.onCloseBtnClicked.bind(this));
        this.$notify_popover = $("#cart-popover");
+       this.$cart_popup = $(".cart-popup");
+       this.$cartpopup_content = this.$cart_popup.children(".popup-content");
+       console.log("Cart initialised : Cart popup : ");
+       console.log(this.$cartpopup_content);
     };
     Cart.prototype.init = function(listener){
         this.addEventListener(listener);
@@ -86,6 +92,13 @@ var Cart = (function(){
     };
     Cart.prototype.onCartButtonHover = function(event){
         console.log("Cart hovered ..");
+        event.preventDefault();
+        //$(".cart-button").dropdown();
+    };
+    Cart.prototype.onCartButtonHoverLeave = function(event){
+        console.log("Cart hovered left..");
+        event.preventDefault();
+        console.log("Cart contains " + this.count + " article(s)");
         //$(".cart-button").dropdown();
     };
     Cart.prototype.onAddButtonClicked = function(event){
@@ -165,17 +178,20 @@ var Cart = (function(){
                 success: function(response){
                     that.total = response.total;
                     that.count = response.count;
-                    that.$notify_popover.html("Article ajouté");
-                    //that.$notify_popover.show();
+                    that.$cartpopup_content.html("Article ajouté dans le panier.");
+                    that.$cart_popup.toggle().delay(3000).toggle(500);
                     that.notify(item);
                 },
-                error: function (){
-                    alert("Il y a une erreur, Veuillez reessayer.");
+                error: function (response){
+                    that.$cartpopup_content.html("Une erreur s'est produite, Veuillez reessayer.");
+                    that.$cart_popup.toggle().delay(3000).toggle(500);
                 }
             });
         }
        
         else{
+            that.$cartpopup_content.html("Cet article n'est plus disponible.");
+            that.$cart_popup.toggle().delay(3000).toggle(500);
             console.log("This article is not available ...");
         }
         
@@ -329,9 +345,29 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
+        $(".flat-dropdown-toggle").click(function(event){
+            /*
+            var $content = $(this).siblings(".flat-dropdown-content");
+            var display_css = $content.css("display");
+            console.log("Before : flat-dropdown-content css : " + $($content).css("display"));
+            if(display_css === "block"){
+                $content.css("display", "none");
+            }
+            else if(display_css === "none"){
+                $content.css("display", "block");
+            }
+            console.log("After : flat-dropdown-content css : " + $($content).css("display"));
+            */
+            $(this).siblings(".flat-dropdown-content").toggle();
+        });
+        $(".flat-header").click(function(event){
+            $(".flat-nav-menu").toggle();
+        });
         this.getItems();
         $("#btn-filter").click(this.onFilterChanged.bind(this));
         $("#btn-filter-reset").click(this.onFilterReset.bind(this));
+        $("#btn-sort").click(this.onSortingChanged.bind(this));
+        $("#btn-sort-reset").click(this.onSortingReset.bind(this));
         this.$select_filter = $("#select-filter");
         this.$select_brands = $("#select-brands");
         for(var i = 0; i < this.brands.length; i++){
@@ -352,7 +388,13 @@ var Catalog = (function(){
     };
 
     Catalog.prototype.onSortingChanged = function(event){
+        event.preventDefault();
         console.log("Sorting changed to " + this.ordering[this.CURRENT_SORTING]);
+        this.sort();
+    };
+    Catalog.prototype.onSortingReset = function(event){
+        event.preventDefault();
+        console.log("Sorting reset");
     };
     Catalog.prototype.onFilterReset = function(event){
         event.preventDefault();
@@ -396,6 +438,7 @@ var Catalog = (function(){
     Catalog.prototype.getItems = function(){
         console.log(" getItems () : This method is not implemented yet ...");
         this.$items = $("#product-list .list-entry");
+        console.log(this.$items);
         console.log("We found " + this.$items.length + " in this page");
         this.getBrands();
 

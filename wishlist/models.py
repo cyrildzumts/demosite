@@ -86,7 +86,7 @@ class Wishlist(models.Model):
     def items_count(self):
         """
         Return the number of items present in the Wishlist.
-        """    
+        """
         return self.wishlistitem_set.count()
 
     def get_user(self):

@@ -4,38 +4,42 @@
 
 {%block PageContent %}
 
-<div class="container-fluid">
-    <div class="flex-item category-menu">
+{% if products %}
+<div>
+  <div class="grid-flex">
+    <div class="category-menu">
         {% include "tags/category_box.html" %}
     </div>
-    {% if products %}
-  
-    <div class="grid-flex">
-            {% for p  in products %}
-                {% include "tags/product_box_min.html" %}
-            {% endfor %}
+    
+    <div class="flex-container">
+        <div class="grid-flex">
+          {% for p  in products %}
+              {% include "tags/product_box_min.html" %}
+          {% endfor %}
+        </div>
     </div>
+  </div>
 
-      <div class="flex-container">
-          <ul class="pager flex-item">
-              {% if products.has_previous %}
-                <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
-              {% endif %}
-              <span class="current">
-                Page {{products.number }} de {{products.paginator.num_pages }}.
-              </span>
-              {% if products.has_next %}
-                <li><a href="?page={{ products.next_page_number }}">next</a></li>
-              {% endif %}
-            </span>
-          </ul>
-      </div>
-      
-    {% else %}
+  <div class="flex-container">
+    <ul class="pager">
+        {% if products.has_previous %}
+          <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
+        {% endif %}
+        <span class="current">
+          Page {{products.number }} de {{products.paginator.num_pages}}.
+        </span>
+        {% if products.has_next %}
+          <li><a href="?page={{ products.next_page_number }}">next</a></li>
+        {% endif %}
+    </ul>
+  </div>
+</div>
+
+     
+
+  {% else %}
       <p class="text-center">Il n'y a pas encore de produits disponible
        dans cette catégorie 
      </p>
   {% endif %}
-</div>
-
 {% endblock PageContent %}

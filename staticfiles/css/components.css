@@ -24,7 +24,7 @@
 .grid-flex{
     display: flex;
     width: 100%;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
     flex-flow: row wrap;
     padding: 2px;
@@ -102,10 +102,18 @@
 }
 
 #filter-box{
-    width: 100%;
+    max-width: 100%;
+    width: 50%;
     padding: 5px;
     margin: 2px;
 }
+
+/** Mega Menu **/
+ /* Navbar container */
+ 
+ 
+
+/** Mega Menu End **/
 /*
 #cart-modal{
     
@@ -871,41 +879,42 @@ nav a:hover, nav a:link{
 ------------------------------------------------*/
 html {
     font-family: "Montserrat", sans-serif;
-    position: relative;
     height: 100%;
+
 }
 
 body{
     display: flex;
     box-sizing: border-box;
     background-color: #FEFEFE;
-    min-height: 100%;
-    min-width: 100%;
+    height: 100%;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     overflow: auto;
-}
 
+}
+/*
 html, body {
-    padding:5px;
-    margin: auto;
+    margin: 1px;
     
 }
+*/
 body > .container-fluid{
     
-    padding: 10px;
+    padding: 1px;
 }
+/*
 footer {
     
     width: 100%;
     height: 100px;
     position: relative;
     text-align: center;
-    color: #FEFEFE;
     padding: 10px;
     margin: auto;
   }
-
+*/
   .site-footer{
     width: 100%;
     position: relative;
@@ -977,6 +986,12 @@ headers and footers.
 }
 
 .content-header{
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #DADFE1;
     padding:10px;
     margin: 5px;
@@ -1348,3 +1363,183 @@ headers and footers.
 }
 
 /**************************************/
+/**
+ TEST UI Component 
+ **************************************/
+
+ .nav-panel{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .nav-panel .navigation{
+     display: flex;
+     align-items: baseline;
+ }
+
+
+ .filter-sorting{
+    display: flex;
+    max-width: 100%;
+    width: 50%;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2px;
+    margin: 2px;
+ }
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+ .flat-card{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 2px;
+     margin: 2px;
+ }
+ .flat-card .header{
+     display: flex;
+     width: 100%;
+     justify-content: space-between;
+     align-items: baseline;
+     padding: 2px;
+     margin: 2px;
+ }
+
+ .flat-card .main-content{
+     display: block;
+     width: 100%;
+     flex-direction: row;
+     padding: 2px;
+     margin: 2px;
+ }
+ .flat-card .flat-dropdown-content, .flat-dropdown-content{
+    display: none;
+}
+ .flat-card .footer{
+     display: flex;
+     width: 100%;
+     justify-content: space-between;
+     align-items: baseline;
+     flex-direction: column;
+     padding: 2px;
+     margin: 2px;
+ }
+ .apply {
+     width: 100%;
+     height: 24px;
+     padding: 2px;
+     margin: 2px;
+     text-align: center;
+     
+ }
+
+ .cart-popup{
+     display: none;
+     width: 150px;
+     border-radius: 2px;
+     position:absolute;
+     left: 50%;
+     top: 50%;
+     z-index: 1;
+     padding: 5px;
+     margin: 5px;
+ }
+
+ .cart-popup .popup-content,  .cart-popup .popup-header{
+
+     text-align: center;
+     padding: 2px;
+     margin: 2px;
+ }
+
+ .popup-header{
+    width: 100%;
+    /*height: 32px;*/
+ }
+
+ .popup-content{
+    width: 100%;
+    /*height: 50px;*/
+ }
+ /*********************************************
+ **********************************************
+ **   Flat Component Design *******************
+ **********************************************/
+
+ .flat-header{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     width: 100%;
+     top: 0;
+     padding: 1px;
+     margin:0px 0px 0.5px 0px;
+     text-align: center;
+ }
+
+ .flat-header .flat-nav{
+     display: block;
+     width: 100%;
+     text-align: center;
+ }
+
+
+ .flat-main{
+    display: flex;
+    width: 100%;
+    flex: 1 0 auto;
+    flex-direction: column;
+    text-align: center;
+    padding: 1px;
+    margin:1px 0px 1px 0px;
+    
+ }
+ .flat-search-bar{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 1px;
+    margin:2px 0px 2px 0px;
+ }
+ .flat-main .flat-nav-menu{
+     display: none;
+     position: absolute;
+     top: 0;
+     z-index: 100;
+     width: 50%;
+ }
+ .flat-footer{
+    display: flex;
+    width: 100%;
+    height: 300px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    margin: 1px 0px 0px 0px;
+ }
+ .flat-footer section
+ {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    padding: 1px;
+    margin:1px 0px 1px 0px;
+ }
+
+ hr{
+     height: 1px;
+     box-sizing: border-box;
+
+ }

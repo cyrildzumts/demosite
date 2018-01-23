@@ -7,7 +7,7 @@
             <h5 class="flex-item">Mon Panier</h5>
             <a class="flex-item" href="{% url 'catalog:index'%}">
                     <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-share-alt"> Continuer mon shopping</span>
+                        <span class="glyphicon glyphicon-share-alt"> Shopping </span>
                     </button>
             </a>
     </div>
@@ -27,26 +27,29 @@
                     <div class="mat-entry"> <span class="cart-counter">{{cart_item_count}}</span> article(s)</div>
                     
             </div>
+            <div id="products" class="flat-card flex-column">
             {% for item  in cart_items %}
-            <div class="card-mat horizontal bordered">
-                    <div class="mat-entry mat-entry-img bordered"> 
-                            <img class="img-responsive" src="{{item.image_url}}">
-                    </div>
-                    <div class="card-mat vertical">
-                            <div class="mat-entry">{{item.name}}</div>
-                            <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                            <div class="mat-entry cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                                <span> Quantité : </span> 
-                                <span class="minusButton glyphicon glyphicon-minus"> </span>
-                                <span class="cartItem-qty"> {{item.quantity}} </span>
-                                <span class="plusButton glyphicon glyphicon-plus"> </span>   
-                            </div>
-                            <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
-                            <div class="mat-entry cart-item-total-price"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span ></div>
-                    </div>
-                    
-            </div>
+                <div class="card-mat horizontal bordered" id="{{item.product.id}}">
+                        <div class="mat-entry mat-entry-img bordered"> 
+                                <img class="img-responsive" src="{{item.image_url}}">
+                        </div>
+                        <div class="card-mat vertical">
+                                <div class="mat-entry">{{item.name}}</div>
+                                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                                <div class="mat-entry cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                                    <span> Quantité : </span> 
+                                    <span class="minusButton glyphicon glyphicon-minus"> </span>
+                                    <span class="cartItem-qty"> {{item.quantity}} </span>
+                                    <span class="plusButton glyphicon glyphicon-plus"> </span>   
+                                </div>
+                                <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
+                                <div class="mat-entry cart-item-total-price"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span ></div>
+                        </div>
+                        
+                </div>
             {% endfor %}
+            </div>
+            
             <div class="list-divider"></div>
             <div class="card-mat vertical bg-newspaper">
                     <div class="mat-entry"><span class="pull-right">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}} FCFA</span>  </strong> </span></div>
@@ -55,7 +58,7 @@
                     <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}} FCFA </span>  </strong></span></div>
             </div>
             <div class="list-divider"></div>
-            <div><a class="no-decoration btn btn-default" href="/order/{{checkout_url}}">
+            <div><a class="no-decoration btn btn-default cart-checkout-btn" href="/order/{{checkout_url}}">
                 Aller à la caisse
             </a></div>
     </div>  
