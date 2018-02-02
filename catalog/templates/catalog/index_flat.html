@@ -1,0 +1,62 @@
+{% extends "base_flat.html" %}
+{% load category_tags %}
+{% load catalog_tags %}
+{% load staticfiles %}
+{% load static %}
+{% block MAINCONTENT %}
+
+<div class="flat-flex flex-column flat-fluid">
+    <div class="flat-card flex-column bordered">
+        
+        <section class="header">
+                <span>Nouveautées</span>
+        </section>
+        <section class="main">
+            <div class="flat-wrapper flat-product-list">
+                    {% get_home_items 0 as new_products %}
+                    {% for p in new_products %}
+                        <div class="flat-product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}">
+                                <div class="card-product-image"> 
+                                        <a href="{{p.get_absolute_url}}">
+                                                <img class="img-responsive" src="{{p.image.url}}">
+                                        </a>
+                                </div>
+                                <div class="list-flex vertical">
+                                        <div class="mat-entry">{{p.name}}</div>
+                                        <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                                        <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
+                                        
+                                </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </section>
+    </div>
+    <div class="flat-card flex-column flat-parfums-section bg-parfum-section bordered">
+        <section class="header">
+                <span>Parfumerie</span>
+        </section>
+        <section class="main flat-card">
+
+            <img class="section-bg-img" src="{% static 'images/parfum-bg.jpg' %}" alt="">
+        </section>
+    </div>
+    <div class="flat-card flex-column bordered">
+        <section class="header">
+                <span>Mode</span>
+        </section>
+        <section class="main flat-card">
+                <img class="section-bg-img" src="{% static 'images/mode-bg.jpg' %}" alt="">
+        </section>
+    </div>
+    <div class="flat-card flex-column bordered">
+        <section class="header">
+                <span>Beauty</span>
+        </section>
+        <section class="main flat-card">
+                <img class="section-bg-img" src="{% static 'images/beauty-bg.jpg' %}" alt="">
+        </section>
+    </div>
+
+</div>
+{% endblock MAINCONTENT %}

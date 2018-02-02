@@ -1,92 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load cart_tags %}
-    {% cart_box request as cart_box %}
+{% load cart_tags %} {% load catalog_tags %} {% cart_box request as cart_box %}
+
 <head>
-  <meta charset="utf-8">
-  <title>
-    {% block title %} {{page_title}} {% endblock %}
-  </title>
-  <meta name="keywords" content="{{meta_keywords}}" />
-  <meta name="description" content="{{meta_description}}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% load staticfiles %} {% load static %}
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Add icon library -->
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/csscolor.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" /> {% block external %} {% endblock external %}
+        <meta charset="utf-8">
+        <title>
+                {% block title %} {{page_title}} {% endblock %}
+        </title>
+        <meta name="keywords" content="{{meta_keywords}}" />
+        <meta name="description" content="{{meta_description}}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+         {% load staticfiles %} {% load static %}
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/csscolor.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" /> {% block external %} {% endblock external %}
 </head>
 
 <body>
-    <header class="flat-header bg-ebonyclay">
-        <h4>Ly Shop</h4>
-        {% comment "nav" %}
-        This nav element is the same accross
-        the whole site. For this container to
-        work without issue, every page needs to
-        provide the category list, cart counter,
-        wishlist counter, 
-        {% endcomment %}
-        <nav class="flat-nav flat-nav-bar bordered">
-            <h4>Navigation</h4>
+        <header class="flat-header bg-ebonyclay">
 
-        </nav>
-    </header>
-    <main class="flat-main bg-tolopea">
-            <aside class="flat-nav-menu bg-ebony bordered">
-                    <h5>Side bar</h5>
-                    <div class="fluid-container bordered">
-                        <h6>Mon Compte</h6>
-                    </div>
-                    <div class="fluid-container bordered">
-                        <h6>Categories</h6>
-                    </div>
-                    <div class="fluid-container bordered">
-                        <h6>Aide</h6>
-                    </div>
-                    <div class="fluid-container bordered">
-                        <h6>Déconnexion</h6>
-                    </div>
+                {% comment "nav" %} This nav element is the same accross the whole site. For this container to work without issue, every
+                page needs to provide the category list, cart counter, wishlist counter, {% endcomment %}
+                <nav class="flat-nav flat-nav-bar">
+                        <div class="flat-nav-container">
+                                <div class="flat-nav-left flat-nav-menu">
+                                        <span class="flat-nav-entry flat-menu-btn glyphicon glyphicon-menu-hamburger flat-icon-big">
 
-            </aside>
-            <div class="flat-search-bar dropdown bordered">
-                    <h4>Search bar</h4>
-            </div>
-            <h4>Main content</h4>
-            {% block MainContent %}
-            
-            {% endblock MainContent %}
-    </main>
-    <footer class="flat-footer bg-ebonyclay">
-        <h4>Footer</h4>
-        <section class="flat-newsletter bordered">
-                <h4>Newsletter</h4>
-        </section>
-        <section class="flat-footer-help bordered">
-                <h4>Help</h4>
-        </section>
-        <section class="flat-payment-options bordered">
-                <h4>Payment options</h4>
-        </section>
-        <section class="flat-social-links bordered">
-                <h4>Social Links</h4>
-        </section>
-        <section class="flat-site-infos bordered">
-                <h4>Site infos ...</h4>
-        </section>
-    </footer>
+                                        </span>
+                                </div>
+                                <div class="flat-nav-center">
+                                        <h5>
+                                                <a href="{% url 'catalog:index' %}">Ly Shop</a>
+                                        </h5>
+                                </div>
+                                <div class="flat-nav-right">
+
+                                        <a class="flat-nav-entry" href="{% url 'wishlist:show_wishlist' %}">
+                                                <span class="glyphicon glyphicon-heart flat-icon-big"></span>
+                                        </a>
+                                        <a class="flat-nav-entry" href="{% url 'cart:show_cart' %}">
+                                                <span class="cart-button glyphicon glyphicon-shopping-cart flat-icon-big">
+                                                </span>
+                                                {% if cart_count.count > 0 %}
+                                                <span class="cart-badge">
+                                                        ({{ cart_count.count }})
+                                                </span>
+                                                {%endif%}
+                                        </a>
+                                        <div class="flat-nav-entry flat-account-entry flat-account-dropdown">
+                                                <span class="glyphicon glyphicon-user flat-icon-big"></span>
+                                                <div class="flat-account-drop-wrapper">
+                                                        <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
+                                                                {% if user.is_authenticated %}
+                                                                <div class="flat-card flex-column">
+                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:user_account'%}">Appercu</a>
+                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:orders' %}">Mes Commandes</a>
+                                                                        <a class="flat-link-entry bordered" href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
+                                                                        <a class="flat-link-entry bordered" href="{% url 'contact:index'%}">Contact</a>
+                                                                        <div class="divider">
+
+                                                                        </div>
+                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:logout' %}">Se déconnecter</a>
+                                                                        <div class="flat-link-entry flat-btn flat-cancel-btn bordered">
+                                                                                <span>Fermer</span>
+                                                                        </div>
+                                                                </div>
+
+                                                                {% else %}
+                                                                <div class="list-flex flex-column flat-login-view">
+                                                                        <div class="flat-login flat-card flex-column dropdown bordered">
+                                                                                <section class="flat-login-header header flat-dropdown-btn">
+                                                                                        <span>
+                                                                                                <h4></h4>J'ai déjà un compte</h4>
+                                                                                        </span>
+                                                                                        <span class="glyphicon glyphicon-menu-right"></span>
+                                                                                </section>
+                                                                                <div class="flat-dropdown-wrapper">
+                                                                                        <section class="flat-form flat-dropdown-content main-content">
+                                                                                                <form id="login_form" name="login_form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left">Nom d'utilisateur
+                                                                                                                        :</span>
+                                                                                                                <input type="text" class="form-control" name="username" id="username">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card vertical">
+                                                                                                                <span class="flat-label text-left">Mot de passe
+                                                                                                                        :</span>
+                                                                                                                <input type="password" class="form-control" name="password" id="password">
+
+                                                                                                        </div>
+                                                                                                        <div class="checkbox">
+                                                                                                                <label>
+                                                                                                                        <input type="checkbox">                                                                                                                        
+                                                                                                                        Se souvenir de moi
+                                                                                                                        </label>
+                                                                                                        </div>
+                                                                                                        <div class="flat-card">
+                                                                                                                <span class="btn btn-default flat-cancel-btn flat-btn"> Annuler </span>
+                                                                                                                <button type="submit" class="btn btn-default flat-btn bg-ebony" id="btn_login"> Se connecter</button>
+                                                                                                        </div>
+
+                                                                                                </form>
+                                                                                        </section>
+                                                                                </div>
+
+                                                                                <section class="footer">
+
+                                                                                </section>
+
+                                                                        </div>
+                                                                        <div class="flat-register flat-card flex-column dropdown bordered">
+                                                                                <section class="flat-register-header header flat-dropdown-btn">
+                                                                                        <span> Je suis un nouveau client </span>
+                                                                                        <span class="glyphicon glyphicon-menu-right"></span>
+                                                                                </section>
+                                                                                <div class="flat-dropdown-wrapper">
+                                                                                        <section class="flat-form flat-dropdown-content main-content">
+                                                                                                <form action="{% url 'accounts:register' %}" method="post">
+                                                                                                        <div class="flat-card  horizontal">
+                                                                                                                <span class="flat-label"> Homme </span>
+                                                                                                                <input type="radio" name="genre">
+                                                                                                                <span class="flat-label"> Femme </span>
+                                                                                                                <input type="radio" name="genre">
+
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Prénom :</span>
+                                                                                                                <input type="text" class="form-control" id="vorname">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Nom de famille
+                                                                                                                        :</span>
+                                                                                                                <input type="text" class="form-control" id="name">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Nom d'utilisateur
+                                                                                                                        :</span>
+                                                                                                                <input type="text" class="form-control" id="username">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Email:</span>
+                                                                                                                <input type="email" class="form-control" id="email">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Mot de passe:</span>
+                                                                                                                <input type="password" class="form-control" id="password">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card  vertical">
+                                                                                                                <span class="flat-label text-left"> Ressaisissez
+                                                                                                                        votre
+                                                                                                                        mot
+                                                                                                                        de
+                                                                                                                        passe:</span>
+                                                                                                                <input type="password" class="form-control" id="password2">
+                                                                                                        </div>
+                                                                                                        <div class="flat-card">
+                                                                                                                <span class="btn btn-default flat-cancel-btn flat-btn"> Annuler </span>
+                                                                                                                <button type="submit" class="btn btn-default flat-btn bg-ebony"> S'enrégistrer
+                                                                                                                        </button>
+                                                                                                        </div>
+
+                                                                                                </form>
+                                                                                        </section>
+                                                                                </div>
+
+                                                                                <section class="footer">
+
+                                                                                </section>
+                                                                        </div>
+                                                                        <div class="flat-card flat-btn flat-cancel-btn bordered">
+                                                                                <span class="header">Fermer</span>
+                                                                        </div>
+
+                                                                </div>
+
+                                                                {% endif %}
+
+                                                        </div>
+                                                </div>
+                                        </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/ajax_login.js' %}"></script>
+                                </div>
+                        </div>
+
+
+                </nav>
+        </header>
+        {% load catalog_tags %}
+        <div id="flat-site-menu" class="flat-dropdown-wrapper">
+                <div class="flat-site-menu list-flex flex-column bg-newspaper">
+                        {% root_categorie as root_cats%} 
+                        {% for cat in root_cats.root_cats %}
+                                <div class="flat-menu-entry">
+                                        <a href="{{cat.get_absolute_url}}"> {{cat.name}} </a>
+                                </div>
+                        {% endfor %}
+
+
+                        <div class="flat-menu-entry">
+                                <a href="">Aide</a>
+                        </div>
+                        <div class="flat-menu-entry">
+                                <a href="{% url 'contact:index'%}">Nous contacter</a>
+                        </div>
+                        <span class="flat-btn-menu-close flat-menu-entry ">Fermer</span>
+
+                </div>
+        </div>
+        <main class="flat-main bordered">
+                {% block BANNER %}
+                
+                {% endblock BANNER %}
+                {% block SEARCHBAR %}
+                        <div class="flat-search-bar dropdown">
+                                <h4>Search bar</h4>
+                                <div>
+                                        <form action="">
+                                                
+                                        </form>
+                                </div>
+                        </div>
+                {% endblock SEARCHBAR %}
+                {% block ASIDE %}
+                        <aside class="flat-nav-menu bg-ebony bordered">
+                                <h5>Side bar</h5>
+                                <div class="fluid-container bordered">
+                                        <h6>Mon Compte</h6>
+                                </div>
+                                <div class="fluid-container bordered">
+                                        <h6>Categories</h6>
+                                </div>
+                                <div class="fluid-container bordered">
+                                        <h6>Aide</h6>
+                                </div>
+                                <div class="fluid-container bordered">
+                                        <h6>Déconnexion</h6>
+                                </div>
+        
+                        </aside>
+                {% endblock ASIDE %}
+                {% block MAINCONTENT %}
+                        <h4>Main content</h4>
+                {% endblock MAINCONTENT %}
+                
+                
+                
+        </main>
+
+        {% block FOOTER %}
+        
+        
+        <footer class="flat-footer bg-ebonyclay">
+                <section class="flat-newsletter bordered">
+                        <div class="section-entry">
+                                <h4>Abonnement à notre newsletter</h4>
+                                <span class="glyphicon glyphicon-envelope"></span>
+                        </div>
+                        <div class="section-entry">
+                                <span class="info bordered">
+                                        Inscrivez-vous à notre newsletter <br>
+                                        pour être informer sur nos offres. <br>
+                                        Vous pouvez vous désinscrire à tout <br>
+                                        moment.
+                                </span>
+                                <span class="">
+                                        <form action="">
+                                                <input type="checkbox" name="newsletter">
+                                                <button class="flat-btn" type="submit">
+                                                  <i class="glyphicon glyphicon-send"> Envoyer</i>
+                                                </button>
+                                        </form>
+                                </span>
+                        </div>
+                </section>
+                <section class="flat-footer-help bordered">
+                        <h4>Service Client</h4>
+                </section>
+                <section class="flat-payment-options bordered">
+                        <div class="section-entry">
+                                <h4>Methodes de Payement</h4>
+                        </div>
+                        <div class="section-entry">
+                                <p class="info bordered">Payer à la livraison</p>
+                                <p class="info bordered">Airtel Money</p>
+
+                        </div>
+                        
+
+                </section>
+                <section class="flat-social-links bordered">
+                        <h4>Suivez nous sur Facebook</h4>
+                        <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                </section>
+                <section class="flat-site-infos bordered">
+                        <h4>Copyright <span class="fa fa-copyright"></span> 2018 - Ly Online Shop</h4>
+                </section>
+        </footer>
+        {% endblock FOOTER %}
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/ajax_login.js' %}"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "base_flat.html"%}
 
 {%block content_header%}
     <div class="header-entry">
@@ -8,7 +8,7 @@
 {%endblock content_header%}
 
 
-{% block PageContent %}
+{% block MAINCONTENT %}
 <div class="order-list list-flex list-vertical">
         <div class="card-mat vertical">
                 <div class="mat-entry"> {{order.get_status}} </div>
@@ -84,4 +84,4 @@
     
     
 
-{% endblock PageContent %}
+{% endblock MAINCONTENT %}

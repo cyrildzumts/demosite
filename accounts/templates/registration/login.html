@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_flat.html" %}
 {% block content_header %}
 <div class="flex-container">
     <h2 class="flex-item">
@@ -6,9 +6,9 @@
     </h2>
 </div>
 {% endblock content_header %}
-{% block PageContent %}
+{% block MAINCONTENT %}
 <div class="container">
     {%include 'tags/login_form.html' %}
 
 </div>
-{% endblock %}
+{% endblock MAINCONTENT %}

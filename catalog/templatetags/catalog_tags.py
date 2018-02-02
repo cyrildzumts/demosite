@@ -48,3 +48,51 @@ def display_session(request):
     for k in session.keys():
         print("Key : %s" % (k))
     return request.session
+
+@register.simple_tag
+def root_categorie():
+    """
+    This method return the root categories
+    """
+    print("Root cat called")
+    root_cats = Category.objects.filter(is_active=True, parent=None)
+    print(root_cats)
+    return {'root_cats': root_cats}
+
+
+@register.simple_tag
+def get_home_items(group):
+    """
+    This method returns a list of items
+    depending on the group value:
+    group = 0 --> Newly added items
+    group = 1 --> Parfums
+    group = 2 --> Mode
+    group = 4 --> Electronics
+    group = 5 --> Sale
+    group = 6 --> Random
+    """
+    print ("get_home_items called")
+    print ("Parameter received " +  str(group))
+    queryset = Product.objects.all()
+    items = None
+    days = 700
+    if group is not None:
+        if group == 0:
+            print ("get New Items")
+            today = datetime.datetime.today()
+            delta = datetime.timedelta(days = days)
+            date = today - delta
+            items = queryset.filter(created_at__gt=date)
+        if group == 1:
+            items = queryset.filter(product_type=3)
+        if group == 2:
+            mode = Category.objects.all().get(name="Mode")
+            items = mode.get_products()
+        if group == 3:
+            mode = Category.objects.all().get(name="Smartphone")
+            items = mode.get_products()
+
+    return items[:3]
+
+

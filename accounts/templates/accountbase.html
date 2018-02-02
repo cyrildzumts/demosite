@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "base_flat.html"%}
 {%comment "not neaded now" %}
 
 
@@ -9,7 +9,7 @@
 </div><!-- End of main-header -->
 {%endblock content_header%}
 
-{% block PageContent %}
+{% block MAINCONTENT %}
 <div class="account-container">
     
     {% block account_sidemenu %}
@@ -39,4 +39,4 @@
     {% endblock account_content%}
 </div>
 
-{% endblock PageContent %}
+{% endblock MAINCONTENT %}

@@ -1,8 +1,8 @@
-{% extends "base.html" %} {% load checkout_tags %} 
+{% extends "base_flat.html" %} {% load checkout_tags %} 
 {% block content_header %}
     <h1>Checkout</h1>
 {% endblock content_header %} 
-{% block PageContent %} 
+{% block MAINCONTENT %} 
 {% if error_message %}
     <ul class="errorlist">
         <li>{{ error_message }}</li>
@@ -55,4 +55,4 @@
 
 </div>
 
-{% endblock PageContent %}
+{% endblock MAINCONTENT %}

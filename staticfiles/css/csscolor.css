@@ -159,9 +159,10 @@
 .gradient-blue{
     background: linear-gradient(#3498db, #4ECDC4);
 }
-.bg-whiteblack{
-    background-color: #ECF0F1;
-    color: #2C2C2C;
+
+.bg-parfum-section{
+    background-color: #F1A9A0;
+    color: #E4F1FE;
 }
 
 .bg-ebony{
@@ -205,4 +206,8 @@
 .bg-success{
     background-color: #53DF83;
     color: #2C3E50;
+}
+.bg-whiteblack{
+    color: #2C2C2C;
+    background-color: #FFFFFF;
 }

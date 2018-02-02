@@ -1,9 +1,5 @@
 
 
-$('[data-toggle="popover"]').popover();
-function hideItemAdded(){
-    $(".item_added").trigger("click");
-}
 
 // display an error message when the
 function displayLoginError(){
@@ -334,6 +330,7 @@ var Catalog = (function(){
         this.$select_brands    = {};
         this.brands            = [];
         this.brand_filter      = [];
+        this.account_menu_popup_is_visible = false;
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -345,24 +342,46 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
-        $(".flat-dropdown-toggle").click(function(event){
-            /*
-            var $content = $(this).siblings(".flat-dropdown-content");
-            var display_css = $content.css("display");
-            console.log("Before : flat-dropdown-content css : " + $($content).css("display"));
-            if(display_css === "block"){
-                $content.css("display", "none");
-            }
-            else if(display_css === "none"){
-                $content.css("display", "block");
-            }
-            console.log("After : flat-dropdown-content css : " + $($content).css("display"));
-            */
-            $(this).siblings(".flat-dropdown-content").toggle();
+        // Dropdown Account Menu 
+        $(".flat-account-dropdown").click(function(event){
+            event.stopPropagation();
+            console.log("Account icon clicked ...");
+            $(".flat-account-drop-wrapper").toggle();
+            console.log($(event.target));
         });
-        $(".flat-header").click(function(event){
-            $(".flat-nav-menu").toggle();
+        $(".flat-cancel-btn").click(function(event){
+            event.stopPropagation();
+            $( ".flat-account-drop-wrapper, .flat-dropdown-wrapper").
+            each(function(index, element){
+                if($(element).css("display") !== "none"){
+                    $(element).hide();
+                }
+            });
         });
+        /**
+         * Controls click event emitted from the Flat Account Menu
+         * contained in a flat-account-drop-wrapper or flat-dropdown-wrapper
+         */
+        $(".flat-dropdown-btn").click(function(event){
+            event.stopPropagation();
+            $(this).siblings(".flat-dropdown-wrapper").toggle();
+        });
+        
+        /**
+         * Controls click on the flat nav menu.
+         * This element contains the side site menu
+         */
+        $(".flat-nav-menu").click(function(event){
+            event.stopPropagation();
+            $("#flat-site-menu").toggle();
+            console.log("menu clicked ...")
+        });
+        $(".flat-btn-menu-close").click(function(event){
+            event.stopPropagation();
+            $("#flat-site-menu").hide();
+            console.log("menu clicked ...")
+        });
+
         this.getItems();
         $("#btn-filter").click(this.onFilterChanged.bind(this));
         $("#btn-filter-reset").click(this.onFilterReset.bind(this));

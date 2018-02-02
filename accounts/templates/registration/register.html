@@ -1,5 +1,5 @@
 
-{% extends "base.html" %}
+{% extends "base_flat.html" %}
 {% block title%} {{page_title}} {% endblock %}
 
 {% block content_header %}
@@ -9,7 +9,7 @@
     </h2>
 </div>
 {% endblock content_header %}
-{% block PageContent %}
+{% block MAINCONTENT %}
 <div class="flex-container">
     <div class="">
       <form class="form" action="{% url 'accounts:register' %}" method="post"> {% csrf_token %}
@@ -64,4 +64,4 @@
 
 </div>
 
-{% endblock %}
+{% endblock MAINCONTENT %}

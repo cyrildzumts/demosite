@@ -13,7 +13,7 @@ class Category(models.Model):
                             representant la page du produit.')
     # parent_category = models.IntegerField(default=0)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True,
-                               null=True)
+                               null=True, related_name='children')
     description = models.TextField()
     is_active = models.BooleanField(default=True)
     meta_keywords = models.CharField(max_length=255, help_text='Liste de mot clés,\
@@ -49,7 +49,8 @@ class Category(models.Model):
         This method returns the direct 
         children categories.
         """
-        return Category.objects.filter(parent=self)
+        #return Category.objects.filter(parent=self)
+        return self.children.all()
 
 
     def root_cat(self):

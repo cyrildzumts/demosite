@@ -49,8 +49,8 @@ def index(request):
         to be displayed. See category_tags.py
 
     """
-    # template_name = "catalog/index.html"
-    template_name = "base_flat.html"
+    template_name = "catalog/index_flat.html"
+    # template_name = "base_flat.html"
     page_title = 'Acceuille | ' + settings.SITE_NAME
     current_cat = Category.objects.filter(parent=None)
     try:
