@@ -603,7 +603,7 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     margin: auto;
 }
 .card-product-image{
-    width: 100%;
+    width: 200px;
     padding: 5px;
     margin: auto;
 }
@@ -1616,6 +1616,7 @@ headers and footers.
  }
  .flex-row{
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .flat-icon-big{
@@ -1666,6 +1667,10 @@ headers and footers.
  }
  .flat-flex{
      display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 1px;
+     margin: 1px;
  }
  .flat-hide{
      display: none !important;
@@ -1766,8 +1771,9 @@ headers and footers.
   }
   .flat-product{
       display: block;
-      max-width: 300px;
-      height: auto;
+      width: 100%;
+      max-width: 500px;
+      height: 270px;
       padding: 2px;
       margin: 2px;
   }

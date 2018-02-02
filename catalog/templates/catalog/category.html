@@ -3,43 +3,65 @@
 
 
 {%block MAINCONTENT %}
-
-{% if products %}
-<div>
-  <div class="grid-flex">
-    <div class="category-menu">
-        {% include "tags/category_box.html" %}
+<div class="flat-main">
+    <div class="flat-card flex-column filter flat-dropdown bordered">
+      <section class="header flat-filter-btn">
+          <span> Filtres </span> <span class="glyphicon glyphicon-plus"></span>
+      </section>
+      <section class="flat-dropdown-wrapper main">
+          <span>Filtres Options </span>
+          <span class="flat-btn flat-close"></span>
+      </section>
     </div>
-    
-    <div class="flex-container">
-        <div class="grid-flex">
-          {% for p  in products %}
-              {% include "tags/product_box_min.html" %}
-          {% endfor %}
-        </div>
+    <div class="flat-card flex-column flat-dropdown bordered">
+        <section class="header flat-cat-btn">
+          <span> Catégorie </span>
+        </section>
+        <section class="main flat-dropdown-wrapper">
+            <span> Categorie Liste </span>
+            {% include "tags/category_box.html" %}
+        </section>
     </div>
-  </div>
 
-  <div class="flex-container">
-    <ul class="pager">
-        {% if products.has_previous %}
-          <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
-        {% endif %}
-        <span class="current">
-          Page {{products.number }} de {{products.paginator.num_pages}}.
-        </span>
-        {% if products.has_next %}
-          <li><a href="?page={{ products.next_page_number }}">next</a></li>
-        {% endif %}
-    </ul>
-  </div>
+    <div class="flat-card flex-column">
+        <section class="main flat-flex flex-row">
+            {% if products %}
+              {% for p  in products %}
+              <div class="flat-product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}">
+                  <div class="card-product-image"> 
+                          <a href="{{p.get_absolute_url}}">
+                                  <img class="img-responsive" src="{{p.image.url}}">
+                          </a>
+                  </div>
+                  <div class="list-flex vertical">
+                          <div class="mat-entry">{{p.name}}</div>
+                          <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                          <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
+                          
+                  </div>
+              </div>
+              {% endfor %}
+            {% else %}
+              <p class="text-center">
+                Il n'y a pas de produits disponible
+                dans cette catégorie 
+              </p>
+            {% endif %}
+        </section>
+
+        <section class="footer">
+            <ul class="pager">
+                {% if products.has_previous %}
+                  <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
+                {% endif %}
+                <span class="current">
+                  Page {{products.number }} de {{products.paginator.num_pages}}.
+                </span>
+                {% if products.has_next %}
+                  <li><a href="?page={{ products.next_page_number }}">next</a></li>
+                {% endif %}
+            </ul>
+        </section>
+    </div>
 </div>
-
-     
-
-  {% else %}
-      <p class="text-center">Il n'y a pas encore de produits disponible
-       dans cette catégorie 
-     </p>
-  {% endif %}
 {% endblock MAINCONTENT %}
