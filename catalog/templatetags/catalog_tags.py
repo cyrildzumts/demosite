@@ -3,6 +3,13 @@ from catalog.models import Category, Phablet, Parfum, Product
 import datetime
 register = template.Library()
 
+# a Cache variable to store Site Categories list
+cat_set = Category.objects.all()
+mode_cat = cat_set.get(name="Mode")
+beauty_cat = cat_set.get(name="Beauté")
+parfum_cat = cat_set.get(name="Parfumerie")
+smartphone_cat = cat_set.get(name="Smartphone")
+
 
 @register.inclusion_tag("tags/category_list.html")
 def category_list(request_path):
@@ -95,4 +102,21 @@ def get_home_items(group):
 
     return items[:3]
 
+
+@register.simple_tag
+def get_cat(category):
+    """
+    This methode return the category model
+    """
+    cat = None
+    if category is not None:
+        if category == "Mode":
+            cat = mode_cat
+        elif category == "Parfumerie":
+            cat = parfum_cat
+        elif category == "Beauty":
+            cat = beauty_cat
+        elif category == "Smartphone":
+            cat = smartphone_cat
+    return cat
 

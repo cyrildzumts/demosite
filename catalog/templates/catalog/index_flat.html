@@ -37,8 +37,10 @@
                 <span>Parfumerie</span>
         </section>
         <section class="main flat-card">
-
-            <img class="section-bg-img" src="{% static 'images/parfum-bg.jpg' %}" alt="">
+                {% get_cat "Parfumerie" as p_cat %}
+                <a href="{{p_cat.get_absolute_url}}">
+                        <img class="section-bg-img" src="{% static 'images/parfum-bg.jpg' %}" alt="">
+                </a>
         </section>
     </div>
     <div class="flat-card flex-column bordered">
@@ -46,15 +48,21 @@
                 <span>Mode</span>
         </section>
         <section class="main flat-card">
-                <img class="section-bg-img" src="{% static 'images/mode-bg.jpg' %}" alt="">
+                {% get_cat "Mode" as m_cat %}
+                <a href="{{m_cat.get_absolute_url}}">
+                        <img class="section-bg-img" src="{% static 'images/mode-bg.jpg' %}" alt="">
+                </a>
         </section>
     </div>
     <div class="flat-card flex-column bordered">
         <section class="header">
-                <span>Beauty</span>
+                <span>Beauté - Cheveux</span>
         </section>
         <section class="main flat-card">
-                <img class="section-bg-img" src="{% static 'images/beauty-bg.jpg' %}" alt="">
+                {% get_cat "Beauty" as b_cat %}
+                <a href="{{b_cat.get_absolute_url}}">
+                        <img class="section-bg-img" src="{% static 'images/beauty-bg.jpg' %}" alt="">
+                </a>
         </section>
     </div>
 
