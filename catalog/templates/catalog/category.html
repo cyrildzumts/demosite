@@ -4,22 +4,65 @@
 
 {%block MAINCONTENT %}
 <div class="flat-main">
-    <div class="flat-card flex-column filter flat-dropdown bordered">
-      <section class="header flat-filter-btn">
-          <span> Filtres </span> <span class="glyphicon glyphicon-plus"></span>
+    <div class="flat-card flex-column filter  bordered">
+      <section class="header flat-filter-btn flat-dropdown-btn">
+          <span> FILTRE </span> <span class="glyphicon glyphicon-plus"></span>
       </section>
-      <section class="flat-dropdown-wrapper main">
-          <span>Filtres Options </span>
-          <span class="flat-btn flat-close"></span>
+      <section class="flat-dropdown-wrapper">
+            
+        <div class="flat-card flex-column">
+                <section class="header">
+                        <span> OPTIONS </span>
+                </section>
+                <section class="flat-wrapper bordered">
+                        <div class="flat-overflow flat-card flex-column space bordered">
+                                <section class="header">
+                                        <span > MARQUES </span>
+                                </section>
+                                <section class="flat-inputs flat-overflow">
+                                        <input type="text" name="mark-query" placeholder="Saissez votre marque ...">
+                                        <div id="flat-brands" class="flat-inputs flat-overflow">
+                                            {% for brand in brands %}
+                                            <span><input type="checkbox" name="mark-choices" value="{{brand}}"> {{brand}} </span>
+                                            {% endfor %}
+                                        </div>
+                                </section>
+                                
+                        </div>
+                        <div class="flat-order-filter flat-fluid space bordered">
+                            <span> TRIER PAR </span>
+                            <div class="flat-inputs">
+                                <span><input type="radio" name="order" value="0"> Plus bas prix </span>
+                                <span><input type="radio" name="order" value="1"> Prix le plus élevé <br></span>
+                                <span><input type="radio" name="order" value="2"> Popularité</span>
+                                <span><input type="radio" name="order" value="2"> Plus récent</span>
+                            </div>
+                        </div>
+                </section>
+                <section class="footer">
+                        <span class="flat-btn flat-filter-apply">Utiliser</span>
+                        <span class="flat-btn flat-filter-close">Fermer</span>
+                </section>
+            
+        </div>
+          
       </section>
     </div>
-    <div class="flat-card flex-column flat-dropdown bordered">
-        <section class="header flat-cat-btn">
-          <span> Catégorie </span>
+    <div class="flat-card flex-column  bordered">
+        <section class="header flat-cat-btn flat-dropdown-btn">
+          <span> Catégorie </span> <span class="glyphicon glyphicon-plus"></span>
         </section>
-        <section class="main flat-dropdown-wrapper">
-            <span> Categorie Liste </span>
-            {% include "tags/category_box.html" %}
+        <section class="flat-dropdown-wrapper">
+            <div class="flat-card flex-column">
+                <section class="main">
+                        {% include "tags/category_box.html" %}
+                </section>
+                <section class="footer">
+                        <span class="flat-btn flat-cat-close">Fermer</span>
+                </section>
+                
+            </div>
+            
         </section>
     </div>
 
@@ -27,19 +70,7 @@
         <section class="main flat-flex flex-row">
             {% if products %}
               {% for p  in products %}
-              <div class="flat-product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}">
-                  <div class="card-product-image"> 
-                          <a href="{{p.get_absolute_url}}">
-                                  <img class="img-responsive" src="{{p.image.url}}">
-                          </a>
-                  </div>
-                  <div class="list-flex vertical">
-                          <div class="mat-entry">{{p.name}}</div>
-                          <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                          <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
-                          
-                  </div>
-              </div>
+              {% include "tags/product_box_flat.html" %}
               {% endfor %}
             {% else %}
               <p class="text-center">
@@ -61,6 +92,11 @@
                   <li><a href="?page={{ products.next_page_number }}">next</a></li>
                 {% endif %}
             </ul>
+        </section>
+    </div>
+    <div class="flat-card flex-column">
+        <section class="header">
+             <span>Vue recemment <span class="fa fa-history"></span></span> 
         </section>
     </div>
 </div>

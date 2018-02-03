@@ -61,9 +61,7 @@ def root_categorie():
     """
     This method return the root categories
     """
-    print("Root cat called")
     root_cats = Category.objects.filter(is_active=True, parent=None)
-    print(root_cats)
     return {'root_cats': root_cats}
 
 
@@ -79,8 +77,6 @@ def get_home_items(group):
     group = 5 --> Sale
     group = 6 --> Random
     """
-    print ("get_home_items called")
-    print ("Parameter received " +  str(group))
     queryset = Product.objects.all()
     items = None
     days = 700

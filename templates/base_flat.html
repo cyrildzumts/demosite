@@ -24,7 +24,7 @@
 </head>
 
 <body>
-        <header class="flat-header bg-ebonyclay">
+        <header class="flat-header bg-site-theme">
 
                 {% comment "nav" %} This nav element is the same accross the whole site. For this container to work without issue, every
                 page needs to provide the category list, cart counter, wishlist counter, {% endcomment %}
@@ -54,7 +54,7 @@
                                                 </span>
                                                 {%endif%}
                                         </a>
-                                        <div class="flat-nav-entry flat-account-entry flat-account-dropdown">
+                                        <div class="flat-nav-entry flat-account-entry flat-account-dropdown-btn">
                                                 <span class="glyphicon glyphicon-user flat-icon-big"></span>
                                                 <div class="flat-account-drop-wrapper">
                                                         <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
@@ -258,7 +258,7 @@
         {% block FOOTER %}
         
         
-        <footer class="flat-footer bg-ebonyclay">
+        <footer class="flat-footer bg-site-theme">
                 <section class="flat-newsletter bordered">
                         <div class="section-entry">
                                 <h4>Abonnement à notre newsletter</h4>
@@ -286,7 +286,7 @@
                 </section>
                 <section class="flat-payment-options bordered">
                         <div class="section-entry">
-                                <h4>Methodes de Payement</h4>
+                                <span> Méthodes de Paiement <span class="fa fa-credit-card flat-icon-big"></span></span>
                         </div>
                         <div class="section-entry">
                                 <p class="info bordered">Payer à la livraison</p>

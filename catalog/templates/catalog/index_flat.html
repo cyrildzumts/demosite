@@ -15,19 +15,7 @@
             <div class="flat-wrapper flat-product-list">
                     {% get_home_items 0 as new_products %}
                     {% for p in new_products %}
-                        <div class="flat-product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}">
-                                <div class="card-product-image"> 
-                                        <a href="{{p.get_absolute_url}}">
-                                                <img class="img-responsive" src="{{p.image.url}}">
-                                        </a>
-                                </div>
-                                <div class="list-flex vertical">
-                                        <div class="mat-entry">{{p.name}}</div>
-                                        <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                                        <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
-                                        
-                                </div>
-                        </div>
+                        {% include "tags/product_box_flat.html" %}
                     {% endfor %}
             </div>
         </section>

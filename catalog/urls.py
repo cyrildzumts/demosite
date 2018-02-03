@@ -7,12 +7,12 @@ urlpatterns = [
     # url(r'^livraison/$', views.livraison, name='livraison'),
     url(r'^flyer/$', views.flyer, name='flyer'),
     url(r'^search/$', views.search_view, name='search'),
-    url(r'^(?P<category_slug>[-\w]+)/$', views.show_category,
+    #url(r'^(?P<category_slug>[-\w]+)/$', views.show_category,
+    #    name='catalog_category'),
+    url(r'^(?P<category_slug>[-\w]+)/$', views.CategoryView.as_view(),
         name='catalog_category'),
     # url(r'^product/(?P<product_slug>[-\w]+)/$', views.show_product,
     #    name='product_details'),
     url(r'^product/(?P<slug>[-\w]+)/$', views.ProductDetailView.as_view(),
         name='product_details'),
-    
-
 ]

@@ -11,7 +11,7 @@ from cart.forms import ProductAddToCartForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from demosite import settings
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView, ListView
 import calendar
 from django.db.models import Q
 import operator
@@ -34,6 +34,39 @@ class ProductDetailView(DetailView):
         name = super(ProductDetailView, self).get_object().name
         context['page_title'] = name
         return context
+
+
+class CategoryView(ListView):
+    template_name = "catalog/category.html"
+
+    def get_queryset(self):
+        key = 'category_slug'
+        self.category = get_object_or_404(Category, slug=self.kwargs[key])
+        return self.category.children.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        meta_keywords = self.category.meta_keywords
+        meta_description = self.category.meta_description
+        brands = set()
+        products = self.category.get_products()
+        parent_cats = self.category.categories
+        for p in products:
+            brands.add(p.brand)
+        
+        context = {
+            'current_category'  : self.category,
+            'parent_cats'       : parent_cats,
+            'page_title'        : self.category.name + ' | ' + settings.SITE_NAME,
+            'meta_keywords'     : meta_keywords,
+            'meta_description'  : meta_description,
+            'products'          : products,
+            'brands'            : sorted(brands),
+        }
+        return context
+
+    
+
 
 
 def get_categories(parent_id):

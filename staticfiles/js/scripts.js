@@ -331,6 +331,8 @@ var Catalog = (function(){
         this.brands            = [];
         this.brand_filter      = [];
         this.account_menu_popup_is_visible = false;
+        this.$category_btn      = {};
+        this.$filter_btn      = {};
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -342,8 +344,20 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
+        this.$category_btn = $(".flat-cat-close");
+        this.$filter_btn = $(".flat-filter-close");
+        this.$filter_btn.click(function(event){
+            event.stopPropagation();
+            console.log("filter close drop clicked ");
+            $(this).parents(".flat-dropdown-wrapper").toggle();
+        });
+        this.$category_btn.click(function(event){
+            event.stopPropagation();
+            console.log("cat close drop clicked ");
+            $(this).parents(".flat-dropdown-wrapper").toggle();
+        });
         // Dropdown Account Menu 
-        $(".flat-account-dropdown").click(function(event){
+        $(".flat-account-dropdown-btn").click(function(event){
             event.stopPropagation();
             console.log("Account icon clicked ...");
             $(".flat-account-drop-wrapper").toggle();
@@ -364,6 +378,7 @@ var Catalog = (function(){
          */
         $(".flat-dropdown-btn").click(function(event){
             event.stopPropagation();
+            console.log("drop clicked ");
             $(this).siblings(".flat-dropdown-wrapper").toggle();
         });
         
