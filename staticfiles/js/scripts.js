@@ -319,10 +319,11 @@ var Catalog = (function(){
     function Catalog(){
         this.sortOrder          = 1;
         this.CURRENT_SORTING    = 0;
-        this.SORTING_PRICE_ASC  = 1;
-        this.SORTING_PRICE_DSC  = 2;
-        this.SORTING_POPULARITY = 3;
-        this.SORTING_RANDOM     = 4;
+        this.SORTING_PRICE_ASC  = 0;
+        this.SORTING_PRICE_DSC  = 1;
+        this.SORTING_POPULARITY = 2;
+        this.SORTING_RANDOM     = 3;
+        this.SORTING_RECENT     = 4;
         this.ordering           = [];
         this.viewedItems        = [];
         this.$items             = {};
@@ -336,6 +337,9 @@ var Catalog = (function(){
         this.$clickable         = {};
         this.$close_flat_main   = {};
         this.$brand_input       = {};
+        this.$sorting_radios    = {};
+        this.$product_list      = {};
+        this.$brand_list        = {};
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -347,7 +351,11 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
+        this.$sorting_radios = $("#flat-sorting-input span input:radio");
+        this.$product_list = $("#flat-product-list");
+        this.$items = $("#flat-product-list .flat-product");
         this.brands = $("#flat-brands span");
+        this.$brand_list = $("#flat-brands span input:checkbox");
         this.$brand_input = $("#brands-filter-input");
         this.$brand_input.keyup(this.onBrandInputChanged.bind(this));
         this.$clickable = $(".flat-clickable");
@@ -415,9 +423,9 @@ var Catalog = (function(){
         });
 
         this.getItems();
-        $("#btn-filter").click(this.onFilterChanged.bind(this));
+        $("#flat-filter-apply").click(this.onFilterChanged.bind(this));
         $("#btn-filter-reset").click(this.onFilterReset.bind(this));
-        $("#btn-sort").click(this.onSortingChanged.bind(this));
+        $("#flat-sort-apply").click(this.onSortingChanged.bind(this));
         $("#btn-sort-reset").click(this.onSortingReset.bind(this));
         this.$select_filter = $("#select-filter");
         this.$select_brands = $("#select-brands");
@@ -433,22 +441,60 @@ var Catalog = (function(){
         console.log("Brands input changed ...");
     };
     Catalog.prototype.onFilterChanged = function(event){
-        this.$select_filter.collapse("toggle");
-        var $input = $("#select-brands input:checked");
+        //this.$select_filter.collapse("toggle");
+        var $selected_brands = this.$brand_list.filter(":checked");
         console.log("Filter Selected : " );
-        for(var i = 0; i < $input.length; i++){
+        console.log($selected_brands);
+        /* for(var i = 0; i < this.$brand_list.length; i++){
             console.log(this.brands[$input[i].value]);
             console.log("--------------");
             this.brand_filter.push(this.brands[$input[i].value]);
         }
-        
-        this.filter();
+         */
+        that = this;
+        var sel = {};
+        var element = {};
+        var match = false;
+        if($selected_brands.length > 0){
+            this.$items.each(function(i, e){
+                element = $(e);
+                $selected_brands.each(function(j,input){
+                    sel = $(input).val();
+                    console.log("Look for items to mask");
+                    console.log("Brand : " + sel);
+                    console.log("Item being checked " );
+                    console.log(element);
+                    console.log("Element Brand : " + element.data("brand"));
+                    if(sel == $(e).data("brand")){
+                        match = true;
+                    }
+                });
+                if(match){
+                    element.show();
+                    match = false;
+                }
+                else{
+                    element.hide();
+                }
+            });
+        }
+        else {
+            this.$items.each(function(i, e){
+                $(e).show();
+            });
+        } 
     };
 
     Catalog.prototype.onSortingChanged = function(event){
+        event.stopPropagation();
         event.preventDefault();
-        console.log("Sorting changed to " + this.ordering[this.CURRENT_SORTING]);
-        this.sort();
+        var order = this.$sorting_radios.filter(":checked").val();
+        order = parseInt(order);
+        console.log("Sorting changed to " + this.ordering[order]);
+        this.sort(order);
+        this.$product_list.empty();
+        this.$items.appendTo(this.$product_list);
+
     };
     Catalog.prototype.onSortingReset = function(event){
         event.preventDefault();
@@ -480,8 +526,45 @@ var Catalog = (function(){
             this.brand_filter.pop();
         }
     };
-    Catalog.prototype.sort = function(){
+    Catalog.prototype.sortByPrice = function(order){
+        var key = "price";
+        if(order == this.SORTING_PRICE_DSC){
+            this.$items.sort(function(a, b){
+                return $(b).data(key) - $(a).data(key);
+            });
+        }
+        else if(order == this.SORTING_PRICE_ASC){
+            this.$items.sort(function(a, b){
+                return $(a).data(key) - $(b).data(key);
+            });
+        }
+    };
+    Catalog.prototype.sortByPopularity = function(key){
+        this.$items.sort(function(a, b){
+            return $(b).data(key) - $(a).data(key);
+        });
+    };
+    Catalog.prototype.sort = function(sortType){
         console.log(" sort () : This method is not implemented yet ...");
+        var key = "";
+        switch (sortType) {
+            case this.SORTING_PRICE_DSC:
+            case this.SORTING_PRICE_ASC:
+                this.sortByPrice(sortType);
+                break;
+            case this.SORTING_POPULARITY:
+                this.sortByPopularity("viewcount");
+                break;
+            case this.SORTING_RANDOM:
+
+                break;
+            case this.SORTING_RECENT:
+
+                break;
+        
+            default:
+                break;
+        }
     };
     Catalog.prototype.search = function(){
         console.log(" search () : This method is not implemented yet ...");
@@ -495,20 +578,13 @@ var Catalog = (function(){
 
     Catalog.prototype.getItems = function(){
         console.log(" getItems () : This method is not implemented yet ...");
-        this.$items = $("#product-list .list-entry");
+        
         console.log(this.$items);
         console.log("We found " + this.$items.length + " in this page");
-        this.getBrands();
 
     };
     Catalog.prototype.getBrands = function (){
-        var brand ;
-        for (var i = 0; i < this.$items.length; i++){
-            brand = $(this.$items[i]).attr("data-brand");
-            if (!this.brands.includes(brand)){
-                this.brands.push(brand);
-            }
-        }
+        console.log("getBrands() called ...");
     };
     return Catalog;
 })();

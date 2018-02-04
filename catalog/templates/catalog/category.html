@@ -20,27 +20,35 @@
                                         <span > MARQUES </span>
                                 </section>
                                 <section class="flat-inputs flat-overflow">
-                                        <input id="brands-filter-input" type="text" name="brands-query" placeholder="Saissez votre marque ...">
+                                        <input id="brands-filter-input" type="text" name="brands-query" placeholder="Saissez une marque ...">
                                         <div id="flat-brands" class="flat-inputs flat-overflow">
                                             {% for brand in brands %}
                                             <span data-brand="{{brand}}"><input type="checkbox" name="mark-choices" value="{{brand}}"> {{brand}} </span>
                                             {% endfor %}
                                         </div>
                                 </section>
+                                <section class="flat-footer">
+                                        <span id="flat-filter-apply" class="flat-btn"> Appliquer</span>
+                                </section>
                                 
                         </div>
-                        <div class="flat-order-filter flat-fluid space bordered">
-                            <span> TRIER PAR </span>
-                            <div class="flat-inputs">
+                        <div class="flat-order-filter flat-card flex-column space bordered">
+                            <section class="header">
+                                <span> TRIER PAR </span>
+                            </section>
+                            <section id="flat-sorting-input" class="flat-inputs">
                                 <span><input type="radio" name="order" value="0"> Plus bas prix </span>
                                 <span><input type="radio" name="order" value="1"> Prix le plus élevé <br></span>
                                 <span><input type="radio" name="order" value="2"> Popularité</span>
-                                <span><input type="radio" name="order" value="2"> Plus récent</span>
-                            </div>
+                                <span><input type="radio" name="order" value="3"> Plus récent</span>
+                            </section>
+                            <section class="flat-footer">
+                                    <span id="flat-sort-apply" class="flat-btn"> Appliquer</span>
+                            </section>
                         </div>
                 </section>
                 <section class="footer">
-                        <span class="flat-btn flat-filter-apply">Utiliser</span>
+                        
                         <span class="flat-btn flat-close-main">Fermer</span>
                 </section>
             
@@ -67,7 +75,7 @@
     </div>
 
     <div class="flat-card flex-column">
-        <section class="main flat-flex flex-row">
+        <section id="flat-product-list" class="main">
             {% if products %}
               {% for p  in products %}
               {% include "tags/product_box_flat.html" %}

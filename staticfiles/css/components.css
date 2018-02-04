@@ -1802,6 +1802,8 @@ headers and footers.
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+      padding: 2px;
+      margin: 1px;
   }
   .flat-product{
       display: block;
