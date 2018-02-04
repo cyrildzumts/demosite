@@ -1688,6 +1688,9 @@ headers and footers.
     margin: 1px;
     
 }
+.flat-clickable{
+    cursor: pointer;
+}
 .flat-inputs{
     display: flex;
     width: 100%;

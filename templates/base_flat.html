@@ -54,9 +54,12 @@
                                                 </span>
                                                 {%endif%}
                                         </a>
-                                        <div class="flat-nav-entry flat-account-entry flat-account-dropdown-btn">
-                                                <span class="glyphicon glyphicon-user flat-icon-big"></span>
-                                                <div class="flat-account-drop-wrapper">
+                                        <div class="flat-nav-entry flat-account-entry ">
+                                                <div class="flat-fuild flat-clickable">
+                                                        <span class="glyphicon glyphicon-user flat-icon-big"></span>
+                                                </div>
+                                                
+                                                <div class="flat-account-drop-wrapper flat-main-content">
                                                         <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
                                                                 {% if user.is_authenticated %}
                                                                 <div class="flat-card flex-column">
@@ -76,14 +79,14 @@
                                                                 {% else %}
                                                                 <div class="list-flex flex-column flat-login-view">
                                                                         <div class="flat-login flat-card flex-column dropdown bordered">
-                                                                                <section class="flat-login-header header flat-dropdown-btn">
+                                                                                <section class="flat-login-header header flat-clickable">
                                                                                         <span>
                                                                                                 <h4></h4>J'ai déjà un compte</h4>
                                                                                         </span>
                                                                                         <span class="glyphicon glyphicon-menu-right"></span>
                                                                                 </section>
-                                                                                <div class="flat-dropdown-wrapper">
-                                                                                        <section class="flat-form flat-dropdown-content main-content">
+                                                                                <div class="flat-dropdown-wrapper flat-main-content">
+                                                                                        <section class="flat-form main-content">
                                                                                                 <form id="login_form" name="login_form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
                                                                                                         <div class="flat-card  vertical">
                                                                                                                 <span class="flat-label text-left">Nom d'utilisateur
@@ -103,7 +106,7 @@
                                                                                                                         </label>
                                                                                                         </div>
                                                                                                         <div class="flat-card">
-                                                                                                                <span class="btn btn-default flat-cancel-btn flat-btn"> Annuler </span>
+                                                                                                                <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
                                                                                                                 <button type="submit" class="btn btn-default flat-btn bg-ebony" id="btn_login"> Se connecter</button>
                                                                                                         </div>
 
@@ -117,12 +120,12 @@
 
                                                                         </div>
                                                                         <div class="flat-register flat-card flex-column dropdown bordered">
-                                                                                <section class="flat-register-header header flat-dropdown-btn">
+                                                                                <section class="flat-register-header header flat-clickable">
                                                                                         <span> Je suis un nouveau client </span>
                                                                                         <span class="glyphicon glyphicon-menu-right"></span>
                                                                                 </section>
-                                                                                <div class="flat-dropdown-wrapper">
-                                                                                        <section class="flat-form flat-dropdown-content main-content">
+                                                                                <div class="flat-dropdown-wrapper flat-main-content">
+                                                                                        <section class="flat-form  main-content">
                                                                                                 <form action="{% url 'accounts:register' %}" method="post">
                                                                                                         <div class="flat-card  horizontal">
                                                                                                                 <span class="flat-label"> Homme </span>
@@ -162,7 +165,7 @@
                                                                                                                 <input type="password" class="form-control" id="password2">
                                                                                                         </div>
                                                                                                         <div class="flat-card">
-                                                                                                                <span class="btn btn-default flat-cancel-btn flat-btn"> Annuler </span>
+                                                                                                                <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
                                                                                                                 <button type="submit" class="btn btn-default flat-btn bg-ebony"> S'enrégistrer
                                                                                                                         </button>
                                                                                                         </div>
@@ -175,7 +178,7 @@
 
                                                                                 </section>
                                                                         </div>
-                                                                        <div class="flat-card flat-btn flat-cancel-btn bordered">
+                                                                        <div class="flat-card flat-btn flat-close-main bordered">
                                                                                 <span class="header">Fermer</span>
                                                                         </div>
 
@@ -259,12 +262,12 @@
         
         
         <footer class="flat-footer bg-site-theme">
-                <section class="flat-newsletter bordered">
-                        <div class="section-entry">
+                <section class="flat-newsletter flat-card flex-column bordered">
+                        <div class="section-entry header">
                                 <h4>Abonnement à notre newsletter</h4>
                                 <span class="glyphicon glyphicon-envelope"></span>
                         </div>
-                        <div class="section-entry">
+                        <div class="section-entry main">
                                 <span class="info bordered">
                                         Inscrivez-vous à notre newsletter <br>
                                         pour être informer sur nos offres. <br>
@@ -281,14 +284,27 @@
                                 </span>
                         </div>
                 </section>
-                <section class="flat-footer-help bordered">
-                        <h4>Service Client</h4>
+                <section class="flat-footer-help flat-card flex-column bordered">
+                        <div class="header flat-clickable">
+                                <span> Service client </span> <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                        <div class="flat-dropdown-wrapper flat-main-content">
+                                <div class="flat-flex flex-column">
+                                        <span class="flat-entry space bordered"> Aide 1</span>
+                                        <span class="flat-entry space bordered"> Aide 2</span>
+                                        <span class="flat-entry space bordered"> Aide 3</span>
+                                        <span class="flat-entry space bordered"> Aide 4</span>
+                                        <span class="flat-entry space bordered"> Plus d'aides ... </span>
+
+                                </div>
+                        </div>
+
                 </section>
-                <section class="flat-payment-options bordered">
-                        <div class="section-entry">
+                <section class="flat-payment-options flat-card flex-column bordered">
+                        <div class="section-entry header">
                                 <span> Méthodes de Paiement <span class="fa fa-credit-card flat-icon-big"></span></span>
                         </div>
-                        <div class="section-entry">
+                        <div class="section-entry main">
                                 <p class="info bordered">Payer à la livraison</p>
                                 <p class="info bordered">Airtel Money</p>
 
@@ -296,11 +312,16 @@
                         
 
                 </section>
-                <section class="flat-social-links bordered">
-                        <h4>Suivez nous sur Facebook</h4>
-                        <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                <section class="flat-social-links flat-card flex-column bordered">
+                        <div class="header">
+                                <h4>Suivez nous sur Facebook</h4>
+                        </div>
+                        <div class="main">
+                                        <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                        </div>
+                        
                 </section>
-                <section class="flat-site-infos bordered">
+                <section class="flat-site-infos">
                         <h4>Copyright <span class="fa fa-copyright"></span> 2018 - Ly Online Shop</h4>
                 </section>
         </footer>

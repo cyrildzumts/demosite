@@ -317,22 +317,25 @@ var Account = (function(){
 
 var Catalog = (function(){
     function Catalog(){
-        this.sortOrder         = 1;
+        this.sortOrder          = 1;
         this.CURRENT_SORTING    = 0;
         this.SORTING_PRICE_ASC  = 1;
         this.SORTING_PRICE_DSC  = 2;
         this.SORTING_POPULARITY = 3;
         this.SORTING_RANDOM     = 4;
         this.ordering           = [];
-        this.viewedItems       = [];
+        this.viewedItems        = [];
         this.$items             = {};
-        this.$select_filter    = {};
-        this.$select_brands    = {};
-        this.brands            = [];
-        this.brand_filter      = [];
+        this.$select_filter     = {};
+        this.$select_brands     = {};
+        this.brands             = [];
+        this.brand_filter       = [];
         this.account_menu_popup_is_visible = false;
         this.$category_btn      = {};
-        this.$filter_btn      = {};
+        this.$filter_btn        = {};
+        this.$clickable         = {};
+        this.$close_flat_main   = {};
+        this.$brand_input       = {};
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -344,9 +347,23 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
+        this.brands = $("#flat-brands span");
+        this.$brand_input = $("#brands-filter-input");
+        this.$brand_input.keyup(this.onBrandInputChanged.bind(this));
+        this.$clickable = $(".flat-clickable");
+        this.$close_flat_main = $(".flat-close-main");
+        this.$clickable.click(function(event){
+            event.stopPropagation();
+            console.log("Clickable clicked ...");
+            $(this).siblings(".flat-main-content").toggle();
+        });
+        this.$close_flat_main.click(function(event){
+            event.stopPropagation();
+            $(this).parents(".flat-main-content").hide();
+        });
         this.$category_btn = $(".flat-cat-close");
         this.$filter_btn = $(".flat-filter-close");
-        this.$filter_btn.click(function(event){
+        /* this.$filter_btn.click(function(event){
             event.stopPropagation();
             console.log("filter close drop clicked ");
             $(this).parents(".flat-dropdown-wrapper").toggle();
@@ -355,7 +372,7 @@ var Catalog = (function(){
             event.stopPropagation();
             console.log("cat close drop clicked ");
             $(this).parents(".flat-dropdown-wrapper").toggle();
-        });
+        }); */
         // Dropdown Account Menu 
         $(".flat-account-dropdown-btn").click(function(event){
             event.stopPropagation();
@@ -407,6 +424,13 @@ var Catalog = (function(){
         for(var i = 0; i < this.brands.length; i++){
             this.$select_brands.append(`<input  type="checkbox" value=${i}> <span class="brand-entry"> ${this.brands[i]} </span>`); 
         }
+    };
+    Catalog.prototype.onBrandInputChanged = function(event){
+        var val = this.$brand_input.val().toLowerCase();
+        this.brands.filter(function(i, e){
+            $(e).toggle($(e).text().toLowerCase().indexOf(val) > -1)
+        });
+        console.log("Brands input changed ...");
     };
     Catalog.prototype.onFilterChanged = function(event){
         this.$select_filter.collapse("toggle");
