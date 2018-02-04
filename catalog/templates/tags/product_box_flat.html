@@ -1,13 +1,19 @@
-<div class="flat-product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
-  <div class="flat-product-image"> 
-          <a href="{{p.get_absolute_url}}">
-                  <img class="img-responsive" src="{{p.image.url}}">
-          </a>
-  </div>
-  <div class="list-flex vertical">
-          <div class="mat-entry">{{p.name}}</div>
-          <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-          <div class="mat-entry clearfix"> <span class="order-ref"> {{p.price}} FCFA  </span></div>
-          
-  </div>
+<div class="flat-product flex-column bordered" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
+        <div class="flat-product-wrapper">
+                <a class="flat-product-link" href="{{p.get_absolute_url}}">
+                </a>
+                <div class="flat-product-image"> 
+                        <img class="img-responsive" src="{{p.image.url}}">
+                        <span class="flat-product-label">Épuisé</span>
+                </div>
+        </div>
+        
+        <div class="flat-product-footer  flex-column">
+                <span class="flat-entry">{{p.name}}</span>
+                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
+                <span class="flat-entry"> <span class="order-ref"> {{p.price}} FCFA  </span></span>
+        </div>
+        <div class="flat-product-options flat-flex flex-row">
+                <span class="glyphicon glyphicon-heart"></span>
+        </div>
 </div>

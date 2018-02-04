@@ -360,6 +360,11 @@ var Catalog = (function(){
         this.$brand_input.keyup(this.onBrandInputChanged.bind(this));
         this.$clickable = $(".flat-clickable");
         this.$close_flat_main = $(".flat-close-main");
+        $(".flat-hoverable").hover(function(event){
+            event.stopPropagation();
+            $(this).children(".flat-product-options").toggle();
+            console.log("flat-product hovered");
+        });
         this.$clickable.click(function(event){
             event.stopPropagation();
             console.log("Clickable clicked ...");

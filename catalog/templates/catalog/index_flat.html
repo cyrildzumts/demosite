@@ -12,7 +12,7 @@
                 <span>Nouveautées</span>
         </section>
         <section class="main">
-            <div class="flat-wrapper flat-product-list">
+            <div id="flat-product-list" class="flat-wrapper">
                     {% get_home_items 0 as new_products %}
                     {% for p in new_products %}
                         {% include "tags/product_box_flat.html" %}
