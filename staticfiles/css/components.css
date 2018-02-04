@@ -1808,7 +1808,7 @@ headers and footers.
   .flat-product{
       position: relative;
       display: flex;
-      max-width: calc(25% - 1.5rem);
+      width: calc(33% - 1.5rem);
       justify-content: center;
       align-items: center;
       /*max-height: 400px;*/
