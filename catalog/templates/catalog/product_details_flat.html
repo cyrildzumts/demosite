@@ -1,0 +1,32 @@
+{% extends "base_flat.html" %}
+{% block MAINCONTENT %}
+
+<div class="flat-product-detail bordered">
+    <div class="flat-image-container bordered">
+            <img class="img-responsive" src="{{product.image.url}}" alt="{{product.name}}" />
+    </div>
+    <div class="flat-product-infos bordered">
+            <section class="flat-header bordered">
+                <span class="flat-product-name">{{product.name}} </span>
+                <span class="flat-product-brand">{{product.brand}}</span>
+                <span class="flat-product-price"> {{product.price}} FCFA</span>
+            </section>
+            <section class="flat-main">
+                <div class="flat-product-description bordered">
+                        <p>{{product.description}}</p>
+                </div>
+                <div class="flat-product-features bordered">
+                        {% if product.template_name is not None%}
+                        {% include product.template_name %}
+                        {%endif%}
+                </div>
+            </section>
+            <section class="flat-product-footer bordered">
+                <button class="flat-add-btn"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter dans le panier </button>
+                <button class="flat-add-btn"><span class="glyphicon glyphicon-heart"></span> Marquer </button>
+            </section>
+    </div>
+
+</div>
+
+{% endblock MAINCONTENT%}

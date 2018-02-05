@@ -26,7 +26,7 @@ from functools import reduce
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = "catalog/product_details.html"
+    template_name = "catalog/product_details_flat.html"
     #context_object_name = "product"
 
     def get_context_data(self, **kwargs):
