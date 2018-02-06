@@ -118,6 +118,9 @@ def ajax_add_to_wishlist(request):
     wishlist. The Request object contains the
     item ID.
     """
+    #Fix-me
+    # To-Do : When the client is trying to add an item that is already
+    # in the wishlist, the view should inform the client about that.
     response = {}
     jsonresponse = HttpResponseBadRequest()
     request_is_valid = len(request.POST) > 0

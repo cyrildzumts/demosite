@@ -51,7 +51,7 @@
                 {% for item  in wishlistitems %}
                 <div class="card-mat horizontal wishlist-entry bordered" id="{{item.id}}">
                         <div class="mat-entry mat-entry-img bordered"> 
-                                <img class="img-responsive" src="{{item.image_url}}">
+                            <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
                         </div>
                         <div class="card-mat vertical">
                                 <div class="mat-entry">{{item.name}}</div>

@@ -609,22 +609,25 @@ var Wishlist = (function(){
         this.count = 0;
         this.$bagde = {};
         this.$counter = {};
+        this.$error_msg = {};
 
     }
     Wishlist.prototype.init = function(){
+        this.$error_msg = $(".flat-error-msg");
         this.$bagde = $(".wishlist-badge");
         this.$counter = $(".wishlist-counter");
         $(".add-to-wishlist").click(this.onAddButtonClicked.bind(this));
+        $("#flat-add-to-wishlist-btn").click(this.onAddButtonClicked.bind(this));
         $(".wishlist-remove").click(this.onRemoveButtonClicked.bind(this));
         $(".wishlist-clear").click(this.onClearButtonClicked.bind(this));
     }
     Wishlist.prototype.onAddButtonClicked = function(event){
         var item = {};
         var $target = $(event.target);
-        var $elelemt_to_add = $target.parent();
-        item.id = parseInt($elelemt_to_add.data("itemid"));
-        item.name = $elelemt_to_add.attr("data-name");
-        //item.image = $elelemt_to_add.attr("data-image");
+        var $element = $(event.target).parent();
+        item.id = parseInt($element.data("itemid"));
+        item.name = $element.data("name");
+        //item.image = $element.data("image");
         console.log("attr itemid : " + item.id);
         console.log("Item to add into wishlist : \nName : " + item.name);
         this.addItem(item);
@@ -648,8 +651,8 @@ var Wishlist = (function(){
         this.clear();
     };
     Wishlist.prototype.addItem = function(item){
-        var $target = $(event.target);
         var that = this;
+        var notification = {};
         $.ajax({
             type: 'POST',
             url: '/wishlist/ajax_add_to_wishlist/',
@@ -658,17 +661,21 @@ var Wishlist = (function(){
             success: function(response){
                 console.log("Wishlist : Add request sent successfully");
                 that.count =  response.item_count;
-                that.notify({});
+                notification.added = true;
+                notification.message = "L'article a été ajouter \nà votre liste de souhait";
+                that.notify(notification);
             },
             error: function(response){
                 console.log("Error : couldn't add item into the wishlist");
+                notification.added = false;
+                notification.message = "L'article n'a pas pu être ajouté à votre liste de souhait";
+                that.notify(notification);
             }
         });
         
         
     };
     Wishlist.prototype.removeItem = function(itemID){
-        var $target = $(event.target);
         var that = this;
         $.ajax({
             type: 'POST',
@@ -687,7 +694,6 @@ var Wishlist = (function(){
         });
     };
     Wishlist.prototype.clear = function(){
-        var $target = $(event.target);
         var that = this;
         $.ajax({
             type: 'POST',
@@ -713,9 +719,13 @@ var Wishlist = (function(){
         });
     };
 
-    Wishlist.prototype.notify = function(){
+    Wishlist.prototype.notify = function(notification){
         console.log("Wishlist changed ...");
+        this.$error_msg.html(notification.message);
+
         this.$counter.html("<strong>" + this.count + " </strong>");
+        this.$error_msg.parent().toggle().delay(3000).toggle(500);
+
         //location.reload(true);
     };
 
