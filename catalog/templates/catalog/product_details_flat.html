@@ -21,9 +21,14 @@
                         {%endif%}
                 </div>
             </section>
-            <section class="flat-product-footer bordered">
-                <button class="flat-add-btn"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter dans le panier </button>
-                <button class="flat-add-btn"><span class="glyphicon glyphicon-heart"></span> Marquer </button>
+            <section class="flat-product-footer flat-fluid bordered" data-itemid="{{product.id}}" data-name="{{product.name}}">
+                <span id="flat-add-to-cart-btn" class="flat-add-btn flat-btn" data-itemid="{{product.id}}" data-available="{{product.is_available}}"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter dans le panier </span>
+                <span id="flat-add-to-wishlist-btn" class="flat-add-btn flat-btn" data-itemid="{{product.id}}"><span class="glyphicon glyphicon-heart"></span> Marquer </span>
+            </section>
+            <section id="flat-add-error" class="flat-flex flex-column">
+                <span class="flat-error-msg bordered">
+
+                </span>
             </section>
     </div>
 

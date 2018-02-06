@@ -23,8 +23,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" /> {% block external %} {% endblock external %}
 </head>
 
-<body>
-        <header class="flat-header bg-site-theme">
+<body class="bg-main-light">
+        <header class="flat-header bg-frenchgrey">
 
                 {% comment "nav" %} This nav element is the same accross the whole site. For this container to work without issue, every
                 page needs to provide the category list, cart counter, wishlist counter, {% endcomment %}
@@ -63,14 +63,14 @@
                                                         <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
                                                                 {% if user.is_authenticated %}
                                                                 <div class="flat-card flex-column">
-                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:user_account'%}">Appercu</a>
-                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:orders' %}">Mes Commandes</a>
-                                                                        <a class="flat-link-entry bordered" href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
-                                                                        <a class="flat-link-entry bordered" href="{% url 'contact:index'%}">Contact</a>
+                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:user_account'%}">Appercu</a>
+                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:orders' %}">Mes Commandes</a>
+                                                                        <a class="flat-link-entry flat-btn" href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
+                                                                        <a class="flat-link-entry flat-btn" href="{% url 'contact:index'%}">Contact</a>
                                                                         <div class="divider">
 
                                                                         </div>
-                                                                        <a class="flat-link-entry bordered" href="{% url 'accounts:logout' %}">Se déconnecter</a>
+                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:logout' %}">Se déconnecter</a>
                                                                         <div class="flat-link-entry flat-btn flat-cancel-btn bordered">
                                                                                 <span>Fermer</span>
                                                                         </div>
@@ -79,11 +79,11 @@
                                                                 {% else %}
                                                                 <div class="list-flex flex-column flat-login-view">
                                                                         <div class="flat-login flat-card flex-column dropdown bordered">
-                                                                                <section class="flat-login-header header flat-clickable">
-                                                                                        <span>
+                                                                                <section class="flat-login-header header flat-btn flat-clickable">
+                                                                                        <span class="">
                                                                                                 <h4></h4>J'ai déjà un compte</h4>
                                                                                         </span>
-                                                                                        <span class="glyphicon glyphicon-menu-right"></span>
+                                                                                        <span class="glyphicon glyphicon-plus"></span>
                                                                                 </section>
                                                                                 <div class="flat-dropdown-wrapper flat-main-content">
                                                                                         <section class="flat-form main-content">
@@ -120,9 +120,9 @@
 
                                                                         </div>
                                                                         <div class="flat-register flat-card flex-column dropdown bordered">
-                                                                                <section class="flat-register-header header flat-clickable">
+                                                                                <section class="flat-register-header header flat-btn flat-clickable">
                                                                                         <span> Je suis un nouveau client </span>
-                                                                                        <span class="glyphicon glyphicon-menu-right"></span>
+                                                                                        <span class="glyphicon glyphicon-plus"></span>
                                                                                 </section>
                                                                                 <div class="flat-dropdown-wrapper flat-main-content">
                                                                                         <section class="flat-form  main-content">
@@ -178,7 +178,7 @@
 
                                                                                 </section>
                                                                         </div>
-                                                                        <div class="flat-card flat-btn flat-close-main bordered">
+                                                                        <div class="flat-btn flat-close-main bordered">
                                                                                 <span class="header">Fermer</span>
                                                                         </div>
 
@@ -198,23 +198,19 @@
                 </nav>
         </header>
         {% load catalog_tags %}
-        <div id="flat-site-menu" class="flat-dropdown-wrapper">
-                <div class="flat-site-menu list-flex flex-column bg-newspaper">
+        <div id="flat-site-menu" class="flat-dropdown-wrapper bg-venus">
+                <div class="flat-site-menu flat-btn-group flex-column">
                         {% root_categorie as root_cats%} 
                         {% for cat in root_cats.root_cats %}
-                                <div class="flat-menu-entry">
-                                        <a href="{{cat.get_absolute_url}}"> {{cat.name}} </a>
-                                </div>
+                                <a class="flat-btn" href="{{cat.get_absolute_url}}"> {{cat.name}} </a>
                         {% endfor %}
 
-
-                        <div class="flat-menu-entry">
-                                <a href="">Aide</a>
+                        <a class="flat-btn" href="">Aide</a>
+                        <a class="flat-btn" href="{% url 'contact:index'%}">Nous contacter</a>
+                        <div class="divider">
+                                
                         </div>
-                        <div class="flat-menu-entry">
-                                <a href="{% url 'contact:index'%}">Nous contacter</a>
-                        </div>
-                        <span class="flat-btn-menu-close flat-menu-entry ">Fermer</span>
+                        <span class="flat-btn-menu-close flat-btn">Fermer</span>
 
                 </div>
         </div>
@@ -223,7 +219,7 @@
                 
                 {% endblock BANNER %}
                 {% block SEARCHBAR %}
-                        <div class="flat-search-bar dropdown">
+                        <div class="flat-search-bar bg-venus dropdown">
                                 <h4>Search bar</h4>
                                 <div>
                                         <form action="">
@@ -233,7 +229,7 @@
                         </div>
                 {% endblock SEARCHBAR %}
                 {% block ASIDE %}
-                        <aside class="flat-nav-menu bg-ebony bordered">
+                        <aside class="flat-nav-menu bg-venus bordered">
                                 <h5>Side bar</h5>
                                 <div class="fluid-container bordered">
                                         <h6>Mon Compte</h6>
@@ -261,7 +257,7 @@
         {% block FOOTER %}
         
         
-        <footer class="flat-footer bg-site-theme">
+        <footer class="flat-footer bg-main-light">
                 <section class="flat-newsletter flat-card flex-column bordered">
                         <div class="section-entry header">
                                 <h4>Abonnement à notre newsletter</h4>

@@ -215,3 +215,25 @@
     background-color: #ECF0F1;
     color: #34495E;
 }
+.bg-frenchgrey{
+    color: #7D656C;
+    background-color: #C4BABD;
+}
+.bg-venus{
+    background-color: #7D656C;
+    color: #F9F8F9;
+}
+.bg-main-light{
+    background-color: #F9F8F9;
+    color: #846D74;
+}
+
+.bg-main-light .flat-btn{
+    background-color: #846D74;
+    color: #F9F8F9;
+}
+
+.bg-main-light .flat-btn:hover{
+    background-color: #E7E2E4;
+    color: #846D74;
+}

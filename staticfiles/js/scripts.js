@@ -49,21 +49,28 @@ $("#loginBtn2").click(function(){
 
 var Cart = (function(){
     function Cart(){
-        this.$cart_popup = {};
-        this.$cartpopup_content = {};
-        this.events = [];
-        this.items = [];
-        this.eventListeners = [];
-        this.$notify_popover = {}
-        this.total = 0;
-        this.count = 0;
-        this.userID = -1;
-        this.observers = [];
-        this.serverUrl = "";
-        this.$counter = {};
+        this.$cart_popup                = {};
+        this.$cartpopup_content         = {};
+        this.events                     = [];
+        this.items                      = [];
+        this.eventListeners             = [];
+        this.$notify_popover            = {}
+        this.total                      = 0;
+        this.count                      = 0;
+        this.userID                     = -1;
+        this.observers                  = [];
+        this.serverUrl                  = "";
+        this.$counter                   = {};
+        this.$add_to_cart_btn           = {};
+        this.$cart_add_error            = {};
+        this.$error_msg                 = {};
     }
     Cart.prototype.initDefault = function(){
         this.$counter = $(".cart-counter");
+        this.$cart_add_error = $("#flat-add-error");
+        this.$error_msg = $(".flat-error-msg");
+        this.$add_to_cart_btn = $("#flat-add-to-cart-btn");
+        this.$add_to_cart_btn.click(this.onAddButtonClicked.bind(this));
         $(".add-to-cart").click(this.onAddButtonClicked.bind(this));
         $(".plusButton").click(this.onPlusButtonClicked.bind(this));
         $(".minusButton").click(this.onMinusButtonClicked.bind(this));
@@ -99,13 +106,11 @@ var Cart = (function(){
     };
     Cart.prototype.onAddButtonClicked = function(event){
         var item = {};
-        var element = $(".add-to-cart");
-        item.id = parseInt(element.attr("data-itemid"));
-        item.is_available = element.attr("data-available");
-        item.price = 15000;
+        item.id = parseInt(this.$add_to_cart_btn.data("itemid"));
+        item.is_available = this.$add_to_cart_btn.data("available");
         item.quantity = 1;
-        console.log("Event targert :"+  event.target.nodeName);
         this.addItem(item);
+        console.log("Add button clicked ...")
     };
     Cart.prototype.onRemoveButtonClicked = function(event){
         console.log("RemovedButton Clicked ...");
@@ -174,20 +179,20 @@ var Cart = (function(){
                 success: function(response){
                     that.total = response.total;
                     that.count = response.count;
-                    that.$cartpopup_content.html("Article ajouté dans le panier.");
-                    that.$cart_popup.toggle().delay(3000).toggle(500);
+                    that.$error_msg.html("Article ajouté dans le panier.");
+                    that.$cart_add_error.toggle().delay(3000).toggle(500);
                     that.notify(item);
                 },
                 error: function (response){
-                    that.$cartpopup_content.html("Une erreur s'est produite, Veuillez reessayer.");
-                    that.$cart_popup.toggle().delay(3000).toggle(500);
+                    that.$error_msg.html("Une erreur s'est produite, Veuillez reessayer.");
+                    that.$cart_add_error.toggle().delay(3000).toggle(500);
                 }
             });
         }
        
         else{
-            that.$cartpopup_content.html("Cet article n'est plus disponible.");
-            that.$cart_popup.toggle().delay(3000).toggle(500);
+            that.$error_msg.html("Cet article n'est plus disponible.");
+            that.$cart_add_error.toggle().delay(3000).toggle(500);
             console.log("This article is not available ...");
         }
         
@@ -340,6 +345,8 @@ var Catalog = (function(){
         this.$sorting_radios    = {};
         this.$product_list      = {};
         this.$brand_list        = {};
+        this.$add_to_cart_btn   = {};
+        this.$add_to_wishlist_btn = {};
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -351,6 +358,7 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
+
         this.$sorting_radios = $("#flat-sorting-input span input:radio");
         this.$product_list = $("#flat-product-list");
         this.$items = $("#flat-product-list .flat-product");
