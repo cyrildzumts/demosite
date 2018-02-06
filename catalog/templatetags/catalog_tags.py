@@ -1,4 +1,5 @@
 from django import template
+from django.utils import timezone
 from catalog.models import Category, Phablet, Parfum, Product
 import datetime
 register = template.Library()
@@ -83,7 +84,7 @@ def get_home_items(group):
     if group is not None:
         if group == 0:
             print ("get New Items")
-            today = datetime.datetime.today()
+            today = timezone.now()
             delta = datetime.timedelta(days = days)
             date = today - delta
             items = queryset.filter(created_at__gt=date)
