@@ -39,17 +39,17 @@
 
   {% else %}
 
-<div class="fluid-container">
+<div class="flat-wishlist">
     
         {% if wishlistitems %}
-        <div class="order-list wishlist-list list-flex list-vertical">
-                <div class="card-mat vertical">
+        <div class="flat-card flex-column">
+                <div class="card-mat header">
                         <div class="mat-entry"> Appercu de vos articles sauvegardés </div>
                         <div class="mat-entry"> <span class="wishlist-counter"> {{item_count}} </span> article(s)</div>
                         
                 </div>
                 {% for item  in wishlistitems %}
-                <div class="card-mat horizontal wishlist-entry bordered" id="{{item.id}}">
+                <div class="main-content bordered" id="{{item.id}}">
                         <div class="mat-entry mat-entry-img bordered"> 
                             <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
                         </div>
@@ -57,62 +57,24 @@
                                 <div class="mat-entry">{{item.name}}</div>
                                 <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
                                 <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
-                                    <span class="wishlist-remove glyphicon glyphicon-remove"> </span>   
+                                    
                                 </div>
-                                <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
+                                <div class="mat-entry"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
+                                <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
+                                    <span class="flat-entry small"> Ajouter au Panier </span>|<span class="flat-entry small wishlist-remove"> Supprimer </span>
+                                </div>
                                 
                         </div>
                         
                 </div>
                 {% endfor %}
-                <div class="list-divider"></div>
-                <div class="wishlist-options list-flex vertical">
-                    <div class="wishlist-clear btn btn-default"> Vider </div>
-                    <div class="wishlist-add-to-cart btn btn-default"> Ajouter au panier </div>
+                <div class="flat-footer">
+                    <div class="wishlist-clear flat-btn"> Vider </div>
                 </div>
                 
         </div>
         {% endif %}
 </div> 
-{% comment "" %}
-
-    <div class="container table-responsive">
-        <table summary="Votre Liste de souhait" id="wishlist-table" class="table table-condensed">
-          <caption>  Votre Liste de Souhaits </caption>
-          <thead>
-            <!-- header info here -->
-            <tr>
-            <th> Image du Produit </th>
-            <th >Nom du Produit </th>
-
-            <th > Prix Unitaire </th>
-            <!-- ..etc .. -->
-          </tr>
-          </thead>
-          <tbody>
-            {% if wishlistitems %}
-                {% for item in wishlistitems %}
-                <tr>
-                    <td class="cart-item-image">
-                        <a href="{{item.get_absolute_url}}">
-                            <img class="img-responsive" src="{{item.image_url}}" alt="{{item.name}}">
-                        </a>
-                    </td>
-                    <td class="cart-item-name"> 
-                        <a href="{{item.get_absolute_url}}">
-                            {{item.name}} 
-                        </a>
-                    </td>
-                    <td class="cart-item-price"> {{item.price}} FCFA</td>
-                </tr>
-                {% endfor %}
-            {% endif %}
-            <!-- loop through cart item here -->
-          </tbody>
-        </table>
-      </div>
-
-      {% endcomment %}
 
 {% endif %}
 {% endblock account_content %}

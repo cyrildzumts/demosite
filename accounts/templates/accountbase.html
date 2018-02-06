@@ -10,33 +10,29 @@
 {%endblock content_header%}
 
 {% block MAINCONTENT %}
-<div class="account-container">
+<div class="flat-account-container flat-flex flex-row bordered">
     
+        {% block account_content %}
+    
+        {% endblock account_content%}
     {% block account_sidemenu %}
-    <div class="container-fluid account-div ">
-        <ul id="account-menu" class="card-flat">
-            <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Appercu </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'accounts:orders' %}"> Mes Commandes </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'wishlist:show_wishlist' %}" > Ma liste de souhaits </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Mes Données </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'contact:index' %}"> Contact </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'accounts:user_account' %}"> Centre d'aide </a></li>
-            <li class="list-divider"></li>
-            <li class="menu-entry"><a  href="{% url 'accounts:logout' %}"> Deconnexion </a></li>
-            {%comment%}<li class="menu-entry"><a  href="#">Abonnements à la newsletter</a></li>{%endcomment%}
-            {%comment%}<li class="menu-entry"><a  href="#">Ma Carte VIP</a></li>{%endcomment%}
-        </ul>
+    <div class="flat-account">
+        <section id="account-menu" class="flat-btn-group flex-column">
+            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Appercu </a>
+            
+            <a class="flat-btn"  href="{% url 'accounts:orders' %}"> Mes Commandes </a>
+           
+            <a class="flat-btn"  href="{% url 'wishlist:show_wishlist' %}" > Ma liste de souhaits </a>
+            
+            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Mes Données </a>
+            <a class="flat-btn"  href="{% url 'contact:index' %}"> Contact </a>
+            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Centre d'aide </a>
+            <a class="flat-btn"  href="{% url 'accounts:logout' %}"> Deconnexion </a>
+            {%comment%}<a  href="#">Abonnements à la newsletter</a>{%endcomment%}
+            {%comment%}<a  href="#">Ma Carte VIP</a>{%endcomment%}
+            </section>
     </div>
-    
     {% endblock account_sidemenu %}
-    {% block account_content %}
-    
-    {% endblock account_content%}
 </div>
 
 {% endblock MAINCONTENT %}

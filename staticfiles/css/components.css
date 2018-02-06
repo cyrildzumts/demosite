@@ -225,7 +225,7 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     padding: 2px;
     margin: 5px;
 }
-.list-divider{
+.list-divider, .flat-divider{
     width: 100%;
     height: 0.5px;
     border: 0.5px solid #ddd;
@@ -793,11 +793,11 @@ nav a:hover, nav a:link{
   width: 80%;
   overflow: hidden;
 }
-.account-menu{
-    width: 300px;
+#account-menu{
+    width: 100%;
     padding: 10px;
     color: #F2F1FE;
-    margin: auto;
+    margin: 2px;
 }
 
 #site-nav-menu{
@@ -1972,11 +1972,39 @@ headers and footers.
     margin: 2px;
 }
 
+.flat-account{
+    width: 40%;
+}
+.flat-wishlist{
+    width: 50%;
+}
+.flat-account, .flat-wishlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 1px;
+    margin: 1px;
+}
 
+.flat-account-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    margin: 1px;
+}
 
-
-
+.small{
+    font-size: 10px;
+}
   @media (max-width: 767px){
+    .flat-account, .flat-wishlist{
+        width: 100%;
+    }
+    
+
     .flat-product {
         width: calc(50% - 0.5rem);
     }

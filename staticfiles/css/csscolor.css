@@ -229,11 +229,15 @@
 }
 
 .bg-main-light .flat-btn{
-    background-color: #846D74;
+    background-color: #A29297;
     color: #F9F8F9;
 }
 
 .bg-main-light .flat-btn:hover{
     background-color: #E7E2E4;
     color: #846D74;
+}
+
+.bg-main-light .flat-divider{
+    border-color: #846D74;
 }
