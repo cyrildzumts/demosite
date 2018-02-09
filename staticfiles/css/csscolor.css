@@ -216,7 +216,8 @@
     color: #34495E;
 }
 .bg-frenchgrey{
-    color: #7D656C;
+    /*color: #7D656C;*/
+    color: #F9F8F9;
     background-color: #C4BABD;
 }
 .bg-venus{

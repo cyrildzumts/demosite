@@ -18,113 +18,111 @@
 
 {% block MAINCONTENT %}
 
-<div class="fluid-container">
+<div class="flat-card flex-column">
 
     {% if cart_items %}
-    <div class="order-list list-flex list-vertical">
+    <div class="header flat-column">
             <div class="card-mat vertical">
                     <div class="mat-entry"> Appercu de votre Panier </div>
-                    <div class="mat-entry"> <span class="cart-counter">{{cart_item_count}}</span> article(s)</div>
+                    <div class="mat-entry"> <strong> <span class="cart-counter">{{cart_item_count}}</span> </strong>  article(s)</div>
+                    <div class="flat-hidden-xs flat-flex">
+                        <p class="flat-cart-description flat-card">
+                                Ici se trouve les articles que vous souhaitez 
+                                acheter. Vous pouvez collectioner les articles
+                                que avez trouvé dans le catalogue afin de les
+                                acheter plus tard. Pour celà il vous suffit
+                                juste d'ajouter chaque article qui vous interesse
+                                dans le Panier. <br>
+                                Veuillez savoir que les articles présent dans le
+                                Panier ne sont pas reservés.
+                        </p>
+                    </div>
                     
-            </div>
-            <div id="products" class="flat-card flex-column">
+            </div>   
+    </div> 
+    <div id="flat-cart-products" class="flat-main-content flat-column">
             {% for item  in cart_items %}
-                <div class="card-mat horizontal bordered" id="{{item.product.id}}">
-                        <div class="mat-entry mat-entry-img bordered"> 
-                                <img class="img-responsive" src="{{item.image_url}}">
-                        </div>
-                        <div class="card-mat vertical">
-                                <div class="mat-entry">{{item.name}}</div>
-                                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                                <div class="mat-entry cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                                    <span> Quantité : </span> 
-                                    <span class="minusButton glyphicon glyphicon-minus"> </span>
-                                    <span class="cartItem-qty"> {{item.quantity}} </span>
-                                    <span class="plusButton glyphicon glyphicon-plus"> </span>   
+                <div id="{{item.product.id}}" class="flat-cart-card flat-row  bordered">
+                        
+                        <div class="flat-col-xs-12">
+                                <div class="flat-row">
+                                        <section class="flat-col-xs-3 bordered">
+                                                        <img class="img-responsive" src="{{item.image_url}}">
+                                                
+                                        </section>
+                                        <section class="flat-col-xs-9">
+                                                <div class="flat-row">
+                                                        <section class="flat-col-xs-4"> <span> {{item.name}}</span> </section>
+                                                        <section class="flat-col-xs-8">
+                                                                <div class="flat-row remove-wrap">
+                                                                        <section class="flat-col-xs-3">
+                                                                                <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                                                                                        <span class="plusButton glyphicon glyphicon-chevron-up"></span>
+                                                                                        <span class="item-qty">{{item.quantity}}</span>
+                                                                                        <span class="minusButton glyphicon glyphicon-chevron-down"></span>
+                                                                                </div>
+                                                                        </section>
+                                                                        <section class="flat-col-xs-9">
+                                                                                <div class="flat-column">
+                                                                                        <span class="main-value"><span class="cart-item-price">{{item.price}}</span> FCFA</span>
+                                                                                        <span class="subdetail small flat-hidden cart-item-total-price">Total : <span>{{item.total}}</span> FCFA</span>
+                                                                                </div>
+                                                                        </section>
+                                                                </div>
+                                                        </section>
+                                                </div>
+                                                <div class="flat-row small">
+                                                        <section class="flat-col-xs-6"> <span class=""> Ajouter à la liste de souhait</span> </section>
+                                                        <section class="flat-col-xs-1"><span> | </span> </section>
+                                                        <section class="flat-col-xs-5"> <span class=""> Supprimer </span></section>
+                                                </div>
+                                        </section>
                                 </div>
-                                <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.price}} FCFA  </span></div>
-                                <div class="mat-entry cart-item-total-price"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span ></div>
                         </div>
                         
+                        
+        
                 </div>
+
             {% endfor %}
-            </div>
-            
-            <div class="list-divider"></div>
-            <div class="card-mat vertical bg-newspaper">
-                    <div class="mat-entry"><span class="pull-right">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}} FCFA</span>  </strong> </span></div>
+            <div class="flat-footer flat-right bg-frenchgrey">
+                        {% comment "" %}
+                <div class="flat-row remove-wrap">
+                        <span class="flat-col-pull-xs-8"></span>
+                        <span class="flat-col-xs-4">Montant Total :
+                                <strong>
+                                        <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA 
+                                </strong>
+                        </span>
+                </div>
+                <div class="flat-row remove-wrap">
+                        <span class="flat-col-pull-xs-8"></span>
+                        <span class="flat-col-xs-4">Frais d'envoie :   <strong> 0.00 FCFA </strong></span>
+                </div>
+                <div class="flat-row remove-wrap">
+                        <span class="flat-col-pull-xs-8"></span>
+                        <span class="flat-col-xs-4">Reduction :   <strong> 0.00 FCFA</strong></span>
+                </div>
+                <div class="flat-row remove-wrap">
+                        <span class="flat-col-pull-xs-8"></span>
+                        <span class="flat-col-xs-4"><strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></span>
+                </div>
+                {% endcomment %}       
+                        
+                        
+                    <div class="mat-entry"><span class="pull-right">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong> </span></div>
                     <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
                     <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>
-                    <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}} FCFA </span>  </strong></span></div>
+                    <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></span></div>
+                    
             </div>
-            <div class="list-divider"></div>
-            <div><a class="no-decoration btn btn-default cart-checkout-btn" href="/order/{{checkout_url}}">
+            <div>
+                <a class="no-decoration flat-btn cart-checkout-btn" href="/order/{{checkout_url}}">
                 Aller à la caisse
-            </a></div>
-    </div>  
+                </a>
+            </div>
+    </div>
 
-{% comment "" %}
-    <table class="table table-condensed table-striped cart-content-table">
-            <thead>
-                <tr>
-                    <th> </th>
-                    <th>Nom du produit</th>
-                    <th>Quantité</th>
-                    <th>Prix Unitaire</th>
-                    <th> Prix total</th>
-                    <th> Action </th>
-                </tr>
-            </thead>
-            <tfoot>
-                    <tr>
-                        <th colspan="4" scope="row" class="order-total"> Montant Total:</th>
-                        <td headers="price" > <span class="cart-subtotal"> {{cart_subtotal}} FCFA </span></td>
-                    </tr>
-                    <tr>
-                        <th colspan="4" scope="row"> Frais d'envoi :</th>
-                        <td headers="price"> 0.00 FCFA</td>
-                    </tr>
-                    <tr>
-                        <th colspan="4" scope="row"> Reduction :</th>
-                        <td headers="price"> -0.00 FCFA</td>
-                    </tr>
-                    <tr>
-                        <th colspan="4" scope="row"> <strong> Somme Total :</strong></th>
-                        <td headers="price"> <strong><span class="cart-subtotal"> {{cart_subtotal}} FCFA  </span></strong></td>
-                    </tr>
-                    <tr> 
-                            <th colspan="4" scope="row"></th>
-                            <td> 
-                                <a class="no-decoration btn btn-default" href="/order/{{checkout_url}}">
-                                    Aller à la caisse
-                                </a>
-                            </td>
-                    </tr>
-            </tfoot>
-            <tbody>
-                {% for item  in cart_items %}
-                <tr>
-                    <td class="cart-item-image"> <img class="img-responsive" src="{{item.image.url}}" alt=""> </td>
-                    <td class="cart-item-name">{{item.product.name}}</td>
-                    <td class="cart-item-qty" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                        <span class="minusButton glyphicon glyphicon-minus"> </span>
-                        <span class="cartItem-qty"> {{item.quantity}} </span>
-                        <span class="plusButton glyphicon glyphicon-plus"> </span>   
-                    </td>
-                    <td class="cart-item-price">{{item.price}} FCFA</td>
-                    <td class="cart-item-total-price">{{item.total_price}} FCFA</td>
-                    <td class="entry card-item-remove fflex-item" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}">
-                            <span class="removeFromCartButton remove_item glyphicon glyphicon-trash" title="Supprimer cet element">
-                                
-                            </span>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            
-    </table>
-                       
-{% endcomment %}
     {%else%}
     <div class="card-mat">
             <section class="card-main text-center">
@@ -148,6 +146,9 @@
     </div>
 
     {% endif %}
+
+
+    
 </div>
 <!-- End Of Container -->
 

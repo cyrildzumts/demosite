@@ -88,7 +88,10 @@ def ajax_cart_update(request):
     done = False
     request_is_valid = len(request.POST) > 0
     if request_is_valid:
+        
         postdata = request.POST.copy()
+        testqty = postdata['quantity']
+        print("Test Qty " + testqty )
         product_id = int(postdata['product_id'])
         quantity = int(postdata['quantity'])
         if product_id is not None and quantity is not None:

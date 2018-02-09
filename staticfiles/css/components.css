@@ -1473,7 +1473,7 @@ headers and footers.
     position: absolute;
     width: 100%;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
     left: 0;
 
     margin: 1px;
@@ -1621,6 +1621,32 @@ headers and footers.
     flex-wrap: wrap;
 }
 
+.flat-row{
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: initial;
+    align-items: center;
+    padding: 1px;
+    margin: 1px;
+}
+.flat-left{
+    align-items: flex-start;
+}
+
+.flat-right{
+    align-items: flex-end;
+}
+.flat-column{
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    margin: 1px;
+}
 .flat-icon-big{
     font-size: 1.4em;
 }
@@ -1642,6 +1668,34 @@ headers and footers.
      padding: 1px;
      margin: 1px;
  }
+ 
+ .flat-card-row{
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    margin: 1px;
+ }
+
+ .flat-card-row .flat-card-image{
+    display: flex;
+    width: 150px;
+    max-height: 200px;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 5px;
+    margin: 1px 5px;
+ }
+ .flat-card-row .flat-card-main{
+    display: flex;
+    max-width: 70%;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1px;
+    margin: 1px;
+ }
 
  .flat-card .flat-label{
      width: 100%;
@@ -1656,7 +1710,7 @@ headers and footers.
      width: 100%;
      min-height: 32px;
      justify-content: space-between;
-     align-items: baseline;
+     align-items: flex-start;
      padding: 2px;
      margin: 2px;
  }
@@ -1995,11 +2049,39 @@ headers and footers.
     padding: 1px;
     margin: 1px;
 }
+.remove-wrap{
+    flex-wrap: nowrap;
+}
 
+.flat-cart-card{
+    width: 100%;
+}
+
+.flat-cart-card .flat-image{
+    width: 25%;
+    height: auto;
+}
+.flat-cart-card .flat-details{
+    width: 65%;
+}
+#flat-cart-products{
+    
+    width: 100%;
+}
 .small{
     font-size: 10px;
 }
+
+@media (min-width: 768px){
+    .flat-cart-card{
+        width: 50%;
+    }
+}
   @media (max-width: 767px){
+
+
+    
+
     .flat-account, .flat-wishlist{
         width: 100%;
     }

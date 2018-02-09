@@ -157,8 +157,8 @@ var Cart = (function(){
     };
     Cart.prototype.notify = function(item){
         console.log("Notifying Observers ...");
-        $(".cart-subtotal").html("<strong>" + this.total + " FCFA" +  "</strong>");
-        this.$counter.html("<strong>" + this.count + "</string>");
+        $(".cart-subtotal").html(this.total);
+        this.$counter.html(this.count);
         
         for (observer in this.observers){
             observer(item);
@@ -247,14 +247,22 @@ var Cart = (function(){
     };
 
     Cart.prototype.update = function(event, action){
+         
         var $target = $(event.target);
-        var $quantity_target = $target.siblings(".cartItem-qty");
-        var itemID = parseInt($target.parent().data("itemid"));
-        var price = parseFloat($target.parent().data("price"));
-        var quantity = parseInt($quantity_target.html());
-        var $span = $target.parent().siblings(".cart-item-total-price").find("span");
+        var $parent = $(event.target).parent();
+        var $qty_target = $parent.children(".item-qty");
+        var itemID = parseInt($parent.data("itemid"));
+        var price = parseFloat($parent.data("price"));
+        var quantity = parseInt($parent.data("quantity"));
+        var $root_container = $(`#${itemID}`);
+        var $subtotal = $root_container.children(".cart-item-total-price");
         var that = this;
-        var requested_qty = action ? quantity + 1 : quantity - 1;
+        var requested_qty = -1;
+        if(action){
+            requested_qty = quantity + 1 ;
+        }else{
+            requested_qty = quantity - 1;
+        }
         $.ajax({
             type: 'POST',
             url: '/cart/cart_update/',
@@ -264,18 +272,20 @@ var Cart = (function(){
                 that.total = response.total;
                 that.count = response.count;
                 if(requested_qty == 0){
-                    $target.parent().parent().parent().remove();
+                    //var querystr = `#${itemID}`;
+                    $(`#${itemID}`).remove();
                  }
                  else {
-                    $quantity_target.html(requested_qty);
-                    $span.html("<strong> Total : " + (price * (requested_qty)) + " FCFA" + "</strong>");
+                    $qty_target.html(requested_qty);
+                    $parent.data("quantity", requested_qty);
+                    $subtotal.html(price * (requested_qty));
                      
                  }
                 
                 that.notify({});
             },
             error: function(response){
-                console.log("Error : couldn't update article");
+                console.log("Error : l'article n'a pas pu etre actualiser");
             }
         });
     };

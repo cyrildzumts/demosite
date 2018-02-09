@@ -49,7 +49,8 @@ $("#login_form_flat").submit(function(){
 
     });
 });
-$("#login_form").submit(function(){
+$("#login_form").submit(function(event){
+    event.stopPropagation();
     var username = document.forms["login_form"]["username"].value;
     var password = document.forms["login_form"]["password"].value;
     if(username == "" || password == "")
