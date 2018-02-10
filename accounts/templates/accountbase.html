@@ -10,25 +10,22 @@
 {%endblock content_header%}
 
 {% block MAINCONTENT %}
-<div class="flat-account-container flat-flex flex-row bordered">
+<div class="flat-account-container flex-row bordered">
     
         {% block account_content %}
     
         {% endblock account_content%}
     {% block account_sidemenu %}
-    <div class="flat-account">
+    <div class="flat-account flat-col-xs-12 flat-col-md-3">
         <section id="account-menu" class="flat-btn-group flex-column">
             <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Appercu </a>
             
             <a class="flat-btn"  href="{% url 'accounts:orders' %}"> Mes Commandes </a>
            
             <a class="flat-btn"  href="{% url 'wishlist:show_wishlist' %}" > Ma liste de souhaits </a>
-            
-            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Mes Données </a>
             <a class="flat-btn"  href="{% url 'contact:index' %}"> Contact </a>
             <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Centre d'aide </a>
             <a class="flat-btn"  href="{% url 'accounts:logout' %}"> Deconnexion </a>
-            {%comment%}<a  href="#">Abonnements à la newsletter</a>{%endcomment%}
             {%comment%}<a  href="#">Ma Carte VIP</a>{%endcomment%}
             </section>
     </div>

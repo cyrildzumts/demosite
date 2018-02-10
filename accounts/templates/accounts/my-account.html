@@ -1,6 +1,6 @@
 {% extends "accountbase.html"%} {%block account_content %}
 
-<div class="">
+<div class="flat-col-xs-12 flat-col-md-6">
         <div class="order-list list-flex list-vertical">
                 <p> Appercu de mon compte</p>
                 {% for order in orders %}
@@ -8,6 +8,60 @@
                 {% endfor %} 
 
 
+        </div>
+        <div class="flat-user-infos flat-row">
+                <section class="flat-col-xs-12 flat-col-md-6 bordered">
+                        <div class="flat-card flex-column">
+                                <section class="header">
+                                        <span>Données d'utilisateur</span>
+                                </section>
+                                <section class="flat-main-content flat-left flat-column">
+                                        <span>{{request.user.username}}</span>
+                                        <span>{{request.user.last_name}} {{request.user.first_name}}</span>
+                                        <span>{{request.user.email}}</span>
+                                </section>
+                                <section class="flat-row">
+                                        <span class="flat-col-xs-9"></span>
+                                        <span class="flat-col-xs-3">
+                                                <a class="flat-link" href="">Modifier</a>
+                                        </span>
+                                </section>
+                        </div>
+                </section>
+                <section class="flat-col-xs-12 flat-col-md-6 bordered">
+                        <div class="flat-card flat-column">
+                                <section class="header">
+                                        <span>Abonnement à la Newsletter</span>
+                                </section>
+                                <section class="flat-main-content flat-column">
+                                        <span> Abonnez vous à notre Newsletter afin d'être informer des offres disponibles et aussi de savoir quand il y
+                                                a de nouveaux produits.
+                                                <br> Vous pouvez vous désabonner à tout moment en decochant la case correspondante.
+                                        </span>
+                                        <span class="flat-newsletter">
+                                                <label for="newsletter">Activer</label>
+                                                <input type="checkbox" name="newsletter" id="subscribe">
+                                        </span>
+                        
+                                </section>
+                               
+                        
+                        </div>
+                </section>
+                <section class="flat-col-xs-12 flat-col-md-6 bordered">
+                        <div class="flat-card flat-column">
+                                <section class="header">
+                                        <span> Addresses  de Livraison et de Retrait </span>
+                                </section>
+                                <section class="flat-main-content flat-column">
+                                        <span> Retrait à {{request.user.userprofile.city}}</span>
+                                </section>
+                                <section class="flat-row">
+                                        <span class="flat-col-xs-9"></span>
+                                        <span class="flat-col-xs-3"> <a class="flat-link" href="">Modifier</a></span>
+                                </section>
+                        </div>
+                </section>
         </div>
 
 </div>

@@ -9,79 +9,63 @@
 
 
 {% block MAINCONTENT %}
-<div class="order-list list-flex list-vertical">
-        <div class="card-mat vertical">
-                <div class="mat-entry"> {{order.get_status}} </div>
-                <div class="mat-entry">Date : {{order.get_date}}</div>
-                <div class="mat-entry"> <span class="order-ref">Ref : {{order.ref_num}} </span></div>
-        </div>
-        {% for item in orderitems %}
-        <div class="card-mat horizontal">
-                <div class="mat-entry mat-entry-img bordered"> 
-                        <img class="img-responsive" src="{{item.image_url}}">
-                </div>
+<div class="flat-col-xs-12 flat-col-md-6">
+        <div class="order-list list-flex list-vertical">
                 <div class="card-mat vertical">
-                        <div class="mat-entry">{{item.name}}</div>
-                        <div class="mat-entry">Quantité : {{item.quantity}}</div>
-                        <div class="mat-entry clearfix"> <span class="order-ref">Prix unitaire : {{item.get_price}} FCFA  </span></div>
-                        <div class="mat-entry"> <span class="order-sum pull-right"><strong> Total : {{item.total}} FCFA</strong></span></div>
+                        <div class="mat-entry"> {{order.get_status}} </div>
+                        <div class="mat-entry">Date : {{order.get_date}}</div>
+                        <div class="mat-entry">
+                                <span class="order-ref">Ref : {{order.ref_num}} </span>
+                        </div>
                 </div>
-                
-        </div>
-        <div class="list-divider"></div>
-        {% endfor %}
-        <div class="card-mat vertical bg-newspaper">
-                <div class="mat-entry"><span class="pull-right">Montant Total : <strong> {{order.total}} FCFA </strong> </span></div>
-                <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
-                <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>
-                <div class="mat-entry"><span class="pull-right"> <strong> Somme Total : {{order.total}} FCFA </strong></span></div>
-        </div>
-        <div class="list-divider"></div>
-</div>  
+                {% for item in orderitems %}
+                <div class="card-mat horizontal">
+                        <div class="mat-entry mat-entry-img bordered">
+                                <img class="img-responsive" src="{{item.image_url}}">
+                        </div>
+                        <div class="card-mat vertical">
+                                <div class="mat-entry">{{item.name}}</div>
+                                <div class="mat-entry">Quantité : {{item.quantity}}</div>
+                                <div class="mat-entry clearfix">
+                                        <span class="order-ref">Prix unitaire : {{item.get_price}} FCFA </span>
+                                </div>
+                                <div class="mat-entry">
+                                        <span class="order-sum pull-right">
+                                                <strong> Total : {{item.total}} FCFA</strong>
+                                        </span>
+                                </div>
+                        </div>
 
-{% comment "" %}
-
-<div class="fluid-container">
-        <div class="table-responsive">
-                <table class="table table-condensedtable-striped order-content-table">
-                        <thead>
-                            <tr>
-                                <th> Nom de l'article </th>
-                                <th> Quantité </th>
-                                <th> Prix Unitaire </th>
-                                <th> Prix Total </th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                                <tr>
-                                    <th colspan="3" scope="row" class="order-total"> Montant Total:</th>
-                                    <td headers="price"> {{order.total}} FCFA</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" scope="row"> Frais d'envoi :</th>
-                                    <td headers="price"> 0.00 FCFA</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" scope="row"> Reduction :</th>
-                                    <td headers="price"> -0.00 FCFA</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" scope="row"> <strong> Somme Total :</strong></th>
-                                    <td headers="price"> <strong> {{order.total}} FCFA </strong></td>
-                                </tr>
-                        </tfoot>
-                        <tbody>
-                            {% for item in orderitems %}
-                                {% include "tags/item_entry.html" %}
-                            {% endfor %}
-                        </tbody>
-                
-                        
-                </table>
+                </div>
+                <div class="list-divider"></div>
+                {% endfor %}
+                <div class="card-mat vertical bg-newspaper">
+                        <div class="mat-entry">
+                                <span class="pull-right">Montant Total :
+                                        <strong> {{order.total}} FCFA </strong>
+                                </span>
+                        </div>
+                        <div class="mat-entry">
+                                <span class="pull-right"> Frais d'envoie :
+                                        <strong> 0.00 FCFA </strong>
+                                </span>
+                        </div>
+                        <div class="mat-entry">
+                                <span class="pull-right"> Reduction :
+                                        <strong> 0.00 FCFA</strong>
+                                </span>
+                        </div>
+                        <div class="mat-entry">
+                                <span class="pull-right">
+                                        <strong> Somme Total : {{order.total}} FCFA </strong>
+                                </span>
+                        </div>
+                </div>
+                <div class="list-divider"></div>
         </div>
 </div>
-{% endcomment %}
-    
-    
+ 
+
+
 
 {% endblock MAINCONTENT %}

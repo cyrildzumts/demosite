@@ -1623,7 +1623,7 @@ headers and footers.
 
 .flat-row{
     display: flex;
-    max-width: 100%;
+    width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: initial;
@@ -1640,7 +1640,7 @@ headers and footers.
 }
 .flat-column{
     display: flex;
-    max-width: 100%;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
