@@ -261,69 +261,91 @@
         {% block FOOTER %}
         
         
-        <footer class="flat-footer bg-main-light">
-                <section class="flat-newsletter flat-card flex-column bordered">
-                        <div class="section-entry header">
-                                <h4>Abonnement à notre newsletter</h4>
-                                <span class="glyphicon glyphicon-envelope"></span>
-                        </div>
-                        <div class="section-entry main">
-                                <span class="info bordered">
-                                        Inscrivez-vous à notre newsletter <br>
-                                        pour être informer sur nos offres. <br>
-                                        Vous pouvez vous désinscrire à tout <br>
-                                        moment.
-                                </span>
-                                <span class="">
-                                        <form action="">
-                                                <input type="checkbox" name="newsletter">
-                                                <button class="flat-btn" type="submit">
-                                                  <i class="glyphicon glyphicon-send"> Envoyer</i>
-                                                </button>
-                                        </form>
-                                </span>
-                        </div>
+        <footer class="flat-footer flat-column bg-main-light">
+                <section class="flat-row">
+                        <section class="flat-col-xs-12 flat-col-md-3">
+                                <section class="flat-newsletter flat-card flex-column bordered">
+                                        <div class="section-entry header">
+                                                <h4>Abonnement à notre newsletter</h4>
+                                                <span class="glyphicon glyphicon-envelope"></span>
+                                        </div>
+                                        <div class="section-entry main flat-column">
+                                                <span class="info bordered">
+                                                        Inscrivez-vous à notre newsletter
+                                                        <br> pour être informer sur nos offres.
+                                                        <br> Vous pouvez vous désinscrire à tout
+                                                        <br> moment.
+                                                </span>
+                                                <span class="">
+                                                        <form action="">
+                                                                <input type="checkbox" name="newsletter">
+                                                                <button class="flat-btn" type="submit">
+                                                                        <i class="glyphicon glyphicon-send"> Envoyer</i>
+                                                                </button>
+                                                        </form>
+                                                </span>
+                                        </div>
+                                </section>
+                        </section>
+                        <section class="flat-col-xs-12 flat-col-md-3">
+                                <section class="flat-footer-help flat-card flex-column  bordered">
+                                        <div class="header flat-clickable">
+                                                <span> Service client </span>
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                        </div>
+                                        <div class="flat-dropdown-wrapper flat-main-content">
+                                                <div class="flat-flex flex-column">
+                                                        <span class="flat-entry space bordered"> Comment passer une commande</span>
+                                                        <span class="flat-entry space bordered"> Quel est le statut de ma commande</span>
+                                                        <span class="flat-entry space bordered"> Où se trouve mon paquet ?</span>
+                                                        <span class="flat-entry space bordered"> Annuler la commande</span>
+                                                        <span class="flat-entry space bordered"> Suggestion et feedback </span>
+        
+                                                </div>
+                                        </div>
+        
+                                </section>
+                        </section>
+                        <section class="flat-col-xs-12 flat-col-md-3">
+                                <section class="flat-payment-options flat-card flex-column  bordered">
+                                        <div class="section-entry header">
+                                                <span> Méthodes de Paiement
+                                                        <span class="fa fa-credit-card flat-icon-big"></span>
+                                                </span>
+                                        </div>
+                                        <div class="section-entry main">
+                                                <p class="info bordered">Payer à la livraison</p>
+                                                <p class="info bordered">Airtel Money</p>
+        
+                                        </div>
+                                </section>
+                        </section>
+                        <section class="flat-col-xs-12 flat-col-md-3">
+                                <section class="flat-social-links flat-card flex-column bordered">
+                                        <div class="header">
+                                                <h4>Suivez nous sur Facebook</h4>
+                                        </div>
+                                        <div class="main">
+                                                <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank">
+                                                        <i class="fa fa-facebook-official"></i>
+                                                </a>
+                                        </div>
+        
+                                </section>
+                        </section>
                 </section>
-                <section class="flat-footer-help flat-card flex-column bordered">
-                        <div class="header flat-clickable">
-                                <span> Service client </span> <span class="glyphicon glyphicon-plus"></span>
-                        </div>
-                        <div class="flat-dropdown-wrapper flat-main-content">
-                                <div class="flat-flex flex-column">
-                                        <span class="flat-entry space bordered"> Aide 1</span>
-                                        <span class="flat-entry space bordered"> Aide 2</span>
-                                        <span class="flat-entry space bordered"> Aide 3</span>
-                                        <span class="flat-entry space bordered"> Aide 4</span>
-                                        <span class="flat-entry space bordered"> Plus d'aides ... </span>
-
-                                </div>
-                        </div>
-
-                </section>
-                <section class="flat-payment-options flat-card flex-column bordered">
-                        <div class="section-entry header">
-                                <span> Méthodes de Paiement <span class="fa fa-credit-card flat-icon-big"></span></span>
-                        </div>
-                        <div class="section-entry main">
-                                <p class="info bordered">Payer à la livraison</p>
-                                <p class="info bordered">Airtel Money</p>
-
-                        </div>
-                        
-
-                </section>
-                <section class="flat-social-links flat-card flex-column bordered">
-                        <div class="header">
-                                <h4>Suivez nous sur Facebook</h4>
-                        </div>
-                        <div class="main">
-                                        <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank"><i class="fa fa-facebook-official"></i></a>
-                        </div>
-                        
-                </section>
-                <section class="flat-site-infos">
-                        <h4>Copyright <span class="fa fa-copyright"></span> 2018 - Lyshop Online</h4>
-                </section>
+                <div class="flat-row">
+                        <section class="flat-col-xs-12">
+                                <section class="flat-site-infos">
+                                       
+                                <span> Copyright<span class="fa fa-copyright"></span> 2018 - Lyshop Online</span>
+                                </section>
+                        </section>
+                </div>
+        
+        
+        
+        
         </footer>
         {% endblock FOOTER %}
 
