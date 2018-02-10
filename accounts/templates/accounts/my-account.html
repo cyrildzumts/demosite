@@ -1,103 +1,14 @@
-{% extends "accountbase.html"%}
-
-
-
-{%block account_content %}
+{% extends "accountbase.html"%} {%block account_content %}
 
 <div class="">
         <div class="order-list list-flex list-vertical">
                 <p> Appercu de mon compte</p>
                 {% for order in orders %}
-                <a class="card-mat bordered" href="{% url 'accounts:order_details' order.id %}">
-                                <div class="list-flex vertical">
-                                                <div class="mat-entry">{{order.get_status}}</div>
-                                                <div class="mat-entry"><strong>{{order.get_date}}</strong></div>
-                                                <div class="mat-entry"> <span class="order-ref">Ref : {{order.ref_num}} </span> <span class="pull-right"><strong> {{order.total}} FCFA</strong></span></div>
-                                </div>
-                </a>
-                <div class="list-divider"></div>
-                <div class="order-card-footer">
-                        <span class="card-key"></span>
-                        <span class="card-value">
-                                <a class="btn" href="{% url 'accounts:order_details' order.id %}">
-                                               <span class=""><strong> Voir la Commande </strong></span> <span class="glyphicon glyphicon-menu-right"></span>
-                                </a>
-                        </span>
-                </div>
-                
-                {% endfor %}
-                {% comment "to be removed" %}
-                {% for order in orders %}
-                <div class="order-card card-flat">
-                        <div class="order-card-header">
-                                <span class="card-key text-left"> <strong> Reference  </strong><span class="right separator"> : </span> </span>
-                                <span class="card-value text-right"> {{order.ref_num}} </span>
-                        </div>
-                        <div class="list-divider"></div>
-                        <div class="order-card-body">
-                                <div class="order-card-entry">
-                                        <span class="card-key text-left"> <strong> Date </strong> <span class="right separator"> : </span> </span>
-                                        <span class="card-value text-right"> {{order.date.date}} </span>
-                                </div>
-                                <div class="list-divider"></div>
-                                <div class="order-card-entry">
-                                        <span class="card-key text-left"> <strong> Montant </strong><span class="right separator"> : </span></span>
-                                        <span class="card-value text-right"> {{order.total}} FCFA </span>
-                                </div>
-                                <div class="list-divider"></div>
-                                <div class="order-card-entry">
-                                        <span class="card-key text-left"> <strong> Status </strong><span class="right separator"> : </span></span>
-                                        <span class="card-value text-right"> {{order.get_status}} </span>
-                                </div>
-                        </div>
-                        <div class="list-divider"></div>
-                        <div class="order-card-footer">
-                                <span class="card-key"></span>
-                                <span class="card-value">
-                                        <a class="btn" href="{% url 'accounts:order_details' order.id %}">
-                                                       <span class=""><strong> Voir la Commande </strong></span> <span class="glyphicon glyphicon-menu-right"></span>
-                                        </a>
-                                </span>
-                        </div>
+                        {% include "tags/order_entry.html" %}
+                {% endfor %} 
 
-                </div>
-                {% endfor %}
-                
-                <div class="orders-overview">
-                                <table class="order-table">
-                                        <caption> Commandes recentes </caption>
-                                        <tr>
-                                                <th> Reference </th>
-                                                <th> Date </th>
-                                                <th> Montant </th>
-                                                <th> Status </th>
-                                                <th>  </th>
-                                        </tr>
-                                        {% for order in orders %}
-                                        <tr> 
-                                                <td> {{order.ref_num}} </td>
-                                                <td> {{order.date.date}} </td>
-                                                <td>  {{order.total}} FCFA </td>
-                                                <td> {{order.get_status}} </td>
-                                                <td> 
-                                                    <a class="btn" href="{% url 'accounts:order_details' order.id %}">
-                                                                Voir la Commande <span class="glyphicon glyphicon-menu-right"></span>
-                                                    </a>
-                                                </td>
-                                        </tr>
-                                        {% endfor %}
-                                        
-        
-                                        
-                                </table>
-                                <div class="container-fluid orders-link"> <a  href=""> <span class="text-right btn btn-default"> Voir toutes les commandes </span> </a></div>
-                        </div>
-                {% endcomment %}
-                
 
         </div>
-        
+
 </div>
 {%endblock account_content%}
-
-
