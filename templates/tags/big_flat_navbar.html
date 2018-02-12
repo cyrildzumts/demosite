@@ -1,39 +1,68 @@
 {% load catalog_tags %}
 <div class="flat-navbar">
-    <a href="{% url 'catalog:index' %}">LYSHOP</a>
-    <div class="flat-dropdown">
-        <button class="dropbtn">CATALOGUE
-            <i class="glyphicon glyphicon-chevron-down"></i>
-        </button>
-        <div class="flat-dropdown-content">
-            <div class="header">
-                <h3 class="flat-cat-header flat-hidden"> LYSHOP CATALOGUE</h3>
-            </div>
-            <div class="flat-row">
-
-                    {% root_categorie as root_cats%} 
-                    {% for cat in root_cats.root_cats %}
-
-                        <section class="flat-col flat-cat-box flat-col-xs-12 flat-col-md-4">
-                        {% if cat.is_parent %}
-                            <div class="flat-cat-header">
-                                    <h3> {{cat.name}} </h3>
-                            </div>
-                            <div class="flat-cat-body">
-                                    <a class="flat-link" href="{{cat.get_absolute_url}}"> Voir tout </a>
-                                    {% include "tags/menu_list.html" with entry_list=cat.subcategories%}
-                            </div>
+    <section class="nav-left">
+            <a href="{% url 'catalog:index' %}">LYSHOP</a>
+            <div class="flat-dropdown">
+                <button class="dropbtn">CATALOGUE
+                    <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+                <div class="flat-dropdown-content">
+                    <div class="header">
+                        <h3 class="flat-cat-header flat-hidden"> LYSHOP CATALOGUE</h3>
+                    </div>
+                    <div class="flat-row">
+        
+                            {% root_categorie as root_cats%} 
+                            {% for cat in root_cats.root_cats %}
+        
+                                <section class="flat-col flat-cat-box flat-col-xs-12 flat-col-md-4">
+                                {% if cat.is_parent %}
+                                    <div class="flat-cat-header">
+                                            <h3> {{cat.name}} </h3>
+                                    </div>
+                                    <div class="flat-cat-body">
+                                            <a class="flat-link" href="{{cat.get_absolute_url}}"> Voir tout </a>
+                                            {% include "tags/menu_list.html" with entry_list=cat.subcategories%}
+                                    </div>
+                                    
+                                {% else %}
                             
-                        {% else %}
-                    
-                        {% endif %}
-                        </section>
-                    {% endfor %}
-                
+                                {% endif %}
+                                </section>
+                            {% endfor %}
+                        
+                    </div>
+                    <span class="flat-btn">
+                        Fermer
+                    </span>
+                </div>
             </div>
-            <span class="flat-btn">
-                Fermer
-            </span>
+    </section>
+    
+    <section class="nav-center">
+
+    </section>
+    <section class="nav-right">
+        <a href="{% url 'wishlist:show_wishlist' %}">
+            <span class="glyphicon glyphicon-heart"></span>
+        </a>
+        <a href="{% url 'cart:show_cart' %}">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+        </a>
+        
+        <div class="flat-dropdown">
+
+                <button class="dropbtn">
+                    <span class="glyphicon glyphicon-user"></span>
+                </button>
+                {% if user.is_authenticated %}
+                {% include "tags/account_menu.html" %}
+                {% else %}
+                {% include "tags/account_login_dialog.html" %}
+                {% endif %}
         </div>
-    </div>
+            
+       
+        
+    </section>
 </div>

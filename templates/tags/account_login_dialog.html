@@ -1,0 +1,109 @@
+<div class="flat-dropdown-content">
+    <div class="flat-column flat-dropdown">
+        <div class="flat-login-dialog flat-row">
+            <div class="flat-col-xs-12 flat-col-md-6">
+                <div class="flat-login flat-card flex-column dropdown bordered">
+                    <section class="flat-login-header header flat-btn flat-clickable">
+                        <span class="">
+                            <h4></h4>J'ai déjà un compte</h4>
+                        </span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </section>
+                    <div class="flat-dropdown-wrapper flat-main-content">
+                        <section class="flat-form main-content">
+                            <form id="login_form" name="login_form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left">Nom d'utilisateur :
+                                    </span>
+                                    <input type="text" class="form-control" name="username" id="username">
+                                </div>
+                                <div class="flat-card vertical">
+                                    <span class="flat-label text-left">Mot de passe :
+                                    </span>
+                                    <input type="password" class="form-control" name="password" id="password">
+
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Se souvenir de moi
+                                    </label>
+                                </div>
+                                <div class="flat-card">
+                                    <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
+                                    <button type="submit" class="btn btn-default flat-btn bg-ebony" id="btn_login"> Se connecter</button>
+                                </div>
+
+                            </form>
+                        </section>
+                    </div>
+
+                    <section class="footer">
+
+                    </section>
+
+                </div>
+            </div>
+            <div class="flat-col-xs-12 flat-col-md-6">
+                <div class="flat-register flat-card flex-column dropdown bordered">
+                    <section class="flat-register-header header flat-btn flat-clickable">
+                        <span> Je suis un nouveau client </span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </section>
+                    <div class="flat-dropdown-wrapper flat-main-content">
+                        <section class="flat-form  main-content">
+                            <form action="{% url 'accounts:register' %}" method="post">
+                                <div class="flat-card  horizontal">
+                                    <span class="flat-label"> Homme </span>
+                                    <input type="radio" name="genre">
+                                    <span class="flat-label"> Femme </span>
+                                    <input type="radio" name="genre">
+
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Prénom :</span>
+                                    <input type="text" class="form-control" id="vorname">
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Nom de famille :
+                                    </span>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Nom d'utilisateur :
+                                    </span>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Email:</span>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Mot de passe:</span>
+                                    <input type="password" class="form-control" id="password">
+                                </div>
+                                <div class="flat-card  vertical">
+                                    <span class="flat-label text-left"> Ressaisissez votre mot de passe:
+                                    </span>
+                                    <input type="password" class="form-control" id="password2">
+                                </div>
+                                <div class="flat-card">
+                                    <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
+                                    <button type="submit" class="btn btn-default flat-btn bg-ebony"> S'enrégistrer
+                                    </button>
+                                </div>
+
+                            </form>
+                        </section>
+                    </div>
+
+                    <section class="footer">
+
+                    </section>
+                </div>
+            </div>
+            <div class="flat-btn flat-close-main bordered">
+                <span class="header">Fermer</span>
+            </div>
+        </div>
+    </div>
+</div>

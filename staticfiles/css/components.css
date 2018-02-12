@@ -2101,11 +2101,19 @@ headers and footers.
 .flat-navbar{
     display: flex;
     flex-direction: row;
-    justify-content:initial ;
+    justify-content: space-between;
     align-items: center;
     overflow: hidden;
     background-color: #BFBFBF;
 
+}
+
+.nav-left, .nav-center, .nav-right {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .flat-navbar a{
@@ -2194,7 +2202,7 @@ headers and footers.
 .flat-navbar ul{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
     list-style-type: none;
