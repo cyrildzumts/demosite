@@ -2060,6 +2060,18 @@ headers and footers.
     flex-wrap: nowrap;
 }
 
+#flat-site-logo{
+    width: 80px;
+    height: 32;
+    padding: 1px;
+    margin: 2px;
+}
+#flat-site-logo a{
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
 .flat-user-infos section{
     display: flex;
     justify-content: center;
@@ -2085,6 +2097,126 @@ headers and footers.
     font-size: 10px;
 }
 
+
+.flat-navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content:initial ;
+    align-items: center;
+    overflow: hidden;
+    background-color: #BFBFBF;
+
+}
+
+.flat-navbar a{
+    font-size: 16px;
+    color: #F3F3F3;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.flat-site-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.flat-dropdown{
+    float: left;
+    overflow: hidden;
+}
+.flat-dropdown .dropbtn{
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+    padding: 14px 16px;
+    font: inherit;
+    background-color: inherit;
+    margin: 0;
+}
+.flat-navbar a:hover, .flat-dropdown:hover .dropbtn {
+    background-color: red;
+  }
+  .flat-dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #F9F9F9;
+    width: 100%;
+    left: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+.flat-dropdown-content .header{
+    background-color: #2F2D2C;
+    padding: 16px;
+    color: white;
+}
+.flat-dropdown:focus .flat-dropdown-content{
+    display: block;
+}
+.flat-dropdown:hover .flat-dropdown-content{
+    display: block;
+}
+
+.flat-col{
+    /*height: 300px;*/
+    background-color: #F2F1FE;
+    padding: 10px;
+    border-bottom: 1px solid #888888;
+}
+
+.flat-col a:hover{
+    background-color: #ddd;
+}
+
+.flat-col a{
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    text-align: left;
+}
+
+.flat-cat-box .flat-cat-header{
+    text-align: left;
+    margin: auto;
+    border-bottom: 1px solid #888888;
+}
+
+.flat-cat-box .flat-cat-body{
+    display: block;
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+
+}
+.flat-navbar ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    list-style-type: none;
+}
+.flat-navbar ul li{
+    height: 32px;
+    background-color: #BFBFBF;
+    padding: 2px;
+    margin: 2px;
+}
+.flat-navbar ul li:hover{
+    background-color: #16A085;
+}
+.flat-navbar ul a{
+    font-size: 1.5em;
+    height: 64px;
+    color: #2F2D2C;
+    text-decoration: none;
+}
+.flat-navbar ul a:hover{
+    text-decoration: none;
+}
 @media (min-width: 768px){
     .flat-cart-card{
         width: 50%;

@@ -218,27 +218,31 @@
 .bg-frenchgrey{
     /*color: #7D656C;*/
     color: #F9F8F9;
-    background-color: #C4BABD;
+    background-color: #545151;
 }
 .bg-venus{
     background-color: #7D656C;
     color: #F9F8F9;
 }
 .bg-main-light{
-    background-color: #F9F8F9;
-    color: #846D74;
+    background-color: #EEEEEE;
+    color: #1A1A1A;
 }
 
 .bg-main-light .flat-btn{
-    background-color: #A29297;
-    color: #F9F8F9;
+    background-color: #1A1A1A;
+    color: #EEEEEE;
 }
 
 .bg-main-light .flat-btn:hover{
-    background-color: #E7E2E4;
-    color: #846D74;
+    background-color: #EEEEEE;
+    color: #1A1A1A;
 }
 
 .bg-main-light .flat-divider{
     border-color: #846D74;
+}
+.bg-dark{
+    background-color: #1A1A1A;
+    color: #EEEEEE;
 }

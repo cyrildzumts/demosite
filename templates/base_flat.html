@@ -28,30 +28,31 @@
 </head>
 
 <body class="bg-main-light">
-        <header class="flat-header bg-frenchgrey">
+        <header class="flat-header bg-main-light">
 
                 {% comment "nav" %} This nav element is the same accross the whole site. For this container to work without issue, every
                 page needs to provide the category list, cart counter, wishlist counter, {% endcomment %}
-                <nav class="flat-nav flat-nav-bar">
-                        <div class="flat-nav-container">
-                                <div class="flat-nav-left flat-nav-menu">
-                                        <span class="flat-nav-entry flat-menu-btn glyphicon glyphicon-menu-hamburger flat-icon-big">
+                <nav class="flat-row remove-wrap hidden">
+                        <div class="flat-col-xs-4 bordered">
+                                <span class="flat-nav-entry flat-menu-btn glyphicon glyphicon-menu-hamburger flat-icon-big">
 
-                                        </span>
+                                </span>
+                        </div>
+                        <div class="flat-col-xs-4">
+                                <div id="flat-site-logo" class="flat-flex bordered">
+                                        <a  href="{% url 'catalog:index' %}">
+                                                
+                                        </a>
+                                        <img class="img-responsive" src="{% static 'images/logo.png' %}" alt="LYSHOP">
                                 </div>
-                                <div class="flat-nav-center">
-                                        <h5>
-                                                <a class="flat-fluid" href="{% url 'catalog:index' %}">
-                                                        <img class="img-responsive" src="{% static 'images/logo.png' %}" alt="LYSHOP">
-                                                </a>
-                                        </h5>
-                                </div>
-                                <div class="flat-nav-right">
-
-                                        <a class="flat-nav-entry" href="{% url 'wishlist:show_wishlist' %}">
+                        </div>
+                        <div class="flat-col-xs-4">
+                                <div class="flat-row remove-wrap bordered">
+                                        <span class="flat-col-pull-xs-3 flat-col-pull-md-9"></span>
+                                        <a class="flat-col-xs-3 flat-col-md-1" href="{% url 'wishlist:show_wishlist' %}">
                                                 <span class="glyphicon glyphicon-heart flat-icon-big"></span>
                                         </a>
-                                        <a class="flat-nav-entry" href="{% url 'cart:show_cart' %}">
+                                        <a class="flat-col-xs-3 flat-col-md-1" href="{% url 'cart:show_cart' %}">
                                                 <span class="cart-button glyphicon glyphicon-shopping-cart flat-icon-big">
                                                 </span>
                                                 {% if cart_count.count > 0 %}
@@ -60,11 +61,11 @@
                                                 </span>
                                                 {%endif%}
                                         </a>
-                                        <div class="flat-nav-entry flat-account-entry ">
+                                        <div class="flat-col-xs-3 flat-col-md-1">
                                                 <div class="flat-fuild flat-clickable">
                                                         <span class="glyphicon glyphicon-user flat-icon-big"></span>
                                                 </div>
-                                                
+                                        
                                                 <div class="flat-account-drop-wrapper flat-main-content">
                                                         <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
                                                                 {% if user.is_authenticated %}
@@ -74,14 +75,14 @@
                                                                         <a class="flat-link-entry flat-btn" href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
                                                                         <a class="flat-link-entry flat-btn" href="{% url 'contact:index'%}">Contact</a>
                                                                         <div class="divider">
-
+                                        
                                                                         </div>
                                                                         <a class="flat-link-entry flat-btn" href="{% url 'accounts:logout' %}">Se déconnecter</a>
                                                                         <div class="flat-link-entry flat-btn flat-cancel-btn bordered">
                                                                                 <span>Fermer</span>
                                                                         </div>
                                                                 </div>
-
+                                        
                                                                 {% else %}
                                                                 <div class="list-flex flex-column flat-login-view">
                                                                         <div class="flat-login flat-card flex-column dropdown bordered">
@@ -95,35 +96,34 @@
                                                                                         <section class="flat-form main-content">
                                                                                                 <form id="login_form" name="login_form" action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
                                                                                                         <div class="flat-card  vertical">
-                                                                                                                <span class="flat-label text-left">Nom d'utilisateur
-                                                                                                                        :</span>
+                                                                                                                <span class="flat-label text-left">Nom d'utilisateur :
+                                                                                                                </span>
                                                                                                                 <input type="text" class="form-control" name="username" id="username">
                                                                                                         </div>
                                                                                                         <div class="flat-card vertical">
-                                                                                                                <span class="flat-label text-left">Mot de passe
-                                                                                                                        :</span>
+                                                                                                                <span class="flat-label text-left">Mot de passe :
+                                                                                                                </span>
                                                                                                                 <input type="password" class="form-control" name="password" id="password">
-
+                                        
                                                                                                         </div>
                                                                                                         <div class="checkbox">
                                                                                                                 <label>
-                                                                                                                        <input type="checkbox">                                                                                                                        
-                                                                                                                        Se souvenir de moi
-                                                                                                                        </label>
+                                                                                                                        <input type="checkbox"> Se souvenir de moi
+                                                                                                                </label>
                                                                                                         </div>
                                                                                                         <div class="flat-card">
                                                                                                                 <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
                                                                                                                 <button type="submit" class="btn btn-default flat-btn bg-ebony" id="btn_login"> Se connecter</button>
                                                                                                         </div>
-
+                                        
                                                                                                 </form>
                                                                                         </section>
                                                                                 </div>
-
+                                        
                                                                                 <section class="footer">
-
+                                        
                                                                                 </section>
-
+                                        
                                                                         </div>
                                                                         <div class="flat-register flat-card flex-column dropdown bordered">
                                                                                 <section class="flat-register-header header flat-btn flat-clickable">
@@ -138,20 +138,20 @@
                                                                                                                 <input type="radio" name="genre">
                                                                                                                 <span class="flat-label"> Femme </span>
                                                                                                                 <input type="radio" name="genre">
-
+                                        
                                                                                                         </div>
                                                                                                         <div class="flat-card  vertical">
                                                                                                                 <span class="flat-label text-left"> Prénom :</span>
                                                                                                                 <input type="text" class="form-control" id="vorname">
                                                                                                         </div>
                                                                                                         <div class="flat-card  vertical">
-                                                                                                                <span class="flat-label text-left"> Nom de famille
-                                                                                                                        :</span>
+                                                                                                                <span class="flat-label text-left"> Nom de famille :
+                                                                                                                </span>
                                                                                                                 <input type="text" class="form-control" id="name">
                                                                                                         </div>
                                                                                                         <div class="flat-card  vertical">
-                                                                                                                <span class="flat-label text-left"> Nom d'utilisateur
-                                                                                                                        :</span>
+                                                                                                                <span class="flat-label text-left"> Nom d'utilisateur :
+                                                                                                                </span>
                                                                                                                 <input type="text" class="form-control" id="username">
                                                                                                         </div>
                                                                                                         <div class="flat-card  vertical">
@@ -163,48 +163,44 @@
                                                                                                                 <input type="password" class="form-control" id="password">
                                                                                                         </div>
                                                                                                         <div class="flat-card  vertical">
-                                                                                                                <span class="flat-label text-left"> Ressaisissez
-                                                                                                                        votre
-                                                                                                                        mot
-                                                                                                                        de
-                                                                                                                        passe:</span>
+                                                                                                                <span class="flat-label text-left"> Ressaisissez votre mot de passe:
+                                                                                                                </span>
                                                                                                                 <input type="password" class="form-control" id="password2">
                                                                                                         </div>
                                                                                                         <div class="flat-card">
                                                                                                                 <span class="btn btn-default flat-close-main flat-btn"> Annuler </span>
                                                                                                                 <button type="submit" class="btn btn-default flat-btn bg-ebony"> S'enrégistrer
-                                                                                                                        </button>
+                                                                                                                </button>
                                                                                                         </div>
-
+                                        
                                                                                                 </form>
                                                                                         </section>
                                                                                 </div>
-
+                                        
                                                                                 <section class="footer">
-
+                                        
                                                                                 </section>
                                                                         </div>
                                                                         <div class="flat-btn flat-close-main bordered">
                                                                                 <span class="header">Fermer</span>
                                                                         </div>
-
+                                        
                                                                 </div>
-
+                                        
                                                                 {% endif %}
-
+                                        
                                                         </div>
                                                 </div>
                                         </div>
-
-
                                 </div>
+                        
+                                
                         </div>
-
-
                 </nav>
         </header>
+        {% include "tags/big_flat_navbar.html" %}
         {% load catalog_tags %}
-        <div id="flat-site-menu" class="flat-dropdown-wrapper bg-venus">
+        <div id="flat-site-menu" class="flat-dropdown-wrapper bg-dark">
                 <div class="flat-site-menu flat-btn-group flex-column">
                         {% root_categorie as root_cats%} 
                         {% for cat in root_cats.root_cats %}
@@ -225,7 +221,7 @@
                 
                 {% endblock BANNER %}
                 {% block SEARCHBAR %}
-                        <div class="flat-search-bar bg-venus dropdown">
+                        <div class="flat-search-bar bg-dark dropdown">
                                 <h4>Search bar</h4>
                                 <div>
                                         <form action="">
