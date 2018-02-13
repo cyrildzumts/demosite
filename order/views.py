@@ -26,7 +26,7 @@ def fill_form(user):
 
 # Create your views here.
 def show_checkout(request):
-    template_name = 'order/checkout.html'
+    template_name = 'order/flat_checkout.html'
     r = request
     if cart.is_empty(request):
         print("show_checkout : Cart is empty")
@@ -47,7 +47,7 @@ def show_checkout(request):
                                    " de maintenant.",
                                    from_email=None,
                                    to_email=["cyrildz@ymail.com"])
-                order_items = order.getOrderItem()
+                #order_items = order.getOrderItem()
                 user_cart = cart.get_cart(request.user)
                 user_cart.delete()
                 order.validate()

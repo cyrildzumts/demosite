@@ -743,6 +743,140 @@ var Wishlist = (function(){
 })();
 
 
+var Checkout = (function(){
+    function Checkout(){
+        this.currentTab = 0;
+        this.tabCount = 0;
+        this.tabs = {};
+        this.tab = {};
+        this.nextBtn = {};
+        this.prevBtn = {};
+        this.submitBtn = {};
+        this.paiementChoiceBtn = {};
+        this.$inputs = {};
+
+    }
+    Checkout.prototype.init = function(){
+        this.paiementOpt = 2;
+        this.tabs = $(".flat-tabcontent");
+        this.tab = $(".flat-tab");
+        this.nextBtn = $("#flat-tabs-next");
+        this.prevBtn = $("#flat-tabs-prev");
+        this.submitBtn = $("#flat-checkout-submit");
+        this.paiementChoiceBtn = $(".choice");
+        this.$inputs = this.paiementChoiceBtn.find('[type="radio"]');
+        console.log("Checkout Init : we found " + this.$inputs.length + " inputs");
+        this.prevBtn.hide();
+        this.tabs.hide();
+        this.tab.click(this.onTabClicked.bind(this));
+        this.nextBtn.click(this.onNextClicked.bind(this));
+        this.prevBtn.click(this.onPrevClicked.bind(this));
+        this.submitBtn.click(this.onSubmitClicked.bind(this));
+        this.paiementChoiceBtn.click(this.inputUpdate.bind(this));
+        this.tabCount = this.tab.length;
+        this.update();
+    };
+
+    Checkout.prototype.inputUpdate = function(event){
+        var choice = $(event.target).parents(".choice");
+        var input = choice.find('[type="radio"]');
+        console.log("Input clicked : Value : ");
+        this.paiementChoiceBtn.removeClass("active");
+        this.$inputs.removeAttr('checked');
+        choice.addClass("active");
+        input.attr('checked', 'true');
+        this.nextBtn.removeClass("disabled");
+        console.log(input);
+        console.log(choice);
+    };
+    Checkout.prototype.onNextClicked = function(event){
+        
+        
+        if(this.currentTab != 1){
+            this.tab.removeClass("active");
+            this.currentTab = (this.currentTab + 1 ) % this.tabCount;
+            this.update();
+        }
+        else{
+            console.log("Checking for checked input");
+            if(this.isInputChecked()){
+                console.log("found checked input");
+                this.tab.removeClass("active");
+                this.currentTab = (this.currentTab + 1 ) % this.tabCount;
+                //this.nextBtn.removeClass("disabled");
+                this.update();
+            }
+            else{
+                console.log("No valid input found");
+                //this.nextBtn.addClass("disabled");
+            }
+        }
+        
+
+    };
+    Checkout.prototype.isInputChecked = function(){
+        return $('input:checked').length == 1;
+    };
+    Checkout.prototype.onPrevClicked = function(event){
+        this.tab.removeClass("active");
+        this.currentTab = (this.currentTab - 1 ) % this.tabCount;
+        this.update();
+    };
+    Checkout.prototype.onSubmitClicked = function(event){
+        event.stopPropagation();
+        event.preventDefault();
+    };
+
+    Checkout.prototype.onTabClicked = function(event){
+        var tab = parseInt($(event.target).data("index"));
+        if(tab == 2){
+            if(this.isInputChecked()){
+                this.currentTab = tab;
+                this.update();
+            }
+        }
+        else if( (tab != this.currentTab) && (tab < 3) && (tab >= 0)){
+            
+            this.currentTab = tab;
+            this.update();
+        }
+    };
+
+    Checkout.prototype.update = function(){
+        if( (this.currentTab == 1) && !this.isInputChecked()){
+            this.nextBtn.addClass("disabled");
+        }
+        else{
+            this.nextBtn.removeClass("disabled");
+        }
+        this.tab.removeClass("active");
+        $(this.tab[this.currentTab]).addClass("active");
+        if(this.currentTab > 0){
+            this.prevBtn.show();
+        }
+        else{
+            this.prevBtn.hide();
+        }
+        if(this.currentTab == (this.tabCount - 1)){
+            this.nextBtn.hide();
+        }
+        else{
+            this.nextBtn.show();
+        }
+        var that = this;
+        this.tabs.hide();
+        $(this.tabs[this.currentTab]).show();
+        if(this.currentTab == 2){
+            this.submitBtn.show();
+        }
+        else{
+            this.submitBtn.hide();
+        }
+    };
+    return Checkout;
+})();
+
+
 Shopping = {};
 Shopping.Cart = Cart;
 if(typeof (Storage)!== "undefined"){
@@ -768,42 +902,10 @@ Shopping.myCart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
+Shopping.checkout = new Checkout();
 Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.myCart.initDefault();
 Shopping.myCart.init($(".cart-badge"));
 Shopping.wishlist.init();
-
-function  ShoppingApp (){
-    // Private attibutes :
-    this.username = "";
-    this.email = "";
-    this.loginstate= false;
-
-
-    this.getUsername = function(){
-        return this.username;
-    }
-    this.getEmail = function(){
-        return this.email;
-    }
-    this.setUsername = function(username){
-        this.username = username;
-    }
-    this.setEmail = function(email){
-        this.email = email;
-    }
-    this.isLoggedIn = function(){
-        return this.loginstate == true;
-    }
-    
-
-    // Cart 
-    //this.Cart 
-};
-
-function Observer(observable){
-    this.update = function(arg){
-        console.log("target has changed ...");
-    };
-};
+Shopping.checkout.init();

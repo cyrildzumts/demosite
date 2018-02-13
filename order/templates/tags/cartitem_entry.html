@@ -1,0 +1,40 @@
+<div id="{{item.product.id}}" class="flat-cart-card flat-row  bordered">
+
+    <div class="flat-col-xs-12">
+        <div class="flat-row">
+            <section class="flat-col-xs-3 bordered">
+                <img class="img-responsive" src="{{item.image_url}}">
+
+            </section>
+            <section class="flat-col-xs-9">
+                <div class="flat-row">
+                    <section class="flat-col-xs-4">
+                        <span> {{item.name}}</span>
+                    </section>
+                    <section class="flat-col-xs-8">
+                        <div class="flat-row remove-wrap">
+                            <section class="flat-col-xs-3">
+                                <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                                    <span class="plusButton glyphicon glyphicon-chevron-up"></span>
+                                    <span class="item-qty">{{item.quantity}}</span>
+                                    <span class="minusButton glyphicon glyphicon-chevron-down"></span>
+                                </div>
+                            </section>
+                            <section class="flat-col-xs-9">
+                                <div class="flat-column">
+                                    <span class="main-value">
+                                        <span class="cart-item-price">{{item.price}}</span> FCFA</span>
+                                    <span class="subdetail small flat-hidden cart-item-total-price">Total :
+                                        <span>{{item.total}}</span> FCFA</span>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+</div>

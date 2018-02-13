@@ -1,0 +1,152 @@
+{% extends "base_flat.html" %} {% load checkout_tags %} 
+{% block content_header %}
+    <h1>Checkout</h1>
+{% endblock content_header %} 
+{% block MAINCONTENT %} 
+{% if error_message %}
+    <ul class="errorlist">
+        <li>{{ error_message }}</li>
+    </ul>
+{% endif %}
+<div id="flat-checkout" class="flat-column">
+
+    <div class="flat-checkout-container container flat-checkout-wizard">
+        <form action="">
+            <div class="flat-tabs">
+                <section class="flat-checkout-header">
+                    <h3>Envoi de Commande</h3>
+                    <h5> Ces informations nous aiderons à traiter votre commande</h5>
+                </section>
+                <section class="flat-tabBar">
+                    <span class="flat-tab active flat-col-xs-4" data-toogle="#userdata" data-index="0">Données Utilisateur</span>
+                    <span class="flat-tab flat-col-xs-4" data-toogle="#paiement" data-index="1">Méthode de Paiement</span>
+                    <span class="flat-tab flat-col-xs-4" data-toogle="#cartcontent" data-index="2">Contenue de la Commande</span>
+                </section>
+                <div class="flat-checkout-body">
+                    <section id="userdata" class="flat-tabcontent">
+                        <div class="flat-row">
+                            <div class="flat-col-sm-12">
+                                <h4 class="info-text">Vérifier que vos informations sont correctes</h4>
+                    
+                            </div>
+                            <div class="flat-col-sm-6 ">
+                                <div class="input-group">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" type="email" name="email" value="{{user.email}}">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                    
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Nom</label>
+                                        <input class="form-control" type="text" name="lastname" value="{{user.last_name}}">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                    
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Prénom</label>
+                                        <input class="form-control" type="text" name="firstname" value="{{user.first_name}}">
+                                    </div>
+                                </div>
+                    
+                            </div>
+                            <div class="flat-col-sm-6">
+                                <div class="input-group">
+                    
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Pays de la livraison</label>
+                                        <select name="country" id="">
+                                            <option value="gabon" selected>Gabon</option>
+                                            <!-- <option value="cameroun">Cameroun</option> -->
+                                        </select>
+                    
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                    
+                                    <div class="form-group label-floating">
+                    
+                                        <label class="control-label">Ville de la livraison</label>
+                                        <select name="country" id="">
+                                            <option value="lbv" selected>Libreville</option>
+                                            <option value="pog">Port-gentil</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="paiement" class="flat-tabcontent">
+                        <div class="flat-row">
+                            <div class="flat-col-sm-10 flat-flex">
+                                <div class="flat-row">
+                                        <div class="flat-col-sm-5">
+                                            <div class="choice flat-column"  rel="tooltip" title="Cette option est bien pour vous si vous voulez payer après avoir vu l'article">
+                                                <input type="radio" name="paiement" value="1">
+                                                <div class="icon">
+                                                    <i class="glyphicon glyphicon-check"></i>
+                                                </div>
+                                                <h6>Payer au moment du retrait</h6>
+                                        
+                                            </div>
+                                        </div>
+                                        <span class="flat-col-sm-2"></span>
+                                        <div class="flat-col-sm-5">
+                                            <div class="choice flat-column" data-toggle="wizard-radio" rel="tooltip" title="En choisissant cette option, votre commande sera traitée avec une plus grande priorité">
+                                                <input type="radio" name="paiement" value="2">
+                                                <div class="icon">
+                                                    <i class="glyphicon glyphicon-phone"></i>
+                                                </div>
+                                                <h6>AirtelMoney</h6>
+                                        
+                                            </div>
+                                        </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="cartcontent" class="flat-tabcontent">
+                        <div class="flat-row">
+                            <h4 class="info-text">Contenu de votre Commande</h4>
+                            <div class="flat-col-sm-12 flat-col-md-6">
+                                <div class="flat-column">
+                                    {% for item in cartitems %} {% include "tags/cartitem_entry.html" %} {% endfor %}
+                                </div>
+                            </div>
+                            <div class="flat-col-sm-12 flat-col-md-6">
+                                <div class="flat-column">
+                                    <span>Montant Total :
+                                        <strong> {{user_cart.subtotal}} FCFA </strong>
+                                    </span>
+                                    <span>Frais d'envoie :
+                                        <strong> 0.00 FCFA </strong>
+                                    </span>
+                                    <span>Reduction :
+                                        <strong> 0.00 FCFA</strong>
+                                    </span>
+                                    <span>
+                                        <strong> Somme Total : {{user_cart.subtotal}} FCFA </strong>
+                                    </span>
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <section class="flat-tabs-footer bordered">
+                    <span id="flat-tabs-prev" class="flat-btn bordered">Précédent</span>
+                    <div class="flat-flex flex-row bordered">
+                        <span id="flat-checkout-submit" class="flat-btn"> <label ><input type="submit"> Envoyer </label></span>
+                        <span id="flat-tabs-next" class="flat-btn">Suivant</span>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+    
+</div>
+{% endblock MAINCONTENT %}

@@ -9,7 +9,9 @@ PAID_TYPE = (
                         ('SMS', 'SMS'),
                         ('OrangeMoney', 'OrangeMoney'),
                         ('MTNMoney', 'MTNMoney'),
-                        ('AirtelMoney', 'AirtelMoney'),)
+                        ('AirtelMoney', 'AirtelMoney'),
+                        ('A la reception', 'A la reception'),
+                        )
 
 
 class CheckoutForm(forms.ModelForm):
