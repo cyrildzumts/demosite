@@ -42,6 +42,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, null=True)
     transaction_id = models.CharField(max_length=20, blank=True)
     ref_num = models.BigIntegerField(blank=True, null=True)
+    payement_type = models.CharField(default="AIRTELMONEY", max_length=20)
 
     # Contact Infos
     email = models.EmailField(max_length=50)

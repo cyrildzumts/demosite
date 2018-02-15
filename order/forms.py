@@ -4,16 +4,6 @@ import datetime
 import re
 
 
-# Checkout Options
-PAID_TYPE = (
-                        ('SMS', 'SMS'),
-                        ('OrangeMoney', 'OrangeMoney'),
-                        ('MTNMoney', 'MTNMoney'),
-                        ('AirtelMoney', 'AirtelMoney'),
-                        ('A la reception', 'A la reception'),
-                        )
-
-
 class CheckoutForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super(CheckoutForm, self).__init__(*args, **kwargs)
@@ -28,4 +18,3 @@ class CheckoutForm(forms.ModelForm):
         class Meta:
             model = Order
             exclude = ('status', 'ip_address', 'user', 'transaction_id',)
-        payement_type = forms.CharField(widget=forms.Select(choices=PAID_TYPE))

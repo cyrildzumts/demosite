@@ -2408,6 +2408,10 @@ headers and footers.
 
 }
 
+.flat-cart-description{
+    max-width: 250px;
+    background-color: #BFBFBF;
+}
   #flat-tabs-prev, #flat-checkout-submit,
   #flat-tabs-next{
       background-color: #3C3B3F;

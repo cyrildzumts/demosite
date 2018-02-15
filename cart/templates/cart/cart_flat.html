@@ -19,27 +19,27 @@
 {% block MAINCONTENT %}
 
 <div class="flat-card flex-column">
-
+        <div class="flat-column flex-center">
+                <div class="flat-card flat-column">
+                        <div class="flat-column flat-left">
+                                <div class=""> Appercu de votre Panier </div>
+                                <div class="">
+                                        <strong>
+                                                <span class="cart-counter">{{cart_item_count}}</span>
+                                        </strong> article(s)</div>
+                                <div class="flat-hidden-xs flat-flex">
+                                        <p class="flat-cart-description text-center">
+                                                Ici se trouve les articles que vous souhaitez acheter.
+                                                <br> Veuillez savoir que les articles présent dans le Panier ne sont pas reservés.
+                                        </p>
+                        
+                                </div>
+                        </div>
+                        
+                </div>   
+        </div> 
     {% if cart_items %}
-    <div class="header flat-column">
-            <div class="card-mat vertical">
-                    <div class="mat-entry"> Appercu de votre Panier </div>
-                    <div class="mat-entry"> <strong> <span class="cart-counter">{{cart_item_count}}</span> </strong>  article(s)</div>
-                    <div class="flat-hidden-xs flat-flex">
-                        <p class="flat-cart-description flat-card">
-                                Ici se trouve les articles que vous souhaitez 
-                                acheter. Vous pouvez collectioner les articles
-                                que avez trouvé dans le catalogue afin de les
-                                acheter plus tard. Pour celà il vous suffit
-                                juste d'ajouter chaque article qui vous interesse
-                                dans le Panier. <br>
-                                Veuillez savoir que les articles présent dans le
-                                Panier ne sont pas reservés.
-                        </p>
-                    </div>
-                    
-            </div>   
-    </div> 
+    
     <div id="flat-cart-products" class="flat-main-content flat-column">
             {% for item  in cart_items %}
                 <div id="{{item.product.id}}" class="flat-cart-card flat-row  bordered">
@@ -124,22 +124,18 @@
     </div>
 
     {%else%}
-    <div class="card-mat">
-            <section class="card-main text-center">
+    <div class="flat-card flat-column">
+            <section class="flex-column flex-center text-center bordered">
                 <h4 class="card-title"> Panier Vide</h4>
                 <h6 class="card-subtitle">Veuillez ajouter des article dans le panier</h6>
             </section>
             <!-- End Of Main Section -->
-            <section class="card-content-text text-center">
+            <section class="flat-main-content text-center bordered">
                 <p>
                     Votre Panier ne contient aucun article.</br>
                     Parcourrez la liste d'articles en vente sur le site</br>
                     et ajouter les produits que vous desirez acheter dans le Panier. </br>
                 </p>
-            </section>
-            <!-- End Of Main Section -->
-            <section class="card-actions text-center">
-                <h4 class="card-next">Acceuille du site</h4>
             </section>
             <!-- End Of Main Section -->
         <!-- End Of Card -->

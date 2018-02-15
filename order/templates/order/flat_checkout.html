@@ -4,14 +4,15 @@
 {% endblock content_header %} 
 {% block MAINCONTENT %} 
 {% if error_message %}
-    <ul class="errorlist">
-        <li>{{ error_message }}</li>
-    </ul>
+    <div class="errorlist">
+        {{ form.errors}}
+    </div>
 {% endif %}
 <div id="flat-checkout" class="flat-column">
 
     <div class="flat-checkout-container container flat-checkout-wizard">
-        <form action="">
+        <form id="flat-order-form" action="." method="post">{% csrf_token %}
+                {% include "tags/hidden-form-field.html" %}
             <div class="flat-tabs">
                 <section class="flat-checkout-header">
                     <h3>Envoi de Commande</h3>
@@ -40,14 +41,18 @@
                     
                                     <div class="form-group label-floating">
                                         <label class="control-label">Nom</label>
-                                        <input class="form-control" type="text" name="lastname" value="{{user.last_name}}">
+                                        <input class="form-control" type="text" name="shipping_name" value="{{user.last_name}}" readonly>
                                     </div>
                                 </div>
                                 <div class="input-group">
                     
                                     <div class="form-group label-floating">
                                         <label class="control-label">Prénom</label>
-                                        <input class="form-control" type="text" name="firstname" value="{{user.first_name}}">
+                                        <input class="form-control" type="text" name="firstname" value="{{user.first_name}}" readonly>
+                                    </div>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Telephone</label>
+                                        <input class="form-control" type="text" name="phone" value="{{user.userprofile.telefon}}">
                                     </div>
                                 </div>
                     
@@ -57,9 +62,9 @@
                     
                                     <div class="form-group label-floating">
                                         <label class="control-label">Pays de la livraison</label>
-                                        <select name="country" id="">
-                                            <option value="gabon" selected>Gabon</option>
-                                            <!-- <option value="cameroun">Cameroun</option> -->
+                                        <select name="shipping_country" id="">
+                                            <option value="Gabon" selected>Gabon</option>
+                                            <!-- <option value="Cameroun">Cameroun</option> -->
                                         </select>
                     
                                     </div>
@@ -69,9 +74,9 @@
                                     <div class="form-group label-floating">
                     
                                         <label class="control-label">Ville de la livraison</label>
-                                        <select name="country" id="">
-                                            <option value="lbv" selected>Libreville</option>
-                                            <option value="pog">Port-gentil</option>
+                                        <select name="shipping_city" id="">
+                                            <option value="Libreville" selected>Libreville</option>
+                                            <option value="Port-gentil">Port-gentil</option>
                                         </select>
                                     </div>
                                 </div>
@@ -84,7 +89,7 @@
                                 <div class="flat-row">
                                         <div class="flat-col-sm-5">
                                             <div class="choice flat-column"  rel="tooltip" title="Cette option est bien pour vous si vous voulez payer après avoir vu l'article">
-                                                <input type="radio" name="paiement" value="1">
+                                                <input type="radio" name="payement_type" value="ESPECE">
                                                 <div class="icon">
                                                     <i class="glyphicon glyphicon-check"></i>
                                                 </div>
@@ -95,7 +100,7 @@
                                         <span class="flat-col-sm-2"></span>
                                         <div class="flat-col-sm-5">
                                             <div class="choice flat-column" data-toggle="wizard-radio" rel="tooltip" title="En choisissant cette option, votre commande sera traitée avec une plus grande priorité">
-                                                <input type="radio" name="paiement" value="2">
+                                                <input type="radio" name="payement_type" value="AIRTELMONEY">
                                                 <div class="icon">
                                                     <i class="glyphicon glyphicon-phone"></i>
                                                 </div>

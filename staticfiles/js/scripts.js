@@ -754,10 +754,12 @@ var Checkout = (function(){
         this.submitBtn = {};
         this.paiementChoiceBtn = {};
         this.$inputs = {};
+        this.$form = {};
 
     }
     Checkout.prototype.init = function(){
         this.paiementOpt = 2;
+        this.$form = $("#flat-order-form");
         this.tabs = $(".flat-tabcontent");
         this.tab = $(".flat-tab");
         this.nextBtn = $("#flat-tabs-next");
@@ -771,7 +773,8 @@ var Checkout = (function(){
         this.tab.click(this.onTabClicked.bind(this));
         this.nextBtn.click(this.onNextClicked.bind(this));
         this.prevBtn.click(this.onPrevClicked.bind(this));
-        this.submitBtn.click(this.onSubmitClicked.bind(this));
+        //this.submitBtn.click(this.onSubmitClicked.bind(this));
+        this.$form.submit(this.onSubmitClicked.bind(this));
         this.paiementChoiceBtn.click(this.inputUpdate.bind(this));
         this.tabCount = this.tab.length;
         this.update();
@@ -823,8 +826,10 @@ var Checkout = (function(){
         this.update();
     };
     Checkout.prototype.onSubmitClicked = function(event){
-        event.stopPropagation();
-        event.preventDefault();
+        console.log("Checkout is being submitted")
+        //event.stopPropagation();
+        //event.preventDefault();
+        return true;
     };
 
     Checkout.prototype.onTabClicked = function(event){
