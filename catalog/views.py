@@ -279,3 +279,12 @@ def livraison(request):
         'page_title': page_title,
     }
     return render(request, template_name,context)
+
+
+def faq_view(request):
+    template_name = "faq_flat.html"
+    page_title = "FAQ | " + settings.SITE_NAME
+    context = {
+        'page_title': page_title,
+    }
+    return render(request, template_name,context)

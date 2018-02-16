@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # url(r'^livraison/$', views.livraison, name='livraison'),
     url(r'^flyer/$', views.flyer, name='flyer'),
+    url(r'^faq/$', views.faq_view, name='faq'),
     url(r'^search/$', views.search_view, name='search'),
     #url(r'^(?P<category_slug>[-\w]+)/$', views.show_category,
     #    name='catalog_category'),

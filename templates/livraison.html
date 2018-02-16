@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_flat.html" %}
 
 {% block banner-panel %}
 
@@ -13,14 +13,14 @@
 {% endblock content_header %}
 
 
-{% block PageContent %}
-    <div class="fluid-container">
-        <div class="flex-item card card-info">
+{% block MAINCONTENT %}
+    <div class="flat-row">
+        <div class="flat-card flex-column">
             Vous trouverez ici les infos concernant la livraison des articles
             vendus sur notre site.
             
             
-            <ul class="list-entry">
+            <ul class="list-entry main-content flex-column">
                 <li>
                     La livraison de produits se fait sur rendez-vous.
                     Nous vous contacterons afin de definir la date, le lieu et l'heure
@@ -48,4 +48,4 @@
         </div>
 
     </div>
-{% endblock PageContent %}
+{% endblock MAINCONTENT %}

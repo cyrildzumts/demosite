@@ -1,0 +1,114 @@
+{% extends "base_flat.html" %}
+
+
+
+{% block MAINCONTENT %}
+
+<div class="flat-row">
+    <div class="flat-column flat-center">
+            <div class="collapsible flat-col-xs-12 flat-col-md-8 bordered"> 
+                <span class="faq-entry-header open" data-target="#make-order">
+                    <strong>Comment passer une commande ?</strong> 
+                </span>
+                <div id="make-order" class="flat-flex collapse-content">
+                    <div class="entry-description">
+                        Pour passer une commande, ajoutez les articles qui 
+                        vous interessent dans le Panier. Une fois les articles
+                        ajoutés dans le Panier, allez sur la page de votre Panier
+                        en cliquant sur l'icon du panier <i class="glyphicon glyphicon-shopping-cart"></i>
+                        qui se trouve sur la barre de navigation. Une fois sur la page
+                        de votre Panier, cliquer sur <i>aller à la caisse</i>. Une fois
+                        que la nouvelle page est chargée, veuillez suivre la procedure jusqu'à
+                        la fin. À la fin de ces étapes, votre commande sera passée et on vous enverra
+                        une confirmation de reception de votre commande.
+                    </div>
+                    <span class="close" data-target="#make-order">Fermer</span>
+                </div>
+                
+            </div>
+            <div class="collapsible flat-col-xs-12 flat-col-md-8 bordered"> 
+                <span class="faq-entry-header open" data-target="#order-status">
+                    <strong>comment connaître le statut de ma commande ?</strong>
+                </span>
+                <div id="order-status" class="collapse-content">
+                    <div class="entry-description">
+                        <p>
+                            Pour connaître le statut de votre commande, allez sur la 
+                        page de votre compte et de là cliquer sur l'option 
+                        <i>Mes commandes</i>. 
+                        </p>
+                        <p>
+                            Une nouvelle page s'ouvrira, dans cette
+                        page se trouvent toutes vos commande. Sur chaque commande listé
+                        se trouve plusieurs information, y compris le statut de votre commande.
+                        </p>
+                        <div class="order-status-entry">
+                            <div class="status-entry">
+                                <span class="key">Passée : </span> Celà veut dire que votre commande a été placée, mais pas 
+                                 encore traitée.
+                            </div>
+                            <span class="status-entry">
+                                <span class="key">En Traitement : </span> <span class="value">commande est entrain d'être traitée.</span> 
+                            </span>
+                            <div class="status-entry">
+                                <div>
+                                    <span class="key">Annulée :</span>
+                                    <span class="value"> Votre commande a été annulée , les raisons de l'annulation 
+                                        peuvent être celles-ci : 
+                                    </span>
+                                </div>
+                                <ul class="options-list">
+                                        <li> Vous l'avez annulé</li>
+                                        <li> L'article commandé n'est plus disponible</li>
+                                </ul>
+                            </div>
+                            <div class="status-entry">
+                                <span class="key">Expédiée : </span>
+                                <span class="value"> Votre commande est route pour vous être livrée </span>
+                            </div>
+                            <div class="status-entry">
+                                <span class="key">Terminée :</span>
+                                <span class="value"> Vous avez récu votre commande.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="bordered flat-col-xs-12 flat-col-md-8 flat-hidden"> 
+                <span class="faq-entry-header flat-dropdown">
+                        <strong>Où se trouve mon paquet ?</strong>
+                </span>
+                <div class="collapse-conten">
+
+                </div>
+            </div>
+            <div class="collapsible flat-col-xs-12 flat-col-md-8 bordered"> 
+                    <span class="faq-entry-header open" data-target="#order-cancel">
+                            <strong>Comment annuler ma commande ?</strong>
+                    </span>
+                    <div id="order-cancel" class="collapse-content">
+                        <span>
+                            Pour annuler une commande, cliquer sur le bouton <i>Annuler</i>
+                            depuis la page de la commande.
+                            Notez que cette option n'est possible que lorsque la commande n'est pas encore
+                            expédiée. Si l'article est deja expediée alors vous prendriez les charges liées
+                            au transport de l'article commandé.
+                        </span>
+                    </div>
+            </div>
+            <div class="collapsible flat-col-xs-12 flat-col-md-8 bordered"> 
+                    <span class="faq-entry-header open" data-target="#feedback">
+                            <strong>Suggestion et feedback</strong>
+                    </span>
+                    <div id="feedback" class="collapse-content">
+                            <span>
+                                Pour tout feedback et toute suggestion vous pouvez utiliser notre 
+                                formulaire de contact disponible sur <a href="{% url 'contact:index' %}">cette page</a>
+                            </span>
+                    </div>
+                </div>
+    </div>
+</div>
+
+{% endblock MAINCONTENT %}

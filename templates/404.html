@@ -1,10 +1,10 @@
 
-{% extends "base.html" %}
+{% extends "base_flat.html" %}
 
 <div class="container-fluid">
-  {% block PageContent %}
+  {% block MAINCONTENT %}
       <h1> 404 ! Oups !</h1>
       <p> La page que vous cherchez n'existe pas.</p>
       <p><a  href="{% url 'catalog:index'%}"> Retour à l'Acceuille </a> </p>
-  {% endblock PageContent %}
+  {% endblock MAINCONTENT %}
 </div>

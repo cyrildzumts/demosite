@@ -19,32 +19,37 @@ $(".search-form").submit(function(){
     return true;
 });
 
-$(".dropdown").mouseenter(function(){
-    $(this).find("ul").fadeIn();
-    //$(".dropdown-menu").fadeIn("slow");
-});
-$(".dropdown").mouseleave(function(){
-    $(this).find("ul").fadeOut();
-    //$(".dropdown-menu").fadeIn("slow");
-});
-
-$("#openMenu").click(function(){
-    document.getElementById("site-menu").style.width = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0.4,0.4)";
-});
-$(".close").click(function(){
-    document.getElementById("site-menu").style.width = "0";
-    document.body.style.backgroundColor = "white";
-    
-});
-$("#loginBtn").click(function(){
-    $("#loginModal").modal();
-});
-$("#loginBtn2").click(function(){
-    $("#loginModal").modal();
-});
 
 
+var Collapsible = (function(){
+    function Collapsible(){
+        this.$collapsible   = {}; // all element with collapsible class
+        this.$close         = {}; // all button used to close a collapsible elements.
+
+    }
+    Collapsible.prototype.init = function(){
+        console.log("Initializing Collapsible ...")
+        this.$collapsible = $(".collapsible");
+        this.$close = this.$collapsible.children(".close");
+        console.log("Found " + this.$collapsible.length + " collapsibles on this pages.");
+        console.log("Found " + this.$close.length + " collapsibles closes on this pages.");
+        this.$collapsible.children(".open").click(function(event){
+            console.log("collapsible opening ...");
+            //event.stopPropagation();
+            var target =$(event.target).data("target");
+            $(target).toggle();
+            console.log("Target : " + target);
+        });
+        this.$close.click(function(event){
+            console.log("collapsible closing ...");
+            event.stopPropagation();
+            var target =$(event.target).data("target");
+            $(target).toggle();
+        });
+    };
+
+    return Collapsible;
+})();
 
 
 var Cart = (function(){
@@ -883,6 +888,7 @@ var Checkout = (function(){
 
 
 Shopping = {};
+
 Shopping.Cart = Cart;
 if(typeof (Storage)!== "undefined"){
     shopStorage  = localStorage;
@@ -914,3 +920,5 @@ Shopping.myCart.initDefault();
 Shopping.myCart.init($(".cart-badge"));
 Shopping.wishlist.init();
 Shopping.checkout.init();
+Shopping.collapsible = new Collapsible();
+Shopping.collapsible.init();
