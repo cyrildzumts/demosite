@@ -31,7 +31,10 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
-        name = super(ProductDetailView, self).get_object().name
+        p = super(ProductDetailView, self).get_object()
+        name = p.name
+        p.view_count = p.view_count + 1
+        p.save()
         context['page_title'] = name
         return context
 
@@ -249,7 +252,7 @@ def search_view(request):
     template_name = "catalog/search_results.html"
     page_title = 'Resultats de la Recherche | ' + settings.SITE_NAME
     results = Product.objects.all()
-    query = request.GET.get('q')
+    query = request.GET.get('search')
     query_list = query.split()
     count = len(query_list)
     if(count  > 0):
@@ -263,28 +266,5 @@ def search_view(request):
     context = {
         'page_title': page_title,
         'results' : results,
-    }
-    return render(request, template_name,context)
-
-
-def livraison(request):
-    """
-    This function serves the livraison Page.
-    By default the livraison html page is saved
-    on the root template folder.
-    """
-    template_name = "livraison.html"
-    page_title = 'Livraison | ' + settings.SITE_NAME
-    context = {
-        'page_title': page_title,
-    }
-    return render(request, template_name,context)
-
-
-def faq_view(request):
-    template_name = "faq_flat.html"
-    page_title = "FAQ | " + settings.SITE_NAME
-    context = {
-        'page_title': page_title,
     }
     return render(request, template_name,context)

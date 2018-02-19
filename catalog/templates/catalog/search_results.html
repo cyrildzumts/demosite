@@ -1,13 +1,13 @@
-{% extends "base.html" %}
+{% extends "base_flat.html" %}
     
-    {% block PageContent %}
+    {% block MAINCONTENT %}
 
             <div class="container-fluid">
                 <div class="row centered">
                     <p> Resultat de la recherche : </p>
                         {%if results%}
                             {% for p  in results %}
-                            {% include "tags/product_box_min.html" %}
+                            {% include "tags/product_box_flat.html" %}
                             {% endfor %}
                         {%else%}
                             <p class="no-result"> Aucun article trouvé. </p>
@@ -16,4 +16,4 @@
                 </div>
             </div><br>
 
-    {% endblock PageContent %}
+    {% endblock MAINCONTENT %}

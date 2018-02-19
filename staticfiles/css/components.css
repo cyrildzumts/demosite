@@ -2280,7 +2280,16 @@ headers and footers.
     text-decoration: none;
 }
 
-
+.flat-form .form-group{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+.form-group input, .form-group button, input, button{
+    width: 100%;
+    border-radius: 10px;
+}
 /** CHECKOUT */
 
 .flat-checkout-wizard{

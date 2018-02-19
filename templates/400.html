@@ -1,14 +1,15 @@
 
 {% extends "base_flat.html" %}
 
-{% block MAINCONTENT %}
+
+  {% block MAINCONTENT %}
     <div  class="flat-card">
         <section class="flat-row flex-center">
             <div class="header">
-                Mauvaise Requête :  404 ! Oups !
+                Mauvaise Requête :  400 ! Oups !
             </div>
             <div class="flat-main-content">
-                    <p> La page demandée n'existe pas ...</p>
+                    <p> Mauvaise requete envoyée ...</p>
                     <p><a  href="{% url 'catalog:index'%}"> Retour à l'Acceuille </a> </p>
             </div>
         </section>

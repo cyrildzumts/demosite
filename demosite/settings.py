@@ -34,8 +34,10 @@ META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.9', 'testserver','192.168.11.10','192.168.11.5', ]
 
-handler404 = 'demosite.views.not_found_404'
-handler500 = 'demosite.views.server_error_500'
+handler404 = 'demosite.views.page_not_found'
+handler500 = 'demosite.views.server_error'
+handler403 = 'demosite.views.permission_denied'
+handler400 = 'demosite.views.bad_request'
 # EMAIL SETTINGS
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
@@ -49,13 +51,7 @@ EMAIL_USE_SSL = True
 FIXTURE_DIRS = ['fixtures']
 # Application definition
 
-"""
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
-"""
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',

@@ -127,11 +127,15 @@
                 
                 {% endblock BANNER %}
                 {% block SEARCHBAR %}
-                        <div class="flat-search-bar bg-dark dropdown">
-                                <h4>Search bar</h4>
-                                <div>
-                                        <form action="">
-                                                
+                        <div class="flat-search-bar bg-dark collapsible">
+                                <span class="open" data-target="#search-form">Rechercher un produit </span>
+                                <div id="search-form">
+                                        <form class="flat-form" action="{% url 'catalog:search' %}">
+                                                <div class="form-group">
+                                                       <input type="search" name="search" id="" placeholder="Saisissez votre recherche ...">
+                                                       <button type="submit"><span class="icon"><i class="fa fa-search"></i></span></button>
+                                                </div>
+
                                         </form>
                                 </div>
                         </div>
@@ -174,7 +178,7 @@
                                                 <span class="glyphicon glyphicon-envelope"></span>
                                         </div>
                                         <div class="section-entry main flat-column">
-                                                <span class="info bordered">
+                                                <span class="bordered">
                                                         Inscrivez-vous à notre newsletter
                                                         <br> pour être informer sur nos offres.
                                                         <br> Vous pouvez vous désinscrire à tout
@@ -192,18 +196,18 @@
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="flat-footer-help flat-card flex-column  bordered">
-                                        <div class="header flat-clickable">
+                                <section class="flat-footer-help flat-card flex-column  collapsible bordered">
+                                        <div class="header open" data-target="#faq-link">
                                                 <span> Service client </span>
                                                 <span class="glyphicon glyphicon-plus"></span>
                                         </div>
-                                        <div class="flat-dropdown-wrapper flat-main-content">
+                                        <div id="faq-link" class="collapse-content">
                                                 <div class="flat-flex flex-column">
-                                                        <span class="flat-entry space bordered"> Comment passer une commande</span>
-                                                        <span class="flat-entry space bordered"> Quel est le statut de ma commande</span>
-                                                        <span class="flat-entry space bordered"> Où se trouve mon paquet ?</span>
-                                                        <span class="flat-entry space bordered"> Annuler la commande</span>
-                                                        <span class="flat-entry space bordered"> Suggestion et feedback </span>
+                                                        <p>
+                                                                Besoin d'aide ? Veuillez consulter notre FAQ
+                                                                
+                                                        </p>
+                                                        <a class="flat-entry flat-link bordered" href="{% url 'faq' %}"> Cliquer ici </a>
         
                                                 </div>
                                         </div>
@@ -218,9 +222,15 @@
                                                 </span>
                                         </div>
                                         <div class="section-entry main">
-                                                <p class="info bordered">Payer à la livraison</p>
-                                                <p class="info bordered">Airtel Money</p>
+                                                <p class="bordered">Payer à la livraison</p>
+                                                <p class="bordered">Airtel Money</p>
         
+                                        </div>
+                                </section>
+                                <section class="flat-card bordered">
+                                        <div class="flat-column">
+                                                <a class="flat-link" href="{% url 'about' %}"> À propos de nous</a>
+                                                <a class="flat-link" href="{% url 'livraison' %}">Livraison</a>
                                         </div>
                                 </section>
                         </section>

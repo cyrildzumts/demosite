@@ -3,6 +3,8 @@ from django.db import models
 from catalog import choices
 # from django.conf import settings
 from django.template.defaultfilters import slugify
+import datetime
+from django.utils import timezone
 
 # Create your models here.
 
@@ -322,6 +324,15 @@ class Product(models.Model):
         if(self.product_is_available() == False):
             self.is_available = False
         super(Product, self).save(*args, **kwargs)
+    
+
+    def is_recent(self):
+        days = 14
+        today = timezone.now()
+        delta = datetime.timedelta(days = days)
+        date = today - delta
+        flag = self.created_at >= date
+        return flag
 
 
 class RelatedModel(models.Model):

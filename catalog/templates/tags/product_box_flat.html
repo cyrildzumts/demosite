@@ -4,7 +4,11 @@
                 </a>
                 <div class="flat-product-image"> 
                         <img class="img-responsive" src="{{p.image.url}}">
-                        <span class="flat-product-label">Nouveau</span>
+                        {% if p.is_recent is True %}
+                                <span class="flat-product-label">Nouveau</span>
+                        
+                        {% endif %}
+                        
                 </div>
         </div>
         
