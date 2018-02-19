@@ -72,7 +72,7 @@
                                                         </section>
                                                 </div>
                                                 <div class="flat-row small">
-                                                        <section class="flat-col-xs-6"> <span class=""> Ajouter à la liste de souhait</span> </section>
+                                                        <section class="flat-col-xs-6"> <span id="" class="flat-cart-add-to-wishlist" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}"> Ajouter à la liste de souhait</span> </section>
                                                         <section class="flat-col-xs-1"><span> | </span> </section>
                                                         <section class="flat-col-xs-5"> <span class=""> Supprimer </span></section>
                                                 </div>
@@ -86,30 +86,6 @@
 
             {% endfor %}
             <div class="flat-footer flat-right bg-frenchgrey">
-                        {% comment "" %}
-                <div class="flat-row remove-wrap">
-                        <span class="flat-col-pull-xs-8"></span>
-                        <span class="flat-col-xs-4">Montant Total :
-                                <strong>
-                                        <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA 
-                                </strong>
-                        </span>
-                </div>
-                <div class="flat-row remove-wrap">
-                        <span class="flat-col-pull-xs-8"></span>
-                        <span class="flat-col-xs-4">Frais d'envoie :   <strong> 0.00 FCFA </strong></span>
-                </div>
-                <div class="flat-row remove-wrap">
-                        <span class="flat-col-pull-xs-8"></span>
-                        <span class="flat-col-xs-4">Reduction :   <strong> 0.00 FCFA</strong></span>
-                </div>
-                <div class="flat-row remove-wrap">
-                        <span class="flat-col-pull-xs-8"></span>
-                        <span class="flat-col-xs-4"><strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></span>
-                </div>
-                {% endcomment %}       
-                        
-                        
                     <div class="mat-entry"><span class="pull-right">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong> </span></div>
                     <div class="mat-entry"><span class="pull-right"> Frais d'envoie :    <strong> 0.00 FCFA </strong></span></div>
                     <div class="mat-entry"><span class="pull-right"> Reduction :   <strong> 0.00 FCFA</strong></span></div>

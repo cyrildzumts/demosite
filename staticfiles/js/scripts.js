@@ -69,6 +69,8 @@ var Cart = (function(){
         this.$add_to_cart_btn           = {};
         this.$cart_add_error            = {};
         this.$error_msg                 = {};
+        this.catalog                    = {};
+        this.$add_to_wishlist_btn       = {};
     }
     Cart.prototype.initDefault = function(){
         this.$counter = $(".cart-counter");
@@ -93,7 +95,13 @@ var Cart = (function(){
     };
     Cart.prototype.init = function(listener){
         this.addEventListener(listener);
+        this.$add_to_wishlist_btn = $(".flat-cart-add-to-wishlist");
+        this.$add_to_wishlist_btn.click(this.onAddToWishlistClicked.bind(this));
     };
+    Cart.prototype.addCatalog = function(catalog){
+        this.catalog = catalog;
+        this.catalog.setCart(this);
+    }
     Cart.prototype.onCloseBtnClicked = function(even){
         console.log("Close Menu btn clicked ...");
         $(".cart-dropdown").toggle();
@@ -109,6 +117,14 @@ var Cart = (function(){
         console.log("Cart contains " + this.count + " article(s)");
         //$(".cart-button").dropdown();
     };
+    Cart.prototype.onAddToWishlistClicked = function(event){
+        event.stopPropagation();
+        console.log("Cart : moving item to Wishlist");
+        var item = {};
+        item.id = $(event.target).data('itemid');
+        item.quantity = $(event.target).data('quantity');
+        this.catalog.addToWishlist(item);
+    }
     Cart.prototype.onAddButtonClicked = function(event){
         var item = {};
         item.id = parseInt(this.$add_to_cart_btn.data("itemid"));
@@ -362,6 +378,8 @@ var Catalog = (function(){
         this.$brand_list        = {};
         this.$add_to_cart_btn   = {};
         this.$add_to_wishlist_btn = {};
+        this.cart               = {};
+        this.wishlist           = {};
     }
     Catalog.prototype.init = function(sorting){
         this.ordering[0]                         = "NO ACTIV SORTING ";
@@ -461,6 +479,24 @@ var Catalog = (function(){
             this.$select_brands.append(`<input  type="checkbox" value=${i}> <span class="brand-entry"> ${this.brands[i]} </span>`); 
         }
     };
+
+    Catalog.prototype.setCart = function(cart){
+        console.log("Catalog adding Cart instance ");
+        this.cart = cart;
+    };
+    Catalog.prototype.setWishlist = function(wishlist){
+        console.log("Catalog adding Wishlist instance ");
+        this.wishlist = wishlist;
+    };
+
+
+    Catalog.prototype.addToCart = function(item){
+        this.cart.addItem(item);
+    };
+    Catalog.prototype.addToWishlist = function(item){
+        this.wishlist.addItem(item);
+    }
+
     Catalog.prototype.onBrandInputChanged = function(event){
         var val = this.$brand_input.val().toLowerCase();
         this.brands.filter(function(i, e){
@@ -625,16 +661,33 @@ var Wishlist = (function(){
         this.$bagde = {};
         this.$counter = {};
         this.$error_msg = {};
+        this.catalog = {};
+        this.$add_to_cart_btn = {};
 
     }
     Wishlist.prototype.init = function(){
         this.$error_msg = $(".flat-error-msg");
         this.$bagde = $(".wishlist-badge");
         this.$counter = $(".wishlist-counter");
+        this.$add_to_cart_btn = $(".flat-wishlist-add-to-cart-btn");
+        this.$add_to_cart_btn.click(this.onAddToCartClicked.bind(this));
         $(".add-to-wishlist").click(this.onAddButtonClicked.bind(this));
         $("#flat-add-to-wishlist-btn").click(this.onAddButtonClicked.bind(this));
         $(".wishlist-remove").click(this.onRemoveButtonClicked.bind(this));
         $(".wishlist-clear").click(this.onClearButtonClicked.bind(this));
+    }
+    Wishlist.prototype.addCatalog = function(catalog){
+        this.catalog = catalog;
+        this.catalog.setWishlist(this);
+    }
+
+    Wishlist.prototype.onAddToCartClicked = function(event){
+        event.stopPropagation();
+        console.log("Wishlist : moving item to Cart");
+        var item = {};
+        item.id = $(event.target).data('itemid');
+        item.quantity = 1;
+        this.catalog.addToCart(item);
     }
     Wishlist.prototype.onAddButtonClicked = function(event){
         var item = {};
@@ -909,16 +962,18 @@ if(typeof (Storage)!== "undefined"){
 else{
     console.log("This Browser doesn't support webstorage");
 }
-Shopping.myCart  = new Shopping.Cart();
+Shopping.cart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
 Shopping.checkout = new Checkout();
 Shopping.catalog.init(0);
 Shopping.account.init();
-Shopping.myCart.initDefault();
-Shopping.myCart.init($(".cart-badge"));
+Shopping.cart.initDefault();
+Shopping.cart.init($(".cart-badge"));
 Shopping.wishlist.init();
 Shopping.checkout.init();
+Shopping.wishlist.addCatalog(Shopping.catalog);
+Shopping.cart.addCatalog(Shopping.catalog);
 Shopping.collapsible = new Collapsible();
 Shopping.collapsible.init();
