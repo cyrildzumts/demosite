@@ -54,10 +54,12 @@ class CategoryView(ListView):
         brands = set()
         products = self.category.get_products()
         parent_cats = self.category.categories
+        root_cats = Category.objects.filter(parent=None)
         for p in products:
             brands.add(p.brand)
         
         context = {
+            'root_cats'         : root_cats,
             'current_category'  : self.category,
             'parent_cats'       : parent_cats,
             'page_title'        : self.category.name + ' | ' + settings.SITE_NAME,

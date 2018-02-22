@@ -2,18 +2,20 @@
     
     {% block MAINCONTENT %}
 
-            <div class="container-fluid">
-                <div class="row centered">
-                    <p> Resultat de la recherche : </p>
+            <div class="flat-search-result">
+                <p> Resultat de la recherche : </p>
+                <div class="flat-row flex-center">
+                    
                         {%if results%}
                             {% for p  in results %}
-                            {% include "tags/product_box_flat.html" %}
+                                {% include "tags/product_box_flat.html" %}
+                            
                             {% endfor %}
                         {%else%}
                             <p class="no-result"> Aucun article trouvé. </p>
 
                         {%endif%}
                 </div>
-            </div><br>
+            </div>
 
     {% endblock MAINCONTENT %}

@@ -1,9 +1,9 @@
 {% load catalog_tags %}
-<div class="flat-navbar">
+<div class="flat-navbar bordered">
     <section class="nav-left">
-            <a href="{% url 'catalog:index' %}">LYSHOP</a>
-            <div class="flat-dropdown">
-                <button class="dropbtn">CATALOGUE
+            <a class="bg-dominant-brand flat-hidden" href="{% url 'catalog:index' %}"><span class="normal-text">LYSHOP</span></a>
+            <div class="flat-dropdown flat-visible-xs">
+                <button class="dropbtn"> <span class="normal-text">CATALOGUE</span>
                     <i class="glyphicon glyphicon-chevron-down"></i>
                 </button>
                 <div class="flat-dropdown-content">
@@ -40,26 +40,41 @@
     </section>
     
     <section class="nav-center">
-
+            
+        <a class="logo" href="{% url 'catalog:index'%}"></a>
     </section>
     <section class="nav-right">
         <a href="{% url 'wishlist:show_wishlist' %}">
-            <span class="glyphicon glyphicon-heart"></span>
+            <div class="flat-column flex-center">
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <span class="small">Favoris</span>
+            </div>
+            
         </a>
         <a href="{% url 'cart:show_cart' %}">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <div class="flat-column flex-center">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <span class="small">Panier</span>
+            </div>
         </a>
         
         <div class="flat-dropdown">
 
                 <button class="dropbtn">
-                    <span class="glyphicon glyphicon-user"></span>
+                    <div class="flat-column flex-center">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="small">Mon Compte</span>
+                    </div>
+                    
                 </button>
-                {% if user.is_authenticated %}
-                {% include "tags/account_menu.html" %}
-                {% else %}
-                {% include "tags/account_login_dialog.html" %}
-                {% endif %}
+                <div class="flat-dropdown-content">
+                        {% if user.is_authenticated %}
+                        {% include "tags/account_menu.html" %}
+                        {% else %}
+                        {% include "tags/account_login_dialog.html" %}
+                        {% endif %}
+                </div>
+                
         </div>
             
        

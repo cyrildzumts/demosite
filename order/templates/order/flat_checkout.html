@@ -2,6 +2,16 @@
 {% block content_header %}
     <h1>Checkout</h1>
 {% endblock content_header %} 
+{% block BANNER %}
+
+{% endblock BANNER %}
+{% block CURRENT_CATEGORY_PATH %}
+
+{% endblock CURRENT_CATEGORY_PATH %}
+
+{% block ASIDE %}
+{% endblock ASIDE %}
+
 {% block MAINCONTENT %} 
 {% if error_message %}
     <div class="errorlist">
@@ -115,38 +125,30 @@
                     </section>
                     <section id="cartcontent" class="flat-tabcontent">
                         <div class="flat-row">
-                            <h4 class="info-text">Contenu de votre Commande</h4>
-                            <div class="flat-col-sm-12 flat-col-md-6">
-                                <div class="flat-column">
-                                    {% for item in cartitems %} {% include "tags/cartitem_entry.html" %} {% endfor %}
+                            <span class="flat-col-xs-12"><h4 class="info-text">Contenu de votre Commande</h4></span>
+                            <div class="flat-col-sm-12">
+                                <div class="flat-row cart-item-list">
+                                    {% for item in cartitems %}
+                                        {% include "tags/cartitem_entry.html" %}
+                                    {% endfor %}
                                 </div>
                             </div>
-                            <div class="flat-col-sm-12 flat-col-md-6">
-                                <div class="flat-column">
-                                    <span>Montant Total :
-                                        <strong> {{user_cart.subtotal}} FCFA </strong>
-                                    </span>
-                                    <span>Frais d'envoie :
-                                        <strong> 0.00 FCFA </strong>
-                                    </span>
-                                    <span>Reduction :
-                                        <strong> 0.00 FCFA</strong>
-                                    </span>
-                                    <span>
-                                        <strong> Somme Total : {{user_cart.subtotal}} FCFA </strong>
-                                    </span>
-                    
-                                </div>
+                            <div class="cart-footer bg-newspaper">
+                                    <div class="cart-footer-entry">Montant Total : <strong> <span class="cart-subtotal">{{user_cart.subtotal}}</span> FCFA </strong></div>
+                                    <div class="cart-footer-entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
+                                    <div class="cart-footer-entry">Reduction :   <strong> 0.00 FCFA</strong></div>
+                                    <div class="cart-footer-entry"><strong> Somme Total : <span class="cart-subtotal"> {{user_cart.subtotal}}</span> FCFA </strong></div>
+                                    
                             </div>
                         </div>
                     </section>
                 </div>
                 
                 <section class="flat-tabs-footer bordered">
-                    <span id="flat-tabs-prev" class="flat-btn bordered">Précédent</span>
+                    <span id="flat-tabs-prev" class="bordered">Précédent</span>
                     <div class="flat-flex flex-row bordered">
-                        <span id="flat-checkout-submit" class="flat-btn"> <label ><input type="submit"> Envoyer </label></span>
-                        <span id="flat-tabs-next" class="flat-btn">Suivant</span>
+                        <button id="flat-checkout-submit" class="" type="submit">Envoyer</button>
+                        <span id="flat-tabs-next" class="">Suivant</span>
                     </div>
                 </section>
             </div>

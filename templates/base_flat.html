@@ -21,158 +21,89 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
         
         <link rel="stylesheet" type="text/css" href="{% static 'css/csscolor.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}" media="all" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/flatgrid.css' %}" />
         
         {% block external %} {% endblock external %}
 </head>
 
-<body class="bg-main-light">
-        <header class="flat-header bg-main-light">
-
-                {% comment "nav" %} This nav element is the same accross the whole site. For this container to work without issue, every
-                page needs to provide the category list, cart counter, wishlist counter, {% endcomment %}
-                <nav class="flat-row remove-wrap hidden">
-                        <div class="flat-col-xs-4 bordered">
-                                <span class="flat-nav-entry flat-menu-btn glyphicon glyphicon-menu-hamburger flat-icon-big">
-
-                                </span>
-                        </div>
-                        <div class="flat-col-xs-4">
-                                <div id="flat-site-logo" class="flat-flex bordered">
-                                        <a  href="{% url 'catalog:index' %}">
-                                                
-                                        </a>
-                                        <img class="img-responsive" src="{% static 'images/logo.png' %}" alt="LYSHOP">
-                                </div>
-                        </div>
-                        <div class="flat-col-xs-4">
-                                <div class="flat-row remove-wrap bordered">
-                                        <span class="flat-col-pull-xs-3 flat-col-pull-md-9"></span>
-                                        <a class="flat-col-xs-3 flat-col-md-1" href="{% url 'wishlist:show_wishlist' %}">
-                                                <span class="glyphicon glyphicon-heart flat-icon-big"></span>
-                                        </a>
-                                        <a class="flat-col-xs-3 flat-col-md-1" href="{% url 'cart:show_cart' %}">
-                                                <span class="cart-button glyphicon glyphicon-shopping-cart flat-icon-big">
-                                                </span>
-                                                {% if cart_count.count > 0 %}
-                                                <span class="cart-badge">
-                                                        ({{ cart_count.count }})
-                                                </span>
-                                                {%endif%}
-                                        </a>
-                                        <div class="flat-col-xs-3 flat-col-md-1">
-                                                <div class="flat-fuild flat-clickable">
-                                                        <span class="glyphicon glyphicon-user flat-icon-big"></span>
-                                                </div>
-                                        
-                                                <div class="flat-account-drop-wrapper flat-main-content">
-                                                        <div class="flat-account-menu flat-dropdown-content dropdown-content0 bg-whiteblack">
-                                                                {% if user.is_authenticated %}
-                                                                <div class="flat-card flex-column">
-                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:user_account'%}">Appercu</a>
-                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:orders' %}">Mes Commandes</a>
-                                                                        <a class="flat-link-entry flat-btn" href="{% url 'wishlist:show_wishlist' %}">Wishlist</a>
-                                                                        <a class="flat-link-entry flat-btn" href="{% url 'contact:index'%}">Contact</a>
-                                                                        <div class="divider">
-                                        
-                                                                        </div>
-                                                                        <a class="flat-link-entry flat-btn" href="{% url 'accounts:logout' %}">Se déconnecter</a>
-                                                                        <div class="flat-link-entry flat-btn flat-cancel-btn bordered">
-                                                                                <span>Fermer</span>
-                                                                        </div>
-                                                                </div>
-                                        
-                                                                {% else %}
-                                                                <div class="list-flex flex-column flat-login-view">
-                                                                        
-                                                                        
-                                                                        <div class="flat-btn flat-close-main bordered">
-                                                                                <span class="header">Fermer</span>
-                                                                        </div>
-                                        
-                                                                </div>
-                                        
-                                                                {% endif %}
-                                        
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                        
-                                
-                        </div>
-                </nav>
-        </header>
-        {% include "tags/big_flat_navbar.html" %}
-        {% load catalog_tags %}
-        <div id="flat-site-menu" class="flat-dropdown-wrapper bg-dark">
-                <div class="flat-site-menu flat-btn-group flex-column">
-                        {% root_categorie as root_cats%} 
-                        {% for cat in root_cats.root_cats %}
-                                <a class="flat-btn" href="{{cat.get_absolute_url}}"> {{cat.name}} </a>
-                        {% endfor %}
-
-                        <a class="flat-btn" href="">Aide</a>
-                        <a class="flat-btn" href="{% url 'contact:index'%}">Nous contacter</a>
-                        <div class="divider">
-                                
-                        </div>
-                        <span class="flat-btn-menu-close flat-btn">Fermer</span>
-
-                </div>
-        </div>
-        <main class="flat-main bordered">
-                {% block BANNER %}
-                
-                {% endblock BANNER %}
-                {% block SEARCHBAR %}
-                        <div class="flat-search-bar bg-dark collapsible">
-                                <span class="open" data-target="#search-form">Rechercher un produit </span>
-                                <div id="search-form">
-                                        <form class="flat-form" action="{% url 'catalog:search' %}">
-                                                <div class="form-group">
-                                                       <input type="search" name="search" id="" placeholder="Saisissez votre recherche ...">
-                                                       <button type="submit"><span class="icon"><i class="fa fa-search"></i></span></button>
-                                                </div>
-
-                                        </form>
-                                </div>
-                        </div>
-                {% endblock SEARCHBAR %}
-                {% block ASIDE %}
-                        <aside class="flat-nav-menu bg-venus bordered">
-                                <h5>Side bar</h5>
-                                <div class="fluid-container bordered">
-                                        <h6>Mon Compte</h6>
-                                </div>
-                                <div class="fluid-container bordered">
-                                        <h6>Categories</h6>
-                                </div>
-                                <div class="fluid-container bordered">
-                                        <h6>Aide</h6>
-                                </div>
-                                <div class="fluid-container bordered">
-                                        <h6>Déconnexion</h6>
-                                </div>
+<body class="">
         
-                        </aside>
-                {% endblock ASIDE %}
-                {% block MAINCONTENT %}
-                        <h4>Main content</h4>
-                {% endblock MAINCONTENT %}
-                
-                
-                
-        </main>
 
+        {% block HEADER %}
+                <header class="flat-row">
+                        {% include "tags/big_flat_navbar.html" %}
+                </header>
+                
+        {% endblock HEADER %}
+        {% block CATEGORY_NAV %}
+                <div class="flat-row flat-visible-md">
+                        <div class="flat-cat-nav bordered"> 
+                                {% block CAT_NAV_CONTENT %}
+                                
+                                {% endblock CAT_NAV_CONTENT %}
+                        </div>
+                </div>
+        {% endblock CATEGORY_NAV %}
+        {% block SEARCHBAR %}
+                <div class="flat-search-bar flat-row">
+                        <div id="search-form" class="search-container">
+                                <form class="flat-form flat-fluid" action="{% url 'catalog:search' %}">
+                                        <div class="form-group ">
+                                                <input type="search" name="search" placeholder="Recherche ...">
+                                                <button type="submit">
+                                                        <i class="fa fa-search"></i>
+                                                </button>
+                                        </div>
+                
+                                </form>
+                        </div>
+                </div>
+        {% endblock SEARCHBAR %}
+        {% block BANNER %}
+                 <div class="flat-row bordered">
+                         {% include "tags/banner.html" %}
+                 </div>
+        {% endblock BANNER %}
+
+        {% block CURRENT_CATEGORY_PATH %}
+                 <div class="flat-row">
+                        {% block CATEGORY_PATH %}
+                                <div class="flat-cat-path">
+                                        CAT PATH
+                                </div>
+                        {% endblock CATEGORY_PATH %}
+                 </div>
+        {% endblock CURRENT_CATEGORY_PATH %}
+        {% load catalog_tags %}
+
+        <main class="flat-row">
+
+                <div class="flat-main-page-content bordered">
+                        
+                                {% block ASIDE %}
+                                        <aside class="flat-visible-md flat-col-md-2 bordered">
+                                                {% block ASIDE_CONTENT %}
+                                                
+                                                {% endblock ASIDE_CONTENT %}
+                                        </aside> 
+                                {% endblock ASIDE %}
+                                {% block MAINCONTENT %}
+                                        <div class="flat-col-xs-12 flat-col-md-10 bordered">
+                                                
+                                                <h4>Main content</h4>
+                                                
+                                        </div>
+                                {% endblock MAINCONTENT %}  
+                </div>      
+        </main>
         {% block FOOTER %}
         
         
-        <footer class="flat-footer flat-column bg-main-light">
+        <footer class="flat-footer flat-column bg-dark">
                 <section class="flat-row">
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="flat-newsletter flat-card flex-column bordered">
+                                <section class="flat-newsletter flat-card flex-column">
                                         <div class="section-entry header">
                                                 <h4>Abonnement à notre newsletter</h4>
                                                 <span class="glyphicon glyphicon-envelope"></span>
@@ -196,7 +127,7 @@
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="flat-footer-help flat-card flex-column  collapsible bordered">
+                                <section class="flat-footer-help flat-card flex-column  collapsible">
                                         <div class="header open" data-target="#faq-link">
                                                 <span> Service client </span>
                                                 <span class="glyphicon glyphicon-plus"></span>
@@ -215,7 +146,7 @@
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="flat-payment-options flat-card flex-column  bordered">
+                                <section class="flat-payment-options flat-card flex-column">
                                         <div class="section-entry header">
                                                 <span> Méthodes de Paiement
                                                         <span class="fa fa-credit-card flat-icon-big"></span>
@@ -227,7 +158,7 @@
         
                                         </div>
                                 </section>
-                                <section class="flat-card bordered">
+                                <section class="flat-card">
                                         <div class="flat-column">
                                                 <a class="flat-link" href="{% url 'about' %}"> À propos de nous</a>
                                                 <a class="flat-link" href="{% url 'livraison' %}">Livraison</a>
@@ -235,7 +166,7 @@
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="flat-social-links flat-card flex-column bordered">
+                                <section class="flat-social-links flat-card flex-column">
                                         <div class="header">
                                                 <h4>Suivez nous sur Facebook</h4>
                                         </div>

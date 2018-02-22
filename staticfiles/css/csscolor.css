@@ -228,17 +228,10 @@
     background-color: #EEEEEE;
     color: #1A1A1A;
 }
-
-.bg-main-light .flat-btn{
-    background-color: #1A1A1A;
-    color: #EEEEEE;
+.bg-dominant-brand{
+    background-color: #ff8080ff;
+    color: #2C2C2C;
 }
-
-.bg-main-light .flat-btn:hover{
-    background-color: #EEEEEE;
-    color: #1A1A1A;
-}
-
 .bg-main-light .flat-divider{
     border-color: #846D74;
 }

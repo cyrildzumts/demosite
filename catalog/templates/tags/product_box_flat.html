@@ -1,4 +1,4 @@
-<div class="flat-product flex-column bordered" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
+<div class="flat-product flex-column" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
         <div class="flat-product-wrapper">
                 <a class="flat-product-link" href="{{p.get_absolute_url}}">
                 </a>
@@ -12,10 +12,10 @@
                 </div>
         </div>
         
-        <div class="flat-product-footer  flex-column">
+        <div class="flat-product-footer  flex-column flex-center">
                 <span class="flat-entry">{{p.name}}</span>
                 <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                <span class="flat-entry"> <span class="order-ref"> {{p.price}} FCFA  </span></span>
+                <span class="flat-entry"> <span class="order-ref"> <strong>{{p.price}} FCFA</strong> </span></span>
         </div>
         <div class="flat-product-options flat-flex flex-row">
                 <span class="glyphicon glyphicon-heart"></span>

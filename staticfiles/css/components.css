@@ -88,8 +88,25 @@
     margin: 5px;
 }
 */
-.order-list{
+.order-list, .cart-item-list{
     width: 100%;
+    max-height: 650px;
+    overflow: auto;
+}
+
+.flat-order-entry{
+    width: 100%;
+    padding: 5px;
+    margin: 2px;
+}
+/*
+.cart-item{
+    height: 180px;
+}
+*/
+
+.cart-item-price{
+    font-weight: bold;
 }
 .order-list a:link, .order-list a:hover, .order-list a{
     width: 100%;
@@ -558,7 +575,7 @@ tr a:link, tr a:visited, .orders-link a:link, .orders-link a:visited{
     }
 
 #banner{
-    width: 100%;
+    
     height: 300px;
     padding: 2px;
     margin: 5px;
@@ -1518,6 +1535,15 @@ headers and footers.
     
  }
 
+#flat-checkout-submit{
+    background-color: #ff8080ff;
+    color: #3C3B3F;
+}
+
+#flat-checkout-submit:hover{
+    background-color: #ff8080;
+    color: #3C3B3F;
+}
 
  .flat-main{
     display: flex;
@@ -1528,19 +1554,28 @@ headers and footers.
     align-items: center; 
     padding: 1px;  
  }
- .flat-search-bar{
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 1px;
-    margin:2px 0px 2px 0px;
- }
+
  .flat-main .flat-nav-menu{
      display: none;
      position: absolute;
      top: 0;
      z-index: 100;
      width: 50%;
+ }
+
+ .cart-footer, .order-footer{
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: baseline;
+    padding: 20px;
+    margin: 2px;
+ }
+
+ .cart-footer-entry, .order-footer-entry{
+     text-align: right;
+     padding: 5px;
+    margin: 2px;
  }
  .flat-footer{
     display: flex;
@@ -1549,7 +1584,7 @@ headers and footers.
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     padding: 1px;
     margin: 1px;
  }
@@ -1560,7 +1595,7 @@ headers and footers.
     /*flex-wrap: wrap;*/
     text-align: center;
     justify-content: center;
-    align-items: initial;
+    align-items: baseline;
     
     padding: 1px;
     margin:1px;
@@ -1585,6 +1620,8 @@ headers and footers.
      box-sizing: border-box;
 
  }
+
+
  .flat-nav-right,  .flat-nav-left,  .flat-nav-center{
      display: flex;
      flex-direction: row;
@@ -1592,6 +1629,10 @@ headers and footers.
      align-items: center;
      height: auto;
      /*padding: 2px;*/
+ }
+
+ .normal-text{
+     font-size: 14px;
  }
  .flat-nav-entry{
      display: flex;
@@ -1604,7 +1645,7 @@ headers and footers.
      margin: 1px;
  }
  .flat-nav-entry:hover{
-     background-color: #FF3951;
+     background-color: #ff8080ff;
      color: #DADFE1;
  }
 .space {
@@ -1627,7 +1668,33 @@ headers and footers.
     padding: 10px;
     margin: 0px;
 }
+.flat-search-bar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow: hidden;
+}
 
+.flat-search-bar input[type=search]{
+    width: 100%;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.flat-search-bar button{
+    float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
 .flat-row{
     display: flex;
     width: 100%;
@@ -1776,7 +1843,7 @@ headers and footers.
 
  }
 
- .flat-card .flat-dropdown-content, .flat-dropdown-content{
+ .flat-card .flat-dropdown-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1801,25 +1868,23 @@ headers and footers.
 
  }
  .flat-add-btn{
-    border-radius: 10px;
-    background-color: #3C3B3F;
-    color: #F3F3F3;
+    /*border-radius: 10px;*/
+    background-color:#FEFEFE;
+    color: #3C3B3F;
     text-align: center;
     padding: 10px;
     margin: 2px;
  }
  .flat-btn{
-     background-color: #16A085;
      border: none;
-     color: #F2F1FE;
-     padding: 15px 32px;
-     margin: 4px 2px;
      text-decoration: none;
      display: flex;
      justify-content: center;
      align-items: center;
      font-size: 16px;
      cursor: pointer;
+     background-color: #2F2D2C;
+     color: #F9F8F4;
  }
  
  .flat-btn a{
@@ -1827,6 +1892,7 @@ headers and footers.
      height: 100%;
      z-index: 2;
      text-decoration: none;
+
  }
  .flat-btn a:hover, .flat-btn a:link{
      text-decoration: none;
@@ -1860,6 +1926,11 @@ headers and footers.
  .flat-card{
      font-size: 1.1em;
  }
+
+ .flat-link{
+     cursor: pointer;
+ }
+
  .flat-link-entry{
      width: 100%;
      height: 32px;
@@ -1891,7 +1962,13 @@ headers and footers.
  /************************************
   * FLAT PRODUCT CONTAINER
   ***********************************/
-
+.flat-page-main, .filter{
+    padding: 10px;
+    margin: 10px;
+}
+.add-margin{
+    margin: 2px;
+}
   #flat-product-list{
       display: flex;
       width: 100%;
@@ -1964,7 +2041,6 @@ headers and footers.
   }
   .flat-product-footer .flat-entry{
       width: 100%;
-      text-align: left;
       font-size: 1.3rem;
       padding: 1px;
       margin: 1px;
@@ -2052,13 +2128,14 @@ headers and footers.
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     padding: 1px;
     margin: 1px;
 }
 .remove-wrap{
     flex-wrap: nowrap;
 }
+
 
 #flat-site-logo{
     width: 80px;
@@ -2093,9 +2170,9 @@ headers and footers.
     
     width: 100%;
 }
-.small{
-    font-size: 10px;
-}
+
+
+
 
 
 .flat-navbar{
@@ -2104,7 +2181,9 @@ headers and footers.
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
-    background-color: #BFBFBF;
+    z-index: 1000;
+    /*background-color: #BFBFBF;*/
+    color: #2F2D2C;
 
 }
 
@@ -2118,9 +2197,9 @@ headers and footers.
 
 .flat-navbar a{
     font-size: 16px;
-    color: #F3F3F3;
+    color: #2F2D2C;
     text-align: center;
-    padding: 14px 16px;
+    padding: 6px;
     text-decoration: none;
 }
 .flat-site-options{
@@ -2137,21 +2216,18 @@ headers and footers.
     font-size: 16px;
     border: none;
     outline: none;
-    color: whitesmoke;
-    padding: 14px 16px;
+    padding: 6px;
     font: inherit;
     background-color: inherit;
     margin: 0;
 }
 .flat-navbar a:hover, .flat-dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: #F2F1FE;
   }
   .flat-dropdown-content{
     display: none;
     position: absolute;
-    background-color: #F9F9F9;
-    width: 100%;
-    left: 0;
+    background-color: #FFFFFF;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1000;
 }
@@ -2223,13 +2299,13 @@ headers and footers.
 }
 .flat-col{
     /*height: 300px;*/
-    background-color: #F2F1FE;
+    background-color: #FFFFFF;
     padding: 10px;
     border-bottom: 1px solid #888888;
 }
 
 .flat-col a:hover{
-    background-color: #ddd;
+    background-color: #ff8080ff;
 }
 
 .flat-col a{
@@ -2268,7 +2344,7 @@ headers and footers.
     margin: 2px;
 }
 .flat-navbar ul li:hover{
-    background-color: #16A085;
+    background-color: #ff8080ff;
 }
 .flat-navbar ul a{
     font-size: 1.5em;
@@ -2286,10 +2362,7 @@ headers and footers.
     justify-content: flex-start;
     align-items: center;
 }
-.form-group input, .form-group button, input, button{
-    width: 100%;
-    border-radius: 10px;
-}
+
 /** CHECKOUT */
 
 .flat-checkout-wizard{
@@ -2366,7 +2439,7 @@ headers and footers.
     line-height: 111px;
   }
   .flat-checkout-wizard .choice:hover .icon, .flat-checkout-wizard .choice.active .icon {
-    border-color: #2ca8ff;
+    border-color: #ff8080ff;
   }
   .flat-checkout-wizard .choice input[type="radio"],
   .flat-checkout-wizard .choice input[type="checkbox"] {
@@ -2443,10 +2516,10 @@ headers and footers.
     transition: 0.3s;
   }
   .flat-tabBar .flat-tab:hover{
-    background-color: #BFBFBF;
+    background-color: #ff8080ff;
   }
   .flat-tabBar .flat-tab.active{
-    background-color: #00bcd4;
+    background-color: #ff8080ff;
   }
   .flat-tabs .flat-tabcontent{
     display: flex;
@@ -2477,11 +2550,12 @@ headers and footers.
 }
   #flat-tabs-prev, #flat-checkout-submit,
   #flat-tabs-next{
-      background-color: #3C3B3F;
+      background-color: #ff8080ff;
+      color: #3C3B3F;
   }
 
   input[type=button], input[type=submit], input[type=reset] {
-    background-color: #4CAF50;
+    background-color: #ff8080ff;
     border: none;
     color: white;
     padding: 16px 32px;
@@ -2489,14 +2563,110 @@ headers and footers.
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.cat-entry{
+    width: 20%;
+    text-align: center;
+    height: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+.cat-entry a{
+    text-decoration: none;
+    color: #2F2D2C;
+}
+
+.cat-entry:hover{
+    background-color: #888888A1;
+}
+
+.cat-entry-content{
+    position: relative;
+    display: flex;
+    width: 250px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+}
+.flat-site-wrapper{
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+}
+.flat-cat-path{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flat-main-page-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    padding: 5px;
+    margin: 5px;
+}
+
+.flat-account-dialog{
+    position: fixed;
+    overflow: hidden;
+    background-color: #FEFEFE;
+    color: #2F2D2C;
+    z-index: 1000;
+}
+
+.flat-account-dialog a, .flat-account-dialog .flat-btn,
+ .flat-account-dialog .flat-link-entry{
+    color: #2F2D2C;
+    background-color: #FEFEFE;
+}
 @media (min-width: 768px){
+
+    .flat-account-dialog{
+        width: 15%;
+    }
+
+    .flat-navbar,#banner, .flat-cat-nav, .search-container,
+    .flat-cat-path, .flat-main-page-content{
+        width: 75%;
+    }
+    .flat-site-wrapper{
+        width: 80%;
+    }
     .flat-cart-card{
         width: 50%;
     }
+    .logo{
+        background-image: url("images/logo.png");
+        background-size: 100px 30px;
+        width: 100px;
+        height: 30px;
+   }
 }
   @media (max-width: 767px){
-
-
+    .flat-account-dialog{
+        width: 100%;
+        left: 0;
+    }
+    .flat-navbar, .flat-cat-nav, .search-container, #banner,
+    .flat-cat-path, .flat-main-page-content, .flat-dropdown-content{
+        width: 100%;
+    }
+    .flat-site-wrapper{
+        width: 100%;
+    }
+    .logo{
+        background-image: url("images/logo-mini.png");
+        background-repeat: no-repeat;
+        background-size: 50px 30px;
+        width: 50px;
+        height: 30px;
+   }
     
 
     .flat-account, .flat-wishlist{

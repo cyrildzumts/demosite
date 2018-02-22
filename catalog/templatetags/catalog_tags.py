@@ -62,6 +62,7 @@ def root_categorie():
     """
     This method return the root categories
     """
+    print("roots cats called ")
     root_cats = Category.objects.filter(is_active=True, parent=None)
     return {'root_cats': root_cats}
 

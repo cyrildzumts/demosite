@@ -26,10 +26,6 @@
             </p>
         </section>
         <!-- End Of Main Section -->
-        <section class="card-actions text-center bordered">
-            <h4 class="card-next">Acceuille du site</h4>
-        </section>
-        <!-- End Of Main Section -->
         {% endcomment %}
         
     <!-- End Of Card -->
@@ -61,7 +57,8 @@
                                 </div>
                                 <div class="mat-entry"> <span class="order-ref">Prix : {{item.price}} FCFA  </span></div>
                                 <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
-                                    <span class="small flat-wishlist-add-to-cart-btn" data-itemid="{{item.product.id}}"> Ajouter au Panier </span>|<span class="flat-entry small wishlist-remove"> Supprimer </span>
+                                    <span class="small flat-wishlist-add-to-cart-btn flat-btn" data-itemid="{{item.product.id}}"> Ajouter au Panier </span>
+                                    <span class="flat-link small wishlist-remove"> Supprimer </span>
                                 </div>
                                 
                         </div>

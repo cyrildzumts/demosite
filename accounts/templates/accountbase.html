@@ -1,8 +1,5 @@
-{% extends "base_flat.html"%}
-{%comment "not neaded now" %}
+{% extends "flat_minimal_base.html"%}
 
-
-{%endcomment%}
 {%block content_header%}
 <div class="content-header flex-container">
      <p> Bienvenue {{request.user.first_name}}! </p>  
@@ -10,7 +7,7 @@
 {%endblock content_header%}
 
 {% block MAINCONTENT %}
-<div class="flat-account-container flex-row bordered">
+<div class="flat-account-container flex-row">
     
         {% block account_content %}
     

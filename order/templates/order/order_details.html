@@ -7,7 +7,15 @@
     
 {%endblock content_header%}
 
+{% block BANNER %}
 
+{% endblock BANNER %}
+{% block CURRENT_CATEGORY_PATH %}
+
+{% endblock CURRENT_CATEGORY_PATH %}
+
+{% block ASIDE %}
+{% endblock ASIDE %}
 {% block MAINCONTENT %}
 <div class="flat-col-xs-12 flat-col-md-6">
         <div class="order-list list-flex list-vertical">
@@ -39,29 +47,14 @@
                 </div>
                 <div class="list-divider"></div>
                 {% endfor %}
-                <div class="card-mat vertical bg-newspaper">
-                        <div class="mat-entry">
-                                <span class="pull-right">Montant Total :
-                                        <strong> {{order.total}} FCFA </strong>
-                                </span>
-                        </div>
-                        <div class="mat-entry">
-                                <span class="pull-right"> Frais d'envoie :
-                                        <strong> 0.00 FCFA </strong>
-                                </span>
-                        </div>
-                        <div class="mat-entry">
-                                <span class="pull-right"> Reduction :
-                                        <strong> 0.00 FCFA</strong>
-                                </span>
-                        </div>
-                        <div class="mat-entry">
-                                <span class="pull-right">
-                                        <strong> Somme Total : {{order.total}} FCFA </strong>
-                                </span>
-                        </div>
+
+                <div class="order-footer bg-newspaper">
+                                <div class="order-footer-entry">Montant Total : <strong> <span class="cart-subtotal"> {{order.total}}</span> FCFA </strong></div>
+                                <div class="order-footer-entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
+                                <div class="order-footer-entry">Reduction :   <strong> 0.00 FCFA</strong></div>
+                                <div class="order-footer-entry"><strong> Somme Total : <span class="cart-subtotal"> {{order.total}}</span> FCFA </strong></div>
+                                
                 </div>
-                <div class="list-divider"></div>
         </div>
 </div>
  

@@ -8,12 +8,21 @@
 .flat-hidden{
     display: none;
 }
+.smaller{
+    font-size: 6px;
+}
+
+.small{
+    font-size: 2.3vw;
+}
 
 .flat-col-xs-1{
     width: calc(100% / 12);
+    padding: 5px;
 }
 .flat-col-xs-2{
     width: calc(100% / 12 * 2);
+    padding: 5px;
 }
 .flat-col-xs-3{
     width: calc(100% / 12 * 3);
@@ -45,6 +54,7 @@
 }
 .flat-col-xs-12{
     width: 100%;
+    padding: 5px;
 }
 
 /***** PULL ELEMENT ******
@@ -94,15 +104,23 @@
  .flat-hidden-xs{
     display: none;
 }
-
-
+.flat-visible-xs{
+    display: flex;
+}
+.flat-visible-md{
+    display: none;
+}
  /** Rules for smartphone */
 @media (min-width: 768px) {
+
+    .smaller{
+        font-size: 6px;
+    }
     .flat-hidden-sm{
         display: none;
     }
-    .flat-hidden-xs{
-        display: block;
+    .flat-visible-md{
+        display: none;
     }
     .flat-visible-sm{
         display: block;
@@ -188,57 +206,69 @@
 
 /* Rules for Tablets , Desktop and medium screen */
 @media (min-width: 992px){
+    .smaller{
+        font-size: 10px;
+    }
+    .small{
+        font-size: 0.8vw;
+    }
     .flat-hidden-md{
         display: none;
     }
-    .flat-visible-md{
-        display: block;
-    }
-    .flat-hidden-sm{
-        display: block;
-    }
-    .flat-hidden-xs{
-        display: block;
-    }
-    .flat-visible-sm{
+    .flat-visible-xs{
         display: none;
+    }
+    .flat-visible-md{
+        display: flex;
     }
     .flat-col-md-1{
         width: calc(100% / 12);
+        padding: 10px;
     }
     .flat-col-md-2{
         width: calc(100% / 12 * 2);
+        padding: 10px;
     }
     .flat-col-md-3{
         width: calc(100% / 12 * 3);
+        padding: 10px;
     }
     .flat-col-md-4{
         width: calc(100% / 12 * 4);
+        padding: 10px;
     }
     .flat-col-md-5{
         width: calc(100% / 12 * 5);
+        padding: 10px;
     }
     .flat-col-md-6{
         width: calc(100% / 12 * 6);
+        padding: 10px;
     }
     .flat-col-md-7{
         width: calc(100% / 12 * 7);
+        padding: 10px;
     }
     .flat-col-md-8{
         width: calc(100% / 12 * 8);
+        padding: 10px;
     }
     .flat-col-md-9{
         width: calc(100% / 12 * 9);
+        padding: 10px;
     }
     
     .flat-col-md-10{
         width: calc(100% / 12 * 10);
+        padding: 10px;
     }
     .flat-col-md-11{
         width: calc(100% / 12 * 11);
+        padding: 10px;
     }
     .flat-col-md-12{
         width: 100%;
+        padding: 10px;
     }
 
     .flat-col-pull-md-1{
@@ -283,29 +313,18 @@
 
 /* Rules for Desktop and large screen */
 @media (min-width: 1200px){
+    .smaller{
+        font-size: 12px;
+    }
     .flat-hidden-lg{
         display: none;
     }
     .flat-visible-lg{
         display: block;
     }
-
-    .flat-hidden-md{
-        display: block;
-    }
-    .flat-visible-md{
+    .flat-visible-xs{
         display: none;
     }
-    .flat-hidden-sm{
-        display: block;
-    }
-    .flat-hidden-xs{
-        display: block;
-    }
-    .flat-visible-sm{
-        display: none;
-    }
-
     .flat-col-lg-1{
         width: calc(100% / 12);
     }

@@ -6,7 +6,7 @@
 {% block MAINCONTENT %}
 
 <div class="flat-flex flex-column flat-fluid">
-    <div class="flat-card flex-column bordered">
+    <div class="flat-card flex-column">
         
         <section class="header">
                 <span>Nouveautées</span>
@@ -20,39 +20,50 @@
             </div>
         </section>
     </div>
-    <div class="flat-card flex-column flat-parfums-section bg-parfum-section bordered">
-        <section class="header">
-                <span>Parfumerie</span>
-        </section>
-        <section class="main flat-card">
-                {% get_cat "Parfumerie" as p_cat %}
-                <a href="{{p_cat.get_absolute_url}}">
-                        <img class="section-bg-img" src="{% static 'images/parfum-bg.jpg' %}" alt="">
-                </a>
-        </section>
-    </div>
-    <div class="flat-card flex-column bordered">
-        <section class="header">
-                <span>Mode</span>
-        </section>
-        <section class="main flat-card">
-                {% get_cat "Mode" as m_cat %}
-                <a href="{{m_cat.get_absolute_url}}">
-                        <img class="section-bg-img" src="{% static 'images/mode-bg.jpg' %}" alt="">
-                </a>
-        </section>
-    </div>
-    <div class="flat-card flex-column bordered">
-        <section class="header">
-                <span>Beauté - Cheveux</span>
-        </section>
-        <section class="main flat-card">
-                {% get_cat "Beauty" as b_cat %}
-                <a href="{{b_cat.get_absolute_url}}">
-                        <img class="section-bg-img" src="{% static 'images/beauty-bg.jpg' %}" alt="">
-                </a>
-        </section>
-    </div>
+
+    
+        <div class="flat-row">
+        
+                <div class="flat-col-xs-12 flat-col-md-4">
+                        <div class="flat-card flex-column flat-parfums-section bg-parfum-section">
+                                <section class="header">
+                                        <span>Parfumerie</span>
+                                </section>
+                                <section class="main flat-card">
+                                        {% get_cat "Parfumerie" as p_cat %}
+                                        <a href="{{p_cat.get_absolute_url}}">
+                                                <img class="section-bg-img" src="{% static 'images/parfum-bg.jpg' %}" alt="">
+                                        </a>
+                                </section>
+                        </div>
+                </div>
+                <div class="flat-col-xs-12 flat-col-md-4">
+                        <div class="flat-card flex-column">
+                                <section class="header">
+                                        <span>Mode</span>
+                                </section>
+                                <section class="main flat-card">
+                                        {% get_cat "Mode" as m_cat %}
+                                        <a href="{{m_cat.get_absolute_url}}">
+                                                <img class="section-bg-img" src="{% static 'images/mode-bg.jpg' %}" alt="">
+                                        </a>
+                                </section>
+                        </div>
+                </div>
+                <div class="flat-col-xs-12 flat-col-md-4">
+                        <div class="flat-card flex-column">
+                                <section class="header">
+                                        <span>Beauté - Cheveux</span>
+                                </section>
+                                <section class="main flat-card">
+                                        {% get_cat "Beauty" as b_cat %}
+                                        <a href="{{b_cat.get_absolute_url}}">
+                                                <img class="section-bg-img" src="{% static 'images/beauty-bg.jpg' %}" alt="">
+                                        </a>
+                                </section>
+                        </div>
+                </div>
+        </div>
 
 </div>
 {% endblock MAINCONTENT %}
