@@ -8,10 +8,12 @@ from catalog.models import Product
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 #from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+@login_required
 def show_wishlist(request):
     template_name = "wishlist/wishlist.html"
     user_wishlist = wishlist.get_wishlist(request.user)

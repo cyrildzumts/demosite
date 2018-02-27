@@ -51,6 +51,100 @@ var Collapsible = (function(){
     return Collapsible;
 })();
 
+var Modal = (function(){
+    function Modal(){
+        this.$modal         = {};
+        this.$accountModal  = {};
+        this.$cartModal     = {};
+        this.$wishlistModal = {};
+        this.$editModal     = {};
+        this.$checkoutModal = {};
+        this.$filterModal   = {};
+        this.$sortOrderModal= {};
+        this.$openModal     = {};
+        this.$closeModal    = {};
+
+    };
+
+    Modal.prototype.init = function(){
+        console.log("Modal plugin initialization ...");
+        this.$accountModal  = $("#account-modal");
+        this.$cartModal     = $("#cart-modal");
+        this.$wishlistModal = $("#wishlist-modal");
+        this.$editModal     = $(".edit-modal");
+        this.$checkoutModal = $("#checkout-modal");
+        this.$filterModal   = $("#filter-modal");
+        this.$sortOrderModal= $("#sortOrder-modal");
+        this.$openModal     = $(".flat-open-modal");
+        this.$closeModal    = $(".flat-close-modal");
+        
+        that = this;
+        this.$openModal.click(function(event){
+            event.stopPropagation();
+            that.$modal = $($(this).data('target'));
+            that.$modal.show();
+            
+        });
+        $(window).click(function(event){
+            var $target = $(event.target);
+            console.log("window click event fired ...");
+            console.log("modal : ");
+            console.log(that.$modal);
+            console.log("event target : ");
+            console.log($target);
+            if($target.is(that.$modal)){
+                console.log("modal clicked");
+                that.$modal.hide();
+            }
+            
+        });
+        this.$closeModal.click(function(event){
+            //that.$modal = $($(this).data('target'));
+            that.$modal.toggle();
+        });
+        
+        console.log("Modal plugin installed ...");
+    };
+
+
+    return Modal;
+})();
+
+var Tabs = (function(){
+    function Tabs(){
+        this.currentTab     = 0;
+        this.tabCount       = 0;
+        this.tabs           = {};
+        this.tab            = {};
+        
+    };
+
+    Tabs.prototype.init = function(){
+        this.tabs = $(".flat-tabcontent");
+        this.tab = $(".flat-tab");
+        this.tabCount = this.tab.length;
+        this.tab.click(this.onTabClicked.bind(this));
+        this.tabs.hide();
+        this.update();
+        console.log("Tabs suceesfully initialized :");
+        console.log(" Tabs found " + this.tabCount + " on this page");
+    };
+    Tabs.prototype.onTabClicked = function(event){
+        var tab = parseInt($(event.target).data("index"));
+        if(tab != this.currentTab){
+            this.currentTab = tab;
+                this.update();
+        }
+    };
+    Tabs.prototype.update = function(){
+        this.tab.removeClass("active");
+        $(this.tab[this.currentTab]).addClass("active");
+        var that = this;
+        this.tabs.hide();
+        $(this.tabs[this.currentTab]).show();
+    };
+    return Tabs;
+})();
 
 var Cart = (function(){
     function Cart(){
@@ -926,7 +1020,6 @@ var Checkout = (function(){
         else{
             this.nextBtn.show();
         }
-        var that = this;
         this.tabs.hide();
         $(this.tabs[this.currentTab]).show();
         if(this.currentTab == 2){
@@ -966,14 +1059,18 @@ Shopping.cart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
-Shopping.checkout = new Checkout();
+//Shopping.checkout = new Checkout();
 Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.cart.initDefault();
 Shopping.cart.init($(".cart-badge"));
 Shopping.wishlist.init();
-Shopping.checkout.init();
+//Shopping.checkout.init();
 Shopping.wishlist.addCatalog(Shopping.catalog);
 Shopping.cart.addCatalog(Shopping.catalog);
 Shopping.collapsible = new Collapsible();
 Shopping.collapsible.init();
+Shopping.modal = new Modal();
+Shopping.modal.init();
+Shopping.tabs = new Tabs();
+Shopping.tabs.init();

@@ -44,38 +44,49 @@
         <a class="logo" href="{% url 'catalog:index'%}"></a>
     </section>
     <section class="nav-right">
-        <a href="{% url 'wishlist:show_wishlist' %}">
+        <a href="{% url 'wishlist:show_wishlist' %}" class="">
             <div class="flat-column flex-center">
                     <span class="glyphicon glyphicon-heart"></span>
                     <span class="small">Favoris</span>
             </div>
             
         </a>
-        <a href="{% url 'cart:show_cart' %}">
+        <a href="{% url 'cart:show_cart' %}" class="">
             <div class="flat-column flex-center">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                     <span class="small">Panier</span>
             </div>
         </a>
+        <a href="{% url 'accounts:user_account'%}">
+            <div class="flat-column flex-center">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="small">Mon Compte</span>
+            </div> 
+        </a>
+        {% comment "" %}
         
-        <div class="flat-dropdown">
+        
+        <div class="flat-dropdown flat-hidden">
 
                 <button class="dropbtn">
                     <div class="flat-column flex-center">
                             <span class="glyphicon glyphicon-user"></span>
                             <span class="small">Mon Compte</span>
-                    </div>
-                    
+                    </div> 
                 </button>
-                <div class="flat-dropdown-content">
-                        {% if user.is_authenticated %}
-                        {% include "tags/account_menu.html" %}
-                        {% else %}
-                        {% include "tags/account_login_dialog.html" %}
-                        {% endif %}
+                <div id="header-account" class="flat-dropdown-content bg-dark bordered">
+                    <div class="container-fluid bordered">
+                            {% if user.is_authenticated %}
+                            {% include "tags/account_menu.html" %}
+                            {% else %}
+                            {% include "tags/account_login_dialog.html" %}
+                            {% endif %}
+                    </div>
+                        
                 </div>
                 
         </div>
+        {% endcomment %}
             
        
         

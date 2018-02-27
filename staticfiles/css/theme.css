@@ -1,0 +1,30 @@
+#site-wrapper{
+    background-color: blanchedalmond;
+    color: #2C2C2C;
+}
+#site-header{
+    background-color: #FEFEFE;
+    color: #2c2c2c;
+}
+.site-header--link:hover{
+    text-decoration: none;
+     background-color: grey;
+     color: white;
+ }
+ #site-header--account, #site-account--menu{
+     background-color: aqua;
+     color: #2C2C2C;
+ }
+.item:hover{
+    background-color: white;
+    color: grey;
+}
+
+.item a{
+    text-decoration: none;
+    color: #2C2C2C;
+}
+
+.item a:hover{
+    text-decoration: none;
+}

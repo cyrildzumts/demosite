@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    list-style: none;
+    list-style-type: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+#banner{
+    display: none;
+}
+
+input, button, tr{
+    border: 2px solid grey;
+    background-color: #ddd;
+}
+
+a{
+    text-decoration: none;
+    color: #2C2C2C;
+}
+

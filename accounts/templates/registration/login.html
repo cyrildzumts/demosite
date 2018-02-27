@@ -1,14 +1,8 @@
-{% extends "base_flat.html" %}
-{% block content_header %}
-<div class="flex-container">
-    <h2 class="flex-item">
-        <strong>Page de Connexion</strong>
-    </h2>
-</div>
-{% endblock content_header %}
+{% extends "flat_minimal_base.html" %}
+
 {% block MAINCONTENT %}
-<div class="container">
-    {%include 'tags/login_form.html' %}
+<div class="flat-col-xs-12">
+    {%include 'tags/account_login_dialog.html' %}
 
 </div>
 {% endblock MAINCONTENT %}

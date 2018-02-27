@@ -10,12 +10,14 @@ from cart import cart
 from demosite import settings
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 #from order import checkout
 
 # Create your views here.
 
 
 @csrf_protect
+@login_required
 def show_cart(request):
     template_name = "cart/cart_flat.html"
     user_cart = cart.get_user_cart(request)

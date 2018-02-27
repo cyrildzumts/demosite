@@ -1,0 +1,43 @@
+{% load staticfiles %}
+{% load catalog_tags %}
+<div class="box">
+    <span id="site-mobile-nav" class="site-header--link">
+        <i class="glyphicon glyphicon-menu-hamburger"></i>
+    </span>
+    <a class="site-header--logo bordered"  href="{% url 'catalog:index'%}">
+        <img src="{% static 'images/logo.png' %}" alt="Aller à la page d'acceuille">
+    </a>
+</div>
+
+
+<div class="box">
+    <ul class="site-header--links relative">
+        <li>
+            <a class="site-header--link" href="{% url 'wishlist:show_wishlist' %}">Favoris</a>
+        </li>
+        <li>
+            <a class="site-header--link" href="{% url 'cart:show_cart' %}">Panier</a>
+        </li>
+        <li>
+            <a class="site-header--link" href="{% url 'accounts:user_account'%}">Mon Compte</a>
+            <div id="site-header--account" class="site-header--sublinks">
+                {% if request.user.is_authenticated %}
+                <ul id="site-account--menu">
+                    <li class="item">
+                        <a class="" href="{% url 'accounts:user_account'%}">Appercu</a>
+                    </li>
+                    <li class="item"><a class="" href="{% url 'accounts:orders' %}">Mes Commandes</a></li>
+                    <li class="item"><a class="" href="{% url 'wishlist:show_wishlist' %}"> Mes Favoris</a></li>
+                    <li class="item"><a class="" href="{% url 'contact:index'%}">Contact</a></li>
+                    <li class="item"></li>
+                    <li class="item"><a class="" href="{% url 'accounts:logout' %}">Se déconnecter</a></li>
+                    <li class="item"><span>Fermer</span></li>
+                </ul>
+                {% else %}
+                    {% include "tags/account_login_dialog.html" %}
+                {% endif %}
+            </div>
+            
+        </li>
+    </ul>
+</div>    

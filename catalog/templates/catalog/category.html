@@ -1,24 +1,6 @@
 {% extends "base_flat.html" %}
 {% load category_tags %}
 
-{% block CAT_NAV_CONTENT %}
-        <div class="flat-row">
-            {% load catalog_tags %}
-            {% for cat in root_cats %}
-                <div class="cat-entry flat-dropdown"> 
-                    <span class="dropbtn">{{cat.name}}</span>
-                    <div class="flat-dropdown-content">
-                        <div class="cat-entry-content bordered">
-                                <a href="{{cat.get_absolute_url}}">VOIR TOUT</a>
-                                {% include "tags/menu_list.html" with entry_list=cat.subcategories%}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        
-{% endblock CAT_NAV_CONTENT %}
-
 {% block BANNER %}
                  
 {% endblock BANNER %}

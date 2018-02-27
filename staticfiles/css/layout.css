@@ -1,0 +1,34 @@
+.bordered{
+    border: 1px solid #ccc;
+}
+
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+
+.fixed{
+    position: fixed;
+}
+
+li {
+    display: block;
+    padding: 5px;
+    position: relative;
+}
+
+li ul, li #site-header--account {
+    display: none;
+    position: absolute;
+
+}
+li:hover ul, li:hover #site-header--account{
+    display: block;
+    width: 100%;
+}
+
+#site-header--account ul{
+    width: 100%;
+}

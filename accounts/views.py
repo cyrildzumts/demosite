@@ -28,18 +28,19 @@ def login(request):
     page_title = "Connexion d'utilisateur"
     template_name = 'registration/login.html'
     # template_name = 'tags/login_form.html'
-    print("login ...")
+    next_url = REDIRECT_URL
     if request.method == 'POST':
-        print("We got a post request ...")
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            print("We got a valid form ...")
+            str_url = request.POST['next']
+            if len(str_url) > 0 :
+                next_url = str_url
             user = auth.authenticate(username=request.POST['username'],
                                      password=request.POST['password'])
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
-                    return redirect(REDIRECT_URL)
+                    return redirect(next_url)
     else:
         form = AuthenticationForm()
     return render(request, template_name, locals())
@@ -66,7 +67,6 @@ def register(request):
         if form.is_valid():
             # form.save()
             form.save()
-            print("Register Form is valid...")
             # return redirect(REDIRECT_URL)
             username = request.POST['username']
             password = request.POST['password1']
@@ -75,9 +75,6 @@ def register(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return redirect(REDIRECT_URL)
-
-        else:
-            print("Register Form is invalid...")
 
     else:
         # form = UserCreationForm()
