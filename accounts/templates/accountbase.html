@@ -1,4 +1,4 @@
-{% extends "flat_minimal_base.html"%}
+{% extends "base_flat.html"%}
 
 {%block content_header%}
 <div class="content-header flex-container">
@@ -6,27 +6,25 @@
 </div><!-- End of main-header -->
 {%endblock content_header%}
 
-{% block MAINCONTENT %}
-<div class="flat-account-container flex-row">
+{% block ASIDE %}
+    <aside id="page-side" class="flat-col-xs-12 flat-col-md-2">
+            {% block ASIDE_CONTENT %} 
     
-        {% block account_content %}
-    
-        {% endblock account_content%}
-    {% block account_sidemenu %}
-    <div class="flat-account flat-col-xs-12 flat-col-md-3">
-        <section id="account-menu" class="flat-btn-group flex-column">
-            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Appercu </a>
-            
-            <a class="flat-btn"  href="{% url 'accounts:orders' %}"> Mes Commandes </a>
-           
-            <a class="flat-btn"  href="{% url 'wishlist:show_wishlist' %}" > Mes Favoris </a>
-            <a class="flat-btn"  href="{% url 'contact:index' %}"> Contact </a>
-            <a class="flat-btn"  href="{% url 'accounts:user_account' %}"> Centre d'aide </a>
-            <a class="flat-btn"  href="{% url 'accounts:logout' %}"> Deconnexion </a>
-            {%comment%}<a  href="#">Ma Carte VIP</a>{%endcomment%}
-            </section>
-    </div>
-    {% endblock account_sidemenu %}
-</div>
+            <div class="page-account-menu flat-column">
+                    <a class="flat-link"  href="{% url 'accounts:user_account' %}"> Appercu </a>
+                    
+                    <a class="flat-link"  href="{% url 'accounts:orders' %}"> Mes Commandes </a>
+                   
+                    <a class="flat-link"  href="{% url 'wishlist:show_wishlist' %}" > Mes Favoris </a>
+                    <a class="flat-link"  href="{% url 'contact:index' %}"> Contact </a>
+                    <a class="flat-link"  href="{% url 'faq' %}"> Centre d'aide </a>
+                    <a class="flat-link"  href="{% url 'accounts:logout' %}"> Deconnexion </a>
+                    {%comment%}<a  href="#">Ma Carte VIP</a>{%endcomment%}
+            </div>
+            {% endblock ASIDE_CONTENT %}            
+    </aside>
+{% endblock ASIDE %}
 
+    
+{% block MAINCONTENT %}
 {% endblock MAINCONTENT %}

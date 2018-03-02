@@ -5,12 +5,11 @@
  ****************************************/
  .flat-row{
     display: flex;
-    /*width: 100%;*/
     flex-direction: row;
+    width: 100%;
     flex-wrap: wrap;
+    align-items: baseline;
     justify-content: center;
-    align-items: center;
-
 }
 .flat-left{
     align-items: flex-start;
@@ -21,10 +20,10 @@
 }
 .flat-column{
     display: flex;
-    /*width: 100%;*/
+    width: 100%;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
  .flat-hidden{
@@ -116,12 +115,15 @@
 /****************************
  ** HIDDEN / VISIBLE ********
  ****************************/
- .flat-hidden-xs{
-    display: none;
-}
-.flat-visible-xs{
-    display: flex;
-}
+ @media (max-width: 768px){
+    .flat-hidden-xs{
+        display: none;
+    }
+    .flat-visible-xs{
+        display: flex;
+    }
+ }
+
 .flat-visible-md{
     display: none;
 }

@@ -1,26 +1,29 @@
-{% extends "accountbase.html"%} {%block account_content %}
+{% extends "accountbase.html"%}
+{% block MAINCONTENT %}
 
-<div class="flat-col-xs-12 flat-col-md-6">
-        <div class="order-list list-flex list-vertical">
-                <p> Appercu de mon compte</p>
+
+
+<div class="flat-col-xs-12 flat-col-md-10">
+        <div class="order-list flat-row">
+                <span class="flat-col-xs-12">Appercu de mon compte</span>
                 {% for order in orders %}
                         {% include "tags/order_entry.html" %}
                 {% endfor %} 
 
 
         </div>
-        <div class="flat-user-infos flat-row">
+        <div id="user-infos" class="">
                 <section class="flat-col-xs-12 flat-col-md-6">
-                        <div class="flat-card flex-column bordered">
+                        <div class="card bordered">
                                 <section class="header">
                                         <span>Données d'utilisateur</span>
                                 </section>
-                                <section class="flat-main-content flat-left flat-column">
+                                <section class="content">
                                         <span>{{request.user.username}}</span>
                                         <span>{{request.user.last_name}} {{request.user.first_name}}</span>
                                         <span>{{request.user.email}}</span>
                                 </section>
-                                <section class="flat-row">
+                                <section class="footer">
                                         <span class="flat-col-xs-9"></span>
                                         <span class="flat-col-xs-3">
                                                 <a class="flat-link" href="">Modifier</a>
@@ -29,17 +32,17 @@
                         </div>
                 </section>
                 <section class="flat-col-xs-12 flat-col-md-6">
-                        <div class="flat-card flat-column bordered">
+                        <div class="card bordered">
                                 <section class="header">
                                         <span>Abonnement à la Newsletter</span>
                                 </section>
-                                <section class="flat-main-content flat-column">
+                                <section class="content">
                                         <span> Inscrivez-vous à notre newsletter <br>
                                                 pour être informer sur nos offres. <br>
                                                 Vous pouvez vous désinscrire à tout <br>
                                                 moment.
                                         </span>
-                                        <span class="flat-newsletter">
+                                        <span class="footer">
                                                 <label for="newsletter">Activer</label>
                                                 <input type="checkbox" name="newsletter" id="subscribe">
                                         </span>
@@ -50,14 +53,14 @@
                         </div>
                 </section>
                 <section class="flat-col-xs-12 flat-col-md-6">
-                        <div class="flat-card flat-column bordered">
+                        <div class="card  bordered">
                                 <section class="header">
                                         <span> Addresses  de Livraison et de Retrait </span>
                                 </section>
-                                <section class="flat-main-content flat-column">
+                                <section class="content">
                                         <span> Retrait à {{request.user.userprofile.city}}</span>
                                 </section>
-                                <section class="flat-row">
+                                <section class="footer">
                                         <span class="flat-col-xs-9"></span>
                                         <span class="flat-col-xs-3"> <a class="flat-link" href="">Modifier</a></span>
                                 </section>
@@ -66,4 +69,4 @@
         </div>
 
 </div>
-{%endblock account_content%}
+{% endblock MAINCONTENT %}

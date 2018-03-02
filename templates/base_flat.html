@@ -10,7 +10,7 @@
         <meta name="keywords" content="{{meta_keywords}}" />
         <meta name="description" content="{{meta_description}}" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-         {% load staticfiles %} {% load static %}
+         {% load staticfiles %}
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -23,30 +23,35 @@
         {% block external %} {% endblock external %}
 </head>
 
-<body class="relative">
+<body class="">
         
 
         {% block HEADER %}
-                <header id="site-header" class="fixed bordered">
-                        {% include "tags/responsive_topnav.html" %}
-                </header>
+                
+                        <header id="site-header" class="fixed bordered">
+                                {% include "tags/responsive_topnav.html" %}
+        
+                        </header>
+                
+                
                 
         {% endblock HEADER %}
-        <div id="site-wrapper">
+       
+<div id="site-wrapper" class="relative">
+
 
         
         {% block CATEGORY_NAV %}
-                <div id="site-nav" class="relative">
-                        <div class=""> 
+                <div id="site-nav" class="relative bordered">
                                 {% block CAT_NAV_CONTENT %}
-                                <div class="">
+                                <div class="flat-row">
                                         {% load catalog_tags %} 
                                         {% root_categorie as context %}
                                         {% for cat in context.root_cats %}
-                                        <div class="">
-                                                <span class="">{{cat.name}}</span>
-                                                <div class="">
-                                                        <div class="">
+                                        <div class="mod-dropdown">
+                                                <span class="mod-dropdown--title">{{cat.name}}</span>
+                                                <div class="mod-dropdown--content">
+                                                        <div class="box">
                                                                 <a href="{{cat.get_absolute_url}}">VOIR TOUT</a>
                                                                 {% include "tags/menu_list.html" with entry_list=cat.subcategories%}
                                                         </div>
@@ -55,23 +60,21 @@
                                         {% endfor %}
                                 </div>
                                 {% endblock CAT_NAV_CONTENT %}
-                        </div>
                 </div>
         {% endblock CATEGORY_NAV %}
         {% block SEARCHBAR %}
-                <div class="">
-                        <div id="" class="">
-                                <form class="" action="{% url 'catalog:search' %}">
-                                        <div class="">
-                                                <input type="search" name="search" placeholder="Recherche ...">
-                                                <button type="submit">
-                                                        <i class="fa fa-search"></i>
-                                                </button>
-                                        </div>
+                <div id="site-search" class="flat-row">
+                        <form class="site-search--form" action="{% url 'catalog:search' %}">
+                                <div class="form-group">
+                                        <input type="search" name="search" placeholder="Recherche ...">
+                                        <button type="submit">
+                                                <i class="fa fa-search"></i>
+                                        </button>
+                                </div>
                 
-                                </form>
-                        </div>
+                        </form>
                 </div>
+                
         {% endblock SEARCHBAR %}
         {% block BANNER %}
                  <div class="bordered">
@@ -89,101 +92,96 @@
                  </div>
         {% endblock CURRENT_CATEGORY_PATH %}
         {% load catalog_tags %}
+        <div id="site-page">
+                        {% block ASIDE %}
+                        <aside id="page-side" class="flat-col-md-2">
+                                {% block ASIDE_CONTENT %} {% endblock ASIDE_CONTENT %}
+                        </aside>
+                        {% endblock ASIDE %}
+                         {% block MAINCONTENT %}
+                        <div class="flat-col-xs-12 flat-col-md-10 bordered">
+                                <h4>Main content</h4>
+                        </div>
+                        {% endblock MAINCONTENT %}
+        </div>
+                
+        
 
-        <main class="bordered">
 
-                <div class="bordered">
-                        
-                                {% block ASIDE %}
-                                        <aside class="flat-col-md-2 bordered">
-                                                {% block ASIDE_CONTENT %}
-                                                
-                                                {% endblock ASIDE_CONTENT %}
-                                        </aside> 
-                                {% endblock ASIDE %}
-                                {% block MAINCONTENT %}
-                                        <div class="flat-col-xs-12 flat-col-md-10 bordered">
-                                                
-                                                <h4>Main content</h4>
-                                                
-                                        </div>
-                                {% endblock MAINCONTENT %}  
-                </div>      
-        </main>
         {% block FOOTER %}
         
-</div>
-        <footer class="">
-                <section class="">
+
+        <footer id="site-footer" class="bordered">
+                <section class="box bordered">
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="">
+                                <section class="site-footer--newsletter bordered">
                                         <div class="">
                                                 <h4>Abonnement à notre newsletter</h4>
                                                 <span class="glyphicon glyphicon-envelope"></span>
                                         </div>
                                         <div class="">
-                                                <span class="bordered">
-                                                        Inscrivez-vous à notre newsletter
-                                                        <br> pour être informer sur nos offres.
-                                                        <br> Vous pouvez vous désinscrire à tout
-                                                        <br> moment.
-                                                </span>
-                                                <span class="">
-                                                        <form action="">
-                                                                <input type="checkbox" name="newsletter">
-                                                                <button class="" type="submit">
-                                                                        <i class="glyphicon glyphicon-send"> Envoyer</i>
-                                                                </button>
-                                                        </form>
-                                                </span>
+                                                <div class="">
+                                                        <span>Inscrivez-vous à notre newsletter</span> 
+                                                        <span>pour être informer sur nos offres.</span> 
+                                                        <span>Vous pouvez vous désinscrire à tout moment</span>
+                                                </div>
+                                                <form id="js-newsletter" action="">
+                                                        <input type="email" name="newsletter" placeholder="Saisisez votre E-Mail">
+                                                        <button  class="" type="submit">
+                                                                <i class="glyphicon glyphicon-send"> Envoyer</i>
+                                                        </button>
+                                                </form>
+                                                <div id="js-notification">
+
+                                                </div>
                                         </div>
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="">
+                                <section class="site-footer--faqs bordered">
                                         <div class="" data-target="#faq-link">
                                                 <span> Service client </span>
-                                                <span class="glyphicon glyphicon-plus"></span>
+                                                <span class="fa fa-handshake-o"></span>
                                         </div>
                                         <div id="faq-link" class="">
                                                 <div class="">
                                                         <p>
                                                                 Besoin d'aide ? Veuillez consulter notre FAQ
-                                                                
                                                         </p>
-                                                        <a class=" bordered" href="{% url 'faq' %}"> Cliquer ici </a>
-        
+                                                        <a class="flat-link" href="{% url 'faq' %}"> Cliquer ici </a>
                                                 </div>
                                         </div>
         
                                 </section>
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="">
+                                <section class="site-footer--paiement bordered">
                                         <div class="">
                                                 <span> Méthodes de Paiement
                                                         <span class="fa fa-credit-card "></span>
                                                 </span>
                                         </div>
-                                        <div class="">
+                                        <div class="flat-container">
                                                 <p class="bordered">Payer à la livraison</p>
                                                 <p class="bordered">Airtel Money</p>
         
                                         </div>
-                                </section>
-                                <section class="">
-                                        <div class="">
-                                                <a class="" href="{% url 'about' %}"> À propos de nous</a>
-                                                <a class="" href="{% url 'livraison' %}">Livraison</a>
+                                        
+                                        <div class="flat-container flat-column">
+                                                <a class="flat-link" href="{% url 'about' %}"> À propos de nous</a>
+                                                <a class="flat-link" href="{% url 'livraison' %}">Livraison</a>
                                         </div>
+                                        
                                 </section>
+                                
                         </section>
                         <section class="flat-col-xs-12 flat-col-md-3">
-                                <section class="">
-                                        <div class="">
-                                                <h4>Suivez nous sur Facebook</h4>
+                                <section class="site-footer--social bordered">
+                                        <div class="flat-container">
+                                                <span>Suivez nous sur Facebook</span>
+                                                <span class="fa fa-share-alt"></span>
                                         </div>
-                                        <div class="">
+                                        <div class="flat-container">
                                                 <a class="" href="https://www.facebook.com/lyshoppinggabao/" target="_blank">
                                                         <i class="fa fa-facebook-official"></i>
                                                 </a>
@@ -192,10 +190,9 @@
                                 </section>
                         </section>
                 </section>
-                <div class="">
-                        <section class="flat-col-xs-12">
-                                <section class="">
-                                       
+                <div class="site-footer-legal box bordered">
+                        <section class="flat-col-xs-12 ">
+                                <section class="copyright flat-row bordered">
                                 <span> Copyright<span class="fa fa-copyright"></span> 2018 - Lyshop Online</span>
                                 </section>
                         </section>
@@ -206,7 +203,7 @@
         
         </footer>
         {% endblock FOOTER %}
-
+</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>

@@ -12,6 +12,9 @@
 .fixed{
     position: fixed;
 }
+.sticky{
+    position: sticky;
+}
 
 li {
     display: block;
@@ -24,11 +27,98 @@ li ul, li #site-header--account {
     position: absolute;
 
 }
-li:hover ul, li:hover #site-header--account{
+li:hover > ul, li:hover #site-header--account{
     display: block;
     width: 100%;
 }
 
 #site-header--account ul{
     width: 100%;
+}
+
+#site-newproducts-ads{
+    position: relative;
+}
+
+#page-side{
+    border-right: 1px solid #ccc;
+}
+
+#page-side li ul{
+    display: block;
+    position: relative;
+    padding: 5px;
+    margin: 5px;
+}
+#product-page{
+
+}
+.image-container{
+
+}
+.product-infos{
+
+}
+.product-infos .header{
+    
+}
+.product-infos .content{
+    
+}
+.product-infos .footer{
+    
+}
+.product-infos .flat-btn{
+    
+}
+.product-infos .flat-cart-add-btn{
+    
+}
+/***********************************************************/
+.mod-dropdown{
+    position: relative;
+}
+
+
+.mod-dropdown--content{
+    position: absolute;
+    top: 3rem;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    
+
+}
+
+.mod-dropdown:hover .mod-dropdown--content{
+    display: block;
+}
+
+.mod-dropdown--content .link{
+    width: 100%;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.product{
+    position: relative;
+}
+.product .label{
+    position: absolute;
+    top: 2%;
+    left:2%;
+}
+.product .image{
+    position: relative;
+}
+
+.image .image--link{
+    position: relative;
+}
+
+
+.order{
+    border-bottom: 1px solid #E7E7E7;
+    border-right: 1px solid #E7E7E7;
 }

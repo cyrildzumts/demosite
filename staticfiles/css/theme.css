@@ -1,5 +1,22 @@
+
+body{
+    color: #2C2C2C;
+}
+
+input, button{
+    background-color: white;
+    border: 2px solid #E7E7E7;
+}
+
+input:focus{
+    background-color: #FEFEFE;
+}
+
+button:hover{
+    background-color: #FEFEFE;
+}
+
 #site-wrapper{
-    background-color: blanchedalmond;
     color: #2C2C2C;
 }
 #site-header{
@@ -28,3 +45,37 @@
 .item a:hover{
     text-decoration: none;
 }
+/********************************************************/
+#site-nav{
+}
+
+
+.mod-dropdown--content{
+    background-color: #FEFEFE;
+    
+}
+
+.mod-dropdown--content .link{
+    border-bottom: 1px solid #ccc;
+
+}
+
+.link, .flat-link{
+    text-decoration: none;
+    color: grey;
+}
+
+.flat-link{
+    color: grey;
+    text-decoration: none;
+}
+
+.link:hover, .flat-link:hover{
+    background-color: antiquewhite;
+    text-decoration: none;
+}
+
+.label{background-color: red;}
+
+.flat-btn{background-color: white; color: #2C2C2C;border: 2px solid #E7E7E7;}
+.flat-btn:hover{background: #ddd;}

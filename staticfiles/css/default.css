@@ -8,13 +8,20 @@
     font-family: "Montserrat", sans-serif;
 }
 
+body, html{
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
 #banner{
     display: none;
 }
 
 input, button, tr{
-    border: 2px solid grey;
-    background-color: #ddd;
+    padding: 14px 16px;
+    border: 1px solid grey;
+    
 }
 
 a{

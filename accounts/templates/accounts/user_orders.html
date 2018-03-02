@@ -6,16 +6,16 @@
 </div><!-- End of main-header -->
 {%endblock content_header%}
 
-{% block account_content %}
-<div class="flat-col-xs-12 flat-col-md-6">
-        <div class="order-list list-flex list-vertical">
 
-                {% for order in orders %} 
-                {% include "tags/order_entry.html" %} 
-                {% endfor %}
+{% block MAINCONTENT %}
+<div class="flat-col-xs-12 flat-col-md-10">
+         <div id="user-orders" class="flat-column">
+                <div class="flat-row">
+                        {% for order in orders %} 
+                        {% include "tags/order_entry.html" %} 
+                        {% endfor %}
+                </div>
         </div>
-
+        
 </div>
-
-{% endblock account_content%}
-
+{% endblock MAINCONTENT %}

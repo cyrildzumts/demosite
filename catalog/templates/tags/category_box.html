@@ -5,7 +5,7 @@
     <!-- and its sibling -->
     <ul class="nav nav-cat">
         {%if current_category.parent is not None%}
-        <li><a  href="{{current_category.parent.get_absolute_url}}">{{current_category.parent.name}}</a></li>
+        <li><a  href="{{current_category.parent.get_absolute_url}}">{{current_category.parent.name}}</a>
          <ul class="nav-cat nav-cat-child">
             {% for category in current_category.parent.subcategories %}
             {%if category == current_category%}
@@ -24,16 +24,16 @@
             {%endif%}
           {% endfor %}
          </ul>
-          
+        </li>
 
         {%else%}
-            <li><a  href="{{current_category.get_absolute_url}}">{{current_category.name}}</a></li>
-            <ul class="nav nav-cat">
-                {%for subcat in current_category.subcategories%}
-                <li><a  href="{{subcat.get_absolute_url}}">{{subcat.name}}</a></li>
-            {%endfor%}
-            </ul>
-            
+            <li><a  href="{{current_category.get_absolute_url}}">{{current_category.name}}</a>
+              <ul class="nav nav-cat">
+                  {%for subcat in current_category.subcategories%}
+                  <li><a  href="{{subcat.get_absolute_url}}">{{subcat.name}}</a></li>
+              {%endfor%}
+              </ul>
+            </li>
         {%endif%}
     </ul>
   </nav>
