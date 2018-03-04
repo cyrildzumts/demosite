@@ -17,15 +17,37 @@ body, html{
 #banner{
     display: none;
 }
-
+label{
+    font-weight: normal;
+}
 input, button, tr{
     padding: 14px 16px;
     border: 1px solid grey;
+    margin: 5px;
     
 }
 
 a{
     text-decoration: none;
     color: #2C2C2C;
+}
+
+.highlight{
+    display: block;
+    padding: 1px 16px;
+    font-size: 100%;
+}
+.note{
+    display: block;
+    padding: 1px 16px;
+    font-size: 0.85em;
+}
+
+
+/**************************************************/
+.js-cart-remove,.js-cart-add-to-wishlist,
+.js-cart-item-up, .js-cart-item-down
+{
+    padding: 5px;
 }
 

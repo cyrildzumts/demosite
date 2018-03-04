@@ -116,10 +116,12 @@ var Tabs = (function(){
         this.tabCount       = 0;
         this.tabs           = {};
         this.tab            = {};
+        this.tabsCount      = 0;
         
     };
 
     Tabs.prototype.init = function(){
+        this.tabsCount = $(".flat-tabs").length;
         this.tabs = $(".flat-tabcontent");
         this.tab = $(".flat-tab");
         this.tabCount = this.tab.length;
@@ -128,6 +130,7 @@ var Tabs = (function(){
         this.update();
         console.log("Tabs suceesfully initialized :");
         console.log(" Tabs found " + this.tabCount + " on this page");
+        console.log("there are " + this.tabsCount + " tabs on this page");
     };
     Tabs.prototype.onTabClicked = function(event){
         var tab = parseInt($(event.target).data("index"));

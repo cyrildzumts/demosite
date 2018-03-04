@@ -1,6 +1,4 @@
-.bordered{
-    border: 1px solid #ccc;
-}
+
 
 .relative{
     position: relative;
@@ -74,6 +72,18 @@ li:hover > ul, li:hover #site-header--account{
 .product-infos .flat-cart-add-btn{
     
 }
+
+
+#wishlist.card .header, #cart.card .header{
+    
+}
+#wishlist.card .content, #cart.card .content{
+    
+}
+
+.card .details{
+
+}
 /***********************************************************/
 .mod-dropdown{
     position: relative;
@@ -113,6 +123,10 @@ li:hover > ul, li:hover #site-header--account{
     position: relative;
 }
 
+.product-price, .product-price-total{
+    font-weight: bold;
+}
+
 .image .image--link{
     position: relative;
 }
@@ -121,4 +135,15 @@ li:hover > ul, li:hover #site-header--account{
 .order{
     border-bottom: 1px solid #E7E7E7;
     border-right: 1px solid #E7E7E7;
+}
+
+.flat-checkout-link .flat-btn{
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.social-link{
+    font-size: 150%;
+    color: #E7E7E7;
 }

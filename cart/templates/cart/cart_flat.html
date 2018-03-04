@@ -1,110 +1,115 @@
 {% extends "flat_minimal_base.html" %}
 
 
-{%block content_header%}
+{%block CURRENT_CATEGORY_PATH%}
 
-    <div class="flex-container">
-            <h5 class="flex-item">Mon Panier</h5>
-            <a class="flex-item" href="{% url 'catalog:index'%}">
-                    <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-share-alt"> Shopping </span>
-                    </button>
-            </a>
-    </div>
-
-{%endblock content_header%}
+{%endblock CURRENT_CATEGORY_PATH%}
 
 {% block MAINCONTENT %}
-<div class="flat-col-xs-12 flat-col-md-12 bordered">
+<div class="flat-col-xs-12 flat-col-md-12">
+
+
+        <div class="flat">
+
+       
                                         
-        <div class="flat-card flex-column">
-                <div class="flat-column flex-center">
-                        <div class="flat-card flat-column">
-                                <div class="flat-column flat-left">
-                                        <div class=""> Appercu de votre Panier </div>
-                                        <div class="">
-                                                <strong>
-                                                        <span class="cart-counter">{{cart_item_count}}</span>
-                                                </strong> article(s)</div>
-                                        <div class="flat-hidden-xs flat-flex">
-                                                <p class="flat-cart-description text-center">
-                                                        Ici se trouve les articles que vous souhaitez acheter.
-                                                        <br> Veuillez savoir que les articles présent dans le Panier ne sont pas reservés.
-                                                </p>
-                                
-                                        </div>
+        <div class="flat-row">
+                <div class="flat-col-xs-12">
+                        <div class="card">
+                                <div class="header">
+                                        <span>Appercu de votre Panier</span>
+                                        <span>
+                                                <strong><span class="cart-counter">{{cart_item_count}}</span></strong> article(s)
+                                        </span>
                                 </div>
-                                
-                        </div>   
-                </div> 
-        {% if cart_items %}
-        
-        <div id="flat-cart-products" class="cart-item-list">
-                {% for item  in cart_items %}
-                        <div id="{{item.product.id}}" class="flat-row cart-item bordered">
-                                
-
-                                                <section class="flat-col-xs-3">
-                                                        <div class="item-image">
-                                                                <img class="img-responsive" src="{{item.image_url}}">
-                                                        </div>      
-                                                </section>
-                                                <section class="flat-col-xs-9">
-                                                        <div class="flat-row">
-                                                                <section class="flat-col-xs-4"> <span> {{item.name}}</span> </section>
-                                                                <section class="flat-col-xs-8">
-                                                                        <div class="flat-row remove-wrap">
-                                                                                <section class="flat-col-xs-3">
-                                                                                        <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                                                                                                <span class="plusButton glyphicon glyphicon-chevron-up"></span>
-                                                                                                <span class="item-qty">{{item.quantity}}</span>
-                                                                                                <span class="minusButton glyphicon glyphicon-chevron-down"></span>
-                                                                                        </div>
-                                                                                </section>
-                                                                                <section class="flat-col-xs-9">
-                                                                                        <div class="flat-column">
-                                                                                                <span class="main-value"><span class="cart-item-price">{{item.price}}</span> FCFA</span>
-                                                                                                <span class="subdetail smaller cart-item-total-price">Total : <span class="cart-item-price">{{item.total}}</span> FCFA</span>
-                                                                                        </div>
-                                                                                </section>
-                                                                        </div>
-                                                                </section>
-                                                        </div>
-                                                        <div class="flat-row small">
-                                                                <section class="flat-col-xs-6"> <span id="" class="flat-cart-add-to-wishlist flat-btn glyphicon glyphicon-heart flat-hidden" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}"></span> </section>
-                                                                <section class="flat-col-xs-1"><span> </span> </section>
-                                                                <section class="flat-col-xs-5"> <span class="flat-link"> Supprimer </span></section>
-                                                        </div>
-                                                </section>
-
-                                
-                                
-                
+                                <div class="content">
+                                                <div class="text-center">
+                                                        <div class="highlight">Ici se trouve les articles que vous souhaitez acheter.</div> 
+                                                        <div class="note"><i> Les articles présent dans le Panier ne sont pas reservés.</i></div>
+                                                </div>
+                                </div>
                         </div>
-
-                {% endfor %}
-                <div class="cart-footer bg-newspaper">
-                        <div class="cart-footer-entry">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></div>
-                        <div class="cart-footer-entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
-                        <div class="cart-footer-entry">Reduction :   <strong> 0.00 FCFA</strong></div>
-                        <div class="cart-footer-entry"><strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></div>
-                        
-                </div>
-                <div>
-                        <a class="no-decoration flat-btn cart-checkout-btn" href="/order/{{checkout_url}}">
-                        Aller à la caisse
-                        </a>
                 </div>
         </div>
+        {% if cart_items %}
+        
 
+
+        <div id="cart" class="card">
+
+                <div class="content">
+                                {% for item  in cart_items %}
+                                <div class="flat-col-xs-12 flat-col-md-6" id="{{item.product.id}}">
+                                        <div class="box bottom-bordered ">
+                                                <div class="flat-col-xs-3">
+                                                        <div class="image-container"> 
+                                                                <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
+                                                        </div>
+                                                </div>
+                                                <div class="flat-col-xs-9">
+                                                                <div class="details">
+                                                                                <div class="flat-row">
+                                                                                                <section class="flat-col-xs-4"> <span class="product-name"> {{item.name}}</span> </section>
+                                                                                                <section class="flat-col-xs-8">
+                                                                                                        <div class="flat-row">
+                                                                                                                <section class="flat-col-xs-3">
+                                                                                                                        <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                                                                                                                                <span class="js-cart-item-up glyphicon glyphicon-chevron-up"></span>
+                                                                                                                                <span class="product-quantity">{{item.quantity}}</span>
+                                                                                                                                <span class="js-cart-item-down glyphicon glyphicon-chevron-down"></span>
+                                                                                                                        </div>
+                                                                                                                </section>
+                                                                                                                <section class="flat-col-xs-9">
+                                                                                                                        <div class="flat-column">
+                                                                                                                                <span class="entry"><span class="product-price">{{item.price}}</span> FCFA</span>
+                                                                                                                                <span class="entry smaller ">Total : <span class="product-price-total">{{item.total}}</span> FCFA</span>
+                                                                                                                        </div>
+                                                                                                                </section>
+                                                                                                        </div>
+                                                                                                </section>
+                                                                                </div>
+                                                                                <div class="flat-row ">
+                                                                                                <div class="flat-row small">
+                                                                                                                <span class="js-cart-add-to-wishlist flat-link" data-itemid="{{item.id}}" data-quantity="{{item.quantity}}">Ajouter aux Favoris</span>
+                                                                                                                <span class="js-cart-remove flat-link" data-itemid="{{item.id}}"> Supprimer </span>
+                                                                                                </div>
+                                                                                </div>
+                                                                                
+                                                                </div><!-- End of Details -->
+                                                                
+                                                </div>
+                                        </div>
+                                                
+                                </div>
+                                {% endfor %}
+                </div>
+                        
+
+                <div class="footer">
+                                <div class="entry">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></div>
+                                <div class="entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
+                                <div class="entry">Reduction :   <strong> 0.00 FCFA</strong></div>
+                                <div class="entry"><strong> Somme Total : <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></div>
+                                
+                </div>
+                <div class="flat-checkout-link">
+                                <a class="flat-btn flat" href="/order/{{checkout_url}}">
+                                Aller à la caisse
+                                </a>
+                </div>
+                
+        </div>
+
+
+        
         {%else%}
-        <div class="flat-card flat-column">
-                <section class="flex-column flex-center text-center bordered">
+        <div class="card">
+                <section class="header bordered">
                         <h4 class="card-title"> Panier Vide</h4>
                         <h6 class="card-subtitle">Veuillez ajouter des article dans le panier</h6>
                 </section>
                 <!-- End Of Main Section -->
-                <section class="flat-main-content text-center bordered">
+                <section class="content bordered">
                         <p>
                         Votre Panier ne contient aucun article.</br>
                         Parcourrez la liste d'articles en vente sur le site</br>
@@ -117,12 +122,7 @@
 
         {% endif %}
 
-
-        
-        </div>
 <!-- End Of Container -->
+        </div>
 </div>
 {% endblock MAINCONTENT %}
-
-{% block CartModal %}
-{% endblock CartModal %}

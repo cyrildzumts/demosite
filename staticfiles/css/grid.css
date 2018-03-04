@@ -32,11 +32,11 @@
 
 .flat-col-xs-1{
     width: calc(100% / 12);
-    padding: 5px;
+    
 }
 .flat-col-xs-2{
     width: calc(100% / 12 * 2);
-    padding: 5px;
+    
 }
 .flat-col-xs-3{
     width: calc(100% / 12 * 3);
@@ -68,7 +68,6 @@
 }
 .flat-col-xs-12{
     width: 100%;
-    padding: 5px;
 }
 
 /***** PULL ELEMENT ******
@@ -237,52 +236,52 @@
     }
     .flat-col-md-1{
         width: calc(100% / 12);
-        padding: 10px;
+        
     }
     .flat-col-md-2{
         width: calc(100% / 12 * 2);
-        padding: 10px;
+        
     }
     .flat-col-md-3{
         width: calc(100% / 12 * 3);
-        padding: 10px;
+
     }
     .flat-col-md-4{
         width: calc(100% / 12 * 4);
-        padding: 10px;
+        
     }
     .flat-col-md-5{
         width: calc(100% / 12 * 5);
-        padding: 10px;
+        
     }
     .flat-col-md-6{
         width: calc(100% / 12 * 6);
-        padding: 10px;
+        
     }
     .flat-col-md-7{
         width: calc(100% / 12 * 7);
-        padding: 10px;
+        
     }
     .flat-col-md-8{
         width: calc(100% / 12 * 8);
-        padding: 10px;
+        
     }
     .flat-col-md-9{
         width: calc(100% / 12 * 9);
-        padding: 10px;
+        
     }
     
     .flat-col-md-10{
         width: calc(100% / 12 * 10);
-        padding: 10px;
+        
     }
     .flat-col-md-11{
         width: calc(100% / 12 * 11);
-        padding: 10px;
+        
     }
     .flat-col-md-12{
         width: 100%;
-        padding: 10px;
+        
     }
 
     .flat-col-pull-md-1{

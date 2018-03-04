@@ -62,7 +62,13 @@
                                                           <input id="brands-filter-input" type="text" name="brands-query" placeholder="Saissez une marque ...">
                                                           <div id="flat-brands" class="flat-inputs">
                                                               {% for brand in brands %}
-                                                              <span class="input-box" data-brand="{{brand}}"><input type="checkbox" name="mark-choices" value="{{brand}}"> {{brand}} </span>
+                                                              <span class="input-box" data-brand="{{brand}}">
+                                                                  <label class="input-container"> {{brand}} 
+                                                                        <input type="checkbox" name="mark-choices" value="{{brand}}">
+                                                                        <span class="checkmark"></span>
+                                                                  </label>
+                                                                  
+                                                                </span>
                                                               {% endfor %}
                                                           </div>
                                                   </section>
@@ -76,10 +82,32 @@
                                                   <span> TRIER PAR </span>
                                               </section>
                                               <section id="flat-sorting-input" class="content flat-inputs">
-                                                  <span class="input-box"><input type="radio" name="order" value="0"> Plus bas prix </span>
-                                                  <span class="input-box"><input type="radio" name="order" value="1"> Prix le plus élevé</span>
-                                                  <span class="input-box"><input type="radio" name="order" value="2"> Popularité</span>
-                                                  <span class="input-box"><input type="radio" name="order" value="3"> Plus récent</span>
+                                                  <span class="input-box">
+                                                      <label class="input-container"> Plus bas prix 
+                                                            <input type="radio" name="order" value="0"> 
+                                                            <span class="radio"></span>
+                                                      </label>
+                                                      
+                                                    </span>
+                                                  <span class="input-box">
+                                                        <label class="input-container"> Prix le plus élevé 
+                                                                <input type="radio" name="order" value="1"> 
+                                                                <span class="radio"></span>
+                                                          </label>
+                                                 </span>
+                                                  <span class="input-box">
+                                                        <label class="input-container"> Popularité 
+                                                                <input type="radio" name="order" value="2"> 
+                                                                <span class="radio"></span>
+                                                          </label>  
+                                                 </span>
+                                                  <span class="input-box">
+                                                        <label class="input-container"> Plus récent
+                                                                <input type="radio" name="order" value="3"> 
+                                                                <span class="radio"></span>
+                                                        </label>
+                                
+                                                </span>
                                               </section>
                                               <section class="footer">
                                                       <span id="flat-sort-apply" class="flat-btn"> Appliquer</span>

@@ -16,10 +16,19 @@ button:hover{
     background-color: #FEFEFE;
 }
 
+.bordered{
+    border: 1px solid #ccc;
+}
+.bottom-bordered{
+    border-bottom: 1px solid #E7E7E7;
+    border-bottom-style: dotted;
+}
+
 #site-wrapper{
     color: #2C2C2C;
 }
 #site-header{
+    font-family: 'Open Sans', sans-serif;
     background-color: #FEFEFE;
     color: #2c2c2c;
 }
@@ -30,6 +39,14 @@ button:hover{
  }
  #site-header--account, #site-account--menu{
      background-color: aqua;
+     color: #2C2C2C;
+ }
+
+ #site-footer{
+     background-color: #2C2C2C;
+     color: #FEFEFE;
+ }
+ #site-footer input,#site-footer button{
      color: #2C2C2C;
  }
 .item:hover{
@@ -60,14 +77,15 @@ button:hover{
 
 }
 
-.link, .flat-link{
+.link,{
     text-decoration: none;
     color: grey;
 }
 
 .flat-link{
-    color: grey;
     text-decoration: none;
+    color: #ff8080ff;
+    
 }
 
 .link:hover, .flat-link:hover{
@@ -79,3 +97,43 @@ button:hover{
 
 .flat-btn{background-color: white; color: #2C2C2C;border: 2px solid #E7E7E7;}
 .flat-btn:hover{background: #ddd;}
+
+
+.order:hover{
+    background-color: #E7E7E7;
+    box-shadow: 3px 3px 5px #ccc;
+}
+
+.flat-checkout-link .flat-btn{
+    background-color: #E7E7E7;
+    border: 2px solid #2C2C2C;
+}
+.flat-checkout-link .flat-btn:hover{
+    background-color: #2C2C2C;
+    border: 2px solid #E7E7E7;
+}
+
+.input-container .checkmark, .input-container .radio{
+    background-color: #EEE;
+  }
+
+.input-container:hover input ~ .checkmark,
+.input-container:hover input ~ .radio{
+    background-color: #ccc;
+}
+
+.input-container input:checked ~ .checkmark,
+.input-container input:checked ~ .radio
+{
+    background-color: #ff8080ff;
+}
+
+.flat-cart-add-btn{
+    background-color: #ff8080ff;
+    color: #FEFEFE;
+}
+
+.flat-cart-add-btn:hover{
+    background-color: #FEFEFE;
+    color: #ff8080ff;
+}

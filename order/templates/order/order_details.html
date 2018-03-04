@@ -1,59 +1,51 @@
-{% extends "base_flat.html"%}
+{% extends "accountbase.html"%}
 
-{%block content_header%}
-    <div class="header-entry">
-         <p> Information de votre Commande </p>
-    </div><!-- End of main-header -->
-    
-{%endblock content_header%}
-
-{% block BANNER %}
-
-{% endblock BANNER %}
-{% block CURRENT_CATEGORY_PATH %}
-
-{% endblock CURRENT_CATEGORY_PATH %}
-
-{% block ASIDE %}
-{% endblock ASIDE %}
 {% block MAINCONTENT %}
-<div class="flat-col-xs-12 flat-col-md-6">
-        <div class="order-list list-flex list-vertical">
-                <div class="card-mat vertical">
-                        <div class="mat-entry"> {{order.get_status}} </div>
-                        <div class="mat-entry">Date : {{order.get_date}}</div>
-                        <div class="mat-entry">
+<div class="flat-col-xs-12 flat-col-md-10">
+        <div id="order-detail" class="card">
+                <div class="header">
+                        <div class="entry"> {{order.get_status}} </div>
+                        <div class="entry">Date : {{order.get_date}}</div>
+                        <div class="entry">
                                 <span class="order-ref">Ref : {{order.ref_num}} </span>
                         </div>
                 </div>
-                {% for item in orderitems %}
-                <div class="card-mat horizontal">
-                        <div class="mat-entry mat-entry-img bordered">
-                                <img class="img-responsive" src="{{item.image_url}}">
-                        </div>
-                        <div class="card-mat vertical">
-                                <div class="mat-entry">{{item.name}}</div>
-                                <div class="mat-entry">Quantité : {{item.quantity}}</div>
-                                <div class="mat-entry clearfix">
-                                        <span class="order-ref">Prix unitaire : {{item.get_price}} FCFA </span>
-                                </div>
-                                <div class="mat-entry">
-                                        <span class="order-sum pull-right">
-                                                <strong> Total : {{item.total}} FCFA</strong>
-                                        </span>
+
+                <div class="content">
+                        {% for item in orderitems %}
+                        <div class="flat-col-xs-12 flat-col-md-6">
+                                <div class="order-item card-row bordered">
+                                        <div class="header">
+                                                <div class="image-container">
+                                                        <img class="img-responsive" src="{{item.image_url}}">
+                                                </div>
+                                        </div>
+                                        <div class="content">
+                                                <div class="entry">{{item.name}}</div>
+                                                <div class="entry">Quantité : {{item.quantity}}</div>
+                                                <div class="entry">
+                                                        <span class="order-ref">Prix : {{item.get_price}} FCFA </span>
+                                                </div>
+                                                <div class="entry">
+                                                        <span class="pull-right">
+                                                                <strong> Total : {{item.total}} FCFA</strong>
+                                                        </span>
+                                                </div>
+                                        </div>
+        
                                 </div>
                         </div>
 
-                </div>
-                <div class="list-divider"></div>
+                        
                 {% endfor %}
+                </div>
+                
 
-                <div class="order-footer bg-newspaper">
-                                <div class="order-footer-entry">Montant Total : <strong> <span class="cart-subtotal"> {{order.total}}</span> FCFA </strong></div>
-                                <div class="order-footer-entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
-                                <div class="order-footer-entry">Reduction :   <strong> 0.00 FCFA</strong></div>
-                                <div class="order-footer-entry"><strong> Somme Total : <span class="cart-subtotal"> {{order.total}}</span> FCFA </strong></div>
-                                
+                <div class="footer ">
+                                <div class="entry">Montant Total : <strong> <span class="js-cart-subtotal"> {{order.total}}</span> FCFA </strong></div>
+                                <div class="entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
+                                <div class="entry">Reduction :   <strong> 0.00 FCFA</strong></div>
+                                <div class="entry"><strong> Somme Total : <span class="js-cart-subtotal"> {{order.total}}</span> FCFA </strong></div>        
                 </div>
         </div>
 </div>

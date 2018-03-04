@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
          {% load staticfiles %}
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -42,7 +43,7 @@
 
         
         {% block CATEGORY_NAV %}
-                <div id="site-nav" class="relative bordered">
+                <div id="site-nav" class="relative">
                                 {% block CAT_NAV_CONTENT %}
                                 <div class="flat-row">
                                         {% load catalog_tags %} 
@@ -77,19 +78,17 @@
                 
         {% endblock SEARCHBAR %}
         {% block BANNER %}
-                 <div class="bordered">
+                 <div class="">
                          {% include "tags/banner.html" %}
                  </div>
         {% endblock BANNER %}
         
         {% block CURRENT_CATEGORY_PATH %}
-                 <div class="bordered">
+                
                         {% block CATEGORY_PATH %}
-                                <div class="flat-cat-path">
-                                        CAT PATH
-                                </div>
+                               
                         {% endblock CATEGORY_PATH %}
-                 </div>
+                 
         {% endblock CURRENT_CATEGORY_PATH %}
         {% load catalog_tags %}
         <div id="site-page">
@@ -111,8 +110,8 @@
         {% block FOOTER %}
         
 
-        <footer id="site-footer" class="bordered">
-                <section class="box bordered">
+        <footer id="site-footer" class="">
+                <section class="box">
                         <section class="flat-col-xs-12 flat-col-md-3">
                                 <section class="site-footer--newsletter bordered">
                                         <div class="">
@@ -162,8 +161,8 @@
                                                 </span>
                                         </div>
                                         <div class="flat-container">
-                                                <p class="bordered">Payer à la livraison</p>
-                                                <p class="bordered">Airtel Money</p>
+                                                <p class="indice">Payer à la livraison</p>
+                                                <p class="indice">Airtel Money</p>
         
                                         </div>
                                         
@@ -179,10 +178,10 @@
                                 <section class="site-footer--social bordered">
                                         <div class="flat-container">
                                                 <span>Suivez nous sur Facebook</span>
-                                                <span class="fa fa-share-alt"></span>
+                                                <span class="fa fa-share-alt social-link"></span>
                                         </div>
                                         <div class="flat-container">
-                                                <a class="" href="https://www.facebook.com/lyshoppinggabao/" target="_blank">
+                                                <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank">
                                                         <i class="fa fa-facebook-official"></i>
                                                 </a>
                                         </div>
@@ -192,7 +191,7 @@
                 </section>
                 <div class="site-footer-legal box bordered">
                         <section class="flat-col-xs-12 ">
-                                <section class="copyright flat-row bordered">
+                                <section class="copyright flat-row">
                                 <span> Copyright<span class="fa fa-copyright"></span> 2018 - Lyshop Online</span>
                                 </section>
                         </section>

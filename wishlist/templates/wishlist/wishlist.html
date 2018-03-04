@@ -1,77 +1,65 @@
 {% extends "accountbase.html" %}
 
-{% block content_header %}
-<h3 class="contact_title"> Liste De Souhaits </h3>
-{% endblock content_header %}
-
-{% block account_content %}
 
 
-{% if item_count == 0 %}
+{% block MAINCONTENT %}
+
+<div class="flat-col-xs-12 flat-col-md-10">
+
+        {% if item_count == 0 %}
   
-  <div class="fluid-container bordered">
-    <div class="card-mat list-flex vertical">
-        <section class="text-center bordered">
-            <h4 class="card-title"> Wishlist vide</h4>
-            <h6 class="card-subtitle"> Veuillez ajouter des article dans votre liste </h6>
-        </section>
-        <!-- End Of Main Section -->
-        {% comment "" %}
-        <section class="card-content-text text-center bordered">
-            <p>
-                Votre Wishlist ne contient aucun article.</br>
-                Parcourrez la liste d'articles en vente sur le site</br>
-                et ajouter les produits qui vous plaisent mais que vous </br>
-                ne souhaitez acheter pour le moment dans cette liste. </br>
-            </p>
-        </section>
-        <!-- End Of Main Section -->
-        {% endcomment %}
-        
-    <!-- End Of Card -->
-    </div>
-  </div>
-  
-
-  {% else %}
-
-<div class="flat-wishlist">
-    
+        <div class="flat-container bordered">
+              <section class="text-center bordered">
+                  <h4 class="title"> Wishlist vide</h4>
+                  <h6 class="subtitle"> Veuillez ajouter des article dans votre liste </h6>
+              </section>
+              <!-- End Of Main Section -->
+              
+          <!-- End Of Card -->
+        </div>
+        {% else %}
         {% if wishlistitems %}
-        <div class="flat-card flex-column">
-                <div class="card-mat header">
-                        <div class="mat-entry"> Appercu de vos articles sauvegardés </div>
-                        <div class="mat-entry"> <span class="wishlist-counter"> {{item_count}} </span> article(s)</div>
+        <div id="wishlist" class="card">
+                <div class="header">
+                        <div class="entry"> Appercu de vos articles sauvegardés </div>
+                        <div class="entry"> <span class="js-wishlist-counter"> {{item_count}} </span> article(s)</div>
                         
                 </div>
-                {% for item  in wishlistitems %}
-                <div class="main-content bordered" id="{{item.id}}">
-                        <div class="mat-entry mat-entry-img bordered"> 
-                            <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
-                        </div>
-                        <div class="card-mat vertical">
-                                <div class="mat-entry">{{item.name}}</div>
-                                <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                                <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
+                <div class="content">
+                    {% for item  in wishlistitems %}
+                        <div class="flat-col-xs-12 flat-col-md-6" id="{{item.id}}">
+                            <div class="box">
+                                <div class="flat-col-xs-3">
+                                        <div class="image-container bordered"> 
+                                                <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
+                                        </div>
+                                </div>
+                                <div class="flat-col-xs-9">
+                                        <div class="details">
+                                                <div class="entry">{{item.name}}</div>
+                                                <div class="entry"> <span class="pruduct-price">Prix : {{item.price}} FCFA  </span></div>
+                                                <div class="entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
+                                                    <span class="small js-move-to-cart  flat-btn flat-cart-add-btn" data-itemid="{{item.product.id}}"> <strong>Ajouter au Panier </strong> </span>
+                                                    <span class="flat-link small js-remove-from-wishlist"> Supprimer </span>
+                                                </div>
+                                                
+                                        </div>
+                                </div>
                                     
-                                </div>
-                                <div class="mat-entry"> <span class="order-ref">Prix : {{item.price}} FCFA  </span></div>
-                                <div class="mat-entry" data-itemid="{{item.id}}" data-name="{{item.name}}" data-image="{{item.image_url}}">
-                                    <span class="small flat-wishlist-add-to-cart-btn flat-btn" data-itemid="{{item.product.id}}"> Ajouter au Panier </span>
-                                    <span class="flat-link small wishlist-remove"> Supprimer </span>
-                                </div>
+                            </div> <!-- End of container -->
+                                
                                 
                         </div>
-                        
-                </div>
                 {% endfor %}
-                <div class="flat-footer">
-                    <div class="wishlist-clear flat-btn"> Vider </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="wishlist-clear flat-btn flat-hidden"> Vider </div>
                 </div>
                 
         </div>
         {% endif %}
-</div> 
-
 {% endif %}
-{% endblock account_content %}
+</div>
+
+{% endblock MAINCONTENT %}

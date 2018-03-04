@@ -13,30 +13,58 @@
 <div class="box">
     <ul class="site-header--links relative">
         <li>
-            <a class="site-header--link" href="{% url 'wishlist:show_wishlist' %}">Favoris</a>
+            <a class="site-header--link" href="{% url 'wishlist:show_wishlist' %}">
+                    <div class="flat-column">
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <span>Favoris</span>
+                    </div>
+            </a>
         </li>
         <li>
-            <a class="site-header--link" href="{% url 'cart:show_cart' %}">Panier</a>
+            <a class="site-header--link" href="{% url 'cart:show_cart' %}">
+                <div class="flat-column">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <span>Panier</span>
+                </div>
+            </a>
         </li>
         <li>
-            <a class="site-header--link" href="{% url 'accounts:user_account'%}">Mon Compte</a>
-            <div id="site-header--account" class="site-header--sublinks">
                 {% if request.user.is_authenticated %}
-                <ul id="site-account--menu">
-                    <li class="item">
-                        <a class="" href="{% url 'accounts:user_account'%}">Appercu</a>
-                    </li>
-                    <li class="item"><a class="" href="{% url 'accounts:orders' %}">Mes Commandes</a></li>
-                    <li class="item"><a class="" href="{% url 'wishlist:show_wishlist' %}"> Mes Favoris</a></li>
-                    <li class="item"><a class="" href="{% url 'contact:index'%}">Contact</a></li>
-                    <li class="item"></li>
-                    <li class="item"><a class="" href="{% url 'accounts:logout' %}">Se déconnecter</a></li>
-                    <li class="item"><span>Fermer</span></li>
-                </ul>
+                <a class="site-header--link" href="{% url 'accounts:user_account'%}">
+                        <div class="flat-column">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <span>Mon Compte</span>
+                        </div>
+                </a>
                 {% else %}
-                    {% include "tags/account_login_dialog.html" %}
+                <a class="site-header--link" href="{% url 'accounts:login'%}">
+                        <div class="flat-column">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <span>Se connecter</span>
+                        </div>
+                </a>
                 {% endif %}
-            </div>
+            
+            {% comment "" %}
+            <div id="site-header--account" class="site-header--sublinks flat-hidden">
+                    {% if request.user.is_authenticated %}
+                    <ul id="site-account--menu">
+                        <li class="item">
+                            <a class="" href="{% url 'accounts:user_account'%}">Appercu</a>
+                        </li>
+                        <li class="item"><a class="" href="{% url 'accounts:orders' %}">Mes Commandes</a></li>
+                        <li class="item"><a class="" href="{% url 'wishlist:show_wishlist' %}"> Mes Favoris</a></li>
+                        <li class="item"><a class="" href="{% url 'contact:index'%}">Contact</a></li>
+                        <li class="item"></li>
+                        <li class="item"><a class="" href="{% url 'accounts:logout' %}">Se déconnecter</a></li>
+                        <li class="item"><span>Fermer</span></li>
+                    </ul>
+                    {% else %}
+                        {% include "tags/account_login_dialog.html" %}
+                    {% endif %}
+                </div>
+            {% endcomment %}
+            
             
         </li>
     </ul>

@@ -1,10 +1,10 @@
 {% extends "base_flat.html"%}
 
-{%block content_header%}
+{%block CURRENT_CATEGORY_PATH%}
 <div class="content-header flex-container">
      <p> Bienvenue {{request.user.first_name}}! </p>  
 </div><!-- End of main-header -->
-{%endblock content_header%}
+{%endblock CURRENT_CATEGORY_PATH%}
 
 {% block ASIDE %}
     <aside id="page-side" class="flat-col-xs-12 flat-col-md-2">
