@@ -60,6 +60,11 @@ button:hover{
     background-color:var(--main-bg-color);
     color: var(--main-color);
 }
+
+.site-header--links li:hover{
+    background-color: var(--btn-hover-bg);
+     color: var(--primary-color);
+}
 .site-header--link:hover{
     text-decoration: none;
      background-color: var(--btn-hover-bg);
@@ -356,4 +361,12 @@ button:hover{
 
 .product:hover{
     box-shadow: var(--box-shadow);
+}
+.flat-icon{
+    font-size: 28px;
+    /*font-weight: bold;*/
+}
+.flat-icon-label{
+    font-size: 10px;
+    font-weight: normal;
 }

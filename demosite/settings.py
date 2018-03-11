@@ -27,9 +27,9 @@ DEBUG = True
 LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.Customer'
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]
-SITE_NAME = "Grand Village"
+SITE_NAME = "LYSHOP"
 META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
-                Sac, sacs, android, iphone, samsung, accessoires"
+                Sac, sacs, android, iphone, samsung, accessoires, shop, lyshop, shopping, gabon, afrique, achats"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.9', 'testserver','192.168.11.10','192.168.11.5', ]

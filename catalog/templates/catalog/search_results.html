@@ -1,10 +1,10 @@
-{% extends "base_flat.html" %}
+{% extends "flat_minimal_base.html" %}
     
     {% block MAINCONTENT %}
 
-            <div class="flat-search-result">
+            <div class="flat-search-result flat-row">
                 <p> Resultat de la recherche : </p>
-                <div class="flat-row flex-center">
+                <div class="product-list">
                     
                         {%if results%}
                             {% for p  in results %}

@@ -56,7 +56,6 @@
 
  #site-header #js-canva-menu{
      font-size: 30px;
-     padding: 5px;
  }
  #site-header .logo-container{
      display: block;
@@ -94,7 +93,7 @@
      text-align: center;
      text-decoration: none;
      height: 100%;
-     padding: 15px;
+     padding: 20px;
  }
 
 
@@ -111,6 +110,22 @@
     text-align: center;
     text-decoration: none;
     height: 100%;
+    margin: 0;
+}
+
+.site-header--links li{
+    padding: 0 10px;
+}
+
+.canva-menu-btn{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.canva-menu-btn .site-header--link{
+    height: 100%;
+    margin: 0;
+    padding: 20px;
 }
 .site-header--links 
  #site-header--account{
