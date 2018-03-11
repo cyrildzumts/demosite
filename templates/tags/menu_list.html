@@ -4,6 +4,7 @@
         {% if entry.is_parent %}
             <div class="collapsible">
                 <span class="open">{{entry.name}}</span>
+                <a class="link" href="{{entry.get_absolute_url}}"> Voir Tout</a>
                 {% include "tags/menu_list.html" with entry_list=entry.subcategories%}
             </div>
             
