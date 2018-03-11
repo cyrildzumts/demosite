@@ -1,5 +1,6 @@
 {% extends "base_flat.html" %}
 {% load category_tags %}
+{% load catalog_tags %}
 
 {% block BANNER %}
                  
@@ -30,7 +31,10 @@
                         <span> Catégorie </span>
                     </section>
                     <section class="card flex-column">
-                            {% include "tags/category_box.html" %}
+                        <div class="navigation">
+                                {% root_categorie as root_cats%} 
+                                {% include "tags/menu_list.html" with entry_list=root_cats.root_cats %}
+                        </div>
                     </section>
             </div>
             {% endblock ASIDE_CONTENT %}
@@ -42,7 +46,7 @@
 <div class="flat-col-xs-12 flat-col-md-10">
     <div class="flat-row ">
         <div class="flat-col-xs-12">
-                <div id="page-filter" class="filter flat-container bordered">
+                <div id="page-filter" class="filter flat-container bottom-bordered">
 
                         <section class="flat-btn flat-clickable">
                             <span> FILTRE </span> <span class="glyphicon glyphicon-plus"></span>
@@ -54,7 +58,7 @@
                                           <span> OPTIONS </span>
                                   </section>
                                   
-                                          <div class="card bordered">
+                                          <div class="card bottom-bordered">
                                                   <section class="header">
                                                           <span > MARQUES </span>
                                                   </section>
@@ -77,7 +81,7 @@
                                                   </section>
                                                   
                                           </div>
-                                          <div class="flat-sorting card bordered">
+                                          <div class="flat-sorting card bottom-bordered">
                                               <section class="header">
                                                   <span> TRIER PAR </span>
                                               </section>

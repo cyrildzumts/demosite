@@ -1,14 +1,16 @@
-{% for entry in entry_list %}
-
-        {% comment "" %}
+<ul class="canva-nav">
+    {% for entry in entry_list %}
+    <li class="list-entry">
         {% if entry.is_parent %}
-            <h3><a href="{{entry.get_absolute_url}}">{{entry.name}}</a></h3>
-            {% include "tags/menu_list.html" with entry_list=entry.subcategories%}
+            <div class="collapsible">
+                <span class="open">{{entry.name}}</span>
+                {% include "tags/menu_list.html" with entry_list=entry.subcategories%}
+            </div>
+            
         {% else %}
-        {% endif %}
-        {% endcomment %}
-        
         <a class="link" href="{{entry.get_absolute_url}}">{{entry.name}}</a>
+        {% endif %}
+    </li>
         
-
 {% endfor %}
+</ul>

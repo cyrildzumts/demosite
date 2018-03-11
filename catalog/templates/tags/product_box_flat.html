@@ -1,11 +1,13 @@
 <div class="flat-col-xs-12 flat-col-md-3">
 
 
-<div class="product bordered" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
-        {% if p.is_recent is True %}
-                <span class="label">Nouveau</span>       
+<div class="product" data-brand="{{p.brand}}" data-price="{{p.price}}" data-viewcount="{{p.view_count}}">
+        {% if p.is_available is False %}
+                <span class="label">Stock épuisé</span>
+        {%elif p.is_recent is True %}
+                <span class="label">Nouveau</span> 
         {% endif %}
-        <span class="label">Solde</span>
+        
         <div class="image">
                 <a class="image--link" href="{{p.get_absolute_url}}">
                         <div class="box"> 
@@ -16,12 +18,10 @@
         </div>
         
         <div class="flat-column">
-                <span class="">{{p.name}}</span>
+                <span class="product--name">{{p.name}}</span>
                 <!--<div class="mat-entry">Quantité : {{item.quantity}}</div> -->
-                <span class=""> <span class=""> <strong>{{p.price}} FCFA</strong> </span></span>
+                <span class=""> <span class="product--price"> <strong>{{p.price}} FCFA</strong> </span></span>
         </div>
-        <div class="">
-                <span class="glyphicon glyphicon-heart"></span>
-        </div>
+
 </div>
 </div>

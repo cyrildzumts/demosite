@@ -30,6 +30,23 @@ li:hover > ul, li:hover #site-header--account{
     width: 100%;
 }
 
+ul.canva-nav{
+    position: relative;
+    padding: 5px;
+}
+ul.canva-nav li{
+    display: block;
+    padding: 10px;
+}
+
+ul.canva-nav li ul{
+    display: none;
+    position: relative;
+}
+ul.canva-nav li:hover > ul{
+    display: block;
+}
+
 #site-header--account ul{
     width: 100%;
 }
@@ -146,4 +163,19 @@ li:hover > ul, li:hover #site-header--account{
 .social-link{
     font-size: 150%;
     color: #E7E7E7;
+}
+
+.js-close-canva{
+    text-align: center;
+    cursor: pointer;
+    padding: 2px;
+}
+
+li .collapsible{
+    width: 100%;
+}
+.collapsible .open{
+    display: block;
+    width: 100%;
+    
 }

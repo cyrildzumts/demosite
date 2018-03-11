@@ -1,14 +1,24 @@
 {% load staticfiles %}
 {% load catalog_tags %}
 <div class="box">
-    <span id="site-mobile-nav" class="site-header--link">
+    <div id="js-canva-menu" class="site-header--link">
         <i class="glyphicon glyphicon-menu-hamburger"></i>
-    </span>
-    <a class="site-header--logo bordered"  href="{% url 'catalog:index'%}">
-        <img src="{% static 'images/logo.png' %}" alt="Aller à la page d'acceuille">
-    </a>
+    </div>
+    <div class="logo-container">
+        <a class="site-header--logo"  href="{% url 'catalog:index'%}">
+            <img src="{% static 'images/logo.png' %}" alt="Aller à la page d'acceuille">
+        </a>
+    </div>
+    
 </div>
 
+{% comment "" %}
+<div class="box flat-hidden">
+    <div class="logo-container">
+        <img src="{% static 'images/logo.png' %}" alt="Aller à la page d'acceuille">
+    </div>
+</div>
+{% endcomment %}
 
 <div class="box">
     <ul class="site-header--links relative">
@@ -28,7 +38,7 @@
                 </div>
             </a>
         </li>
-        <li>
+        <li class="flat-hidden-xs">
                 {% if request.user.is_authenticated %}
                 <a class="site-header--link" href="{% url 'accounts:user_account'%}">
                         <div class="flat-column">

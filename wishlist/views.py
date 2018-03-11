@@ -126,14 +126,14 @@ def ajax_add_to_wishlist(request):
     response = {}
     jsonresponse = HttpResponseBadRequest()
     request_is_valid = len(request.POST) > 0
-    flag = False
     if request_is_valid:
         postdata = request.POST.copy()
         product_id = int(postdata['product_id'])
         user_wishlist = wishlist.get_wishlist(request.user)
-        flag = user_wishlist.add(int(product_id))
+        res = user_wishlist.add(int(product_id))
         item_count = user_wishlist.items_count()
-        response = {'state': flag,
+        response = {'added': res['added'],
+                    'duplicated': res['duplicated'],
                     'item_count': item_count,
                    }
         jsonresponse = HttpResponse(json.dumps(response), content_type="application/json")

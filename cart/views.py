@@ -65,8 +65,8 @@ def ajax_add_to_cart(request):
         product_id = postdata['product_id']
         quantity = postdata['quantity']
         if product_id:
-            print("Ajax Add : product_id : ", product_id)
-            print("Ajax Add : quantity : ", quantity)
+            #print("Ajax Add : product_id : ", product_id)
+            #print("Ajax Add : quantity : ", quantity)
             user_cart = cart.get_user_cart(request)
             p = Product.objects.get(pk=product_id)
             added = user_cart.add_to_cart(product=p, quantity=int(quantity))
@@ -85,28 +85,28 @@ def ajax_add_to_cart(request):
 def ajax_cart_update(request):
     """
     This method is called from JQuery.  it updates the Cart
+    When 
     """
-    response = {}
-    done = False
+    response = HttpResponseBadRequest()
+    result = {}
     request_is_valid = len(request.POST) > 0
     if request_is_valid:
         
         postdata = request.POST.copy()
-        testqty = postdata['quantity']
-        print("Test Qty " + testqty )
         product_id = int(postdata['product_id'])
         quantity = int(postdata['quantity'])
         if product_id is not None and quantity is not None:
-            print("Ajax Update : product_id : ", product_id)
-            print("Ajax Update : quantity : ", quantity)
+            #print("Ajax Update : product_id : ", product_id)
+            #print("Ajax Update : quantity : ", quantity)
             user_cart = cart.get_user_cart(request)
-            done = user_cart.update_cart(item_id=product_id, quantity=quantity)
-            if done is True:
-                response['state'] = True
-                response['count'] = user_cart.items_count()
-                response['total'] = user_cart.subtotal()
-                response['quantity'] = quantity
-            else:
-                return HttpResponseBadRequest()
+            result = user_cart.update_cart(item_id=product_id, quantity=quantity)
+            result['count'] = user_cart.items_count()
+            result['total'] = user_cart.subtotal()
+            response = result
+                
+        else:
+            return HttpResponseBadRequest()
+    else:
+        return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),
                         content_type="application/json")

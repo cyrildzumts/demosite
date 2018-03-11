@@ -34,11 +34,17 @@ var Collapsible = (function(){
         console.log("Found " + this.$collapsible.length + " collapsibles on this pages.");
         console.log("Found " + this.$close.length + " collapsibles closes on this pages.");
         this.$collapsible.children(".open").click(function(event){
-            console.log("collapsible opening ...");
-            //event.stopPropagation();
+            event.stopPropagation();
             var target =$(event.target).data("target");
-            $(target).toggle();
-            console.log("Target : " + target);
+            if(target == undefined){
+                $(this).parent().children("ul").toggle();
+            }
+            else{
+                $(target).toggle();
+                console.log("Target : " + target);
+            }
+            
+            
         });
         this.$close.click(function(event){
             console.log("collapsible closing ...");
@@ -135,6 +141,7 @@ var Tabs = (function(){
     Tabs.prototype.onTabClicked = function(event){
         var tab = parseInt($(event.target).data("index"));
         if(tab != this.currentTab){
+            console.log("Tabs Plugin : Tab Clicked");
             this.currentTab = tab;
                 this.update();
         }
@@ -151,12 +158,10 @@ var Tabs = (function(){
 
 var Cart = (function(){
     function Cart(){
-        this.$cart_popup                = {};
-        this.$cartpopup_content         = {};
+
         this.events                     = [];
         this.items                      = [];
         this.eventListeners             = [];
-        this.$notify_popover            = {}
         this.total                      = 0;
         this.count                      = 0;
         this.userID                     = -1;
@@ -164,51 +169,46 @@ var Cart = (function(){
         this.serverUrl                  = "";
         this.$counter                   = {};
         this.$add_to_cart_btn           = {};
-        this.$cart_add_error            = {};
-        this.$error_msg                 = {};
         this.catalog                    = {};
         this.$add_to_wishlist_btn       = {};
+        this.$checkout_link             = {};
+        this.$summary                   = {};
     }
-    Cart.prototype.initDefault = function(){
+    Cart.prototype.init = function(){
+        this.$summary = $("#js-cart-summary");
+        this.$add_to_wishlist_btn = $(".js-cart-add-to-wishlist");
+        this.$add_to_wishlist_btn.click(this.onAddToWishlistClicked.bind(this));
+        this.$checkout_link = $(".flat-checkout-link");
         this.$counter = $(".cart-counter");
-        this.$cart_add_error = $("#flat-add-error");
-        this.$error_msg = $(".flat-error-msg");
         this.$add_to_cart_btn = $("#flat-add-to-cart-btn");
         this.$add_to_cart_btn.click(this.onAddButtonClicked.bind(this));
-        $(".add-to-cart").click(this.onAddButtonClicked.bind(this));
-        $(".plusButton").click(this.onPlusButtonClicked.bind(this));
-        $(".minusButton").click(this.onMinusButtonClicked.bind(this));
-        $(".removeFromCartButton").click(this.onRemoveButtonClicked.bind(this));
+        $("#js-add-to-cart").click(this.onAddButtonClicked.bind(this));
+        $(".js-cart-item-up").click(this.onPlusButtonClicked.bind(this));
+        $(".js-cart-item-down").click(this.onMinusButtonClicked.bind(this));
+        $(".js-cart-remove").click(this.onRemoveButtonClicked.bind(this));
         //$(".cart-popover-button").hover(function(){
         //$("#cart-modal").modal({backdrop: false});
        // });
-       $(".cart-button").hover(this.onCartButtonHover.bind(this), this.onCartButtonHoverLeave.bind(this));
-       $(".close-btn").click(this.onCloseBtnClicked.bind(this));
-       this.$notify_popover = $("#cart-popover");
-       this.$cart_popup = $(".cart-popup");
-       this.$cartpopup_content = this.$cart_popup.children(".popup-content");
-       console.log("Cart initialised : Cart popup : ");
-       console.log(this.$cartpopup_content);
-    };
-    Cart.prototype.init = function(listener){
-        this.addEventListener(listener);
-        this.$add_to_wishlist_btn = $(".flat-cart-add-to-wishlist");
-        this.$add_to_wishlist_btn.click(this.onAddToWishlistClicked.bind(this));
+       //$(".cart-button").hover(this.onCartButtonHover.bind(this), this.onCartButtonHoverLeave.bind(this));
+       //$(".close-btn").click(this.onCloseBtnClicked.bind(this));
     };
     Cart.prototype.addCatalog = function(catalog){
         this.catalog = catalog;
         this.catalog.setCart(this);
     }
     Cart.prototype.onCloseBtnClicked = function(even){
+        event.stopPropagation();
         console.log("Close Menu btn clicked ...");
         $(".cart-dropdown").toggle();
     };
     Cart.prototype.onCartButtonHover = function(event){
+        event.stopPropagation();
         console.log("Cart hovered ..");
         event.preventDefault();
         //$(".cart-button").dropdown();
     };
     Cart.prototype.onCartButtonHoverLeave = function(event){
+        event.stopPropagation();
         console.log("Cart hovered left..");
         event.preventDefault();
         console.log("Cart contains " + this.count + " article(s)");
@@ -218,24 +218,32 @@ var Cart = (function(){
         event.stopPropagation();
         console.log("Cart : moving item to Wishlist");
         var item = {};
-        item.id = $(event.target).data('itemid');
-        item.quantity = $(event.target).data('quantity');
-        this.catalog.addToWishlist(item);
+        var $target = $($(event.target).data('target'));
+        item.id = $target.data("product-id");
+        if(isNaN(item.id)){
+            console.log("Item ID is NaN");
+            this.catalog.notify({message: "ID non identifié. Si le problème persiste veuillez nous contatcter. "});
+        }
+        else{
+            this.catalog.addToWishlist(item);
+        }
+        
     }
     Cart.prototype.onAddButtonClicked = function(event){
+        event.stopPropagation();
         var item = {};
-        item.id = parseInt(this.$add_to_cart_btn.data("itemid"));
-        item.is_available = this.$add_to_cart_btn.data("available");
+        var $target = $($(event.target).data("target"));
+        item.id = parseInt($target.data("product-id"));
+        item.is_available = $target.data("available");
         item.quantity = 1;
         this.addItem(item);
-        console.log("Add button clicked ...")
     };
     Cart.prototype.onRemoveButtonClicked = function(event){
-        console.log("RemovedButton Clicked ...");
-        var $target_parent = $(event.target).parent();
-        var itemID = parseInt($target_parent.attr("data-itemid"));
+        event.stopPropagation();
+        var $target = $($(event.target).data("target"));
+        var itemID = parseInt($target.data("product-id"));
         var that = this;
-
+        console.log("Cart Remove : ID = " + itemID);
         $.ajax({
             type: 'POST',
             url: '/cart/cart_update/',
@@ -244,19 +252,23 @@ var Cart = (function(){
             success: function(response){
                 that.total = response.total;
                 that.count = response.count;
-                $target_parent.parent().remove();
+                $target.remove();
                 that.notify({});
+                that.catalog.notify({message: "L'article a été retiré du Panier"});
             },
             error: function(response){
+                that.catalog.notify({message: "L'article n'a pas pû être retiré du Panier"});
                 console.log("Error : couldn't remove the  article");
             }
         });
     };
     Cart.prototype.onPlusButtonClicked = function(event){
+        event.stopPropagation();
         console.log("PlusButton Clicked ...  : ");
         this.update(event, true);
     };
     Cart.prototype.onMinusButtonClicked = function(event){
+        event.stopPropagation();
         console.log("MinusButton Clicked ...");
         this.update(event, false);
     };
@@ -277,9 +289,13 @@ var Cart = (function(){
         console.log("Notifying Observers ...");
         $(".cart-subtotal").html(this.total);
         this.$counter.html(this.count);
-        
-        for (observer in this.observers){
-            observer(item);
+        if(this.count == 0){
+            this.$checkout_link.hide();
+            this.$summary.hide();
+        }
+        else{
+            this.$checkout_link.show();
+            this.$summary.show();
         }
         this.badgeUpdate();
     };
@@ -287,7 +303,7 @@ var Cart = (function(){
        
         var that = this;
         // Send request to the Server 
-        if(item.is_available != "False"){
+        if(item.is_available == "True"){
             $.ajax({
                 type: 'POST',
                 url : '/cart/add_to_cart/',
@@ -297,20 +313,17 @@ var Cart = (function(){
                 success: function(response){
                     that.total = response.total;
                     that.count = response.count;
-                    that.$error_msg.html("Article ajouté dans le panier.");
-                    that.$cart_add_error.toggle().delay(3000).toggle(500);
                     that.notify(item);
+                    that.catalog.notify({message: "L'article a été ajouté dans le Panier"});
                 },
                 error: function (response){
-                    that.$error_msg.html("Une erreur s'est produite, Veuillez reessayer.");
-                    that.$cart_add_error.toggle().delay(3000).toggle(500);
+                    this.catalog.notify({message: "L'article n'a pas pu être ajouté dans le Panier"});
                 }
             });
         }
        
         else{
-            that.$error_msg.html("Cet article n'est plus disponible.");
-            that.$cart_add_error.toggle().delay(3000).toggle(500);
+            that.catalog.notify({message: "Cet article n'est plus disponible."});
             console.log("This article is not available ...");
         }
         
@@ -365,15 +378,16 @@ var Cart = (function(){
     };
 
     Cart.prototype.update = function(event, action){
-         
-        var $target = $(event.target);
-        var $parent = $(event.target).parent();
-        var $qty_target = $parent.children(".item-qty");
-        var itemID = parseInt($parent.data("itemid"));
-        var price = parseFloat($parent.data("price"));
-        var quantity = parseInt($parent.data("quantity"));
-        var $root_container = $(`#${itemID}`);
-        var $subtotal = $root_container.children(".cart-item-total-price");
+         var notification = {};
+        var $target = $($(event.target).data("target"));
+        var $qty_target = $(event.target).siblings(".product-quantity");
+        var itemID = parseInt($target.data("product-id"));
+        var price = parseFloat($target.data("price"));
+        var quantity = parseInt($target.data("quantity"));
+        
+        var $subtotal = $target.find(".product-price-total");
+        console.log("Cart update : ");
+        console.log($subtotal);
         var that = this;
         var requested_qty = -1;
         if(action){
@@ -381,6 +395,8 @@ var Cart = (function(){
         }else{
             requested_qty = quantity - 1;
         }
+        console.log("Cart quantity update : " + requested_qty);
+        console.log($qty_target);
         $.ajax({
             type: 'POST',
             url: '/cart/cart_update/',
@@ -389,26 +405,39 @@ var Cart = (function(){
             success: function(response){
                 that.total = response.total;
                 that.count = response.count;
-                if(requested_qty == 0){
-                    //var querystr = `#${itemID}`;
-                    $(`#${itemID}`).remove();
-                 }
-                 else {
-                    $qty_target.html(requested_qty);
-                    $parent.data("quantity", requested_qty);
-                    $subtotal.html(price * (requested_qty));
-                     
-                 }
-                
+                if(response.updated){
+                   if(response.quantity > 0){
+                    $qty_target.html(response.quantity);
+                    $target.data("quantity", response.quantity);
+                    $subtotal.html(price * (response.quantity));
+                    
+                   }
+                   else{
+                    $target.remove();
+                   }
+                   notification.message= "Le Panier a été actualisé";
+                }
+                else{
+                    if(response.quantity_error){
+                        notification.message= "Vous avez atteint la quantité maximale pour cet article";
+                    }
+                    else{
+                        notification.message= "Il a eu une erreur interne. veuillez reéssayer plus tard";
+                    }
+                }
+               
                 that.notify({});
+                that.catalog.notify(notification);
+                
             },
             error: function(response){
+                that.catalog.notify({message: "Le Panier n'a pas pu être actualisé"});
                 console.log("Error : l'article n'a pas pu etre actualiser");
             }
         });
     };
     Cart.prototype.badgeUpdate = function(){
-        this.eventListeners[0].html("(" + this.count + ")");
+
     };
     Cart.prototype.getCart = function(){
         var cart = myCart || new Cart();
@@ -477,8 +506,16 @@ var Catalog = (function(){
         this.$add_to_wishlist_btn = {};
         this.cart               = {};
         this.wishlist           = {};
+        this.$canvamenu          = {};
+        this.$site_wrapper      = {};
+        this.$canva_menu_btn    = {};
+        this.$canva_container   = {};
+        this.$notification      = {};
+        this.$notification_content = {};
+        this.timeoutID          = -1;
     }
     Catalog.prototype.init = function(sorting){
+        var that = this;
         this.ordering[0]                         = "NO ACTIV SORTING ";
         this.ordering[this.SORTING_PRICE_ASC]     = "ASCENDING SORTING";
         this.ordering[this.SORTING_PRICE_DSC]     = "DESCENDING SORTING";
@@ -488,7 +525,12 @@ var Catalog = (function(){
             this.CURRENT_SORTING = sorting;
             this.filter();
         }
-
+        this.$notification = $("#notification");
+        this.$notification_content = this.$notification.children(".content");
+        this.$canva_menu_btn = $("#js-canva-menu");
+        this.$canvamenu = $("#site-canva-menu");
+        this.$canva_container = this.$canvamenu.children(".canva-container");
+        this.$site_wrapper= $("#site-wrapper");
         this.$sorting_radios = $("#flat-sorting-input span input:radio");
         this.$product_list = $("#flat-product-list");
         this.$items = $("#flat-product-list .flat-product");
@@ -564,7 +606,17 @@ var Catalog = (function(){
             $("#flat-site-menu").hide();
             console.log("menu clicked ...")
         });
+        $(".js-notify-close").click(function(event){
+            event.stopPropagation();
+            console.log("closing notification...");
+            if(that.timeoutID > 0){
+                console.log("A timer is active : timer ID = " + that.timeoutID);
+                clearTimeout(that.timeoutID);
+                that.timeoutID = -1;
+            }
+            that.$notification.hide();
 
+        });
         this.getItems();
         $("#flat-filter-apply").click(this.onFilterChanged.bind(this));
         $("#btn-filter-reset").click(this.onFilterReset.bind(this));
@@ -575,6 +627,33 @@ var Catalog = (function(){
         for(var i = 0; i < this.brands.length; i++){
             this.$select_brands.append(`<input  type="checkbox" value=${i}> <span class="brand-entry"> ${this.brands[i]} </span>`); 
         }
+
+        /**
+         * OFF-CANVA-MENU
+         */
+         $("#js-canva-menu").click(function(event){
+             console.log("click on canva button");
+            var left = that.$canvamenu.css("left");
+            console.log("click on canva button");
+            console.log("canva menu  LEFT Property : " +  left);
+            if (left == "0px"){
+                that.$canvamenu.css("left", "-200px");
+                that.$site_wrapper.css("margin-left", "0");
+            }
+            else if (left == "-200px"){
+                that.$canvamenu.css("left", "0");
+                that.$site_wrapper.css("margin-left", "200px");
+            }
+         });
+
+         $(".js-close-canva").click(function(event){
+            var target = $($(".js-close-canva").data("target"));
+            target.css("left", "-200px");
+            that.$site_wrapper.css("margin-left", "0");
+            $(".collapsible ul").hide();
+         });
+         
+
     };
 
     Catalog.prototype.setCart = function(cart){
@@ -747,31 +826,51 @@ var Catalog = (function(){
     Catalog.prototype.getBrands = function (){
         console.log("getBrands() called ...");
     };
+
+    Catalog.prototype.notify = function(notification){
+        var that = this;
+        if(notification.message != "undefined"){
+            this.$notification_content.html(notification.message); 
+        }
+        else{
+            console.log("Bad notification object");
+            this.$notification_content.html("Erreur du format de notifition"); 
+        }
+
+        this.$notification.show("slow", function(){
+            var element = this;
+            that.timeoutID = setTimeout(function(){
+                $(element).hide();
+                //that.timeoutID = -1;
+            }, 5000);
+            console.log("timerID : " + that.timeoutID);
+        });
+    };
     return Catalog;
 })();
 //var myCart = new Cart();
 
 var Wishlist = (function(){
     function Wishlist(){
-        this.items = [];
-        this.count = 0;
-        this.$bagde = {};
-        this.$counter = {};
-        this.$error_msg = {};
-        this.catalog = {};
-        this.$add_to_cart_btn = {};
+        this.items              = [];
+        this.count              = 0;
+        this.$bagde             = {};
+        this.$counter           = {};
+        this.catalog            = {};
+        this.$add_to_cart_btn   = {};
+        this.$clear_btn         = {};
 
     }
     Wishlist.prototype.init = function(){
-        this.$error_msg = $(".flat-error-msg");
+        this.$clear_btn = $(".js-wishlist-clear");
         this.$bagde = $(".wishlist-badge");
-        this.$counter = $(".wishlist-counter");
-        this.$add_to_cart_btn = $(".flat-wishlist-add-to-cart-btn");
+        this.$counter = $(".js-wishlist-counter");
+        this.$add_to_cart_btn = $(".js-move-to-cart");
         this.$add_to_cart_btn.click(this.onAddToCartClicked.bind(this));
-        $(".add-to-wishlist").click(this.onAddButtonClicked.bind(this));
+        $("#js-add-to-wishlist").click(this.onAddButtonClicked.bind(this));
         $("#flat-add-to-wishlist-btn").click(this.onAddButtonClicked.bind(this));
-        $(".wishlist-remove").click(this.onRemoveButtonClicked.bind(this));
-        $(".wishlist-clear").click(this.onClearButtonClicked.bind(this));
+        $(".js-remove-from-wishlist").click(this.onRemoveButtonClicked.bind(this));
+        this.$clear_btn.click(this.onClearButtonClicked.bind(this));
     }
     Wishlist.prototype.addCatalog = function(catalog){
         this.catalog = catalog;
@@ -782,37 +881,41 @@ var Wishlist = (function(){
         event.stopPropagation();
         console.log("Wishlist : moving item to Cart");
         var item = {};
-        item.id = $(event.target).data('itemid');
+        var $target = $($(event.target).data("target"));
+        item.id = parseInt($target.data("product-id"));
+        item.is_available = $target.data("available");
         item.quantity = 1;
         this.catalog.addToCart(item);
     }
     Wishlist.prototype.onAddButtonClicked = function(event){
+        event.stopPropagation();
+        console.log("Add to wishlist : " );
+        
         var item = {};
-        var $target = $(event.target);
-        var $element = $(event.target).parent();
-        item.id = parseInt($element.data("itemid"));
-        item.name = $element.data("name");
-        //item.image = $element.data("image");
-        console.log("attr itemid : " + item.id);
-        console.log("Item to add into wishlist : \nName : " + item.name);
-        this.addItem(item);
+        var $target = $($(event.target).data("target"));
+        console.log($target);
+        item.id = parseInt($target.data("product-id"));
+        
+        if(!isNaN(item.id)){
+            this.addItem(item);
+        }
+        else{
+            console.log("Item has an invalid ID : " + item.id);
+        }
         
     };
     Wishlist.prototype.onRemoveButtonClicked = function(event){
+        event.stopPropagation();
         var item = {};
-        var $target = $(event.target);
-        var $element_to_remove = $target.parent();
-        item.id = parseInt($element_to_remove.attr("data-itemid"));
-        item.name = $element_to_remove.attr("data-name");
-        item.image = $element_to_remove.attr("data-image");
-        console.log("Item to Remove : \nName : " + item.name);
-        this.removeItem(item.id);
+        var target_id = $(event.target).data("target");
+        var $target = $(target_id);
+        console.log("Removing WI : " +  target_id);
+        item.id = parseInt($target.data("itemid"));
+        this.removeItem(item.id, $target);
         
     };
     Wishlist.prototype.onClearButtonClicked = function(event){
-        var item = {};
-        var $target = $(event.target);
-        var $element_to_remove = $target.parent();
+        event.stopPropagation();
         this.clear();
     };
     Wishlist.prototype.addItem = function(item){
@@ -826,21 +929,31 @@ var Wishlist = (function(){
             success: function(response){
                 console.log("Wishlist : Add request sent successfully");
                 that.count =  response.item_count;
-                notification.added = true;
-                notification.message = "L'article a été ajouter \nà votre liste de souhait";
+                notification.added = response.added;
+                console.log("Response Added : " + response.added);
+                console.log("Response Duplicate : " + response.duplicated);
+                if(response.added){
+                    notification.message = "L'article a été ajouté à vos Favoris";
+                }
+                else{
+                    if (response.duplicated){
+                        notification.message = "Cet article est déjà dans vos Favoris";
+                    }
+                }
+                
                 that.notify(notification);
             },
             error: function(response){
                 console.log("Error : couldn't add item into the wishlist");
                 notification.added = false;
-                notification.message = "L'article n'a pas pu être ajouté à votre liste de souhait";
+                notification.message = "L'article n'a pas pu être ajouté à vos Favoris";
                 that.notify(notification);
             }
         });
         
         
     };
-    Wishlist.prototype.removeItem = function(itemID){
+    Wishlist.prototype.removeItem = function(itemID, $element_to_remove){
         var that = this;
         $.ajax({
             type: 'POST',
@@ -850,10 +963,11 @@ var Wishlist = (function(){
             success: function(response){
                 console.log("Wishlist : Remove request sent successfully");
                 that.count =  response.item_count;
-                $(`#${itemID}`).remove();
-                that.notify({});
+                $element_to_remove.remove();
+                that.notify({message: "L'article a été retiré des Favoris"});
             },
             error: function(response){
+                that.notify({message: "L'article n'a pas pu être retiré des Favoris"});
                 console.log("Error : couldn't remove item from the wishlist");
             }
         });
@@ -869,10 +983,12 @@ var Wishlist = (function(){
                 console.log("Clear request sent successfully");
                 console.log("Wishlist cleared : " +  response.state);
                 that.count =  response.item_count;
-                that.notify({});
+                $("#wishlist .content").children().remove();
+                that.notify({message: "La liste des Favoris a été vidée"});
             },
             error: function(response){
-                console.log("Error : couldn't remove item from the wishlist");
+                that.notify({message: "Erreur : La Liste des Favoris n'a pas pu être vidée"});
+                console.log("Error : couldn't clear the wishlist");
             }
         });
         
@@ -886,12 +1002,15 @@ var Wishlist = (function(){
 
     Wishlist.prototype.notify = function(notification){
         console.log("Wishlist changed ...");
-        this.$error_msg.html(notification.message);
-
         this.$counter.html("<strong>" + this.count + " </strong>");
-        this.$error_msg.parent().toggle().delay(3000).toggle(500);
-
-        //location.reload(true);
+        if(this.count == 0){
+            this.$clear_btn.hide();
+        }
+        else{
+            this.$clear_btn.show();
+        }
+        this.catalog.notify(notification);
+        
     };
 
     return Wishlist;
@@ -915,11 +1034,11 @@ var Checkout = (function(){
     Checkout.prototype.init = function(){
         this.paiementOpt = 2;
         this.$form = $("#flat-order-form");
-        this.tabs = $(".flat-tabcontent");
-        this.tab = $(".flat-tab");
-        this.nextBtn = $("#flat-tabs-next");
-        this.prevBtn = $("#flat-tabs-prev");
-        this.submitBtn = $("#flat-checkout-submit");
+        this.tabs = $(".flat-tabcontent-checkout");
+        this.tab = $(".flat-tab-checkout");
+        this.nextBtn = $("#js-checkout-next-btn");
+        this.prevBtn = $("#js-checkout-prev-btn");
+        this.submitBtn = $("#js-checkout-submit-btn");
         this.paiementChoiceBtn = $(".choice");
         this.$inputs = this.paiementChoiceBtn.find('[type="radio"]');
         console.log("Checkout Init : we found " + this.$inputs.length + " inputs");
@@ -958,7 +1077,6 @@ var Checkout = (function(){
         else{
             console.log("Checking for checked input");
             if(this.isInputChecked()){
-                console.log("found checked input");
                 this.tab.removeClass("active");
                 this.currentTab = (this.currentTab + 1 ) % this.tabCount;
                 //this.nextBtn.removeClass("disabled");
@@ -988,12 +1106,16 @@ var Checkout = (function(){
     };
 
     Checkout.prototype.onTabClicked = function(event){
+        event.stopPropagation();
         var tab = parseInt($(event.target).data("index"));
         if(tab == 2){
             if(this.isInputChecked()){
                 this.currentTab = tab;
+                console.log("there is one input checked");
                 this.update();
             }
+            else
+                console.log("there is no input checked");
         }
         else if( (tab != this.currentTab) && (tab < 3) && (tab >= 0)){
             
@@ -1062,13 +1184,12 @@ Shopping.cart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
-//Shopping.checkout = new Checkout();
+Shopping.checkout = new Checkout();
 Shopping.catalog.init(0);
 Shopping.account.init();
-Shopping.cart.initDefault();
-Shopping.cart.init($(".cart-badge"));
+Shopping.cart.init();
 Shopping.wishlist.init();
-//Shopping.checkout.init();
+Shopping.checkout.init();
 Shopping.wishlist.addCatalog(Shopping.catalog);
 Shopping.cart.addCatalog(Shopping.catalog);
 Shopping.collapsible = new Collapsible();

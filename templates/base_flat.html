@@ -29,7 +29,7 @@
 
         {% block HEADER %}
                 
-                        <header id="site-header" class="fixed bordered">
+                        <header id="site-header" class="bordered">
                                 {% include "tags/responsive_topnav.html" %}
         
                         </header>
@@ -37,9 +37,59 @@
                 
                 
         {% endblock HEADER %}
+
+        <div id="site-canva-menu">
+                        <div class="canva-container">
+                                
+                                <div class="navigation bottom-bordered">
+                                        {% root_categorie as root_cats%} 
+                                        {% include "tags/menu_list.html" with entry_list=root_cats.root_cats %}
+                                </div>
+                                
+
+
+                                <div class="user-account">
+                                        {% if request.user.is_authenticated %}
+                                        <a class="site-header--link" href="{% url 'accounts:user_account'%}">
+                                                <div class="flat-row">
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                        <span class="secondary">Mon Compte</span>
+                
+                                                </div>
+                                        </a>
+                                        <a class="site-header--link" href="{% url 'accounts:logout'%}">
+                                                <div class="flat-row">
+                                                        <span class="secondary">Se Déconnecter</span>
+                
+                                                </div>
+                                        </a>
+                                        {% else %}
+                                        <a class="site-header--link" href="{% url 'accounts:login'%}">
+                                                <div class="flat-row">
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                        <span class="secondary">Se connecter</span>
+                                                </div>
+                                        </a>
+                                        {% endif %}
+                                </div>
+
+                                <span class="js-close-canva" data-target="#site-canva-menu">Fermer</span>
+        
+                        </div>
+        
+        </div>
        
 <div id="site-wrapper" class="relative">
 
+                <div id="notification" class="flat-container">
+                        <div class="content">
+                                                
+                        </div>
+                        <div class="js-notify-close flat-btn">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span>Fermer</span>
+                        </div>
+                </div>
 
         
         {% block CATEGORY_NAV %}
@@ -66,9 +116,9 @@
         {% block SEARCHBAR %}
                 <div id="site-search" class="flat-row">
                         <form class="site-search--form" action="{% url 'catalog:search' %}">
-                                <div class="form-group">
-                                        <input type="search" name="search" placeholder="Recherche ...">
-                                        <button type="submit">
+                                <div class="flat-row">
+                                        <input type="search" name="search" placeholder="Recherche ..." class="flat-col-xs-10">
+                                        <button type="submit" class="submit-btn" class="flat-col-xs-2">
                                                 <i class="fa fa-search"></i>
                                         </button>
                                 </div>
@@ -107,9 +157,10 @@
         
 
 
-        {% block FOOTER %}
         
-
+        
+</div>
+{% block FOOTER %}
         <footer id="site-footer" class="">
                 <section class="box">
                         <section class="flat-col-xs-12 flat-col-md-3">
@@ -166,10 +217,7 @@
         
                                         </div>
                                         
-                                        <div class="flat-container flat-column">
-                                                <a class="flat-link" href="{% url 'about' %}"> À propos de nous</a>
-                                                <a class="flat-link" href="{% url 'livraison' %}">Livraison</a>
-                                        </div>
+                                        
                                         
                                 </section>
                                 
@@ -184,6 +232,10 @@
                                                 <a class="social-link" href="https://www.facebook.com/lyshoppinggabao/" target="_blank">
                                                         <i class="fa fa-facebook-official"></i>
                                                 </a>
+                                        </div>
+                                        <div class="flat-container flat-column">
+                                                <a class="flat-link" href="{% url 'about' %}"> À propos de nous</a>
+                                                <a class="flat-link" href="{% url 'livraison' %}">Livraison</a>
                                         </div>
         
                                 </section>
@@ -202,7 +254,7 @@
         
         </footer>
         {% endblock FOOTER %}
-</div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>

@@ -20,7 +20,7 @@
 {% endif %}
 <div id="flat-checkout" class="flat-column">
 
-    <div class="flat-checkout-container container flat-checkout-wizard">
+    <div class="flat-checkout-container flat-checkout-wizard">
         <form id="flat-order-form" action="." method="post">{% csrf_token %}
                 {% include "tags/hidden-form-field.html" %}
             <div class="flat-tabs">
@@ -29,45 +29,45 @@
                     <h5> Ces informations nous aiderons à traiter votre commande</h5>
                 </section>
                 <section class="flat-tabBar">
-                    <span class="flat-tab active flat-col-xs-4" data-toogle="#userdata" data-index="0">Données Utilisateur</span>
-                    <span class="flat-tab flat-col-xs-4" data-toogle="#paiement" data-index="1">Méthode de Paiement</span>
-                    <span class="flat-tab flat-col-xs-4" data-toogle="#cartcontent" data-index="2">Contenue de la Commande</span>
+                    <span class="flat-tab-checkout active flat-col-xs-4" data-toggle="#userdata" data-index="0">Données Utilisateur</span>
+                    <span class="flat-tab-checkout flat-col-xs-4" data-toggle="#paiement" data-index="1">Méthode de Paiement</span>
+                    <span class="flat-tab-checkout flat-col-xs-4" data-toggle="#cartcontent" data-index="2">Contenue de la Commande</span>
                 </section>
                 <div class="flat-checkout-body">
-                    <section id="userdata" class="flat-tabcontent">
+                    <section id="userdata" class="flat-tabcontent-checkout">
                         <div class="flat-row">
                             <div class="flat-col-sm-12">
                                 <h4 class="info-text">Vérifier que vos informations sont correctes</h4>
                     
                             </div>
-                            <div class="flat-col-sm-6 ">
+                            <div class="flat-col-sm-12 flat-col-md-6">
                                 <div class="input-group">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Email</label>
-                                        <input class="form-control" type="email" name="email" value="{{user.email}}">
+                                        <input class="" type="email" name="email" value="{{user.email}}">
                                     </div>
                                 </div>
                                 <div class="input-group">
                     
                                     <div class="form-group label-floating">
                                         <label class="control-label">Nom</label>
-                                        <input class="form-control" type="text" name="shipping_name" value="{{user.last_name}}" readonly>
+                                        <input class="" type="text" name="shipping_name" value="{{user.last_name}}" readonly>
                                     </div>
                                 </div>
                                 <div class="input-group">
                     
                                     <div class="form-group label-floating">
                                         <label class="control-label">Prénom</label>
-                                        <input class="form-control" type="text" name="firstname" value="{{user.first_name}}" readonly>
+                                        <input class="" type="text" name="firstname" value="{{user.first_name}}" readonly>
                                     </div>
                                     <div class="form-group label-floating">
                                         <label class="control-label">Telephone</label>
-                                        <input class="form-control" type="text" name="phone" value="{{user.userprofile.telefon}}">
+                                        <input class="" type="text" name="phone" value="{{user.userprofile.telefon}}">
                                     </div>
                                 </div>
                     
                             </div>
-                            <div class="flat-col-sm-6">
+                            <div class="flat-col-sm-12 flat-col-md-6">
                                 <div class="input-group">
                     
                                     <div class="form-group label-floating">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </section>
-                    <section id="paiement" class="flat-tabcontent">
+                    <section id="paiement" class="flat-tabcontent-checkout">
                         <div class="flat-row">
                             <div class="flat-col-sm-10 flat-flex">
                                 <div class="flat-row">
@@ -103,7 +103,7 @@
                                                 <div class="icon">
                                                     <i class="glyphicon glyphicon-check"></i>
                                                 </div>
-                                                <h6>Payer au moment du retrait</h6>
+                                                <span class="paiement-option">Payer au moment du retrait</span>
                                         
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                                 <div class="icon">
                                                     <i class="glyphicon glyphicon-phone"></i>
                                                 </div>
-                                                <h6>AirtelMoney</h6>
+                                                <span class="paiement-option">AirtelMoney</span>
                                         
                                             </div>
                                         </div>
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </section>
-                    <section id="cartcontent" class="flat-tabcontent">
+                    <section id="cartcontent" class="flat-tabcontent-checkout">
                         <div class="flat-row">
                             <span class="flat-col-xs-12"><h4 class="info-text">Contenu de votre Commande</h4></span>
                             <div class="flat-col-sm-12">
@@ -144,12 +144,11 @@
                     </section>
                 </div>
                 
-                <section class="flat-tabs-footer bordered">
-                    <span id="flat-tabs-prev" class="bordered">Précédent</span>
-                    <div class="flat-flex flex-row bordered">
-                        <button id="flat-checkout-submit" class="" type="submit">Envoyer</button>
-                        <span id="flat-tabs-next" class="">Suivant</span>
-                    </div>
+                <section class="flat-tabs-footer flat-row">
+                    <span id="js-checkout-prev-btn" class="flat-btn">Précédent</span>
+                    
+                    <span id="js-checkout-next-btn" class="flat-btn">Suivant</span>
+                    <button id="js-checkout-submit-btn" class="flat-btn checkout-submit-btn" type="submit">Envoyer</button>
                 </section>
             </div>
         </form>

@@ -117,8 +117,11 @@ class Cart(models.Model):
         If quantity == 0 then that item will be removed from the cart.
         if quantity < 0 this method returns false.
         On success this method returns True.
+
+        Update :11.03.2018 : this method returns an object which
+        contains more infos on the result.
         """
-        flag = False
+        response = {}
         if(quantity >= 0):
             if(self.contain_item(item_id)):
                 prod = Product.objects.get(pk=int(item_id))
@@ -130,10 +133,17 @@ class Cart(models.Model):
                     if (quantity <= in_stock):
                         item.set_quantity(quantity)
                         item.save()
-                        flag = True
+                        response['updated'] = True
+                        response['quantity'] = quantity
+                    else:
+                        response['updated'] = False
+                        response['quantity_error'] = True
+                        response['quantity'] = item.quantity
+
                 else:
-                        flag = self.remove_from_cart(item.id)
-        return flag
+                        response['updated'] = self.remove_from_cart(item.id)
+                        response['quantity'] = 0
+        return response
 
 
     def update_quantity(self, item_id, quantity):

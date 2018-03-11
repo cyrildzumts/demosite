@@ -17,7 +17,7 @@
                 <div class="flat-col-xs-12">
                         <div class="card">
                                 <div class="header">
-                                        <span>Appercu de votre Panier</span>
+                                        <div>Appercu de votre Panier : </div>
                                         <span>
                                                 <strong><span class="cart-counter">{{cart_item_count}}</span></strong> article(s)
                                         </span>
@@ -39,53 +39,12 @@
 
                 <div class="content">
                                 {% for item  in cart_items %}
-                                <div class="flat-col-xs-12 flat-col-md-6" id="{{item.product.id}}">
-                                        <div class="box bottom-bordered ">
-                                                <div class="flat-col-xs-3">
-                                                        <div class="image-container"> 
-                                                                <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
-                                                        </div>
-                                                </div>
-                                                <div class="flat-col-xs-9">
-                                                                <div class="details">
-                                                                                <div class="flat-row">
-                                                                                                <section class="flat-col-xs-4"> <span class="product-name"> {{item.name}}</span> </section>
-                                                                                                <section class="flat-col-xs-8">
-                                                                                                        <div class="flat-row">
-                                                                                                                <section class="flat-col-xs-3">
-                                                                                                                        <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                                                                                                                                <span class="js-cart-item-up glyphicon glyphicon-chevron-up"></span>
-                                                                                                                                <span class="product-quantity">{{item.quantity}}</span>
-                                                                                                                                <span class="js-cart-item-down glyphicon glyphicon-chevron-down"></span>
-                                                                                                                        </div>
-                                                                                                                </section>
-                                                                                                                <section class="flat-col-xs-9">
-                                                                                                                        <div class="flat-column">
-                                                                                                                                <span class="entry"><span class="product-price">{{item.price}}</span> FCFA</span>
-                                                                                                                                <span class="entry smaller ">Total : <span class="product-price-total">{{item.total}}</span> FCFA</span>
-                                                                                                                        </div>
-                                                                                                                </section>
-                                                                                                        </div>
-                                                                                                </section>
-                                                                                </div>
-                                                                                <div class="flat-row ">
-                                                                                                <div class="flat-row small">
-                                                                                                                <span class="js-cart-add-to-wishlist flat-link" data-itemid="{{item.id}}" data-quantity="{{item.quantity}}">Ajouter aux Favoris</span>
-                                                                                                                <span class="js-cart-remove flat-link" data-itemid="{{item.id}}"> Supprimer </span>
-                                                                                                </div>
-                                                                                </div>
-                                                                                
-                                                                </div><!-- End of Details -->
-                                                                
-                                                </div>
-                                        </div>
-                                                
-                                </div>
+                                        {% include "tags/card_entry_flat.html" %}
                                 {% endfor %}
                 </div>
                         
 
-                <div class="footer">
+                <div id="js-cart-summary" class="footer">
                                 <div class="entry">Montant Total : <strong> <span class="cart-subtotal"> {{cart_subtotal}}</span> FCFA </strong></div>
                                 <div class="entry">Frais d'envoie :    <strong> 0.00 FCFA </strong></div>
                                 <div class="entry">Reduction :   <strong> 0.00 FCFA</strong></div>
@@ -93,7 +52,7 @@
                                 
                 </div>
                 <div class="flat-checkout-link">
-                                <a class="flat-btn flat" href="/order/{{checkout_url}}">
+                                <a class="flat-btn checkout-link" href="/order/{{checkout_url}}">
                                 Aller à la caisse
                                 </a>
                 </div>

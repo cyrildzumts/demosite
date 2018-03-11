@@ -42,19 +42,22 @@ class Wishlist(models.Model):
         appropriate value for its variable and save.
         """
         product_id = int(product_id)
-        item_in_wishlist = False
-        
         items = self.get_items()
+        added = False
+        duplicate = False
         for item in items:
             if item.product.pk == product_id:
                 item_in_wishlist = True
-        if not item_in_wishlist:
+                duplicate = True
+        if not duplicate:
             # create and save a new Wishlist item
             product = Product.objects.get(id=product_id)
             item = WishlistItem(product=product)
             item.save()
             # item.set_product(product)
             self.wishlistitem_set.add(item)
+            added = True
+        return {"added": added, "duplicated": duplicate }
 
 
     def get_item(self, item_id):

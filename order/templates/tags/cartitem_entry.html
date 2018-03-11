@@ -1,37 +1,48 @@
-<div id="{{item.product.id}}" class="flat-cart-card flat-col-xs-12">
-
-        <div class="flat-row">
-            <section class="flat-col-xs-3">
-                    <div class="item-image">
-                            <img class="img-responsive" src="{{item.image_url}}">
-                    </div>  
-            </section>
-            <section class="flat-col-xs-9">
-                <div class="flat-row">
-                    <section class="flat-col-xs-4">
-                        <span> {{item.name}}</span>
-                    </section>
-                    <section class="flat-col-xs-8">
-                        <div class="flat-row remove-wrap">
-                            <section class="flat-col-xs-3">
-                                <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
-                                    <span class="item-qty">{{item.quantity}}</span>
-                                </div>
-                            </section>
-                            <section class="flat-col-xs-9">
-                                <div class="flat-column">
-                                    <span class="main-value">
-                                        <span class="cart-item-price">{{item.price}}</span> FCFA</span>
-                                    <span class="subdetail smaller cart-item-total-price">Total :
-                                        <span class="cart-item-price">{{item.total}}</span> FCFA</span>
-                                </div>
-                            </section>
+<div class="flat-col-xs-12" id="{{item.product.id}}">
+        <div class="box bottom-bordered ">
+                <div class="flat-col-xs-3">
+                        <div class="image-container"> 
+                                <a href="{{item.get_absolute_url}}"><img class="img-responsive" src="{{item.image_url}}"></a>
                         </div>
-                    </section>
                 </div>
-            </section>
+                <div class="flat-col-xs-9">
+                                <div class="details">
+                                                <div class="flat-row">
+                                                                <section class="flat-col-xs-4"> <span class="product-name"> {{item.name}}</span> </section>
+                                                                <section class="flat-col-xs-8">
+                                                                        <div class="flat-row">
+                                                                                <section class="flat-col-xs-3">
+                                                                                        <div class="flat-column small" data-itemid="{{item.product.id}}" data-quantity="{{item.quantity}}" data-price="{{item.price}}">
+                                                                                                <span class="product-quantity">{{item.quantity}}</span>
+                                                                                                {% comment "" %}
+                                                                                                <span class="js-cart-item-up glyphicon glyphicon-chevron-up"></span>
+                                                                                                
+                                                                                                <span class="js-cart-item-down glyphicon glyphicon-chevron-down"></span>
+                                                                                                {% endcomment %}
+                                                                                        </div>
+                                                                                </section>
+                                                                                <section class="flat-col-xs-9">
+                                                                                        <div class="flat-column">
+                                                                                                <span class="entry"><span class="product-price">{{item.price}}</span> FCFA</span>
+                                                                                                <span class="entry smaller ">Total : <span class="product-price-total">{{item.total}}</span> FCFA</span>
+                                                                                        </div>
+                                                                                </section>
+                                                                        </div>
+                                                                </section>
+                                                </div>
+                                                {% comment "" %}
+                                                
+                                                
+                                                <div class="flat-row ">
+                                                                <div class="flat-row small">
+                                                                        <span class="js-cart-add-to-wishlist flat-link" data-itemid="{{item.id}}" data-quantity="{{item.quantity}}">Ajouter aux Favoris</span>
+                                                                        <span class="js-cart-remove flat-link" data-itemid="{{item.id}}"> Supprimer </span>
+                                                                </div>
+                                                </div>
+                                                {% endcomment %}
+                                </div><!-- End of Details -->
+                                
+                </div>
         </div>
-
-
-
+                
 </div>

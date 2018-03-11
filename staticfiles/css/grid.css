@@ -3,6 +3,10 @@
  * This grid divides the screen in 12 columns
  * By default
  ****************************************/
+ #site-canva-menu, #js-canva-menu{
+    display: none;
+}
+
  .flat-row{
     display: flex;
     flex-direction: row;
@@ -12,11 +16,13 @@
     justify-content: center;
 }
 .flat-left{
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .flat-right{
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
 }
 .flat-column{
     display: flex;
@@ -24,6 +30,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.flex-center{
+    justify-content: center;
+    align-items: center;
 }
 
  .flat-hidden{
@@ -115,6 +125,12 @@
  ** HIDDEN / VISIBLE ********
  ****************************/
  @media (max-width: 768px){
+    #site-canva-menu, #js-canva-menu{
+        display: block;
+    }
+    #site-nav{
+        display: none;
+    }
     .flat-hidden-xs{
         display: none;
     }
