@@ -1037,3 +1037,16 @@ form .input{
 .status-entry .value{
     padding: 5px 0 5px 30px;
 }
+
+/*  ADS COMPONENTS */
+
+
+.rectangle-ads{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 90px;
+    padding: 2px 5px;
+
+}

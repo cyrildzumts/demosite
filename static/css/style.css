@@ -1,138 +1,15 @@
-/*
-.item_added_message{
-    font-family:Arial,Helvetica,sans-serif;
-    position:fixed;
-    top:0px;
-    left:0px;
-    width:100%;
-    z-index:105;
-    text-align:center;
-    font-weight:bold;
-    font-size:100%;
-    color:white;
-    padding:10px 0px 10px 0px;
-    background-color:#8E1609;
-}
-
-.item_added_message span {
-    text-align: center;
-    width: 95%;
-    float:left;
-}
-
-.close-notify {
-    white-space: nowrap;
-    float:right;
-    margin-right:10px;
-    color:#fff;
-    text-decoration:none;
-    border:2px #fff solid;
-    padding-left:3px;
-    padding-right:3px
-}
-
-.close-notify a {
-    color: #fff;
-}
-*/
-/*
-.category-container a.active{
-  background-color: #bdc3c7;
-}
-.category-container{
-  width: 100%;
-  height: auto;
-  margin: auto;
-}
 
 
-
-.product_box{
-    max-width: 500px;
-    height: auto;
-    margin-bottom:  10px;
-}
-
-
-.item{
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    margin: auto;
-}
-.product_image{
-  width: auto;
-  max-height: 300px;
-  min-height: 200px;
-  max-width: 300px;
-  margin-bottom:  10px;
-}
-
-.bordered-container{
-  width: 100%;
-  height: auto;
-  border-width: 1px;
-  border-radius: 8px;
-  border-style: solid;
-  border-color: lightgrey;
-}
-*/
 
 .push
  {
     height: 8px;
  }
 
-
-.orderEntry{
-
-    height: auto;
-    width: 50%;
-    /*display: block;*/
-    color: white;
-    background: #61C9FD;
-    padding: 10px;
-    margin: 20px;
-    font-family: 'Ubuntu', sans-serif;
-
-}
-.orderItem{
-
-    
-
-    box-shadow: 5px 5px 5px #888888;
-    /*display: block;*/
-    border-radius: 1em;
-    background: #F7F7F7;
-    padding: 10px;
-    margin: 20px;
-    font-family: 'Ubuntu', sans-serif;
-
-}
-
-.orderItem .itemImage
-{
-    height: 128px;
-    width: 128px;
-}
-
-.orderItemDetail
-{
-    height: auto;
-    width: 330px; 
-    margin: 10px; 
-}
-
 .flex {
     display: flex;
 }
 
-.refNumber
-{
-    font-size: 11px;
-}
 
 .product-inner-container{
     width: 100%;
@@ -197,41 +74,32 @@
     padding: 1px;
 }
 
-.add-to-cart{
-    width: 50%;
+.add-to-cartt{
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
     padding: 1px;
+    margin: 2px;
+    
 }
 
 .center{
+    position: absolute;
     display: block;
-    margin-left: auto;
-    margin-right: auto
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 .gi-2x{font-size: 2em;}
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
 
-body{
-    margin-bottom: 150px; 
-    background-color: #FEFEFE;
+.body-wrapper{
+    width: 100%;
+    
+    margin-bottom: -150px;
 }
-footer {
-  position: absolute;
-  width: 100%;
-  height: 150px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;
-  color: #FEFEFE;
-  margin-bottom: 2px;
-  font-size: 20px;
-}
+
 
 .main-header{
     width: 100%;
@@ -239,31 +107,20 @@ footer {
     margin: 10px;
     
 }
-body > .container-fluid{
-    
-    padding: 60px 15px 0;
-}
+
 .container-fluid .text-muted{
     margin: 20px 0;
 }
 
-footer > .container-fluid {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 
-html {
-    
-    position: relative;
-    min-height: 100%;
-}
-
+/*
 .side-bar .active{
     color:#F2F1FE;
     background-color:#663399;
 }
-
+*/
+/*
 .side-bar  a{
     color:#663399;
 }
@@ -286,7 +143,7 @@ html {
 .sidebar-link{
     color: #663399;
 }
-
+*/
 
 
 /* Custom page CSS
@@ -297,9 +154,6 @@ html {
     visibility: hidden;
 }
 
-.text-left{
-    text-align: left;
-}
 .bg-transparent{
     background-color: transparent;
 }
@@ -323,27 +177,22 @@ html {
     align-items: center;
     justify-content: center
 }
+/*
 *,
 *:before,
 *::after{
     box-sizing: border-box;
 }
-
+*/
+/*
 .jumbotron{
     background-color: #DCC6E0;
     color: #FEFEFE;
 }
+*/
 
-.navbar {
-    margin-bottom: 0;
-    z-index: 9999;
-    border: 0;
-    font-size: 14px !important;
-    font-family: Ubuntu;
-    letter-spacing: 1px;
-    border-radius: 0;
-}
 
+/*
 .navbar li a, .navbar .navbar-brand {
     color: #FEFEFE !important;
 }
@@ -352,27 +201,34 @@ html {
     color: #f4511e !important;
     background-color: #FEFEFE !important;
 }
-
+*/
+.sidebar-container a:link, .btn a:link{
+    text-decoration: none;
+    color: #22313F;
+}
+.sidebar-container  li a, .sidebar-container ul{
+    text-decoration: none;
+    list-style-type: none;
+    color: #22313F;
+}
+.no-decoration{
+    text-decoration: none;
+    list-style-type: none;
+}
 .navbar-default .navbar-toggle {
     border-color: transparent;
     color: #FEFEFE !important;
 }
 
-.text-purple
-{
-    font-family: "Montserrat", sans-serif;
-    color: #663399;    
 
-}
-.text-orange{
-    color: #f4511e;
-}
 .card-cart{
     width: 100%;
     height: 100px;
     margin: 10px;
 }
-
+.cart_badge{
+    font-size: 8px;
+}
 .fluid{
     width: 100%;
     margin: auto;
@@ -390,8 +246,7 @@ html {
 }
 
 .bordered{
-    margin: 5px;
-    /*border: 1px solid #888888;*/
+    border: 1px solid #BFBFBF;
 }
 .rounded-2{
     border-radius: 2px;
@@ -404,3 +259,124 @@ html {
 .rounded-10{
     border-radius: 20px;
 }
+
+
+.not-in-stock{
+    font-size: 0.75em;
+    background-color: #F62459;
+    color: #F2F1FE;
+}
+
+
+.sidebar-container{
+    color: #22313F;
+}
+
+.bottom-separator{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #BFBFBF;
+}
+
+
+
+.float-left{
+    float:left;
+}
+
+.float-right{
+    float: right;
+}
+
+.after-box{
+    clear: left;
+}
+
+.sorting-panel{ 
+    display: inline;
+    padding: 10px;
+}
+
+.sorting-panel form{
+    height: 32px;
+}
+
+.sorting-panel input{
+    background-color: #F9F8F4;
+}
+input[type=text]:focus {
+    border: 3px solid #E9E8E3;
+}
+/*
+nav li{
+    text-align: center;
+
+}
+nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 2px;
+}
+*/
+/*
+nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 2px 5px 0;
+}
+nav li{
+    border: 1px solid #666;
+    background-color: #EEE;
+    padding: 10px 1em;
+    text-align: center;
+    margin: 3px 1px 0 ;
+}
+nav li a{
+    text-decoration: none;
+    font-size: 1.2em;
+}
+*/
+/*
+
+@media only screen and (max-width: 50em){
+    nav li, .nav li{
+        display:inline-block;
+        
+        
+        
+    }
+    nav , .nav{
+        padding-bottom: 2em;
+    }
+
+    nav li, .nav li{
+        border: 1px solid #666;
+        
+        padding: 1px 1em;
+        text-align: center;
+        justify-content: center;
+        margin: 2px 1px 0 ;
+    }
+}
+*/
+
+
+
+.remove-z{
+    z-index: 0;
+}
+
+
+.width_25{
+    width: 25%;
+}
+
+.login-container{
+    top: 20px;
+}
+
+
+.div-btn{
+    display: block;
+}
+

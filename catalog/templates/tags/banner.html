@@ -1,32 +1,44 @@
-<div id="banner" class="carousel slide container-fluid bordered" data-ride="carousel">
+<div id="banner" class="card">
     <!-- indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#banner" data-slide-to="0" class="active"></li>
-        <li data-target="#banner" data-slide-to="1" ></li>
-        <li data-target="#banner" data-slide-to="2" ></li>
-        <li data-target="#banner" data-slide-to="3" ></li>
-        <li data-target="#banner" data-slide-to="4" ></li>
-    </ol>
     <!-- wrapper for slides -->
-    <div class="carousel-inner border-inner fluid-container bordered bg-crimson" role="listbox">
-        {% for p in banner %}
-            {% if forloop.first%}
-                <div class="item active banner-item bordered bg-niagara">
-            {% else %}
-                <div class="item banner-item bordered bg-niagara">
-            {%endif%}
-                <img class="img-responsive" src="{{p.image.url}}" alt="{{p.name}}"  >
-                </div>
-        {% endfor %}
+    <div class="banner-source-images js-banner-images">
+            
+            <div class="banner-image-container large-leaderboard">
+                <img class="ads-image" src="/media/assets/ads2.png" alt="">
+            </div>
+            
+    </div>
+    <div class="flat-hidden banner-texts js-banner-texts">
+        <div class="banner-text rectangle-ads">Des Produits de qualités à des prix imbatables</div>
+        <div class="banner-text rectangle-ads">Chez <span class="ads-site-name"> LYSHOP </span> vous ne trouvez que des articles <em>originaux</em> </div>
+        <div class="banner-text rectangle-ads">
+            <div class="flat-column">
+                    <span>Livraison sur <strong> Libreville </strong> et <strong> Port-gentil </strong> .</span>
+                    <div class="flat-column">
+                        <span>Vous n'êtes pas dans ces villes ?</span>
+                        <span>pas grave, vous pouvez demandez à un parent ou ami de recupperer votre paquet.</span>
+                    </div>
+                    
+            </div>
+            
+        </div>
+
+        <div class="banner-text rectangle-ads">
+            Profitez des offres du moment
+        </div>
+    </div>
+    <div id="js-banner-content" class="banner-content" role="listbox">
+        <div class="flat-row">
+             <div class="ads-site-name">LYSHOP</div>
+        </div>
+        <div class="flat-row">
+            <div class="banner-item full-banner">
+
+            </div>
+        </div>
+        
     </div> <!-- End of Wrapper -->
 
     <!-- Left and Right controls -->
-    <a class="left carousel-control" href="#banner" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Precedent</span>
-    </a>
-    <a class="right carousel-control" href="#banner" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Suivant</span>
-    </a>
+    
 </div> <!-- End of Banner -->

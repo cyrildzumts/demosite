@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cv8bnb0(d8%e6kt!x#qyy7_me#jy=)cv!_u=f9sse^a&r2eebw'
+SECRET_KEY = os.environ['SITE_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.Customer'
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]

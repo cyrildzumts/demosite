@@ -3,6 +3,12 @@
 {% load catalog_tags %}
 {% load staticfiles %}
 {% load static %}
+
+{% block BANNER %}
+<div id="site-banner" class="flat-row">
+        {% include "tags/banner.html" %}
+ </div>
+{% endblock BANNER %}
 {%block CURRENT_CATEGORY_PATH%}
 
 {%endblock CURRENT_CATEGORY_PATH%}

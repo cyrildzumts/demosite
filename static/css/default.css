@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    list-style: none;
+    list-style-type: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+body, html{
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-weight: normal;
+}
+input, button, tr, select, textarea{
+    padding: 14px 16px;
+    margin: 0;
+}
+select option{
+
+    padding: 10px 16px
+}
+
+a{
+    text-decoration: none;
+    color: #2C2C2C;
+}
+
+.highlight{
+    display: block;
+    padding: 1px 16px;
+    font-size: 100%;
+}
+.note{
+    display: block;
+    padding: 1px 16px;
+    font-size: 0.85em;
+}
+
+
+/**************************************************/
+.js-cart-remove,.js-cart-add-to-wishlist,
+.js-cart-item-up, .js-cart-item-down
+{
+    padding: 5px;
+}
+
+.banner-text{
+    max-width: 75%;
+    padding: 15px;
+}

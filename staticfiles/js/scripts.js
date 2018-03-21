@@ -1158,6 +1158,45 @@ var Checkout = (function(){
 })();
 
 
+var Banner = (function(){
+    function Banner(){
+        this.banner_texts_sources   = {};
+        this.banner_content         = {};
+        this.banner_images_sources  = {};
+        this.banner_texts           = {};
+        this.banner_images          = {};
+        this.pos_text              = 0;
+        this.total_text            = 0;
+
+
+    }
+    Banner.prototype.init = function(){
+        this.banner_texts_sources   = $(".js-banner-texts");
+        this.banner_content         = $("#js-banner-content");
+        this.banner_images_sources  = $(".js-banner-images");
+        this.banner_texts           = this.banner_texts_sources.children(".banner-text");
+        this.banner_images          = this.banner_images_sources.children(".banner-image");
+        this.total_text             = this.banner_texts.length
+        console.log("Banner initialized");
+        console.log("Banner found " + this.banner_texts.length + " on this page");
+        setInterval(this.playText, 5000, this);
+    };
+
+    Banner.prototype.playText = function(that){
+        console.log("Play Text : ");
+        console.log(that);
+        var element = that.banner_texts[that.pos_text];
+        that.pos_text = (that.pos_text + 1) % that.total_text;
+        that.banner_content.empty();
+        $(element).appendTo(that.banner_content);
+        console.log("Play Text Element Pos  : " + that.pos_text);
+        console.log(element);
+    };
+
+    return Banner;
+
+})();
+
 Shopping = {};
 
 Shopping.Cart = Cart;
@@ -1180,11 +1219,13 @@ if(typeof (Storage)!== "undefined"){
 else{
     console.log("This Browser doesn't support webstorage");
 }
+Shopping.banner = new Banner();
 Shopping.cart  = new Shopping.Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
 Shopping.checkout = new Checkout();
+Shopping.banner.init();
 Shopping.catalog.init(0);
 Shopping.account.init();
 Shopping.cart.init();

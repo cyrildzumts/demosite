@@ -26,6 +26,16 @@
 }
 .bg-radicalred{
     background-color: #F62459;
+    color: #F2F1FE;
+}
+.bg-crimson{
+    background-color: #FF3951;
+    color: #F2F1FE;
+}
+
+.bg-tolopea{
+    background-color: #2A2742;
+    color: #F2F1FE;
 }
 .bg-snuff{
     color: #F2F1FE;
@@ -146,5 +156,86 @@
 .bg-emerald{
     background-color: #3FC380;
 }
+.gradient-blue{
+    background: linear-gradient(#3498db, #4ECDC4);
+}
 
+.bg-parfum-section{
+    background-color: #F1A9A0;
+    color: #E4F1FE;
+}
 
+.bg-ebony{
+    background-color: #2C2C2C;
+    color: #ECF0F1;
+}
+.bg-newspaper{
+    background-color: #F9F8F4;
+    color:#2C2C2C;
+}
+
+.bg-mandys-pink{
+    background-color: #F1BC9E;
+    color:#2C2C2C;
+}
+
+.bg-transparent{
+    background-color: transparent;
+}
+
+.text-color-crimson{
+    color: #FF3951;
+}
+
+.text-purple
+{
+    font-family: "Montserrat", sans-serif;
+    color: #663399;    
+
+}
+.text-orange{
+    color: #f4511e;
+}
+.wishlist-remove-btn{
+    color: #FF3951;
+}
+.wishlist-clear-btn{
+ background-color: #FF3951;
+}
+
+.bg-success{
+    background-color: #53DF83;
+    color: #2C3E50;
+}
+.bg-whiteblack{
+    color: #2C2C2C;
+    background-color: #FFFFFF;
+}
+.bg-site-theme{
+    background-color: #ECF0F1;
+    color: #34495E;
+}
+.bg-frenchgrey{
+    /*color: #7D656C;*/
+    color: #F9F8F9;
+    background-color: #545151;
+}
+.bg-venus{
+    background-color: #7D656C;
+    color: #F9F8F9;
+}
+.bg-main-light{
+    background-color: #EEEEEE;
+    color: #1A1A1A;
+}
+.bg-dominant-brand{
+    background-color: #ff8080ff;
+    color: #2C2C2C;
+}
+.bg-main-light .flat-divider{
+    border-color: #846D74;
+}
+.bg-dark{
+    background-color: #1A1A1A;
+    color: #EEEEEE;
+}

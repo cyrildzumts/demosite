@@ -1,0 +1,395 @@
+
+:root{
+    --main-bg-color : #FEFEFE;
+    --main-color    : #2C2C2C;
+    --hover-color   : #F7F3F4;
+    --link-bg-color : #C4BABD;
+    --link-color    : #C4C4C4;
+    --border        : 2px solid  #C4C4C4;
+    --btn-bg-color  : #B5A4A9;
+    --btn-hover-bg  : #F7F3F4;
+    --primary-color : #FF8080FF;
+    --secondary-color: #6D6D6D;
+    --box-shadow    : 3px 3px 5px #6D6D6D;
+    --btn-border    : 2px solid #C4C4C4;
+    --label-color   : #FF2C00;
+    --submit-btn-bg : #FEFEFE;
+    --notify-bg     : #FEFEFE;
+    --notify-color  : #C4C4C4;
+    --notify-border : 2px solid #C4C4C4;
+    --product-name  : #C4C4C4;
+    --product-price : #2C2C2C;
+    --brand-color   : #C4C4C4;
+}
+
+
+body{
+    color: var(--main-color);
+}
+
+input, button, select, textarea{
+    /*background-color: var(--btn-bg-color);*/
+    color: var(--main-color);
+    border: var(--btn-border);
+}
+
+.submit-btn{
+    background-color: var(--submit-btn-bg);
+}
+input:focus{
+    background-color: var(--main-bg-color);
+}
+
+button:hover{
+    background-color:var(--btn-hover-bg);
+}
+
+.bordered{
+    border: 1px solid #ccc;
+}
+.bottom-bordered{
+    border-bottom: 2px solid #E7E7E7;
+    border-bottom-style: dotted;
+}
+
+#site-wrapper{
+    
+}
+#site-header{
+    font-family: 'Open Sans', sans-serif;
+    background-color:var(--main-bg-color);
+    color: var(--main-color);
+}
+
+.site-header--links li:hover{
+    background-color: var(--btn-hover-bg);
+     color: var(--primary-color);
+}
+.site-header--link:hover{
+    text-decoration: none;
+     background-color: var(--btn-hover-bg);
+     color: var(--primary-color);
+ }
+ #site-header--account, #site-account--menu{
+     background-color: var(--main-bg-color);
+     color: var(--main-color);
+ }
+
+ #site-footer{
+     background-color: var(--main-bg-color);
+     color:var(--main-color);
+ }
+ #site-footer input,#site-footer button{
+     color:var(--main-color);
+ }
+.item:hover{
+    background-color:var(--btn-hover-bg);;
+    color: var(--main-color);
+}
+
+.item a{
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.item a:hover{
+    text-decoration: none;
+}
+/********************************************************/
+#site-nav{
+}
+
+#site-canva-menu{
+    background-color:var(--main-bg-color);
+    color:var(--main-color);
+}
+.canva-container{
+    
+}
+
+#site-canva-menu li{
+    color: var(--main-color);
+    border-bottom: 1px solid var(--btn-border);
+}
+#site-canva-menu li a{
+    color:inherit;
+    text-decoration: none;
+}
+#site-canva-menu li a:hover, #site-canva-menu li a:link{
+    color:inherit;
+    text-decoration: none;
+}
+#site-canva-menu li:last-child{
+    border: none;
+}
+.mod-dropdown--content{
+    background-color: #FEFEFE;
+    
+}
+
+.mod-dropdown--content .link{
+    border-bottom: 1px solid #ccc;
+
+}
+
+.link{
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+.flat-link{
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 14px;
+    font-weight: bold;
+    
+}
+
+.flat-link:hover{
+    background-color:var(--primary-color);
+    text-decoration: none;
+}
+
+.label{background-color: var(--label-color);}
+
+.flat-btn{background-color: var(--main-bg-color); color: var(--link-color);border: var(--btn-border);}
+.flat-btn:hover{background: var(--btn-hover-bg);}
+
+
+.order:hover{
+    background-color: var(--hover-color);
+    box-shadow: var(--box-shadow);
+}
+.flat-tab:hover, .flat-tab.active,
+.flat-tab-checkout:hover,.flat-tab-checkout.active{
+    background-color: var(--primary-color);
+  }
+
+  .flat-tabcontent, .flat-tabcontent-checkout{
+    
+    /*border-top: none;*/
+  }
+
+  .flat-tabs{
+
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+}
+
+.flat-tabBar{
+    border: var(--border);
+    background-color: var(--main-bg-color);
+}
+
+ .flat-tab, .flat-tab-checkout{
+    
+    background-color: var(--main-bg-color);
+    border: var(--border);
+}
+.flat-checkout-link .flat-btn{
+    background-color: var(--main-color);
+    color: var(--primary-color);
+    border: var(--btn-border);
+}
+.flat-checkout-link .flat-btn:hover{
+    background-color: var(--btn-hover-bg);
+    border: var(--btn-border);
+}
+.flat-checkout-wizard .choice .icon {
+    color: var(--main-color);
+    border: 4px solid #CCCCCC;
+
+  }
+.flat-checkout-wizard .choice:hover .icon, .flat-checkout-wizard .choice.active .icon {
+    border-color: var(--primary-color);
+  }
+  .flat-checkout-wizard .description {
+    color: var(--secondary-color);
+    font-size: 14px;
+  }
+.flat-cart-description{
+    background-color: var(--main-bg-color);
+}
+.checkout-submit-btn{
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+  }
+
+
+
+.input-container .checkmark, .input-container .radio{
+    background-color: var(--secondary-color);
+  }
+
+.input-container:hover input ~ .checkmark,
+.input-container:hover input ~ .radio{
+    background-color: var(--btn-hover-bg);
+}
+
+.input-container input:checked ~ .checkmark,
+.input-container input:checked ~ .radio
+{
+    background-color: var(--primary-color);
+}
+
+.input-container .checkmark:after{
+    border: var(--border);
+  }
+
+  .input-container .radio:after{
+
+	background: var(--main-bg-color);
+  }
+
+  select option{
+    color: var(--link-color);
+    font-size: 1.5em;
+}
+.flat-cart-add-btn, .checkout-submit-btn{
+    background-color: var(--main-color);
+    color: var(--primary-color);
+}
+
+.flat-cart-add-btn:hover, .checkout-submit-btn:hover{
+    background-color: var(--main-bg-color);
+    color: var(--primary-color);
+}
+
+.js-close-canva{
+    background-color: var(--primary-color);
+}
+#notification{
+    background-color: var(--notify-bg);
+    color: var(--notify-color);
+    border: var(--notify-border);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.product--name{
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--product-name);
+}
+.product--price{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--product-price);
+}
+
+.product-infos .header .product--name{
+    font-size: 200%;
+    font-weight: bold;
+    color: var(--main-color);
+}
+.product-infos .header .product--brand{
+    font-size: 100%;
+    font-weight: bold;
+    color: var(--product-name);
+}
+.product-infos .header .product--price{
+    font-size: 200%;
+    font-weight: bold;
+}
+.paiement-option{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--link-color);
+}
+
+#shiping-page .card .content{
+    
+}
+
+#shiping-page .card .content ul li{
+    border: var(--border);
+}
+#shiping-page .card .content ul li{
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+#about-page .card .content .description p{
+    color: var(--main-color);
+    font-size: 18px;
+    letter-spacing: 2px;
+    border: var(--border);
+}
+#contact-page .card  p{
+    color: var(--main-color);
+    font-size: 18px;
+    letter-spacing: 2px;
+    border: var(--border);
+}
+#about-page .card .content .description p .flat-link{
+    padding: 0;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+    
+}
+#about-page .card .content .description p .flat-link:hover{
+
+    color: var(--primary-color);
+    background-color: var(--btn-hover-bg);
+}
+
+.site-name{
+    color: var(--main-color);
+    font-weight: bold;
+}
+.status-entry{
+    border-bottom: var(--btn-border);
+
+}
+
+.status-entry .key{
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+.collapsible {
+
+}
+
+.collapsible .faq-entry-header{
+    font-size: 14px;
+}
+.collapsible .open:hover{
+    cursor: pointer;
+    background-color: var(--btn-hover-bg);
+}
+
+.product:hover{
+    box-shadow: var(--box-shadow);
+}
+.flat-icon{
+    font-size: 28px;
+    /*font-weight: bold;*/
+}
+.flat-icon-label{
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.banner-content{
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+}
+.banner-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--main-color);
+}
+
+.ads-site-name{
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.rectangle-ads{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--main-bg-color);
+    color: var(--link-color);
+    /*border: var(--btn-border);*/
+}

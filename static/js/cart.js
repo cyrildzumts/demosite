@@ -1,6 +1,15 @@
-jQuery(".add-to-cart").click(function(){
+jQuery(".add-to-cartt").click(function(){
     var item_id = parseInt(jQuery(this).attr("data-itemid"));
-    cart_add_item(item_id, 1);
+    var is_available = jQuery(this).attr("data-available");
+    console.log("Item availability : " + is_available);
+    if(is_available != "False")
+        {
+            cart_add_item(item_id, 1);
+        }
+    else{
+
+    }
+
 })
 
 function cart_add_item(id, quantity)
@@ -42,7 +51,7 @@ function cart_update(inputElement, product_id, quantity)
                 type : 'POST',
                 url: '/cart/cart_update/',
                 data:{product_id: product_id, quantity:quantity},
-                dataype: 'json',
+                dataType: 'json',
                 success: function(response){
                     //update_input(inputElement, response.count);
                     //cart_edit_confirm(response);
@@ -61,8 +70,8 @@ function cart_update(inputElement, product_id, quantity)
 function cart_edit_confirm(response)
 {
     //update the cart icon counter
-    print("cart_edit_confirm :  count " + response.total_count);
-    update_cart_icon(response.total_count);
+    print("cart_edit_confirm :  count " + response.count);
+    update_cart_icon(response.count);
 
 }
 
@@ -104,19 +113,21 @@ jQuery("input.quantity").keypress(function(e){
 jQuery(".add_item").click(function(){
     displayAttribute($(this), true);
 });
-
+/*
 jQuery(".remove_item").click(function(){
 
     node = $(this);
     console.log("remove item clicked");
     displayAttribute(node, false);
 });
-
+*/
+/*
 jQuery(".delete").click(function(){
     print("Delete Item clicked " + this);
     node = $(this);
     displayAttribute(node, false, true);
 });
+*/
 function displayAttribute(node, added, del){
     /**
     * node : a JSON representing an HTML element
@@ -162,13 +173,13 @@ function displayAttribute(node, added, del){
     temp.quantity = quantity;
     temp.input = node.siblings("input");
     //temp.input.val(quantity);
-    print("Item Parent : " + temp.parent);
-    print("Parent Attributes : ");
-    print("Item ID : " +  temp.item_id );
-    print("Item Old Quantity : " + temp.old_quantity);
-    print("Item Quantity : " + quantity);
-    print("Input : " + temp.input );
-    print("Input Value : " + temp.input.val() );
+    //print("Item Parent : " + temp.parent);
+    //print("Parent Attributes : ");
+    //print("Item ID : " +  temp.item_id );
+    //print("Item Old Quantity : " + temp.old_quantity);
+    //print("Item Quantity : " + quantity);
+    //print("Input : " + temp.input );
+    //print("Input Value : " + temp.input.val() );
     cart_update(temp.input, temp.item_id, temp.quantity);
     return temp;
 }

@@ -370,3 +370,25 @@ button:hover{
     font-size: 10px;
     font-weight: normal;
 }
+
+.banner-content{
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+}
+.banner-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--main-color);
+}
+
+.ads-site-name{
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.rectangle-ads{
+    font-size: 32px;
+    background-color: var(--main-color);
+    color: var(--link-color);
+    border: var(--btn-border);
+}

@@ -1,7 +1,5 @@
 from django.db import models
-# from django.core.urlresolvers import reverse
 from catalog import choices
-# from django.conf import settings
 from django.template.defaultfilters import slugify
 import datetime
 from django.utils import timezone
