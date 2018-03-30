@@ -62,7 +62,7 @@ def root_categorie():
     """
     This method return the root categories
     """
-    print("roots cats called ")
+    #print("roots cats called ")
     root_cats = Category.objects.filter(is_active=True, parent=None)
     return {'root_cats': root_cats}
 
@@ -84,7 +84,7 @@ def get_home_items(group):
     days = 700
     if group is not None:
         if group == 0:
-            print ("get New Items")
+            #print ("get New Items")
             today = timezone.now()
             delta = datetime.timedelta(days = days)
             date = today - delta

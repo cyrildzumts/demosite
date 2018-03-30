@@ -1177,3 +1177,15 @@ form .input{
     max-width: 100%;
     max-height: 100%;
 }
+
+.flat-main-content{
+    display: none;
+}
+
+
+@media (max-width: 768px){
+    .full-banner,.leaderboard,.large-leaderboard,
+    .square-preview,.square-preview-2{
+        width: 100%;
+    }
+ }

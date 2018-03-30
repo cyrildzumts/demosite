@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from demosite import settings
 from django.views.generic import DetailView, ListView
 import calendar
-from django.db.models import Q
+from django.db.models import Q, F
 import operator
 from functools import reduce
 # Create your views here.
@@ -33,9 +33,8 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         p = super(ProductDetailView, self).get_object()
         name = p.name
-        p.view_count = p.view_count + 1
-        p.save()
-        context['page_title'] = name
+        self.get_queryset().update(view_count=F('view_count') + 1)
+        context['page_title'] = name + " | " + settings.SITE_NAME
         return context
 
 

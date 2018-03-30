@@ -32,7 +32,7 @@ META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
                 Sac, sacs, android, iphone, samsung, accessoires, shop, lyshop, shopping, gabon, afrique, achats"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.9', 'testserver','192.168.11.10','192.168.11.5', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.4', 'testserver', ]
 
 handler404 = 'demosite.views.page_not_found'
 handler500 = 'demosite.views.server_error'

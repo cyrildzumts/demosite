@@ -2,17 +2,18 @@ from django.db import models
 from catalog import choices
 from django.template.defaultfilters import slugify
 import datetime
+import time
 from django.utils import timezone
 
 # Create your models here.
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, help_text='Texte unique\
                             representant la page du produit.')
     # parent_category = models.IntegerField(default=0)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True,
+    parent = models.ForeignKey('self',blank=True,
                                null=True, related_name='children')
     description = models.TextField()
     is_active = models.BooleanField(default=True)
@@ -59,9 +60,13 @@ class Category(models.Model):
         that is, self.parent is None , self is returned
         instead of None.
         """
+        start_time = datetime.datetime.now()
         root = self
         while root.parent is not None:
             root = root.parent
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Cat root_cat() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         return root
 
     def is_root(self):
@@ -88,6 +93,7 @@ class Category(models.Model):
         Category.
         """
         flag = False
+        start_time = datetime.datetime.now()
         current_cat = product.categories.get()
         if current_cat == self:
             flag = True
@@ -96,6 +102,9 @@ class Category(models.Model):
                 current_cat = current_cat.parent
                 if current_cat == self:
                     flag = True
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Cat is_root_child() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         return flag
 
     def get_products(self):
@@ -103,8 +112,13 @@ class Category(models.Model):
         Return every products which belong
         to this Category tree.
         """
-        products = Product.objects.all().order_by('-created_at')
+        start_time = datetime.datetime.now()
+        products = Product.objects.all().order_by('-created_at').filter()
         items = [p for p in products if self.is_root_child(p)]
+
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Cat get_products() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         return items
 
     def get_direct_products(self):
