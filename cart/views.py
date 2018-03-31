@@ -6,6 +6,7 @@ from django.http import HttpResponseBadRequest
 from django.http import HttpResponse
 from django.urls import reverse, resolve
 from cart import cart
+from cart.cart_service import CartService
 # from cart.models import Cart, CartItem
 from demosite import settings
 from django.views.decorators.csrf import csrf_protect
@@ -36,8 +37,8 @@ def show_cart(request):
             return HttpResponseRedirect(match.url_name)
     cart_items = user_cart.get_items()
     page_title = 'Panier' + " - " + settings.SITE_NAME
-    cart_subtotal = user_cart.subtotal()
-    cart_item_count = user_cart.items_count()
+    cart_subtotal = CartService.get_subtotal(user_cart.id)
+    cart_item_count = CartService.items_count(user_cart.id)
 
     context = {'cart_items': cart_items,
                'page_title': page_title,
@@ -65,15 +66,13 @@ def ajax_add_to_cart(request):
         product_id = postdata['product_id']
         quantity = postdata['quantity']
         if product_id:
-            #print("Ajax Add : product_id : ", product_id)
-            #print("Ajax Add : quantity : ", quantity)
             user_cart = cart.get_user_cart(request)
             p = Product.objects.get(pk=product_id)
             added = user_cart.add_to_cart(product=p, quantity=int(quantity))
             if added is True:
                 response['state'] = True
-                response['count'] = user_cart.items_count()
-                response['total'] = user_cart.subtotal()
+                response['count'] = CartService.items_count(user_cart.id)
+                response['total'] = CartService.get_subtotal(user_cart.id)
             else:
                 return HttpResponseBadRequest()
     return HttpResponse(json.dumps(response),
@@ -96,12 +95,10 @@ def ajax_cart_update(request):
         product_id = int(postdata['product_id'])
         quantity = int(postdata['quantity'])
         if product_id is not None and quantity is not None:
-            #print("Ajax Update : product_id : ", product_id)
-            #print("Ajax Update : quantity : ", quantity)
             user_cart = cart.get_user_cart(request)
             result = user_cart.update_cart(item_id=product_id, quantity=quantity)
-            result['count'] = user_cart.items_count()
-            result['total'] = user_cart.subtotal()
+            result['count'] = CartService.items_count(user_cart.id)
+            result['total'] = CartService.get_subtotal(user_cart.id)
             response = result
                 
         else:

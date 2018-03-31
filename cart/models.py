@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 from catalog.models import Product
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -9,6 +10,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.shortcuts import get_object_or_404
 from cart.cart_exceptions import QuantityError
 from django.core.exceptions import ObjectDoesNotExist
+
+from cart.cart_service import CartService
 # Create your models here.
 
 """
@@ -63,7 +66,7 @@ class Cart(models.Model):
         """
         added = False
         if quantity >= 0:
-            if self.contain_item(product.pk):
+            if CartService.contains_item(self.id, product.id):
                 print ("Product Already in Cart")
                 # ci = CartItem.objects.get(product=product)
                 # ci = CartItem.objects.get(cart=self, product=product)
@@ -88,14 +91,24 @@ class Cart(models.Model):
         return added
 
     def contain_item(self, item_id):
+        """
+        Deprecated : this method is slow on query.
+        Use the CartService.contains_items() from 
+        cart.cart_service instead
+        """
         flag = False
         try:
+            start_time = datetime.datetime.now()
             prod = Product.objects.get(pk=int(item_id))
             item = self.cartitem_set.get(product=prod)
             if item is not None:
                 flag = True
+            end_time = datetime.datetime.now()
+            elapsed_time = end_time - start_time
+            print("Cart : contain_item() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         except ObjectDoesNotExist as e:
-            pass  # print(e)
+            flag = False
+
         return flag
 
     def get_item(self, item_id):
@@ -123,7 +136,7 @@ class Cart(models.Model):
         """
         response = {}
         if(quantity >= 0):
-            if(self.contain_item(item_id)):
+            if(CartService.contains_item(self.id, item_id)):
                 prod = Product.objects.get(pk=int(item_id))
                 item = self.cartitem_set.get(product=prod)
                 # item = self.get_item(item_id)
@@ -191,11 +204,18 @@ class Cart(models.Model):
         """
         Return the subtotal amount for the
         items available in the Cart.
+        Deprecated : use CartService.get_subtotal()
+        from cart.cart_service instead
         """
         cart_total = 0
+        start_time = datetime.datetime.now()
         items = self.get_items()
         for item in items:
             cart_total += item.total_price()
+
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Cart : subtotal() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         return cart_total
 
     def get_items(self):
@@ -207,11 +227,18 @@ class Cart(models.Model):
     def items_count(self):
         """
         Return the number of items present in the Cart.
+        Deprecated : use CartService.items_count()
+        from cart.cart_service instead
         """
         count = 0
+        start_time = datetime.datetime.now()
         items = self.get_items()
         for item in items:
             count += item.quantity
+
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Cart : items_count() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         return count
 
     def is_empty(self):

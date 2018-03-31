@@ -1,14 +1,11 @@
 # Create your models here.
+import datetime
 from django.db import models
 from catalog.models import Product
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-#from django.contrib.contenttypes.models import ContentType
-#from django.contrib.contenttypes.fields import GenericForeignKey
-#from django.conf import settings
-#from django.contrib.sessions.models import Session
-#from django.contrib.auth.signals import user_logged_in
-#from django.shortcuts import get_object_or_404
+
+from wishlist.wishlist_service import WishlistService
 
 # Create your models here.
 
@@ -42,13 +39,17 @@ class Wishlist(models.Model):
         appropriate value for its variable and save.
         """
         product_id = int(product_id)
-        items = self.get_items()
+        start_time = datetime.datetime.now()
+        #items = self.get_items()
         added = False
-        duplicate = False
-        for item in items:
-            if item.product.pk == product_id:
-                item_in_wishlist = True
-                duplicate = True
+        duplicate = WishlistService.contains_item(self.id, product_id)
+        #for item in items:
+        #    if item.product.pk == product_id:
+        #        item_in_wishlist = True
+        #        duplicate = True
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Wishlist : add() check processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         if not duplicate:
             # create and save a new Wishlist item
             product = Product.objects.get(id=product_id)
@@ -89,8 +90,15 @@ class Wishlist(models.Model):
     def items_count(self):
         """
         Return the number of items present in the Wishlist.
+
         """
-        return self.wishlistitem_set.count()
+        count = 0
+        start_time = datetime.datetime.now()
+        count = WishlistService.items_count(self.id)
+        end_time = datetime.datetime.now()
+        elapsed_time = end_time - start_time
+        print("Wishlist : items_count() check processing time : {0} ms".format(elapsed_time.microseconds / 1000))
+        return count
 
     def get_user(self):
         """

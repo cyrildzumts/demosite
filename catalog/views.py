@@ -16,6 +16,7 @@ import calendar
 from django.db.models import Q, F
 import operator
 from functools import reduce
+from catalog.category_service import CategoryService
 # Create your views here.
 
 # this function return a list of subcategory
@@ -51,12 +52,15 @@ class CategoryView(ListView):
         meta_keywords = self.category.meta_keywords
         meta_description = self.category.meta_description
         brands = set()
-        products = self.category.get_products()
-        parent_cats = self.category.categories
+        print("Categoryview processin  products ...")
+        products = CategoryService.get_products(self.category.id)
+        print("Categoryview processin parent cats ...")
+        parent_cats = CategoryService.get_parents_from(self.category.id)
+        print("Categoryview processin root cats ...")
         root_cats = Category.objects.filter(parent=None)
-        for p in products:
-            brands.add(p.brand)
-        
+        print("Categoryview processin brands ...")
+        brands = CategoryService.get_brands(self.category.id)
+        print("Categoryview processing done ...")
         context = {
             'root_cats'         : root_cats,
             'current_category'  : self.category,

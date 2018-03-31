@@ -149,7 +149,6 @@ def ajax_wishlist_clear(request):
     user_wishlist = wishlist.get_wishlist(request.user)
     user_wishlist.clear()
     print("User %s Wishlist cleared" % request.user.username)
-    item_count = user_wishlist.items_count()
     response = {}
     item_count = user_wishlist.items_count()
     response = {'state': True,

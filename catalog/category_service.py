@@ -41,7 +41,7 @@ class CategoryService():
         with connection.cursor() as cursor:
             start_time = datetime.datetime.now()
             cursor.execute(query, [start, end])
-            row = cursor.fetchall()[0]
+            row = cursor.fetchone()
             end_time = datetime.datetime.now()
             elapsed_time = end_time - start_time
             print("Categoryservice : get_path() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
@@ -88,13 +88,42 @@ class CategoryService():
                     and root.parent_id in ( t4.id ,t3.id ,t2.id ,t1.id)"
                 start_time = datetime.datetime.now()
                 cursor.execute(query,[product_id])
-                row = cursor.fetchall()[0]
+                row = cursor.fetchall()
                 end_time = datetime.datetime.now()
                 elapsed_time = end_time - start_time
                 print("Categoryservice : is_root_child() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
-                flag = category in row
+                if (row and len(row)):
+                    row = row[0]
+                    flag = category in row
 
         return  flag
+
+
+    @staticmethod
+    def get_parents_from(category_id):
+        row = None
+        paths = None
+        query = "SELECT t1.id, t1.name, t1.slug, t2.id, t2.name, t2.slug,t3.id, t3.name, t3.slug , t4.id, t4.name, t4.slug \
+            FROM categories AS t1 , categories as cat_end \
+            LEFT JOIN categories AS t2 ON t2.parent_id = t1.id \
+            LEFT JOIN categories AS t3 ON t3.parent_id = t2.id \
+            LEFT JOIN categories AS t4 ON t4.parent_id = t3.id \
+			WHERE t1.parent_id is NULL and cat_end.id=%s and cat_end.id in (t2.id, t3.id, t4.id)"
+        print("Categoryservice : get_parent_from() cat id : {0}".format(category_id))
+        with connection.cursor() as cursor:
+            start_time = datetime.datetime.now()
+            cursor.execute(query, [category_id])
+            row = cursor.fetchall()
+            end_time = datetime.datetime.now()
+            elapsed_time = end_time - start_time
+            print("Categoryservice : get_parent_from() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
+            if(row and len(row)):
+                paths = list(zip(*[iter(row[0])]*3))
+            else:
+                print("CategoryService get_parents_from() no result")
+
+        print("Categoryservice : paths processed")
+        return paths
 
 
     @staticmethod
@@ -149,3 +178,4 @@ def test_query2():
     for brand in brands:
         print(brand)
 
+    parent_cats = CategoryService.get_parents_from(cat.id)
