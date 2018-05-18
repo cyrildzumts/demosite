@@ -1,5 +1,5 @@
 from order.models import Order, OrderItem
-from cart import cart
+from cart import cart_utils
 from order.forms import CheckoutForm
 from django.core import urlresolvers
 

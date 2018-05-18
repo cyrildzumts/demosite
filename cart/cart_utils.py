@@ -8,35 +8,8 @@ import random
 CART_ID_SESSION_KEY = 'cart_id'
 
 
-def get_cart(user):
-    """
-        @brief get_cart
-        @param user :  the current user who made the request
-        @ return a Cart which belongs to user.
-        if the user has no Cart, then a new one is created for this user
-    """
-    try:
-        cart = Cart.objects.get(user=user)
-    except Cart.DoesNotExist:
-        cart = Cart()
-        cart.user = user
-        cart.save()
-    return cart
 
 
-def get_user_cart(request):
-    """
-        @brief get_user_cart : this is an utility function that
-        first checks if the current user is logged in.
-        @return a Cart associated to the user who made
-        this request.
-        An exception is thrown if the user is not logged in.
-    """
-    if request.user.is_authenticated():
-        return get_cart(request.user)
-    else:
-        raise Http404("Vous devez être connecter pour \
-        pouvoir utiliser le Panier.")
 
 
 # get current user's cart id, set new one if blank

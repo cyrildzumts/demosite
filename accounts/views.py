@@ -1,23 +1,36 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.template import RequestContext
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as django_login, logout as django_logout
-from accounts.forms import AuthenticationForm, RegistrationForm
-from .models import UserProfile
-from .forms.forms import UserForm
+from accounts.models import UserProfile
+from accounts.forms.forms import UserForm, UserProfileForm
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
-from demosite import settings
+from demosite import settings, utils
 from order.models import Order, OrderItem
-
+from accounts.services import AccountService
+from django.urls import reverse_lazy
+from django.views.generic.edit import  UpdateView
 
 # GLOBAL Redirect url variable
 REDIRECT_URL = settings.LOGIN_REDIRECT_URL
+
+@method_decorator(login_required, name='dispatch')
+class UserProfileUpdateView(UpdateView):
+    form_class = UserProfileForm
+    #template_name = 'accounts/userprofile_form.html' : default name
+    success_url = reverse_lazy('accounts:user_account')
+
+    def get_object(self, queryset=None):
+        profile = UserProfile.objects.get(user=self.request.user)
+        return profile
+
+
 
 
 # Create your views here.
@@ -27,23 +40,24 @@ def login(request):
     """
     page_title = "Connexion d'utilisateur"
     template_name = 'registration/login.html'
+    
     # template_name = 'tags/login_form.html'
-    next_url = REDIRECT_URL
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            str_url = request.POST['next']
-            if len(str_url) > 0 :
-                next_url = str_url
-            user = auth.authenticate(username=request.POST['username'],
-                                     password=request.POST['password'])
-            if user is not None:
-                if user.is_active:
-                    auth.login(request, user)
-                    return redirect(next_url)
+        result = AccountService.process_login_request(request)
+        if result['user_logged']:
+            return redirect(result['next_url'])
     else:
-        form = AuthenticationForm()
-    return render(request, template_name, locals())
+        form = AccountService.get_authentication_form()
+        register_form = AccountService.get_registration_form()
+    
+    context = {
+        
+        'page_title':page_title,
+        'template_name':template_name,
+        'form': form,
+        'registration_form': register_form,
+    }
+    return render(request, template_name, context)
 
 
 def logout(request):
@@ -61,25 +75,19 @@ def register(request):
     template_name = "registration/register.html"
     page_title = 'Creation de compte | ' + settings.SITE_NAME
     if request.method == 'POST':
-        postdata = request.POST.copy()
-        # form = UserCreationForm(postdata)
-        form = RegistrationForm(data=request.POST.copy())
-        if form.is_valid():
-            # form.save()
-            form.save()
-            # return redirect(REDIRECT_URL)
-            username = request.POST['username']
-            password = request.POST['password1']
-            user = auth.authenticate(username=username, password=password)
-
-            if user and user.is_active:
-                auth.login(request, user)
-                return redirect(REDIRECT_URL)
+        result = AccountService.process_registration_request(request)
+        if result['user_logged']:
+            return result['next_url']
 
     else:
         # form = UserCreationForm()
-        form = RegistrationForm()
-    return render(request, template_name, locals())
+        form = AccountService.get_registration_form()
+    context = {
+        'page_title': page_title,
+        'template_name': template_name,
+        'form': form,
+    }
+    return render(request, template_name, context)
 
 
 @login_required

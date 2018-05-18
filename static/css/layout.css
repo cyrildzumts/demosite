@@ -16,20 +16,28 @@
 
 li {
     display: block;
+    width: 100%;
     padding: 5px;
+
     position: relative;
 }
 
 li ul, li #site-header--account {
     display: none;
-    position: absolute;
+    position: relative;
 
 }
+/*
 li:hover > ul, li:hover #site-header--account{
     display: block;
     width: 100%;
 }
-
+*/
+/*
+li:hover #site-header--account{
+    display: block;
+    width: 100%;
+}
 ul.canva-nav{
     position: relative;
     padding: 5px;
@@ -51,6 +59,7 @@ ul.canva-nav li:hover > ul{
     width: 100%;
 }
 
+*/
 #site-newproducts-ads{
     position: relative;
 }
@@ -58,13 +67,14 @@ ul.canva-nav li:hover > ul{
 #page-side{
     border-right: 1px solid #ccc;
 }
-
+/*
 #page-side li ul{
     display: block;
     position: relative;
     padding: 5px;
     margin: 5px;
 }
+*/
 #product-page{
 
 }

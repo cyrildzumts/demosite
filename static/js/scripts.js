@@ -1,5 +1,8 @@
 
 
+/*import {Dispatcher,Subscriber,Publisher} from './lib/pubsub.js';*/
+
+
 
 // display an error message when the
 function displayLoginError(){
@@ -18,6 +21,281 @@ $(".search-form").submit(function(){
         return false;
     return true;
 });
+
+function ajax(options){
+    return new Promise(function(resolve, reject){
+        $.ajax(options).done(resolve).fail(reject);
+    });
+}
+
+// PUBLISHER - SUBSCRIBER MODULES
+
+/**
+ * Integer Constant used to represent TOPICS
+ * The Client is of course free not to use it.
+ * 0 - SearchResults
+ * 1 - SortingOrderChanged
+ * 2 - FILTERCHANGED
+ * 3 - NewsletterRegister
+ * 4 - CartAddItem
+ * 5 - CartRemoveItem
+ * 6 - CartRemoveAll
+ * 7 - WishlistAddItem
+ * 8 - WishlistRemoveItem
+ * 9 - WishlistRemoveAll
+ * 10 - LoginFormSubmit
+ * 11 -  LogoutSent
+ * 12 - CheckoutSubmit
+ * 
+ */
+
+const PUBSUBTOPIC = {
+    SEARCH : '/search',
+    SEARCHRESULT : '/search/results/',
+    SORTINGLOWERPRICE : '/sorting/lowerprice',
+    SORTINGHIGHERPRICE: '/sorting/higherprice',
+    SORTINGTOPARTCIEL  : '/sorting/top',
+    SORTINGMOSTRECENT  : '/sorting/mostrecent',
+    FILTERBRAND        : '/filter/brands',
+    NEWSLETTERREGISTER : '/newsletter/register',
+    CARTADDITEM        : '/card/add',
+    CARTADDITEMFAILED  : '/card/add/failed',
+    CARTREMOVEITEM     : '/card/remove',
+    CARTUPDATE         : '/cart/update',
+    CARTUPDATESUCCESS  : '/cart/update/success',
+    CARTUPDATEFAILED   : '/cart/update/failed',
+    CARTREMOVEITEMFAILED : '/card/remove/failed',
+    CARTCLEAR          : '/card/clear',
+    WISHLISTADD        : '/wishlist/add',
+    WISHLISTREMOVE     : '/wishlist/remove',
+    WISHLISTCLEAR      : '/wishlist/clear',
+    WISHLISTADDTOCART  : '/wishlist/cart-add',
+    CHECKOUTSUBMIT     : '/checkout/submit',
+    CHECKOUTCANCEL     : '/checkout/cancel',
+    FORMERROR          : '/forms/error'
+
+};
+
+var Dispatcher = (function(){
+    function Dispatcher(){
+        this.publishers         = [];
+        this.subscribers        = [];
+        this.topics             = new Set();
+        /**
+         * topics regroups all subscribers to a 
+         * particule
+         */
+        this.topic_pool         = {};
+        this.topic_ref          = -1;
+    };
+
+    /**
+     * 
+     * @param {*} topic 
+     * @param {*} publisher 
+     */
+    Dispatcher.prototype.add_publisher = function(topic, publisher){
+        this.publishers.push(publisher);
+        if(!this.topic_pool.hasOwnProperty(topic)){
+            this.topic_pool[topic] = [];
+        }
+
+    };
+    Dispatcher.prototype.add_subscriber = function(subscriber){
+        this.subscribers.push(subscriber);
+    };
+
+    /**
+     * return a unique Token used to unsubscribe from topic
+     * @param {*} topic (string): The topic to subscribe to
+     * @param {*} listener(Function): The callback function to call when  a topic changed
+     */
+    Dispatcher.prototype.register_subscriber = function(topic, listener){
+        if(!this.topic_pool.hasOwnProperty(topic)){
+            this.topic_pool[topic] = [];
+        }
+        var token = (++this.topic_ref).toString();
+        this.topic_pool[topic].push({callback:listener, token: token});
+        return token;
+    };
+
+    /**
+     * Unsubscribe a a listener from a topic
+     * @param {*} token(string) : The token of the listener to unsubscribe
+     */
+    Dispatcher.prototype.unsubscribe = function(token){
+        for(var topic in this.topic_pool){
+            if(this.topic_pool.hasOwnProperty(topic)){
+                for(var i = 0, j = this.topic_pool[topic].length; i < j; i++){
+                    if(this.topic_pool[topic][i].token === token){
+                        this.topic_pool[topic].splice(i, 1);
+                        return token;
+                    }
+                }
+            }
+        }
+        return false;
+    };
+
+    Dispatcher.prototype.notify = function(data){
+        if(data){
+            this.subscribers.forEach(function(subscriber){
+                if(subscriber.get_topics().has(data.topic)){
+                    subscriber.update(data);
+                }
+            });
+        }
+    };
+
+
+    Dispatcher.prototype.publish = function(topic, data){
+        //console.log("Dispatcher publish() : this ref :");
+        //console.log(this);
+        //console.log("Dispatcher publish() : this ref END");
+        console.log("publishing to topic : " + topic);
+        if(!this.topic_pool.hasOwnProperty(topic)){
+            //console.log("New data publish for an undefined topic " + topic);
+            //console.log("Published Data : " );
+            //console.log(data);
+            return false;
+        }
+        var subscribers = this.topic_pool[topic];
+        for(var i = 0, j = subscribers.length; i < j; i++){
+            try {
+                subscribers[i].callback(topic, data);
+            } catch (error) {
+                throw error;
+            }
+        }
+        //console.log("Dispatcher Publish() : ");
+        //console.log(data);
+        //console.log("Dispatcher publish() end");
+        return true;
+    };
+    Dispatcher.prototype.get_topics = function(){
+        return this.topics;
+    };
+
+    Dispatcher.prototype.contains_topic = function(topic){
+        var flag = false;
+        if(typeof topic === "number"){
+            flag = this.topics.has(topic);
+        }
+
+        return flag;
+    };
+
+    Dispatcher.prototype.remove_topic = function(topic){
+       this.topics.delete(topic);
+    };
+
+    Dispatcher.prototype.add_topic = function(topic){
+        this.topics.add(topic);
+    };
+    return Dispatcher;
+})();
+
+
+var Publisher = (function(){
+    function Publisher(){
+        this.id = generate_id();
+        this.topic = -1;
+        this.dispatchers = [];
+
+    };
+    Publisher.prototype.set_topic = function(topic){
+        this.topic = topic;
+    };
+
+    Publisher.prototype.get_topic = function(){
+        return this.topic;
+    };
+
+    Publisher.prototype.register = function(dispatcher){
+        this.dispatchers.push(dispatcher);
+        dispatcher.add_publisher(this);
+        console.log("Dispatcher registered on Publisher " + this.id + " ");
+
+    };
+
+    Publisher.prototype.deregister = function(dispatcher){
+        //this.dispatchers.pop()
+    };
+
+    Publisher.prototype.publish = function(data){
+        console.log("Publisher " + this.id + " published new data");
+        if (data){
+            data.topic = this.topic;
+            this.dispatchers.forEach(function(dispatcher){
+                dispatcher.notify(data);
+            })
+        }
+    };
+
+    return Publisher;
+})();
+
+var Subscriber = (function(){
+    function Subscriber(){
+        this.topics         = new Set();
+        this.dispatchers    = [];
+        this.id             = generate_id();
+        this.listeners      = [];
+    };
+    Subscriber.prototype.set_callback = function(callback){
+        this.callback = callback;
+        this.listeners.push(callback);
+    }
+
+    Subscriber.prototype.add_listener = function(callback){
+        this.listeners.push(callback)
+    };
+
+    Subscriber.prototype.get_topics = function(){
+        return this.topics;
+    };
+
+    Subscriber.prototype.register = function(dispatcher){
+        dispatcher.add_subscriber(this);
+        this.dispatchers.push(dispatcher);
+        console.log("Dispatcher registered on Subscriber " + this.id);
+    };
+
+    Subscriber.prototype.deregister = function(dispatcher){
+        console.log("This method deregister(...) is not implemented yet")
+    };
+
+    Subscriber.prototype.register_to_topic = function(topic){
+        this.topics.add(topic);
+    };
+
+    Subscriber.prototype.deregister_from_topic = function(topic){
+        //this.topics.pop();
+        if(this.topics.has(topic))
+            this.topics.delete(topic);
+    };
+
+    Subscriber.prototype.update = function(data){
+        if(data && data.hasOwnProperty( "topic" )){
+            if(this.callback){
+                this.callback(data);
+            }
+            else{
+                console.log("Subscriber " +  this.id +  " received new Data : " + data.content +
+                            " from topic " + data.topic + " .");
+            }
+        }
+
+        
+    };
+
+    return Subscriber;
+})();
+
+/* END OF PUBLISHER - SUBSCRIBER MODULES */
+
+
+
 
 
 
@@ -173,25 +451,32 @@ var Cart = (function(){
         this.$add_to_wishlist_btn       = {};
         this.$checkout_link             = {};
         this.$summary                   = {};
+        this.dispatcher                 = {};
     }
     Cart.prototype.init = function(){
         this.$summary = $("#js-cart-summary");
-        this.$add_to_wishlist_btn = $(".js-cart-add-to-wishlist");
-        this.$add_to_wishlist_btn.click(this.onAddToWishlistClicked.bind(this));
-        this.$checkout_link = $(".flat-checkout-link");
-        this.$counter = $(".cart-counter");
-        this.$add_to_cart_btn = $("#flat-add-to-cart-btn");
-        this.$add_to_cart_btn.click(this.onAddButtonClicked.bind(this));
-        $("#js-add-to-cart").click(this.onAddButtonClicked.bind(this));
-        $(".js-cart-item-up").click(this.onPlusButtonClicked.bind(this));
-        $(".js-cart-item-down").click(this.onMinusButtonClicked.bind(this));
-        $(".js-cart-remove").click(this.onRemoveButtonClicked.bind(this));
-        //$(".cart-popover-button").hover(function(){
-        //$("#cart-modal").modal({backdrop: false});
-       // });
-       //$(".cart-button").hover(this.onCartButtonHover.bind(this), this.onCartButtonHoverLeave.bind(this));
-       //$(".close-btn").click(this.onCloseBtnClicked.bind(this));
+        //this.$add_to_wishlist_btn = $(".js-cart-add-to-wishlist");
+        //this.$add_to_wishlist_btn.click(this.onAddToWishlistClicked.bind(this));
+         this.$checkout_link = $(".flat-checkout-link");
+         this.$counter = $(".cart-counter");
+        //this.$add_to_cart_btn = $("#flat-add-to-cart-btn");
+        //this.$add_to_cart_btn.click(this.onAddButtonClicked.bind(this));
+        //$("#js-add-to-cart").click(this.onAddButtonClicked.bind(this));
+        //$(".js-cart-item-up").click(this.onPlusButtonClicked.bind(this));
+        //$(".js-cart-item-down").click(this.onMinusButtonClicked.bind(this));
+        //$(".js-cart-remove").click(this.onRemoveButtonClicked.bind(this));
+
     };
+    Cart.prototype.set_dispatcher = function(dispatcher){
+        this.dispatcher = dispatcher;
+        var token = dispatcher.register_subscriber(PUBSUBTOPIC['CARTADDITEM'], this.addItem.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTADDITEMFAILED'], this.onAddItemFailed.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTREMOVEITEM'], this.removeItem.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTREMOVEITEMFAILED'], this.onRemoveItemFailed.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTCLEAR'], this.clear.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTUPDATE'], this.update.bind(this));
+
+    }
     Cart.prototype.addCatalog = function(catalog){
         this.catalog = catalog;
         this.catalog.setCart(this);
@@ -236,7 +521,8 @@ var Cart = (function(){
         item.id = parseInt($target.data("product-id"));
         item.is_available = $target.data("available");
         item.quantity = 1;
-        this.addItem(item);
+        //this.addItem(item);
+        this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
     };
     Cart.prototype.onRemoveButtonClicked = function(event){
         event.stopPropagation();
@@ -299,33 +585,80 @@ var Cart = (function(){
         }
         this.badgeUpdate();
     };
-    Cart.prototype.addItem = function(item){
-       
-        var that = this;
+
+
+    Cart.prototype.onAddItemSucess = function(response){
+        this.total = response.total;
+        this.count = response.count;
+        //this.notify({});
+        //this.catalog.notify({message: "L'article a été ajouté dans le Panier"});
+        //this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEMSUCCESS'], {message: "L'article a été ajouté dans le Panier", total: response.total, count: response.count});
+    };
+
+    Cart.prototype.onAddItemFailed = function(response){
+        //this.catalog.notify({message: "L'article n'a pas pu être ajouté dans le Panier"});
+        //this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEMFAILED'], {message: "L'article n'a pas pu être ajouté dans le Panier."});
+    };
+
+    Cart.prototype.onRemoveItemFailed = function(e){
+
+    };
+
+    Cart.prototype.onRemoveItemSuccess = function(e){
+
+    };
+
+    Cart.prototype.addItem = function(topic, item){
+        //console.log("Cart addItem() this ref : ");
+        //console.log(this);
+        //console.log("Cart addItem() this ref END ");
         // Send request to the Server 
+        //console.log("Cart Additem new Item : ");
+        //console.log(item);
         if(item.is_available == "True"){
-            $.ajax({
-                type: 'POST',
-                url : '/cart/add_to_cart/',
-                data: {product_id: item.id, quantity: item.quantity},
-                dataType: 'json',
-                // success Function called in case of an http 200 response
-                success: function(response){
-                    that.total = response.total;
-                    that.count = response.count;
-                    that.notify(item);
-                    that.catalog.notify({message: "L'article a été ajouté dans le Panier"});
-                },
-                error: function (response){
-                    this.catalog.notify({message: "L'article n'a pas pu être ajouté dans le Panier"});
-                }
-            });
+
+            var settings = {
+                            type: 'POST',
+                            url : '/cart/add_to_cart/',
+                            data: {product_id: item.id, quantity: item.quantity},
+                            dataType: 'json'
+                        };
+            var future = ajax(settings).then(this.onAddItemSucess, this.onAddItemFailed);
+        }
+       
+        else{
+            this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEMFAILED'], {message: "Cet article n'est plus disponible."});
+            //that.catalog.notify({message: "Cet article n'est plus disponible."});
+            
+            //console.log("This article is not available ...");
+        }
+        
+    };
+
+    Cart.prototype.react = function(topic, item){
+       
+        //console.log("Cart received new data from topic : " + topic);
+        //console.log("Cart React() new data : ");
+       // console.log(item);
+        this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEMFAILED'], {message: "CARD ADD ITEM FAILDE !"});
+        // Send request to the Server 
+        /*
+        if(item.is_available == "True"){
+
+            var settings = {
+                            type: 'POST',
+                            url : '/cart/add_to_cart/',
+                            data: {product_id: item.id, quantity: item.quantity},
+                            dataType: 'json'
+                        };
+            var future = ajax(settings).then(this.onAddItemSucess.bind(this), this.onAddItemFailed.bind(this));
         }
        
         else{
             that.catalog.notify({message: "Cet article n'est plus disponible."});
             console.log("This article is not available ...");
         }
+        */
         
     };
     Cart.prototype.removeItem = function(itemID){
@@ -377,71 +710,68 @@ var Cart = (function(){
         this.count = 0;
     };
 
-    Cart.prototype.update = function(event, action){
+    Cart.prototype.update = function(topic, data){
          var notification = {};
-        var $target = $($(event.target).data("target"));
-        var $qty_target = $(event.target).siblings(".product-quantity");
-        var itemID = parseInt($target.data("product-id"));
-        var price = parseFloat($target.data("price"));
-        var quantity = parseInt($target.data("quantity"));
-        
-        var $subtotal = $target.find(".product-price-total");
-        console.log("Cart update : ");
-        console.log($subtotal);
-        var that = this;
-        var requested_qty = -1;
-        if(action){
-            requested_qty = quantity + 1 ;
-        }else{
-            requested_qty = quantity - 1;
-        }
-        console.log("Cart quantity update : " + requested_qty);
-        console.log($qty_target);
-        $.ajax({
+        var settings = {
             type: 'POST',
             url: '/cart/cart_update/',
-            data: {product_id: itemID, quantity : requested_qty},
-            dataType:'json',
-            success: function(response){
-                that.total = response.total;
-                that.count = response.count;
-                if(response.updated){
-                   if(response.quantity > 0){
-                    $qty_target.html(response.quantity);
-                    $target.data("quantity", response.quantity);
-                    $subtotal.html(price * (response.quantity));
-                    
-                   }
-                   else{
-                    $target.remove();
-                   }
-                   notification.message= "Le Panier a été actualisé";
+            data: {product_id: data.id, quantity : data.requested_qty},
+            dataType:'json'
+        };
+        var success = function(response){
+            console.log("Cart Update Succes :");
+            console.log(this);
+            this.total = response.total;
+            this.count = response.count;
+            console.log("Cart Success Data :");
+            console.log(data);
+            console.log("quantity updated: " );
+            console.log(response.updated);
+            console.log("quantity : " + response.quantity);
+            console.log(response);
+            console.log("Log end Cart");
+            if(response.updated){
+               
+               if(response.quantity > 0){
+                   
+                data.qty_target.html(response.quantity);
+                data.target.data("quantity", response.quantity);
+                data.subtotal.html(this.total);
+                
+               }
+               else{
+                data.target.remove();
+               }
+               notification.message= "Le Panier a été actualisé";
+            }
+            else{
+                if(response.quantity_error){
+                    notification.message= "Vous avez atteint la quantité maximale pour cet article";
                 }
                 else{
-                    if(response.quantity_error){
-                        notification.message= "Vous avez atteint la quantité maximale pour cet article";
-                    }
-                    else{
-                        notification.message= "Il a eu une erreur interne. veuillez reéssayer plus tard";
-                    }
+                    notification.message= "Il a eu une erreur interne. veuillez reéssayer plus tard";
                 }
-               
-                that.notify({});
-                that.catalog.notify(notification);
-                
-            },
-            error: function(response){
-                that.catalog.notify({message: "Le Panier n'a pas pu être actualisé"});
-                console.log("Error : l'article n'a pas pu etre actualiser");
             }
+           
+            this.notify({});
+            //that.catalog.notify(notification);
+
+            this.dispatcher.publish(PUBSUBTOPIC['CARTUPDATESUCCESS'], notification);
+            
+        };
+        var future = ajax(settings);
+        future.then(success.bind(this), function(response){
+            console.log("Cart Update Succes :");
+            console.log(this);
+            this.disptacher( PUBSUBTOPIC['CARTUPDATEFAILED'], {message: "Le Panier n'a pas pu être actualisé"});
+            console.log("Error : l'article n'a pas pu etre actualiser");
         });
     };
-    Cart.prototype.badgeUpdate = function(){
 
+    Cart.prototype.badgeUpdate = function(){
+        console.log("Cart.badgeUpdate() not implemented yet ...");
     };
-    Cart.prototype.getCart = function(){
-        var cart = myCart || new Cart();
-    };
+    
     return Cart;
 })();
 
@@ -513,6 +843,15 @@ var Catalog = (function(){
         this.$notification      = {};
         this.$notification_content = {};
         this.timeoutID          = -1;
+        this.dispatcher         = {};
+        this.cart_add_btn       = {};
+        this.cart_remove_btn    = {};
+        this.wl_add_btn         = {};
+        this.wl_remove_btn      = {};
+        this.wl_clear_btn       = {};
+        this.wl_counter         = {};
+        this.wl_add_to_cart_btn = {};
+
     }
     Catalog.prototype.init = function(sorting){
         var that = this;
@@ -540,6 +879,24 @@ var Catalog = (function(){
         this.$brand_input.keyup(this.onBrandInputChanged.bind(this));
         this.$clickable = $(".flat-clickable");
         this.$close_flat_main = $(".flat-close-main");
+
+        //this.$add_to_cart_btn = $("#flat-add-to-cart-btn");
+        //this.$add_to_cart_btn.click(this.onCartAddBtnClicked.bind(this));
+        $("#js-add-to-cart").click(this.onCartAddBtnClicked.bind(this));
+        $(".js-cart-item-up").click(this.onCartPlusBtnClicked.bind(this));
+        $(".js-cart-item-down").click(this.onCartMinusBtnClicked.bind(this));
+        $(".js-cart-remove").click(this.onCartRemoveBtnClicked.bind(this));
+
+        this.$wl_clear_btn = $(".js-wishlist-clear");
+        this.$wlbagde = $(".wishlist-badge");
+        this.$wl_counter = $(".js-wishlist-counter");
+        this.$wl_add_to_cart_btn = $(".js-move-to-cart");
+        this.$wl_add_to_cart_btn.click(this.onWLAddToCartClicked.bind(this));
+        $("#js-add-to-wishlist").click(this.onWLAddBtnClicked.bind(this));
+        $("#flat-add-to-wishlist-btn").click(this.onWLAddBtnClicked.bind(this));
+        $(".js-remove-from-wishlist").click(this.onWLRemoveBtnClicked.bind(this));
+        this.$wl_clear_btn.click(this.onWLClearBtnClicked.bind(this));
+
         $(".flat-hoverable").hover(function(event){
             event.stopPropagation();
             $(this).children(".flat-product-options").toggle();
@@ -556,16 +913,7 @@ var Catalog = (function(){
         });
         this.$category_btn = $(".flat-cat-close");
         this.$filter_btn = $(".flat-filter-close");
-        /* this.$filter_btn.click(function(event){
-            event.stopPropagation();
-            console.log("filter close drop clicked ");
-            $(this).parents(".flat-dropdown-wrapper").toggle();
-        });
-        this.$category_btn.click(function(event){
-            event.stopPropagation();
-            console.log("cat close drop clicked ");
-            $(this).parents(".flat-dropdown-wrapper").toggle();
-        }); */
+        
         // Dropdown Account Menu 
         $(".flat-account-dropdown-btn").click(function(event){
             event.stopPropagation();
@@ -637,25 +985,160 @@ var Catalog = (function(){
             console.log("click on canva button");
             console.log("canva menu  LEFT Property : " +  left);
             if (left == "0px"){
-                that.$canvamenu.css("left", "-200px");
+                that.$canvamenu.css("left", "-400px");
                 that.$site_wrapper.css("margin-left", "0");
             }
-            else if (left == "-200px"){
+            else if (left == "-400px"){
                 that.$canvamenu.css("left", "0");
-                that.$site_wrapper.css("margin-left", "200px");
+                that.$site_wrapper.css("margin-left", "400px");
             }
          });
 
          $(".js-close-canva").click(function(event){
             var target = $($(".js-close-canva").data("target"));
-            target.css("left", "-200px");
+            target.css("left", "-400px");
             that.$site_wrapper.css("margin-left", "0");
             $(".collapsible ul").hide();
          });
+         $(".mask").hide();
+
+         $("li .reveal").click(function(event){
+             event.stopPropagation();
+             $(event.target).toggle();
+             $(event.target).siblings(".mask").toggle().siblings(".submenu").toggle();
+             console.log(event.target);
+         });
+
+         $("li .mask").click(function(event){
+            event.stopPropagation();
+            $(event.target).toggle();
+            $(event.target).siblings(".reveal").toggle().siblings(".submenu").toggle();
+            console.log(event.target);
+        });
          
 
     };
 
+    Catalog.prototype.onCartAddBtnClicked = function(event){
+        event.stopPropagation();
+        var item = {};
+        var $target = $($(event.target).data("target"));
+        item.id = parseInt($target.data("product-id"));
+        item.is_available = $target.data("available");
+        item.quantity = 1;
+        console.log("Catalog publshing CARTADDITEM");
+        this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
+
+    };
+    Catalog.prototype.onCartPlusBtnClicked = function(event){
+        event.stopPropagation();
+        console.log("PlusButton Clicked ...  : ");
+        //this.update(event, true);
+        var $target = $($(event.target).data("target"));
+        var $qty_target = $(event.target).siblings(".product-quantity");
+        var itemID = parseInt($target.data("product-id"));
+        var price = parseFloat($target.data("price"));
+        var quantity = parseInt($target.data("quantity"));
+        
+        var $subtotal = $target.find(".product-price-total");
+        var requested_qty = quantity + 1 ;
+        this.dispatcher.publish(PUBSUBTOPIC['CARTUPDATE'], 
+                                {
+                                    id:itemID, quantity:quantity, 
+                                    requested_qty:requested_qty,
+                                    target: $target,
+                                    qty_target: $qty_target,
+                                    subtotal : $subtotal
+                                });
+        
+    };
+    Catalog.prototype.onCartMinusBtnClicked = function(event){
+        event.stopPropagation();
+        console.log("MinusButton Clicked ...");
+        //this.update(event, false);
+        var $target = $($(event.target).data("target"));
+        var $qty_target = $(event.target).siblings(".product-quantity");
+        var itemID = parseInt($target.data("product-id"));
+        var price = parseFloat($target.data("price"));
+        var quantity = parseInt($target.data("quantity"));
+        
+        var $subtotal = $target.find(".product-price-total");
+        var requested_qty = quantity - 1 ;
+        this.dispatcher.publish(PUBSUBTOPIC['CARTUPDATE'], 
+                                {
+                                    id:itemID, quantity:quantity, 
+                                    requested_qty:requested_qty,
+                                    target: $target,
+                                    qty_target: $qty_target,
+                                    subtotal : $subtotal
+                                });
+    };
+
+    Catalog.prototype.onCartRemoveBtnClicked = function(event){
+        event.stopPropagation();
+    };
+
+    // WISHLIST reactors:
+    Catalog.prototype.onWLAddBtnClicked = function(event){
+        event.stopPropagation();
+        console.log("Add to wishlist : " );
+        
+        var item = {};
+        var $target = $($(event.target).data("target"));
+        console.log($target);
+        item.id = parseInt($target.data("product-id"));
+        
+        if(!isNaN(item.id)){
+            this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
+        }
+        else{
+            console.log("Item has an invalid ID : " + item.id);
+        }
+        
+    };
+
+    Catalog.prototype.onCartAddItemFailed = function(topic, data){
+        this.notify(topic, data);
+    };
+
+    Catalog.prototype.onCartRemoveItemFailed = function(topic, data){
+        this.notify(topic, data);
+    };
+    Catalog.prototype.onWLAddToCartClicked = function(event){
+        event.stopPropagation();
+    };
+
+    Catalog.prototype.onWLRemoveBtnClicked = function(event){
+        event.stopPropagation();
+        var item = {};
+        var target_id = $(event.target).data("target");
+        this.$to_remove = $(target_id);
+        console.log("Removing WI : " +  target_id);
+        item.id = parseInt(this.$to_remove.data("itemid"));
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTREMOVE'], item);
+        //var result = this.removeItem(item.id);
+        //result.then(this.onRemoveItemSuccess.bind(this),
+        //this.onRemoveItemFailed.bind(this));
+        
+    };
+    Catalog.prototype.onWLClearBtnClicked = function(event){
+        event.stopPropagation();
+        //this.clear();
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTCLEAR'], {});
+    };
+
+    Catalog.prototype.set_dispatcher = function(dispatcher){
+        this.dispatcher = dispatcher;
+        var token = dispatcher.register_subscriber(PUBSUBTOPIC['CARTADDITEMSUCCESS'], this.notify.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTADDITEMFAILED'], this.onCartAddItemFailed.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTREMOVEITEMFAILED'], this.onCartRemoveItemFailed.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['SORTINGHIGHERPRICE'], this.onSortingChanged.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['SORTINGLOWERPRICE'], this.onSortingChanged.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['FILTERBRAND'], this.filter.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTUPDATESUCCESS'], this.notify.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['CARTUPDATEFAILED'], this.notify.bind(this));
+
+    };
     Catalog.prototype.setCart = function(cart){
         console.log("Catalog adding Cart instance ");
         this.cart = cart;
@@ -667,7 +1150,11 @@ var Catalog = (function(){
 
 
     Catalog.prototype.addToCart = function(item){
-        this.cart.addItem(item);
+        //this.cart.addItem(item);
+        console.log("Catalog publishing to CARTADDITEM");
+        console.log(item);
+        console.log("Catalog puslishing to CARTADDITEm end");
+        this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
     };
     Catalog.prototype.addToWishlist = function(item){
         this.wishlist.addItem(item);
@@ -685,12 +1172,6 @@ var Catalog = (function(){
         var $selected_brands = this.$brand_list.filter(":checked");
         console.log("Filter Selected : " );
         console.log($selected_brands);
-        /* for(var i = 0; i < this.$brand_list.length; i++){
-            console.log(this.brands[$input[i].value]);
-            console.log("--------------");
-            this.brand_filter.push(this.brands[$input[i].value]);
-        }
-         */
         that = this;
         var sel = {};
         var element = {};
@@ -827,7 +1308,27 @@ var Catalog = (function(){
         console.log("getBrands() called ...");
     };
 
-    Catalog.prototype.notify = function(notification){
+    Catalog.prototype.react = function(topic, notification){
+        var that = this;
+        if(notification.message != "undefined"){
+            this.$notification_content.html(notification.message); 
+        }
+        else{
+            console.log("Bad notification object");
+            this.$notification_content.html("Erreur du format de notifition"); 
+        }
+
+        this.$notification.show("slow", function(){
+            var element = this;
+            that.timeoutID = setTimeout(function(){
+                $(element).hide();
+                //that.timeoutID = -1;
+            }, 5000);
+            console.log("timerID : " + that.timeoutID);
+        });
+    };
+
+    Catalog.prototype.notify = function(topic, notification){
         var that = this;
         if(notification.message != "undefined"){
             this.$notification_content.html(notification.message); 
@@ -859,6 +1360,8 @@ var Wishlist = (function(){
         this.catalog            = {};
         this.$add_to_cart_btn   = {};
         this.$clear_btn         = {};
+        this.$to_remove         = {};
+        this.dispatcher         = {};
 
     }
     Wishlist.prototype.init = function(){
@@ -871,6 +1374,14 @@ var Wishlist = (function(){
         $("#flat-add-to-wishlist-btn").click(this.onAddButtonClicked.bind(this));
         $(".js-remove-from-wishlist").click(this.onRemoveButtonClicked.bind(this));
         this.$clear_btn.click(this.onClearButtonClicked.bind(this));
+    }
+    Wishlist.prototype.set_dispatcher = function(dispatcher){
+        this.dispatcher = dispatcher;
+        dispatcher.register_subscriber(PUBSUBTOPIC['WISHLISTADD'], this.addItem.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['WISHLISTREMOVE'], this.removeItem.bind(this));
+        dispatcher.register_subscriber(PUBSUBTOPIC['WISHLISTCLEAR'], this.clear.bind(this));
+        //dispatcher.register_subscriber(PUBSUBTOPIC['WISHLISTADDTOCART'], this.add)
+
     }
     Wishlist.prototype.addCatalog = function(catalog){
         this.catalog = catalog;
@@ -885,7 +1396,8 @@ var Wishlist = (function(){
         item.id = parseInt($target.data("product-id"));
         item.is_available = $target.data("available");
         item.quantity = 1;
-        this.catalog.addToCart(item);
+        //this.catalog.addToCart(item);
+        this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
     }
     Wishlist.prototype.onAddButtonClicked = function(event){
         event.stopPropagation();
@@ -897,7 +1409,8 @@ var Wishlist = (function(){
         item.id = parseInt($target.data("product-id"));
         
         if(!isNaN(item.id)){
-            this.addItem(item);
+            //this.addItem(item);
+            this.dispatcher.publish(PUBSUBTOPIC['CARTADDITEM'], item);
         }
         else{
             console.log("Item has an invalid ID : " + item.id);
@@ -908,90 +1421,106 @@ var Wishlist = (function(){
         event.stopPropagation();
         var item = {};
         var target_id = $(event.target).data("target");
-        var $target = $(target_id);
+        this.$to_remove = $(target_id);
         console.log("Removing WI : " +  target_id);
-        item.id = parseInt($target.data("itemid"));
-        this.removeItem(item.id, $target);
+        item.id = parseInt(this.$to_remove.data("itemid"));
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTREMOVE'], item);
+        //var result = this.removeItem(item.id);
+        //result.then(this.onRemoveItemSuccess.bind(this),
+        //this.onRemoveItemFailed.bind(this));
         
     };
     Wishlist.prototype.onClearButtonClicked = function(event){
         event.stopPropagation();
         this.clear();
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTCLEAR'], {});
     };
-    Wishlist.prototype.addItem = function(item){
-        var that = this;
-        var notification = {};
-        $.ajax({
-            type: 'POST',
-            url: '/wishlist/ajax_add_to_wishlist/',
-            data: {product_id: item.id},
-            dataType:'json',
-            success: function(response){
-                console.log("Wishlist : Add request sent successfully");
-                that.count =  response.item_count;
-                notification.added = response.added;
-                console.log("Response Added : " + response.added);
-                console.log("Response Duplicate : " + response.duplicated);
-                if(response.added){
-                    notification.message = "L'article a été ajouté à vos Favoris";
-                }
-                else{
-                    if (response.duplicated){
-                        notification.message = "Cet article est déjà dans vos Favoris";
-                    }
-                }
-                
-                that.notify(notification);
-            },
-            error: function(response){
-                console.log("Error : couldn't add item into the wishlist");
-                notification.added = false;
-                notification.message = "L'article n'a pas pu être ajouté à vos Favoris";
-                that.notify(notification);
+
+    Wishlist.prototype.onAddItemSucess = function(response){
+            this.count =  response.item_count;
+            notification.added = response.added;
+            if(response.added){
+                notification.message = "L'article a été ajouté à vos Favoris";
             }
-        });
-        
-        
+            else{
+                if (response.duplicated){
+                    notification.message = "Cet article est déjà dans vos Favoris";
+                }
+            }
+            console.log("Wishlist : " + notification.message);
+            this.notify(notification);
     };
-    Wishlist.prototype.removeItem = function(itemID, $element_to_remove){
-        var that = this;
-        $.ajax({
+
+    Wishlist.prototype.onAddItemFailed = function(error){
+            notification.added = false;
+            notification.message = "L'article n'a pas pu être ajouté à vos Favoris";
+            console.log("Error : couldn't add item into the wishlist");
+            this.notify(notification);
+    };
+
+    Wishlist.prototype.onClearSuccess = function(response){
+        this.count =  response.item_count;
+        $("#wishlist .content").children().remove();
+        this.notify({message: "La liste des Favoris a été vidée"});
+    };
+
+    Wishlist.prototype.onClearFailed = function(error){
+        that.notify({message: "Erreur : La Liste des Favoris n'a pas pu être vidée"});
+        console.log("Error : couldn't clear the wishlist");
+    };
+
+    Wishlist.prototype.onRemoveItemSuccess = function(response){
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTADDFAILED'],
+        {
+            message: "L'article n'a pas pu être retiré des Favoris",
+            count: response.item_count,
+            action: this.$to_remove.remove
+        } );
+        console.log("Wishlist : Remove request sent successfully");
+                //this.count =  response.item_count;
+                //this.$to_remove.remove();
+                //this.$to_remove = {};
+                //this.notify({message: "L'article a été retiré des Favoris"});
+    };
+
+    Wishlist.prototype.onRemoveItemFailed = function(error){
+        this.dispatcher.publish(PUBSUBTOPIC['WISHLISTADDFAILED'],{message: "L'article n'a pas pu être retiré des Favoris"} );
+        //this.notify({message: "L'article n'a pas pu être retiré des Favoris"});
+        console.log("Wishlist Error : couldn't remove item from the wishlist");
+    };
+
+
+    Wishlist.prototype.addItem = function(topic, item){
+        var data = {product_id:item.id};
+        var url = '/wishlist/ajax_add_to_wishlist/';
+        var settings = {
+            type        :'POST',
+            url         : '/wishlist/ajax_add_to_wishlist/',
+            data        : data,
+            dataType    : 'json'
+        };
+
+        return ajax(settings).then(this.onAddItemSucess.bind(this), this.onAddItemFailed.bind(this));
+    };
+    Wishlist.prototype.removeItem = function(itemID){
+        var options = {
             type: 'POST',
             url: '/wishlist/ajax_remove_from_wishlist/',
             data: {product_id: itemID},
-            dataType:'json',
-            success: function(response){
-                console.log("Wishlist : Remove request sent successfully");
-                that.count =  response.item_count;
-                $element_to_remove.remove();
-                that.notify({message: "L'article a été retiré des Favoris"});
-            },
-            error: function(response){
-                that.notify({message: "L'article n'a pas pu être retiré des Favoris"});
-                console.log("Error : couldn't remove item from the wishlist");
-            }
-        });
+            dataType:'json'
+        };
+
+        return ajax(options);
     };
-    Wishlist.prototype.clear = function(){
-        var that = this;
-        $.ajax({
+    Wishlist.prototype.clear = function(topic, item){
+        var options = {
             type: 'POST',
             url: '/wishlist/ajax_wishlist_clear/',
             data: {},
-            dataType:'json',
-            success: function(response){
-                console.log("Clear request sent successfully");
-                console.log("Wishlist cleared : " +  response.state);
-                that.count =  response.item_count;
-                $("#wishlist .content").children().remove();
-                that.notify({message: "La liste des Favoris a été vidée"});
-            },
-            error: function(response){
-                that.notify({message: "Erreur : La Liste des Favoris n'a pas pu être vidée"});
-                console.log("Error : couldn't clear the wishlist");
-            }
-        });
-        
+            dataType:'json'};
+
+        return ajax(options).then(this.onClearSuccess.bind(this), this.onClearFailed.bind(this));
+            
     };
 
     Wishlist.prototype.get = function(itemID){
@@ -1176,7 +1705,7 @@ var Banner = (function(){
         this.total_text             = 0;
         this.banner_item            = {};
         this.ads_texts              = [
-            "Chez Lyshop, c'est la qualité avant tout",
+            "Chez <span class=\"flat-link\">LYSHOP</span>, c'est la qualité avant tout",
             "Votre bonheur est notre plaisir",
             "Chez Lyshop vous ne trouverez que des articles originaux",
             "Livraison sur Libreville & Port-gentil",
@@ -1188,31 +1717,20 @@ var Banner = (function(){
     Banner.prototype.init = function(){
         this.banner_texts_sources   = $(".js-banner-texts");
         this.banner_content         = $("#js-banner-content");
-        this.banner_item            = this.banner_content.filter(".banner-item");
+        this.banner_item            = $(".banner-item");
         this.banner_images_sources  = $(".js-banner-images");
         this.banner_texts           = this.banner_texts_sources.children(".banner-text");
-        this.ads_image              = this.banner_images_sources.children("img.ads-image");
+        this.ads_image              = $("img.ads-image");
         this.total_text             = this.ads_texts.length;
         this.total_image            = this.banner_images.length;
-        console.log("Banner initialized");
-        console.log("Banner found " + this.total_text + " on this page");
         setInterval(this.playText, 5000, this);
     };
 
     Banner.prototype.playText = function(that){
-        console.log("Play Text : ");
-        console.log(that);
-        //var element = that.banner_texts[that.pos_text];
         that.pos_text = (that.pos_text + 1) % that.total_text;
         that.pos_image = (that.pos_image + 1) % that.total_image;
-        //that.banner_content.empty();
-        //$(element).appendTo(that.banner_content);
         that.banner_item.html(that.ads_texts[that.pos_text]);
         that.ads_image.attr('src', that.banner_images[that.pos_image]);
-        console.log("Play Text Element Pos  : " + that.pos_text);
-        //console.log(element);
-        console.log(that.ads_texts[that.pos_text]);
-        console.log(that.banner_images[that.pos_image]);
     };
 
     return Banner;
@@ -1221,7 +1739,6 @@ var Banner = (function(){
 
 Shopping = {};
 
-Shopping.Cart = Cart;
 if(typeof (Storage)!== "undefined"){
     shopStorage  = localStorage;
     //shopStorage.Shopping = shopStorage.Shopping || {} ;
@@ -1241,20 +1758,24 @@ if(typeof (Storage)!== "undefined"){
 else{
     console.log("This Browser doesn't support webstorage");
 }
+Shopping.dispatcher = new Dispatcher();
 Shopping.banner = new Banner();
-Shopping.cart  = new Shopping.Cart();
+Shopping.cart  = new Cart();
 Shopping.account = new Account();
 Shopping.catalog = new Catalog();
 Shopping.wishlist =  new Wishlist();
 Shopping.checkout = new Checkout();
 Shopping.banner.init();
 Shopping.catalog.init(0);
+Shopping.catalog.set_dispatcher(Shopping.dispatcher);
 Shopping.account.init();
 Shopping.cart.init();
+Shopping.cart.set_dispatcher(Shopping.dispatcher);
 Shopping.wishlist.init();
 Shopping.checkout.init();
-Shopping.wishlist.addCatalog(Shopping.catalog);
-Shopping.cart.addCatalog(Shopping.catalog);
+Shopping.wishlist.set_dispatcher(Shopping.dispatcher);
+//Shopping.wishlist.addCatalog(Shopping.catalog);
+//Shopping.cart.addCatalog(Shopping.catalog);
 Shopping.collapsible = new Collapsible();
 Shopping.collapsible.init();
 Shopping.modal = new Modal();

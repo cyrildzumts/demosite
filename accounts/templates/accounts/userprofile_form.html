@@ -1,0 +1,36 @@
+{% extends "accountbase.html"%}
+
+
+
+{%block MAINCONTENT %}
+
+<div class="container">
+                <section class="card-flat-header">
+                        <h2 class="panel-title">Informations personelles : </h2>
+                </section>
+                
+                
+               
+                <section class="card-flat-body content-center">
+                    <form id="update-user-infos" action="{% url 'accounts:edit_user_infos' %}" method="post">{% csrf_token %}
+
+                        {{form.as_ul}}
+
+                        <input type="submit" value="Update" />
+
+                    </form>
+                </section>
+
+                <div class="flat-container">
+                    {% for field in form %}
+                        <div class="flat-row">
+                                {{ field.errors }}
+                                {{ field.label_tag }} {{ field }}
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+{%endblock MAINCONTENT%}
+
+

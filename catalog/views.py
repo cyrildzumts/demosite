@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 # from django.template import RequestContext
-from cart import cart
+from cart.cart_service import CartService
 from cart.forms import ProductAddToCartForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -41,6 +41,7 @@ class ProductDetailView(DetailView):
 
 class CategoryView(ListView):
     template_name = "catalog/category.html"
+    paginate_by = 1
 
     def get_queryset(self):
         key = 'category_slug'
@@ -194,13 +195,14 @@ def show_product(request, product_slug, template_name="catalog/product.html"):
             # action = postdata.get('action')
             print("Add to Cart form is Valid")
             # add to cart and redirect to cart page
-            user_cart = cart.get_user_cart(request)
+            user_cart = CartService.get_user_cart(request)
             # get product slug from postdata, return blank if empty
             product_slug = postdata.get('product_slug')
             # get quantity added, return 1 if empty
             quantity = postdata.get('quantity', 1)
 
             p = get_object_or_404(Product, slug=product_slug)
+            # TO-DO Check if the product was added into the Cart
             user_cart.add_to_cart(product=p, quantity=int(quantity))
             # return JsonResponse({'status': 'ok'})
             # if test cookie worked, get rid of it

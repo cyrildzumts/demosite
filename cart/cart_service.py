@@ -2,8 +2,43 @@ import datetime
 from django.db import connection
 
 from cart import models
+from demosite import utils
+from django.shortcuts import get_object_or_404, Http404
 
-class CartService():
+class CartService:
+
+
+    @staticmethod
+    def get_user_cart(request):
+        """
+            @brief get_user_cart : this is an utility function that
+            first checks if the current user is logged in.
+            @return a Cart associated to the user who made
+            this request.
+            An exception is thrown if the user is not logged in.
+        """
+        if request.user.is_authenticated():
+            return CartService.get_cart(request.user)
+        else:
+            raise Http404("Vous devez être connecter pour \
+            pouvoir utiliser le Panier.")
+
+    @staticmethod
+    def get_cart(user):
+        """
+            @brief get_cart
+            @param user :  the current user who made the request
+            @ return a Cart which belongs to user.
+            if the user has no Cart, then a new one is created for this user
+        """
+        try:
+            cart = models.Cart.objects.get(user=user)
+        except models.Cart.DoesNotExist:
+            cart = models.Cart()
+            cart.user = user
+            cart.save()
+        return cart
+
 
     @staticmethod
     def get_subtotal(cart_id):
@@ -66,6 +101,20 @@ class CartService():
         if result and len(result):
             flag = 1 in result
         return flag
+    
+
+    @staticmethod
+    def process_request(request):
+        postdata = utils.get_postdata(request)
+        user_cart = CartService.get_user_cart(request)
+        item_id = postdata['item_id']
+        quantity = postdata['quantity']
+        if postdata['submit'] == 'Supprimer':
+            user_cart.remove_from_cart(item_id)
+        if postdata['submit'] == 'Actualiser':
+            user_cart.update_quantity(item_id=item_id, quantity=int(quantity))
+        
+
 
 
 

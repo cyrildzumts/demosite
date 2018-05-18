@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SITE_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.Customer'
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailAuthBackend', ]
@@ -32,7 +32,7 @@ META_KEYWORDS = " Telephone, Smartphone, Parfum, Parfums, parfums, chaussure, \
                 Sac, sacs, android, iphone, samsung, accessoires, shop, lyshop, shopping, gabon, afrique, achats"
 META_DESCRIPTION = " Marché en ligne pour chaussures, Smartphone, parfums,\
                     sacs à main pour femmes et plein d'autres accessoires."
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.4', 'testserver', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.11.3', 'testserver', ]
 
 handler404 = 'demosite.views.page_not_found'
 handler500 = 'demosite.views.server_error'

@@ -44,6 +44,6 @@ class WishlistService():
             print("Wishlistservice : items_count() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         
         if result and len(result):
-            count = result[0]
+            count = result[0][0]
 
         return count

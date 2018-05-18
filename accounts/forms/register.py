@@ -1,5 +1,5 @@
 from django import forms
-from accounts.models import Customer
+from accounts.models import Customer, UserProfile
 from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.auth.models import User
 import datetime
@@ -11,6 +11,15 @@ END = datetime.date.today().year - 16
 
 YEARS_CHOICES = [y for y in range(START.year, END)]
 
+
+
+
+class RegistrationForm2(forms.ModelForm):
+    """
+    """
+    class Meta:
+        model = UserProfile
+        exclude = ['is_active_account']
 
 class RegistrationForm(forms.ModelForm):
     """
@@ -34,9 +43,9 @@ class RegistrationForm(forms.ModelForm):
                                 label="Mot de passe(Confirmation)")
     date_of_birth = forms.DateField(label="Date de Naissance",
                                     widget=forms.widgets.SelectDateWidget(
-                                        empty_label=("Choose Year",
-                                                     "Choose Month",
-                                                     "Choose Day"),
+                                        empty_label=("Choisissez l'année",
+                                                     "choisissez le mois",
+                                                     "choisissez le jour"),
                                         years=YEARS_CHOICES
                                                      )
                                     )
@@ -69,9 +78,6 @@ class RegistrationForm(forms.ModelForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         user.set_password(self.cleaned_data['password1'])
-        # user.customer.date_of_birth = self.cleaned_data['date_of_birth']
-        # user.customer.country = self.cleaned_data['country']
-        # user.customer.city = self.cleaned_data['city']
         if commit:
             user.save()
         return user

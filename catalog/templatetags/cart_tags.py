@@ -1,5 +1,5 @@
 from django import template
-from cart.cart import get_cart
+from cart.cart_service import CartService
 
 
 register = template.Library()
@@ -9,12 +9,13 @@ register = template.Library()
 def cart_box(request):
     context = {}
     if request.user.is_authenticated():
-        cart = get_cart(request.user)
-        count = cart.items_count()
+        cart = CartService.get_cart(request.user)
+        count = CartService.items_count(cart.id)
         cartItems = cart.get_items()
     else:
         count = 0
         cartItems = None
     context = {'count' : count,
-               'cartItems' : cartItems}
+               'cartItems' : cartItems
+            }
     return context

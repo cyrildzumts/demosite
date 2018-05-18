@@ -8,7 +8,7 @@
 
 {% block CATEGORY_PATH %}
     <div class="flat-row">
-        <ol class="breadcrumb">
+        <ul class="breadcrumb">
                 {% for cat in parent_cats  %}
                     {% if forloop.last %}
                     <li> {{cat.name}}</a></li>
@@ -17,7 +17,7 @@
                     {% endif %}
                     
                 {% endfor %}
-        </ol>
+        </ul>
     </div>
 {% endblock CATEGORY_PATH %} 
 
@@ -145,17 +145,22 @@
                         </section>
                 
                         <section class="footer">
-                            <ul class="pager">
-                                {% if products.has_previous %}
-                                  <li><a href="?page={{ products.previous_page_number }}">precedent</a></li>
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                  <li><a href="?page={{ page_obj.previous_page_number }}">precedent</a></li>
                                 {% endif %}
-                                <span class="current">
-                                  Page {{products.number }} de {{products.paginator.num_pages}}.
+                                <span class="current-page">
+                                  Page {{page_obj.number }} de {{paginator.num_pages}}.
                                 </span>
-                                {% if products.has_next %}
-                                  <li><a href="?page={{ products.next_page_number }}">next</a></li>
+                                {% if page_obj.has_next %}
+                                  <li><a href="?page={{ page_obj.next_page_number }}">next</a></li>
                                 {% endif %}
                             </ul>
+                            {% if is_paginated %}
+                                Django Paginated
+                            {% else %}
+                                Django not Paginated
+                            {% endif %}
                         </section>
                     </div>
         </div>

@@ -7,6 +7,7 @@ app_name = 'accounts'
 urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^user_account/$', views.user_account, name='user_account'),
+    url(r'^edit_user_infos/$', views.UserProfileUpdateView.as_view(), name='edit_user_infos'),
     url(r'^login', views.login, name='login'),
     url(r'^logout', views.logout, name='logout'),
     url(r'^orders/$', views.show_orders, name='orders'),

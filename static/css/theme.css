@@ -20,6 +20,7 @@
     --product-name  : #C4C4C4;
     --product-price : #2C2C2C;
     --brand-color   : #C4C4C4;
+    --canva-menu-bg : #C4C4C4;
 }
 
 
@@ -100,7 +101,7 @@ button:hover{
 }
 
 #site-canva-menu{
-    background-color:var(--main-bg-color);
+    background-color: var(--canva-menu-bg);
     color:var(--main-color);
 }
 .canva-container{
@@ -392,4 +393,10 @@ button:hover{
     background-color: var(--main-bg-color);
     color: var(--link-color);
     /*border: var(--btn-border);*/
+}
+
+.expand{
+    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: bold;
 }
