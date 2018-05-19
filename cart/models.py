@@ -96,6 +96,7 @@ class Cart(models.Model):
         Use the CartService.contains_items() from 
         cart.cart_service instead
         """
+        """
         flag = False
         try:
             start_time = datetime.datetime.now()
@@ -108,8 +109,8 @@ class Cart(models.Model):
             print("Cart : contain_item() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
         except ObjectDoesNotExist as e:
             flag = False
-
-        return flag
+        """
+        return CartService.contains_item(self.id, item_id)
 
     def get_item(self, item_id):
         """
@@ -207,6 +208,7 @@ class Cart(models.Model):
         Deprecated : use CartService.get_subtotal()
         from cart.cart_service instead
         """
+        """
         cart_total = 0
         start_time = datetime.datetime.now()
         items = self.get_items()
@@ -216,7 +218,8 @@ class Cart(models.Model):
         end_time = datetime.datetime.now()
         elapsed_time = end_time - start_time
         print("Cart : subtotal() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
-        return cart_total
+        """
+        return CartService.get_subtotal(self.id)
 
     def get_items(self):
         """
@@ -230,6 +233,7 @@ class Cart(models.Model):
         Deprecated : use CartService.items_count()
         from cart.cart_service instead
         """
+        """
         count = 0
         start_time = datetime.datetime.now()
         items = self.get_items()
@@ -239,7 +243,8 @@ class Cart(models.Model):
         end_time = datetime.datetime.now()
         elapsed_time = end_time - start_time
         print("Cart : items_count() processing time : {0} ms".format(elapsed_time.microseconds / 1000))
-        return count
+        """
+        return CartService.items_count(self.id)
 
     def is_empty(self):
         return self.items_count() == 0

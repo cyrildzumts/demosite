@@ -130,7 +130,7 @@ class Order(models.Model):
                 oi.order = self
                 oi.save()
 
-    def sent_confirmation_mail(selft):
+    def sent_confirmation_mail(self):
         pass
     
     def getOrderItem(self):

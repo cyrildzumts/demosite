@@ -4,33 +4,24 @@
 
 {%block MAINCONTENT %}
 
-<div class="container">
-                <section class="card-flat-header">
-                        <h2 class="panel-title">Informations personelles : </h2>
-                </section>
-                
-                
-               
-                <section class="card-flat-body content-center">
-                    <form id="update-user-infos" action="{% url 'accounts:edit_user_infos' %}" method="post">{% csrf_token %}
+    <div class="container">
+                    <section class="card-flat-header">
+                            <h2 class="panel-title">Modifier vos Informations personelles : </h2>
+                    </section>
+                    
+                    
+                    <section>
+                        <p><a class="flat-link" href="{% url 'accounts:password_change' %}">Cliquez ici</a> pour changer votre mot de passe. </p>
+                    </section>
+                    <section class="card-flat-body content-center">
+                        <form id="update-user-infos" action="{% url 'accounts:edit_user_infos' %}" method="post">{% csrf_token %}
+                            {% include "tags/default_form.html" %}
+                        </form>
+                    </section>
 
-                        {{form.as_ul}}
-
-                        <input type="submit" value="Update" />
-
-                    </form>
-                </section>
-
-                <div class="flat-container">
-                    {% for field in form %}
-                        <div class="flat-row">
-                                {{ field.errors }}
-                                {{ field.label_tag }} {{ field }}
-                        </div>
-                    {% endfor %}
-                </div>
-                
-            </div>
+                    
+                    
+    </div>
 {%endblock MAINCONTENT%}
 
 

@@ -19,7 +19,7 @@ class AirtelMoneyProviderMock(SMSPayProvider):
             content_type = 'Content-Type'
             value = 'application/json'
             postdata = {
-                'customer': customer.telefon,
+                'customer': customer.userprofile.telefon,
                 'amount': amount
             }
             request =  urllib.request.Request(AirtelMoneyProviderMock.api_url)
@@ -39,7 +39,7 @@ class PaypalProviderMock(SMSPayProvider):
             content_type = 'Content-Type'
             value = 'application/json'
             postdata = {
-                'customer': customer.telefon,
+                'customer': customer.email,
                 'amount': amount
             }
             request =  urllib.request.Request(PaypalProviderMock.api_url)

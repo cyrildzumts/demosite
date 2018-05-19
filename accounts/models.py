@@ -27,6 +27,12 @@ class UserProfile(models.Model):
     newsletter = models.BooleanField(default=False)
     is_active_account = models.BooleanField(default=True)
 
+
+    class Meta:
+        permissions = (
+            ('deactivate_userprofile', "Can deactivate a User"),
+        )
+
     @models.permalink
     def get_absolute_url(self):
         return ('accounts:edit_user_infos', (), {'pk': self.pk})

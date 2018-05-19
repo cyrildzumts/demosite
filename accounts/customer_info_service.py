@@ -75,7 +75,7 @@ class UserInfoService:
         # an user 
         done = False
         requester = User.objects.get(id=requester_id)
-        if(requester.has_perm('can_change_user')):
+        if(requester.has_perm('accounts:can_change_user:userprofile')):
             r = User.objects.filter(id=user_id).update(is_active=False)
             done = r > 0
             print("CustomerService.deactivate_user() Success : requester user  {} deaticated the user with id {}".format(requester_id, user_id))

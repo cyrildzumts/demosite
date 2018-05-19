@@ -14,7 +14,7 @@ from accounts.models import UserProfile
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-
+import datetime
 
 def fill_form(user):
     form = {}
@@ -32,7 +32,7 @@ def fill_form(user):
 # Create your views here.
 @login_required
 def show_checkout(request):
-
+    page_title = 'Checkout'
     template_name = 'order/flat_checkout.html'
     r = request
     cart = CartService.get_user_cart(request)
@@ -43,20 +43,38 @@ def show_checkout(request):
     if request.method == 'POST':
         order = OrderService.create_order(request)
         if order:
-            request.session['order_number'] = order.pk
-            receipt_url = urlresolvers.reverse('order:receipt')
-            """ mail.dispatchEmail(subject="Confirmation de votre commande",
-                                    content="Votre commande a bien été recue.  Dès reception "
-                                    " du paiement votre commande sera livrée. Notez bien que votre commade "
-                                    " sera annulée si elle n'est payé dans un delai de 7 jours à compter"
-                                    " de maintenant.",
-                                    from_email=None,
-                                    to_email=["cyrildz@ymail.com"]) 
-            """
-                #order_items = order.getOrderItem()
-            cart.delete()
-            order.validate()
-            return HttpResponseRedirect(receipt_url)
+            approved = OrderService.charge_order(order)
+            if approved:
+
+                request.session['order_number'] = order.pk
+                receipt_url = urlresolvers.reverse('order:receipt')
+                """ mail.dispatchEmail(subject="Confirmation de votre commande",
+                                        content="Votre commande a bien été recue.  Dès reception "
+                                        " du paiement votre commande sera livrée. Notez bien que votre commade "
+                                        " sera annulée si elle n'est payé dans un delai de 7 jours à compter"
+                                        " de maintenant.",
+                                        from_email=None,
+                                        to_email=["cyrildz@ymail.com"]) 
+                """
+                    #order_items = order.getOrderItem()
+                cart.delete()
+                order.validate()
+                return HttpResponseRedirect(receipt_url)
+            else :
+                print("{} : Order charge failed. Please try again".format(datetime.datetime.now()))
+                cartitems = cart.get_items()
+
+                form_context = fill_form(User.objects.get(
+                    username=request.user.username))
+                form_context['ip_address'] = request.META.get('REMOTE_ADDR')
+                context = {
+                    'user_cart': cart,
+                    'page_title': page_title,
+                    'form_context': form_context,
+                    'cartitems': cartitems,
+                    'template_name' : template_name
+                }
+                return render(request, template_name, context)
     else:
             # Method = GET . this an initial request. create a a new form
         cartitems = cart.get_items()
@@ -65,7 +83,7 @@ def show_checkout(request):
             username=request.user.username))
         form_context['ip_address'] = request.META.get('REMOTE_ADDR')
         print("Form Filled : Name =  " + form_context['name'])
-        page_title = 'Checkout'
+        
     
     context = {
         'user_cart': cart,
